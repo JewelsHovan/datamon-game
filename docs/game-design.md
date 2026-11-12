@@ -31,17 +31,37 @@ The spike generated a pose grid and a 6-frame punch for Julien with `gpt-image-2
 | Animation set | Core set, 17 clips | Listed under "Core animation set" below. |
 | Stages and effects | Generated | Painted pixel stages split into parallax layers, and effect animations (hit and block sparks, dust, slash trails, super flash). |
 
+### Round 3 interview (2026-11-12, after playing the MVP)
+
+| Topic | Choice | What it means |
+|---|---|---|
+| Buttons | Punch / Kick / Special | Punch = jab, forward+Punch = heavy punch; Kick = snap kick, forward+Kick = roundhouse (knockdown); down+either = low sweep; in the air either = air kick; Punch+Kick = throw; Special = the fighter's signature special. Replaces Light / Heavy / Special. |
+| Keyboard layout | Home row split | P1 W A S D + F (punch) G (kick) H (special). P2 arrows + L (punch) ; (kick) ' (special). An in-game controls screen rebinds keys and shows which keys register at once, so two players can check their keyboard. |
+| Roster | 4 fighters with their own specials | Felicia, Pentcho and Alex get full animation sets. Each launch fighter gets an archetype and a signature special with its own animation and effect. The other 33 appear on the select screen as "coming soon". |
+| Polish | Smoother moves, more moves and reactions, sound and music, living stage and menus | Clip set v2 (more frames per attack, new reaction clips), chiptune audio, a painted stage with parallax and walkers, an animated select screen and a versus splash. |
+
+### Launch fighters (proposed; change on the HQ page)
+
+| Fighter | Archetype | Signature special | Effect |
+|---|---|---|---|
+| Julien H. | All-rounder | Data Orb: a straight projectile | orb, orb_burst |
+| Felicia G. | Trickster | Context Switch: dissolves into data pixels and reappears behind the opponent with a kick | teleport_out, teleport_in |
+| Pentcho T. | Bruiser | Hotfix Charge: armored shoulder charge that absorbs one hit and knocks down | charge_streaks |
+| Alex A. | Rusher | Rapid Deploy: dashing three-punch flurry ending in an uppercut | rush_streaks |
+
+Stats per archetype (health, walk speed, damage scale) live in one data table; the all-rounder is the baseline.
+
 ### Defaults (set while writing specs)
 
 - **Stack:** Vite + TypeScript + Canvas 2D, no game engine. Vitest for game tests, pytest (through uv) for the Python art pipeline. npm.
 - **Controls (one data table, easy to change):**
 
-  | | Move | Light | Heavy | Special |
+  | | Move | Punch | Kick | Special |
   |---|---|---|---|---|
   | P1 | W A S D | F | G | H |
-  | P2 | Arrow keys | , | . | / |
+  | P2 | Arrow keys | L | ; | ' |
 
-  Gamepads through the Gamepad API (d-pad or left stick; face buttons for light, heavy, special). Enter confirms or starts, Esc pauses.
+  (Round 3; was Light/Heavy with P2 on , . /.) Gamepads through the Gamepad API (d-pad or left stick; A punch, B kick, X or Y special), assigned to a player on their first button press. Enter confirms or starts, Esc pauses. All keys are rebindable on the controls screen.
 - **Super:** heavy + special together with a full meter (open on the HQ page).
 - **Match rules:** best of 3 rounds, 99-second rounds (open on the HQ page), 1000 health. On time-out, more health wins the round.
 - **Image model:** OpenAI `gpt-image-2.5-sunburst` with reference images and transparent backgrounds, called through the image-compass plugin's `generate_openai.py`. Gemini is out for now (its prepaid credits ran out during the spike).
@@ -161,16 +181,13 @@ Generation is billed per image. Estimate: 17 clips plus retries is about 20 to 2
 
 ## Roadmap
 
-Each line is one spec, roughly one session. 001 and 002 can run in parallel.
+Each line is one spec, roughly one session. Done or in review: 001 engine, 002 animation pipeline, 003 combat, 004 effects.
 
-1. **Engine core** (`specs/001-engine-core.md`): scaffold, fixed-timestep loop, deterministic sim, input, movement, the clip format loader with walk-sheet placeholders, two fighters in a sandbox at 640x360.
-2. **Animation pipeline and Julien's full set** (`specs/002-animation-pipeline.md`): generate, cut, normalize, anchor, review and pack; all 17 clips for Julien approved.
-3. **Combat core:** frame-data moves on top of real clips, per-frame hit and hurt boxes, light and heavy attacks, one special, block, throw, stun, combos, knockdown, hit-stop, health and K.O.
-4. **Effects and feel:** generated effect strips (sparks, dust, slashes, super flash) plus screen shake, flashes, smears and K.O. slow-motion.
-5. **Match flow and UI:** title, character select, HUD, rounds, announcer text, results with win quote, pause.
-6. **Launch roster:** Felicia, Pentcho and Alex get their full sets; archetypes, move names and signature battlemons for all four.
+5. **Controls and match flow** (`specs/005-controls-and-match-flow.md`): Punch / Kick / Special, the home-row layout, a controls screen with rebinding and a key test, gamepad join, title, character select (4 playable, 33 coming soon), versus splash, results, rematch, pause.
+6. **Launch roster and signature specials** (`specs/006-launch-roster.md`): Felicia, Pentcho and Alex animated with clip set v2; archetype stats; the four signature specials with their effects.
 7. **Battlemon supers:** super meter rules and the five domain summons.
 8. **CPU opponent and arcade ladder.**
-9. **Stages:** generated painted stages split into parallax layers, with background walkers.
-10. **Audio:** WebAudio chiptune sound effects and a music loop.
+9. **Living stage and menus** (`specs/009-living-stage.md`): a generated Compass stage split into parallax layers, coworkers walking in the background, an animated select screen and versus splash.
+10. **Audio** (`specs/010-audio.md`): WebAudio chiptune sound effects, stingers and a music loop.
 11. **Roster batches:** the other 33 people, in batches through the proven pipeline.
+12. **Animation v2** (`specs/012-animation-v2.md`): smoother attacks (more frames) and new moves and reactions (dashes, crouching and air hurt, wall bounce, intro, taunt, get-up roll, block push) for all four launch fighters.
