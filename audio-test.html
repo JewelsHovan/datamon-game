@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Datamon audio test</title>
+    <link rel="icon" href="data:," />
+    <style>
+      :root {
+        --bg: #0d0b1a;
+        --panel: #17142b;
+        --line: #2d2850;
+        --text: #e8e6ff;
+        --muted: #9a96c4;
+        --accent: #ffd34d;
+        --button: #241f45;
+        --button-hover: #322b5f;
+        --ok: #6be29b;
+        --warn: #ff8a6b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 20px 16px 40px;
+        background: var(--bg);
+        color: var(--text);
+        font: 14px/1.4 ui-monospace, Menlo, Consolas, monospace;
+      }
+      h1 {
+        margin: 0 0 4px;
+        font-size: 20px;
+        color: var(--accent);
+      }
+      .lede {
+        margin: 0 0 16px;
+        color: var(--muted);
+        max-width: 70ch;
+      }
+      #status {
+        margin: 0 0 16px;
+        padding: 10px 12px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        white-space: pre-wrap;
+        min-height: 3.2em;
+      }
+      #status.running {
+        border-color: var(--ok);
+      }
+      #status.muted {
+        border-color: var(--warn);
+      }
+      #groups {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 12px;
+      }
+      section {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 10px 12px 12px;
+      }
+      h2 {
+        margin: 0 0 8px;
+        font-size: 13px;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      button {
+        font: inherit;
+        color: var(--text);
+        background: var(--button);
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 6px 9px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: var(--button-hover);
+      }
+      button.primary {
+        background: var(--accent);
+        color: #1a1400;
+        border-color: var(--accent);
+        font-weight: 700;
+      }
+      label {
+        display: grid;
+        grid-template-columns: 60px 1fr 36px;
+        align-items: center;
+        gap: 8px;
+        margin-top: 6px;
+        color: var(--muted);
+      }
+      input[type="range"] {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Datamon audio test</h1>
+    <p class="lede">
+      Every effect, stinger, menu sound and music loop from spec 010, synthesized live with WebAudio. Press
+      "Start audio" first (browsers need a click). M mutes. Effects buttons fire the same SimEvents the game emits.
+    </p>
+    <pre id="status">audio: idle (click Start audio)</pre>
+    <div id="groups"></div>
+    <script type="module" src="/src/audio/testPage.ts"></script>
+  </body>
+</html>

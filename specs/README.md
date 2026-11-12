@@ -15,5 +15,5 @@ Files are `NNN-short-slug.md`. The skills keep this index in sync.
 | 005 | [Controls for two and the match flow](005-controls-and-match-flow.md) | in-progress |
 | 006 | [Launch roster and signature specials](006-launch-roster.md) | in-progress |
 | 009 | [Living stage](009-living-stage.md) | ready |
-| 010 | [Audio](010-audio.md) | in-progress |
+| 010 | [Audio](010-audio.md) | review |
 | 012 | [Animation v2: smoother moves, more moves and reactions](012-animation-v2.md) | in-progress |

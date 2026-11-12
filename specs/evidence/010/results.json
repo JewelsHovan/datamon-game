@@ -1,0 +1,96 @@
+{
+  "lazy: no context before input": {
+    "pass": true,
+    "status": "idle"
+  },
+  "click resumes a running AudioContext": {
+    "pass": true,
+    "status": "running",
+    "clockRate": 1.002
+  },
+  "every effect, stinger and menu button schedules voices": {
+    "pass": true,
+    "perButton": {
+      "swing-light": 1,
+      "swing-heavy": 2,
+      "swing-special": 2,
+      "swing-throw": 1,
+      "hit-light": 3,
+      "hit-heavy": 3,
+      "hit-special": 4,
+      "block-light": 5,
+      "block-heavy": 6,
+      "block-special": 4,
+      "grab": 3,
+      "toss": 2,
+      "knockdown": 4,
+      "tech": 4,
+      "jump": 2,
+      "land": 2,
+      "projectile": 3,
+      "clash": 5,
+      "trade": 4,
+      "ko": 17,
+      "round-1": 11,
+      "round-3": 13,
+      "fight": 6,
+      "round-win": 17,
+      "time-win": 19,
+      "draw": 7,
+      "match-win": 31,
+      "ui-move": 1,
+      "ui-confirm": 2,
+      "ui-back": 2,
+      "stack": 36
+    },
+    "silent": [],
+    "dropped": 0
+  },
+  "combo and timer countdown schedule over time": {
+    "pass": true,
+    "comboVoices": 12,
+    "countdownVoices": 39
+  },
+  "fight loop plays at 150 BPM (10 steps/s)": {
+    "pass": true,
+    "track": "fight",
+    "steps": 21,
+    "late": 0,
+    "musicVoices": 12
+  },
+  "a 400 ms stall resyncs without late notes": {
+    "pass": true,
+    "late": 0,
+    "resyncs": 1,
+    "steps": 32
+  },
+  "full round sequence with music under it": {
+    "pass": true,
+    "voices": 391,
+    "late": 0,
+    "droppedDuringRound": 0
+  },
+  "select loop": {
+    "pass": true,
+    "track": "select",
+    "steps": 12
+  },
+  "M toggles mute; muted schedules nothing": {
+    "pass": true,
+    "whileMuted": 0,
+    "afterUnmute": 3
+  },
+  "music stops": {
+    "pass": true,
+    "track": null
+  },
+  "volume persists across reload": {
+    "pass": true,
+    "music": 0.35
+  },
+  "no console errors": {
+    "pass": true,
+    "errors": [],
+    "warnings": []
+  }
+}
