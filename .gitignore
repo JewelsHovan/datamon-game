@@ -2,3 +2,7 @@ node_modules/
 dist/
 .DS_Store
 *.log
+.qa/
+hq/index.html
+art/raw/
+.claude-images/

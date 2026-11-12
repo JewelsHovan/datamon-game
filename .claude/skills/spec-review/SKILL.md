@@ -36,7 +36,7 @@ Decide whether a spec is really done. Trust the code and the checks, not the Imp
 6. **Decide.**
    - Every criterion PASS and no must-fix: `Status: done`.
    - Otherwise: `Status: in-progress`, untick the failed criteria, and add the must-fix items as new unticked Tasks so `/spec-tackle` picks them up.
-   Update the row in `specs/README.md`.
+   Update the row in `specs/README.md` and the project HQ, if `CLAUDE.md` names one.
 7. **Report** the verdict, the criteria table in short, and the must-fix items.
 
 ## Rules

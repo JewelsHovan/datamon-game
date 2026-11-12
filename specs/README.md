@@ -8,3 +8,5 @@ Files are `NNN-short-slug.md`. The skills keep this index in sync.
 
 | # | Spec | Status |
 |---|---|---|
+| 001 | [Engine core: game loop, input and two fighters moving](001-engine-core.md) | ready |
+| 002 | [Animation pipeline and Julien's full set](002-animation-pipeline.md) | ready |

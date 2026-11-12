@@ -15,7 +15,7 @@ Write one spec in `specs/` that another session could implement without asking q
 3. **Size it.** One spec is something one session can build and verify, roughly a day of work or less. If the idea is bigger, propose a split into several specs, write the first one, and list the rest under Follow-ups.
 4. **Number it.** Next free number, zero-padded: `specs/NNN-short-slug.md` (`001-core-loop.md`).
 5. **Write it** from the template below. Every acceptance criterion must be checkable: a command, a test, or a concrete thing to see in the running game. No "works well", "is fun", "is fast" without a measure.
-6. **Index it.** Add a row to the table in `specs/README.md`.
+6. **Index it.** Add a row to the table in `specs/README.md`, and update the project HQ if `CLAUDE.md` names one (apply any pending HQ decisions before writing the spec, too).
 7. **Report** the path, the criteria count, and any decisions you made for the user, in a few lines.
 
 Set `Status: ready` when nothing is left open. If Open questions remain, set `Status: draft` and say so.
