@@ -205,7 +205,7 @@ async function doubleTap(code) {
 /** P1 walks P2 into the right-hand wall (pushboxes push), then backs off to `gap` px. */
 async function cornerP2(gap = 70) {
   await down("KeyD");
-  await waitFor((s) => s.fighters[1].x >= 123500, 15000, 30); // the right wall is at 124000
+  await waitFor((s) => s.fighters[1].x >= 119500, 15000, 30); // the right wall is at 120000 (80 px margin)
   await up("KeyD");
   await down("KeyA");
   await waitFor((s) => gapPx(s) >= gap, 2000, 15);

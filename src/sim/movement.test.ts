@@ -42,7 +42,7 @@ describe("movement (A8)", () => {
     expect(MOVEMENT).toMatchObject({
       floorY: 32000,
       stageWidth: 128000,
-      screenMargin: 4000,
+      screenMargin: 8000, // spec 001 R8: sized to the art (was 4000)
       walkForwardSpeed: 180, // spec 012: matched to the walk art stride (was 270)
       walkBackSpeed: 150, // spec 012 (was 200)
       jumpsquatFrames: 4,
@@ -145,7 +145,7 @@ describe("movement (A8)", () => {
   });
 
   it("separation never exceeds the screen limit", () => {
-    expect(MAX_SEPARATION).toBe(56000);
+    expect(MAX_SEPARATION).toBe(48000);
     const sequences: InputPair[] = [
       [L, R], // both walk back
       [L, 0], // only P1 walks back

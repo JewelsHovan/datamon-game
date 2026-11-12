@@ -46,7 +46,7 @@
     "bounce": {
       "type": "wall_bounce",
       "player": 1,
-      "x": 124000,
+      "x": 120000,
       "y": 25129
     },
     "screenshot": "specs/evidence/012/08-wall-bounce.png"

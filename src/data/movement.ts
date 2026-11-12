@@ -11,8 +11,12 @@ export const MOVEMENT = Object.freeze({
   stageWidth: 128000,
   /** Screen width at the internal resolution: 640 px. */
   screenWidth: 64000,
-  /** Distance a fighter's center keeps from the screen edge and the stage edge: 40 px. */
-  screenMargin: 4000,
+  /**
+   * Distance a fighter's center keeps from the screen edge and the stage edge: 80 px.
+   * Sized to the art (spec 001 R8): the widest backward reach of any launch fighter's
+   * frame is 73 px (air_hurt, heavy_kick), so a body at a wall or at max separation stays whole.
+   */
+  screenMargin: 8000,
   /** Starting distance between the two fighters: 200 px. */
   startSeparation: 20000,
 

@@ -20,6 +20,8 @@ Revised 2026-11-12 after the round 2 interview: 640x360 internal resolution, and
 - R6. Rendering: a 640x360 internal canvas scaled by the largest integer factor that fits the window, letterboxed, no smoothing. A placeholder stage (sky gradient, floor line). A camera that follows the midpoint between the fighters, clamped to the stage. Fighters are drawn through the animation clip format from `docs/game-design.md` (atlas frames with an anchor and hold ticks; art faces right and is mirrored around the anchor for facing left). A clip loader reads a fighter's `public/fighters/<slug>/manifest.json` when it exists; otherwise it builds placeholder clips from the walk sheet (idle = standing side frame, walk = the 4-frame side cycle; crouch and jump reuse the standing frame), downscaled once so a standing person is about 150px tall, with hard alpha edges. Which clip and frame shows comes from sim counters. Each fighter has a simple shadow on the floor.
 - R7. Sandbox scene: `npm run dev` opens straight into a two-fighter sandbox. `?p1=<slug>&p2=<slug>` picks the fighters (defaults `julien-hovan` and `felicia-gorgacheva`); an unknown slug falls back to the default with a console warning. F1 toggles a debug overlay with sim frame, render FPS, steps run on the last animation frame, and each fighter's state name. `window.__game` exposes `simFrame` and `hashState()` for browser checks.
 
+- R8. (Added 2026-11-12 from QA finding F5, at the user's request through the lead session.) Fighters stay whole on screen: at a stage wall and at the maximum separation, no frame of a launch fighter's art is cut by the view edge on the side facing the edge.
+
 ## Acceptance criteria
 - [x] A1. (R1) `npm install`, `npm run build`, `npm run typecheck` and `npm test` each exit 0. How to check: run each with `> log 2>&1; echo "EXIT=$?"`.
 - [x] A2. (R1) The catalog wrapper returns exactly 37 people, each with a portrait URL, a sheet URL and 4 frames for `left` and `right`. How to check: a Vitest test.
@@ -33,6 +35,8 @@ Revised 2026-11-12 after the round 2 interview: 640x360 internal resolution, and
 - [x] A10. (R4, R5, R6) In the browser, P1 (WASD) and P2 (arrow keys) can each walk with the walk cycle animating, crouch and jump, and walking into the opponent pushes them. How to check: drive the keys with the browser tools, take screenshots mid-walk, crouched and mid-jump.
 - [x] A11. (R7) `?p1=jewoo-lee&p2=veronica-marallag` shows those two people; `?p1=nobody` shows the default P1 and logs a warning. F1 shows and hides the overlay with all four fields. How to check: browser tools, screenshot and console messages.
 
+- [x] A12. (R8) Vitest: for each launch fighter, every frame's backward reach (its anchor x) fits inside the screen margin, and with the fighters at either wall or at the maximum separation each fighter's center is at least the margin inside the camera's view. Browser: the corner wall bounce screenshot in `specs/evidence/012/` shows the whole fighter.
+
 ## Out of scope
 - Attacks, hitboxes, health, damage, K.O. (spec 002, combat core).
 - Generated animation clips and the art pipeline (spec 002).
@@ -45,7 +49,7 @@ Revised 2026-11-12 after the round 2 interview: 640x360 internal resolution, and
 - Stack is Vite + TypeScript + Canvas 2D with no engine, and npm. Use the current stable versions (Vite 8, Vitest 5 and TypeScript 7 at the time of writing); check the scaffold works rather than assuming flags.
 - No render interpolation: draw the latest sim state, as arcade fighters do, so every displayed frame is a real sim frame.
 - Integer subpixels instead of floats, so hashing is stable and determinism doesn't depend on float behavior.
-- Starting movement numbers, in pixels at 640x360 (kept in one tunable data file): floor at y=320; stage 1280 wide; screen margin 40, so max separation is 560; pushbox 46 wide; walk forward 2.7/frame, back 2.0/frame; jumpsquat 4 frames; jump launch speed 11.6/frame with gravity 0.58/frame^2 (exactly 40 airborne frames in subpixels, about 116px apex); jump horizontal speed 3.3/frame; landing 3 frames.
+- Starting movement numbers, in pixels at 640x360 (kept in one tunable data file): floor at y=320; stage 1280 wide; screen margin 40, so max separation is 560 (80 and 480 since R8); pushbox 46 wide; walk forward 2.7/frame, back 2.0/frame; jumpsquat 4 frames; jump launch speed 11.6/frame with gravity 0.58/frame^2 (exactly 40 airborne frames in subpixels, about 116px apex); jump horizontal speed 3.3/frame; landing 3 frames.
 - Placeholder fighter scale: one global factor that maps source footY 228 to 150px, so relative heights between people are kept. Generated clips (spec 002) are already at game scale and are drawn 1:1.
 - Walk sheet cells differ per person (`cellW` 99 to 130, `cellH` 240): always read them from the catalog.
 - Placeholder walk cycle shows each of the 4 side frames for 8 sim frames; the standing frame is column 2 (`STANDING_WALK_FRAME`).
@@ -66,6 +70,7 @@ Revised 2026-11-12 after the round 2 interview: 640x360 internal resolution, and
 - [x] T8. Sandbox: `src/scenes/sandbox.ts`, wiring in `src/main.ts`, URL params, `window.__game`.
 - [x] T9. Tests: `src/engine/loop.test.ts`, `src/sim/determinism.test.ts`, `src/sim/purity.test.ts`, `src/sim/inputHistory.test.ts`, `src/input/gamepad.test.ts`, `src/sim/movement.test.ts`, `src/data/catalog.test.ts`.
 - [x] T10. Browser checks for A4, A9, A10, A11 with the browser tools; save screenshots under `specs/evidence/001/`.
+- [x] T11. (R8) Screen margin sized to the art; camera and margin tests; rerun the corner browser check.
 
 ## Follow-ups
 The rest of the game is planned in the Roadmap section of `docs/game-design.md` (specs 002 to 009). Write each with `/spec-create` when the previous one is done; 002 (combat core) is next.
@@ -111,6 +116,11 @@ The rest of the game is planned in the Roadmap section of `docs/game-design.md` 
 - No real `public/fighters/<slug>/manifest.json` existed during this work, so the loader is proven on the fixture only. Re-run A11 with `?p1=julien-hovan` once spec 002 packs Julien's set; `window.__game.info().clipSources` should then say `manifest`.
 - Integer scaling is in CSS pixels. At a fractional devicePixelRatio (1.5), odd scales are not whole device pixels.
 - Gamepad mapping is unit-tested only, not on hardware.
+
+### R8: fighters stay whole on screen (2026-11-12, QA finding F5)
+- Cause: walls and the screen limit kept fighter centers 40 px from the view edge, but the art reaches up to 73 px backward from the anchor (air_hurt and heavy_kick frames across the four launch fighters) and up to 93 px forward. A body knocked into the corner, or lying at max separation, was cut by the view edge.
+- Fix: `MOVEMENT.screenMargin` 4000 -> 8000 (80 px). The walls move to 80..1200 px and the max separation to 480 px (was 560); the camera code is unchanged (it already clamps to the stage and centers on the midpoint, so 80 px from a wall or from the separation limit is 80 px from the view edge). A fighter that faces the edge it is pressed against (only possible if crossed up mid-knockdown) can still lose up to about 13 px of a forward-reaching frame; noted, not handled.
+- A12: `src/render/camera.test.ts` (each launch fighter's frames all have a backward reach within 80 px; both centers at least 80 px inside the view at either wall, at max separation against either wall and mid-stage). `src/sim/movement.test.ts` and `src/render/screen.test.ts` updated for the new numbers. `npx vitest run` EXIT=0, 301 tests. Browser: `specs/evidence/012/08-wall-bounce.png` from `specs/evidence/012/moves-check.mjs` (EXIT=0) shows Julien whole at the right wall; the 001, 003, 005 and 008 browser checks still pass (EXIT=0 each).
 
 ## Review
 (filled by spec-review)

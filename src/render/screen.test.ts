@@ -38,7 +38,7 @@ describe("camera (R6)", () => {
     s.fighters[1].x = 20000;
     expect(cameraFor(s).x).toBe(0);
     s.fighters[0].x = 110000;
-    s.fighters[1].x = 124000;
+    s.fighters[1].x = 120000;
     expect(cameraFor(s).x).toBe(640);
   });
 });
