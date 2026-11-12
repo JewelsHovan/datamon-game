@@ -8,7 +8,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit -p tsconfig.json"
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "dm": "node scripts/dm.mjs",
+    "deploy": "node scripts/dm.mjs deploy"
   },
   "devDependencies": {
     "@types/node": "^22.20.5",

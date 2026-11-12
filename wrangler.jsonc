@@ -1,0 +1,11 @@
+// Cloudflare deploy config: a static-assets-only Worker serving the Vite build.
+// Deploy with `./dm deploy` (runs the gates first), not raw `wrangler deploy`.
+{
+  "name": "datamon-game",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./dist"
+  },
+  "workers_dev": true,
+  "preview_urls": true
+}

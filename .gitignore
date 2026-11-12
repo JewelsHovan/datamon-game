@@ -13,3 +13,6 @@ art/fighters/*/*/contact.png
 art/fighters/*/*/preview.gif
 art/effects/*/contact.png
 art/effects/*/preview.gif
+.dm/
+.wrangler/
+.claude/worktrees/
