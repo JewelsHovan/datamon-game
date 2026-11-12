@@ -21,7 +21,7 @@ Round 3 interview ("4 fighters, own specials"); archetypes and specials are prop
 - R5. The select screen shows each fighter's archetype and special name.
 
 ## Acceptance criteria
-- [ ] A1. (R1) For each new fighter: pytest checks of palette, idle height and manifest pass; every clip passed the frame-by-frame review; generation totals recorded.
+- [x] A1. (R1) For each new fighter: pytest checks of palette, idle height and manifest pass; every clip passed the frame-by-frame review; generation totals recorded.
 - [ ] A2. (R2, R3) Vitest per special: Felicia ends up on the other side of the opponent (or in front when cornered) and cannot be hit while dissolved; Pentcho's charge survives one hit and knocks down on contact; Alex's flurry lands up to four separate hits and the last launches; Julien's projectile behaves as in spec 003. Determinism test with all four fighters.
 - [ ] A3. (R4) Effect review in the HQ lab; browser screenshots of each special mid-animation in `specs/evidence/006/`.
 - [ ] A4. (R5) Select-screen screenshot showing all four with archetype and special names.
@@ -36,14 +36,20 @@ Round 3 interview ("4 fighters, own specials"); archetypes and specials are prop
 - None (archetype assignments are proposals the user can change on the HQ page).
 
 ## Tasks
-- [ ] T1. Generate, review and approve the three fighters' 26 clips each (after spec 012's T1).
-- [ ] T2. Signature special clips per fighter and the special effects.
+- [x] T1. Generate, review and approve the three fighters' 26 clips each (after spec 012's T1).
+- [x] T2. Signature special clips per fighter and the special effects.
 - [ ] T3. Fighter data table and per-fighter move sets.
 - [ ] T4. The three new specials in the sim; tests.
 - [ ] T5. Select-screen info; browser evidence; HQ.
 
 ## Implementation notes
-(filled by spec-tackle)
+2026-11-12, lead session (art; the specials sim T3-T5 follow once spec 005 merges).
+
+- Felicia, Pentcho and Alex: idle generated in 2 variants each and the steadiest kept (Felicia 0, Pentcho 1, Alex 0), then the other 25 clips of set v2 each, reviewed frame by frame and approved (26/26 each). Packed atlases 1024x1533 to 1024x1692. Images: 29, 28 and 28 including the crouch_hurt and throw regenerations.
+- Signature special clips: Felicia's Context Switch (crouch, spin, reappear into a jumping kick), Pentcho's Hotfix Charge (shoulder down, two running frames, slam), Alex's Rapid Deploy (dash, jab, straight, hook, crouch, rising uppercut, land).
+- Special effects generated and approved: teleport_out, teleport_in, charge_streaks, rush_streaks, uppercut_arc.
+- Alternate palettes reworked so they recolor the top garment (colors mostly in the torso band and not in the head band, skin excluded; black or grey garments are tinted): Julien maroon, Felicia navy, Pentcho blue blazer, Alex mustard.
+- A1: pytest passes for palettes, idle heights and manifests of all four.
 
 ## Review
 (filled by spec-review)

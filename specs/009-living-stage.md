@@ -31,13 +31,19 @@ Round 3 interview ("Living stage & menus"). The stage today is a gradient and a 
 - None.
 
 ## Tasks
-- [ ] T1. Generate and process the stage layers; manifest; pytest.
-- [ ] T2. Parallax renderer and ambient animation.
-- [ ] T3. Walkers and the K.O. reaction.
+- [x] T1. Generate and process the stage layers; manifest; pytest.
+- [x] T2. Parallax renderer and ambient animation.
+- [x] T3. Walkers and the K.O. reaction.
 - [ ] T4. Evidence and HQ.
 
 ## Implementation notes
-(filled by spec-tackle)
+2026-11-12, lead session.
+
+- `art/pipeline/stage.py` + `art/stages.json`: far layer (dusk skyline through tall windows, 864x360 for factor 0.35) and mid layer (desks, monitors with code, coffee station, architecture whiteboard, plants, pendant lamps, transparent, 1088x360 for factor 0.7), both reduced to 64 colors. Manifest at `public/stages/office/manifest.json`.
+- `src/render/stage.ts` keeps the spec 001 `drawStage(ctx, camera)` signature and lazy-loads the stage: far layer, blinking city lights, walkers, mid layer, a dimming pass so fighters read first, and a code-drawn floor on the sim floor line. `stageReact("ko", x)` makes walkers stop and face the fight (wired into the scene at the spec 005 merge).
+- `src/render/stageWalkers.ts`: pure seeded scheduler; tests in `stageWalkers.test.ts` (deterministic per seed, walkers cross and respawn, K.O. makes everyone stop and face the fight).
+- Screenshot of a live training match on the stage: fighters readable over the dimmed office.
+- Open: A2 screenshots at three camera positions, A3 walker screenshots, A4 fps check; K.O. reaction wiring.
 
 ## Review
 (filled by spec-review)
