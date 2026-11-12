@@ -6,7 +6,7 @@ export const COMBAT = Object.freeze({
   maxHealth: 1000,
   /** A press counts for this many frames after it happens (input buffer). */
   bufferFrames: 4,
-  /** Light and heavy pressed within this many frames of each other start a throw. */
+  /** Punch and Kick pressed within this many frames of each other start a throw. */
   throwChordFrames: 2,
   /** Throw reach: center-to-center distance, 72 px. */
   throwRange: 7200,

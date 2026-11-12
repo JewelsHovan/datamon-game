@@ -1,0 +1,387 @@
+{
+  "A2 P2 KeyL starts light_punch": {
+    "pass": true,
+    "event": {
+      "type": "attack",
+      "player": 1,
+      "move": "light_punch"
+    }
+  },
+  "A2 P2 Semicolon starts light_kick": {
+    "pass": true,
+    "event": {
+      "type": "attack",
+      "player": 1,
+      "move": "light_kick"
+    }
+  },
+  "A2 P2 Quote starts special": {
+    "pass": true,
+    "event": {
+      "type": "attack",
+      "player": 1,
+      "move": "special"
+    }
+  },
+  "A2 ' and / prevented": {
+    "pass": true,
+    "active": "body",
+    "hasFocus": true,
+    "log": [
+      {
+        "type": "keydown",
+        "code": "Quote",
+        "prevented": true
+      },
+      {
+        "type": "keydown",
+        "code": "Slash",
+        "prevented": true
+      }
+    ],
+    "screenshot": "specs/evidence/005/a2-p2-keys.png"
+  },
+  "A5 title": {
+    "pass": true,
+    "menu": {
+      "index": 0,
+      "item": "VS CPU"
+    },
+    "screenshot": "specs/evidence/005/a5-01-title.png"
+  },
+  "A5 select": {
+    "pass": true,
+    "menu": {
+      "mode": "versus",
+      "stage": "pick",
+      "cursors": [
+        0,
+        0
+      ],
+      "under": [
+        "julien-hovan",
+        "julien-hovan"
+      ],
+      "locked": [
+        null,
+        null
+      ],
+      "level": "normal",
+      "tiles": [
+        "julien-hovan",
+        "pentcho-tchomakov",
+        "alex-andrianavalontsalama",
+        "andrea-vreugdenhil",
+        "antonia-nistor",
+        "aurelien-bouffanais",
+        "dana-domanko",
+        "duc-an-nguyen",
+        "elina-gu",
+        "emile-moffatt",
+        "ethan-pirso",
+        "felicia-gorgacheva",
+        "francesco-finn",
+        "guillaume-delmas-frenette",
+        "guillaume-pregent",
+        "jerry-zhu",
+        "jewoo-lee",
+        "jonah-lee",
+        "jonathan-kim",
+        "logan-labossiere",
+        "megane-darnaud",
+        "milen-thomas",
+        "minh-ngoc-do",
+        "oyku-cildir",
+        "philippe-miranda-jean",
+        "richard-el-chaar",
+        "sarah-kotb",
+        "saransh-padhy",
+        "scott-carr",
+        "stephanie-fontaine",
+        "tabarek-al-khalidi",
+        "tyler-nagano",
+        "veronica-marallag",
+        "victor-desautels",
+        "vincent-anctil",
+        "wild-guevera",
+        "william-chan",
+        "random"
+      ],
+      "playable": [
+        "julien-hovan"
+      ]
+    },
+    "screenshot": "specs/evidence/005/a5-02-select.png"
+  },
+  "A5 coming soon cannot be picked": {
+    "pass": true,
+    "under": [
+      "pentcho-tchomakov",
+      "julien-hovan"
+    ],
+    "locked": [
+      null,
+      null
+    ],
+    "screenshot": "specs/evidence/005/a5-03-coming-soon.png"
+  },
+  "A5 picks": {
+    "pass": true,
+    "locked": [
+      "julien-hovan",
+      "julien-hovan"
+    ],
+    "p2Under": "random",
+    "screenshot": "specs/evidence/005/a5-04-select-ready.png"
+  },
+  "A5 versus": {
+    "pass": true,
+    "menu": {
+      "frames": 40,
+      "loaded": true,
+      "error": null
+    },
+    "screenshot": "specs/evidence/005/a5-05-versus.png"
+  },
+  "A6 round 1 intro legends": {
+    "pass": true,
+    "legends": [
+      [
+        "F PUNCH  G KICK  H SPECIAL",
+        "WASD MOVE  F+G THROW"
+      ],
+      [
+        "L PUNCH  ; KICK  ' SPECIAL",
+        "ARROWS MOVE  L+; THROW"
+      ]
+    ],
+    "screenshot": "specs/evidence/005/a6-round1-intro-legends.png"
+  },
+  "A5 results": {
+    "pass": true,
+    "menu": {
+      "winner": 0,
+      "index": 0,
+      "item": "REMATCH"
+    },
+    "screenshot": "specs/evidence/005/a5-06-results.png"
+  },
+  "A5 rematch": {
+    "pass": true,
+    "round": {
+      "phase": "intro",
+      "phaseFrame": 7,
+      "number": 1,
+      "wins": [
+        0,
+        0
+      ],
+      "timer": 5940,
+      "winner": -1,
+      "reason": "",
+      "training": false
+    },
+    "screenshot": "specs/evidence/005/a5-07-rematch.png"
+  },
+  "A5 pause (legends showing)": {
+    "pass": true,
+    "menu": {
+      "index": 0,
+      "item": "RESUME"
+    },
+    "screenshot": "specs/evidence/005/a5-08-pause.png"
+  },
+  "A5 quit to select": {
+    "pass": true,
+    "menu": {
+      "mode": "versus",
+      "stage": "pick",
+      "cursors": [
+        0,
+        0
+      ],
+      "under": [
+        "julien-hovan",
+        "julien-hovan"
+      ],
+      "locked": [
+        null,
+        null
+      ],
+      "level": "normal",
+      "tiles": [
+        "julien-hovan",
+        "pentcho-tchomakov",
+        "alex-andrianavalontsalama",
+        "andrea-vreugdenhil",
+        "antonia-nistor",
+        "aurelien-bouffanais",
+        "dana-domanko",
+        "duc-an-nguyen",
+        "elina-gu",
+        "emile-moffatt",
+        "ethan-pirso",
+        "felicia-gorgacheva",
+        "francesco-finn",
+        "guillaume-delmas-frenette",
+        "guillaume-pregent",
+        "jerry-zhu",
+        "jewoo-lee",
+        "jonah-lee",
+        "jonathan-kim",
+        "logan-labossiere",
+        "megane-darnaud",
+        "milen-thomas",
+        "minh-ngoc-do",
+        "oyku-cildir",
+        "philippe-miranda-jean",
+        "richard-el-chaar",
+        "sarah-kotb",
+        "saransh-padhy",
+        "scott-carr",
+        "stephanie-fontaine",
+        "tabarek-al-khalidi",
+        "tyler-nagano",
+        "veronica-marallag",
+        "victor-desautels",
+        "vincent-anctil",
+        "wild-guevera",
+        "william-chan",
+        "random"
+      ],
+      "playable": [
+        "julien-hovan"
+      ]
+    },
+    "screenshot": "specs/evidence/005/a5-09-back-to-select.png"
+  },
+  "A3 rebind P1 Punch to L swaps with P2": {
+    "pass": true,
+    "capturing": {
+      "player": 0,
+      "action": "punch"
+    },
+    "status": "P1 PUNCH = L  (SWAPPED WITH P2 PUNCH)",
+    "p1": [
+      "KeyL"
+    ],
+    "p2": [
+      "KeyF"
+    ],
+    "screenshot": "specs/evidence/005/a3-01-controls-swap.png"
+  },
+  "A3 bindings survive a reload": {
+    "pass": true,
+    "stored": "{\"version\":1,\"players\":[{\"up\":[\"KeyW\"],\"down\":[\"KeyS\"],\"left\":[\"KeyA\"],\"right\":[\"KeyD\"],\"punch\":[\"KeyL\"],\"kick\":[\"KeyG\"],\"special\":[\"KeyH\"],\"start\":[\"Enter\"]},{\"up\":[\"ArrowUp\"],\"down\":[\"ArrowDown\"],\"left\":[\"ArrowLeft\"],\"right\":[\"ArrowRight\"],\"punch\":[\"KeyF\"],\"kick\":[\"Semicolon\"],\"special\":[\"Quote\"],\"start\":[\"NumpadEnter\"]}]}",
+    "p1": [
+      "KeyL"
+    ],
+    "p2": [
+      "KeyF"
+    ],
+    "screenshot": "specs/evidence/005/a3-02-after-reload.png"
+  },
+  "A3 restore defaults": {
+    "pass": true,
+    "status": "DEFAULTS RESTORED",
+    "p1": [
+      "KeyF"
+    ],
+    "p2": [
+      "KeyL"
+    ],
+    "storedAfter": "KeyF",
+    "screenshot": "specs/evidence/005/a3-03-defaults-restored.png"
+  },
+  "A3 key test lights F G H L ; ' together": {
+    "pass": true,
+    "lit": [
+      [
+        "punch",
+        "kick",
+        "special"
+      ],
+      [
+        "punch",
+        "kick",
+        "special"
+      ]
+    ],
+    "screenshot": "specs/evidence/005/a3-04-key-test-six-held.png"
+  },
+  "CPU select: fighter, CPU fighter, level": {
+    "pass": true,
+    "menu": {
+      "stage": "level",
+      "level": "hard",
+      "locked": [
+        "julien-hovan",
+        "julien-hovan"
+      ]
+    },
+    "screenshot": "specs/evidence/005/cpu-01-select-level.png"
+  },
+  "CPU fight from the flow": {
+    "pass": true,
+    "menu": {
+      "mode": "cpu",
+      "fighters": [
+        "julien-hovan",
+        "julien-hovan"
+      ],
+      "cpu": [
+        null,
+        "hard"
+      ],
+      "phase": "intro",
+      "round": 1,
+      "wins": [
+        0,
+        0
+      ],
+      "legends": [
+        [
+          "F PUNCH  G KICK  H SPECIAL",
+          "WASD MOVE  F+G THROW"
+        ],
+        [
+          "CPU HARD"
+        ]
+      ]
+    }
+  },
+  "?cpu=easy shortcut": {
+    "pass": true,
+    "menu": {
+      "mode": "cpu",
+      "fighters": [
+        "julien-hovan",
+        "julien-hovan"
+      ],
+      "cpu": [
+        null,
+        "easy"
+      ],
+      "phase": "intro",
+      "round": 1,
+      "wins": [
+        0,
+        0
+      ],
+      "legends": [
+        [
+          "F PUNCH  G KICK  H SPECIAL",
+          "WASD MOVE  F+G THROW"
+        ],
+        [
+          "CPU EASY"
+        ]
+      ]
+    },
+    "screenshot": "specs/evidence/005/cpu-02-shortcut-intro.png"
+  },
+  "no console errors": {
+    "pass": true,
+    "errors": []
+  }
+}
