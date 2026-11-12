@@ -62,7 +62,7 @@ Runs in parallel with spec 001. Nothing here touches `src/` except the preview p
 2026-11-12, lead session.
 
 **Pipeline changes from the plan**
-- Calibration frame: every strip starts with one extra figure, the standard fighting stance. `process.py` scales each clip so that figure is 140px tall and uses it to convert torso anchors into back-foot space, then drops it. The model draws each strip at its own scale (raw stance height ranged 574 to 893px across clips), so one per-fighter scale would not have worked. Decision recorded here; the design doc pipeline section describes the same flow.
+- Calibration frame: every strip starts with one extra figure, the standard fighting stance. `process.py` scales each clip so that figure is 140px tall and uses it to convert torso anchors into back-foot space, then drops it. The model draws each strip at its own scale (raw stance height ranged from 574 to 916px across clips), so one per-fighter scale would not have worked. Decision recorded here; the design doc pipeline section describes the same flow.
 - Palette: median cut (PIL) instead of k-means; deterministic and good enough at 48 colors.
 - Added `art/pipeline/review.py` (status CLI) and `art/pipeline/batch_review.py` (process the newest raw per clip and tile contact sheets for review).
 
