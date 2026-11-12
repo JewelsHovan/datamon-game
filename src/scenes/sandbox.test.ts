@@ -2,12 +2,12 @@ import { describe, expect, it } from "vitest";
 import { DEFAULT_P1, DEFAULT_P2, DEFAULT_SEED, pickFighters } from "./sandbox";
 
 describe("sandbox URL params (R7)", () => {
-  it("defaults to julien-hovan vs felicia-gorgacheva", () => {
+  it("defaults to a julien-hovan mirror match", () => {
     const warnings: string[] = [];
     const pick = pickFighters("", (m) => warnings.push(m));
     expect([pick.p1.slug, pick.p2.slug]).toEqual([DEFAULT_P1, DEFAULT_P2]);
     expect(DEFAULT_P1).toBe("julien-hovan");
-    expect(DEFAULT_P2).toBe("felicia-gorgacheva");
+    expect(DEFAULT_P2).toBe("julien-hovan");
     expect(pick.seed).toBe(DEFAULT_SEED);
     expect(warnings).toEqual([]);
   });

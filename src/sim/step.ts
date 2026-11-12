@@ -1,28 +1,15 @@
 // One 60 Hz simulation step, in the fixed order of operations from
 // docs/game-design.md ("Game loop architecture", rule 6).
+import { advancePush, advanceProjectiles, applyHits, detectHits } from "./combat";
 import { advanceFighter } from "./fighter";
 import { pushInput } from "./inputHistory";
 import { applyMovement, midpoint, resolveSpacing, updateFacing } from "./physics";
+import { advanceRound } from "./round";
 import { cloneState } from "./state";
 import type { InputPair, SimState } from "./types";
 
-/** A hit found by hit detection, applied afterwards. Combat (spec 003) fills it in. */
-export type PendingHit = never;
-
-/** Detect hits for both fighters at once, so trades happen. No-op until combat. */
-export function detectHits(_state: SimState): PendingHit[] {
-  return [];
-}
-
-/** Apply damage, hit-stop and stun from detected hits. No-op until combat. */
-export function applyHits(_state: SimState, _hits: readonly PendingHit[]): void {
-  // Intentionally empty: combat core fills this slot.
-}
-
-/** Round timer and round state. No-op until match flow. */
-export function advanceRound(_state: SimState): void {
-  // Intentionally empty: match flow fills this slot.
-}
+export { applyHits, detectHits, type PendingHit } from "./combat";
+export { advanceRound } from "./round";
 
 /**
  * Advances the sim by one frame. Uses only `prev` and the two input bitmasks;
@@ -34,24 +21,32 @@ export function step(prev: SimState, inputs: InputPair): SimState {
   state.frame += 1;
   state.events = [];
 
-  // 1. Read inputs.
+  // 1. Read inputs (recorded even during hit-stop, so presses buffer through it).
   pushInput(p1.input, inputs[0]);
   pushInput(p2.input, inputs[1]);
 
-  // 2. Advance state machines.
-  advanceFighter(p1, 0, state.events);
-  advanceFighter(p2, 1, state.events);
+  // 2. Advance state machines. Fighters in hit-stop stay frozen this step.
+  const frozen = [p1.hitstop > 0, p2.hitstop > 0] as const;
+  advanceFighter(p1, 0, state);
+  advanceFighter(p2, 1, state);
 
-  // 3. Movement and gravity.
+  // 3. Movement, gravity and pushback; projectiles fly.
   const previousMid = midpoint(state.fighters);
-  applyMovement(p1, 0, state.events);
-  applyMovement(p2, 1, state.events);
+  if (!frozen[0]) {
+    applyMovement(p1, 0, state.events);
+    advancePush(p1);
+  }
+  if (!frozen[1]) {
+    applyMovement(p2, 1, state.events);
+    advancePush(p2);
+  }
+  advanceProjectiles(state);
 
   // 4. Pushboxes, walls and the screen limit; then facing.
   resolveSpacing(state.fighters, previousMid);
   updateFacing(state.fighters);
 
-  // 5. Detect hits for both fighters at once.
+  // 5. Detect hits for both fighters at once (trades happen).
   const hits = detectHits(state);
 
   // 6. Apply hits.

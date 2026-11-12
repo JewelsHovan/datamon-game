@@ -1,10 +1,12 @@
-// Fighter movement state machine. Every state transition lives in this file:
-// input-driven ones in advanceFighter, the floor contact in landFighter
-// (called by physics when an airborne fighter reaches the floor).
+// Fighter state machine. Every state transition lives here: input-driven ones
+// in advanceFighter, the floor contact in landFighter (called by physics when an
+// airborne fighter reaches the floor), and the combat ones through combat.ts
+// helpers called from here and from hit application.
 import { MOVEMENT } from "../data/movement";
+import { advanceDowned, tickGroundMove, tryAirMove, tryGroundMove } from "./combat";
 import { DIR_BACK, DIR_DOWN, DIR_FORWARD, DIR_UP } from "./inputBits";
 import { inputAt, toFacingRelative } from "./inputHistory";
-import type { FighterState, FighterStateName, JumpDir, PlayerIndex, SimEvent } from "./types";
+import type { FighterState, FighterStateName, JumpDir, PlayerIndex, SimEvent, SimState } from "./types";
 
 export function isAirborne(f: FighterState): boolean {
   return f.state === "airborne";
@@ -15,6 +17,11 @@ export function isActionable(state: FighterStateName): boolean {
   return (
     state === "idle" || state === "walk_forward" || state === "walk_back" || state === "crouch"
   );
+}
+
+/** States in which a grounded fighter may turn to face the opponent. */
+export function canTurn(state: FighterStateName): boolean {
+  return isActionable(state) || state === "landing" || state === "jumpsquat";
 }
 
 function enter(f: FighterState, state: FighterStateName): void {
@@ -65,11 +72,28 @@ function groundVelocity(f: FighterState): number {
   }
 }
 
+/** Fighters may move and attack only while the round is being fought (or in training). */
+export function controlEnabled(state: SimState): boolean {
+  return state.round.training || (state.round.phase === "fight" && state.round.winner === -1);
+}
+
+/** Acting from neutral: start a buffered move, otherwise walk, crouch or jump. */
+function neutral(f: FighterState, player: PlayerIndex, state: SimState, control: boolean, dirs: number): void {
+  if (control && tryGroundMove(f, player, state)) return;
+  groundedControl(f, control ? dirs : 0);
+}
+
 /**
  * Advances one fighter's state machine by one frame, from its newest input.
+ * A fighter in hit-stop is frozen: only the hit-stop counter runs down.
  * Sets the velocities that physics applies next.
  */
-export function advanceFighter(f: FighterState, player: PlayerIndex, events: SimEvent[]): void {
+export function advanceFighter(f: FighterState, player: PlayerIndex, state: SimState): void {
+  if (f.hitstop > 0) {
+    f.hitstop -= 1;
+    return;
+  }
+  const control = controlEnabled(state);
   const dirs = toFacingRelative(inputAt(f.input, 0), f.facing);
   f.stateFrame += 1;
 
@@ -78,35 +102,65 @@ export function advanceFighter(f: FighterState, player: PlayerIndex, events: Sim
       // A direction held during the squat still picks the jump direction.
       const intent = horizontalIntent(dirs);
       if (intent !== 0) f.jumpDir = intent;
-      if (f.stateFrame >= MOVEMENT.jumpsquatFrames) launch(f, player, events);
+      if (f.stateFrame >= MOVEMENT.jumpsquatFrames) launch(f, player, state.events);
       break;
     }
     case "airborne":
-      // No air control; physics lands the fighter.
+      // No air control; physics lands the fighter. One air attack per jump.
+      if (f.move) f.move.tick += 1;
+      else if (control) tryAirMove(f, player, state);
       break;
     case "landing":
       if (f.stateFrame >= MOVEMENT.landingFrames) {
         enter(f, "idle");
-        groundedControl(f, dirs);
+        neutral(f, player, state, control, dirs);
       }
       break;
+    case "attack":
+      if (tickGroundMove(f, player, state)) {
+        f.state = "idle";
+        f.stateFrame = 0;
+        neutral(f, player, state, control, dirs);
+      }
+      break;
+    case "hitstun":
+    case "blockstun":
+      f.stun -= 1;
+      if (f.stun <= 0) {
+        f.state = "idle";
+        f.stateFrame = 0;
+        groundedControl(f, control ? dirs : 0);
+      }
+      break;
+    case "held":
+      // The thrower moves and releases the victim; this is only a safety net.
+      if (f.stateFrame > 60) enter(f, "idle");
+      break;
+    case "knockdown":
+    case "ko":
+      advanceDowned(f, player, state);
+      break;
+    case "victory":
+      break;
     default:
-      groundedControl(f, dirs);
+      f.comboHits = 0;
+      neutral(f, player, state, control, dirs);
       break;
   }
 
-  if (f.state !== "airborne") {
+  if (f.state !== "airborne" && f.state !== "knockdown" && f.state !== "ko") {
     f.vx = groundVelocity(f);
     f.vy = 0;
   }
 }
 
-/** Floor contact: the only way out of the airborne state. */
+/** Floor contact: the only way out of the airborne state. Ends any air attack. */
 export function landFighter(f: FighterState, player: PlayerIndex, events: SimEvent[]): void {
   f.y = MOVEMENT.floorY;
   f.vx = 0;
   f.vy = 0;
   f.jumpDir = 0;
+  f.move = null;
   enter(f, "landing");
   events.push({ type: "land", player });
 }

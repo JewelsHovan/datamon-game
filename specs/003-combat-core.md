@@ -1,6 +1,6 @@
 # 003: Combat core: the first real fight
 
-Status: draft
+Status: in-progress
 Created: 2026-11-12
 
 ## Goal

@@ -369,3 +369,58 @@ export function browserClipDeps(): ClipLoaderDeps {
     },
   };
 }
+
+/** URL of a fighter's alternate palette ({"#from": "#to"}), used for P2 in mirror matches. */
+export function altPaletteUrl(slug: string): string {
+  return `./fighters/${slug}/palette-alt.json`;
+}
+
+/** Exact-color remap of RGBA pixels; unmapped colors and transparent pixels are left alone. */
+export function remapColors(rgba: Uint8ClampedArray, mapping: Readonly<Record<string, string>>): number {
+  const table = new Map<number, number>();
+  for (const [from, to] of Object.entries(mapping)) {
+    if (from === to) continue;
+    table.set(parseInt(from.slice(1), 16), parseInt(to.slice(1), 16));
+  }
+  let changed = 0;
+  for (let i = 0; i < rgba.length; i += 4) {
+    if (rgba[i + 3] === 0) continue;
+    const key = (rgba[i]! << 16) | (rgba[i + 1]! << 8) | rgba[i + 2]!;
+    const to = table.get(key);
+    if (to === undefined) continue;
+    rgba[i] = (to >> 16) & 255;
+    rgba[i + 1] = (to >> 8) & 255;
+    rgba[i + 2] = to & 255;
+    changed++;
+  }
+  return changed;
+}
+
+const altCache = new Map<string, Promise<ClipSet>>();
+
+/**
+ * The fighter's clips recolored with their alternate palette (mirror matches).
+ * Fighters without generated art or without an alternate palette get their normal clips.
+ */
+export function loadAltClipSet(person: Person, deps: ClipLoaderDeps = browserClipDeps()): Promise<ClipSet> {
+  let pending = altCache.get(person.slug);
+  if (!pending) {
+    pending = (async () => {
+      const base = await loadClipSet(person, deps);
+      if (base.source !== "manifest") return base;
+      const mapping = await deps.fetchJson(altPaletteUrl(person.slug));
+      if (!isRecord(mapping)) return base;
+      const canvas = deps.createCanvas(base.atlas.width, base.atlas.height);
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return base;
+      ctx.drawImage(base.atlas, 0, 0);
+      const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      remapColors(pixels.data, mapping as Record<string, string>);
+      ctx.putImageData(pixels, 0, 0);
+      return { ...base, atlas: canvas };
+    })();
+    altCache.set(person.slug, pending);
+    pending.catch(() => altCache.delete(person.slug));
+  }
+  return pending;
+}

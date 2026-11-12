@@ -1,7 +1,7 @@
 {
  "fighter": "effects",
- "version": 2,
- "scale": null,
+ "version": 3,
+ "scale": 1,
  "facing": "right",
  "clips": {
   "hit_light": {

@@ -128,7 +128,7 @@ def test_julien_manifest_valid():
 
 
 # Spec 003 A2: boxes derived from the art --------------------------------------------------------
-BOXES = common.PUBLIC_FIGHTERS / "julien-hovan" / "boxes.json"
+BOXES = common.ROOT / "src" / "data" / "boxes" / "julien-hovan.json"
 
 
 @pytest.mark.skipif(not BOXES.exists(), reason="boxes.json not generated yet")

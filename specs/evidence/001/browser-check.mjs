@@ -119,7 +119,8 @@ async function viewport(width, height) {
 
 async function open(query = "") {
   consoleMessages.length = 0;
-  await page("Page.navigate", { url: BASE + query });
+  // Spec 003 made the default a timed match; spec 001 checks run in free training mode.
+  await page("Page.navigate", { url: BASE + (query ? query + "&" : "?") + "mode=training" });
   for (let i = 0; i < 100; i++) {
     const ready = await evaluate("!!(window.__game && window.__game.simFrame > 10)").catch(
       () => false,

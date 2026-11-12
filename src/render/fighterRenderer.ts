@@ -1,6 +1,8 @@
 // Draws a fighter from its clip set. The clip and frame come from sim
 // counters (state and stateFrame), never from render time.
 import { MOVEMENT } from "../data/movement";
+import { MOVES, segmentAt } from "../data/moves";
+import { downedFrame } from "../sim/combat";
 import { SUBPX } from "../sim/fixed";
 import type { FighterState } from "../sim/types";
 import type { Camera } from "./camera";
@@ -11,11 +13,38 @@ export interface ClipChoice {
   tick: number;
   /** Play the clip backwards (walking back reuses the walk clip). */
   reverse: boolean;
+  /** An exact frame index (move timelines pick frames themselves); overrides `tick`. */
+  frame?: number;
+}
+
+function moveChoice(f: FighterState): ClipChoice | null {
+  const m = f.move;
+  if (!m) return null;
+  const def = MOVES[m.id];
+  let frame = segmentAt(def.segments, m.tick).segment.frame;
+  if (def.id === "throw" && !m.grabbed && m.tick > def.grabTick!) {
+    // A whiffed throw keeps reaching for a moment, then recovers.
+    frame = m.tick < def.grabTick! + 10 ? 0 : 4;
+  }
+  return { clip: def.clip, tick: m.tick, reverse: false, frame };
 }
 
 /** Which clip a fighter shows, and how far into it, from sim state only. */
 export function clipForFighter(f: FighterState): ClipChoice {
   switch (f.state) {
+    case "attack":
+      return moveChoice(f) ?? { clip: "idle", tick: f.stateFrame, reverse: false };
+    case "hitstun":
+      return { clip: "hurt", tick: 0, reverse: false, frame: f.stunLow ? 1 : f.stun <= 4 ? 2 : 0 };
+    case "blockstun":
+      return { clip: "block", tick: 0, reverse: false, frame: f.stunLow ? 1 : 0 };
+    case "held":
+      return { clip: "hurt", tick: 0, reverse: false, frame: 0 };
+    case "knockdown":
+    case "ko":
+      return { clip: "knockdown", tick: f.stateFrame, reverse: false, frame: downedFrame(f) };
+    case "victory":
+      return { clip: "victory", tick: f.stateFrame, reverse: false };
     case "idle":
       return { clip: "idle", tick: f.stateFrame, reverse: false };
     case "walk_forward":
@@ -29,7 +58,7 @@ export function clipForFighter(f: FighterState): ClipChoice {
       // The crouch clip's first frame doubles as the pre-jump squat and the landing squat.
       return { clip: "crouch", tick: 0, reverse: false };
     case "airborne":
-      return { clip: "jump", tick: f.stateFrame, reverse: false };
+      return moveChoice(f) ?? { clip: "jump", tick: f.stateFrame, reverse: false };
   }
 }
 
@@ -43,6 +72,9 @@ export function resolveClip(set: ClipSet, name: string): Clip {
 export function frameForFighter(set: ClipSet, f: FighterState): ClipFrame {
   const choice = clipForFighter(f);
   const clip = resolveClip(set, choice.clip);
+  if (choice.frame !== undefined && set.clips[choice.clip]) {
+    return clip.frames[Math.min(choice.frame, clip.frames.length - 1)]!;
+  }
   let index = clipFrameIndex(clip, choice.tick);
   if (choice.reverse) index = clip.frames.length - 1 - index;
   return clip.frames[index]!;
@@ -76,17 +108,41 @@ export function drawFighter(
   set: ClipSet,
   f: FighterState,
   camera: Camera,
+  tint?: string,
 ): void {
   const frame = frameForFighter(set, f);
   const sx = Math.round(f.x / SUBPX) - camera.x;
   const sy = Math.round(f.y / SUBPX) - camera.y;
+  const source = tint ? tinted(set, frame, tint) : null;
+  const img = source ?? set.atlas;
+  const ox = source ? 0 : frame.x;
+  const oy = source ? 0 : frame.y;
   if (f.facing === set.artFacing) {
-    ctx.drawImage(set.atlas, frame.x, frame.y, frame.w, frame.h, sx - frame.ax, sy - frame.ay, frame.w, frame.h);
+    ctx.drawImage(img, ox, oy, frame.w, frame.h, sx - frame.ax, sy - frame.ay, frame.w, frame.h);
     return;
   }
   ctx.save();
   ctx.translate(sx, sy);
   ctx.scale(-1, 1);
-  ctx.drawImage(set.atlas, frame.x, frame.y, frame.w, frame.h, -frame.ax, -frame.ay, frame.w, frame.h);
+  ctx.drawImage(img, ox, oy, frame.w, frame.h, -frame.ax, -frame.ay, frame.w, frame.h);
   ctx.restore();
+}
+
+let scratch: HTMLCanvasElement | null = null;
+
+/** The frame as a solid silhouette of `color` (the hit flash). */
+function tinted(set: ClipSet, frame: ClipFrame, color: string): HTMLCanvasElement | null {
+  if (typeof document === "undefined") return null;
+  scratch ??= document.createElement("canvas");
+  scratch.width = frame.w;
+  scratch.height = frame.h;
+  const c = scratch.getContext("2d");
+  if (!c) return null;
+  c.clearRect(0, 0, frame.w, frame.h);
+  c.drawImage(set.atlas, frame.x, frame.y, frame.w, frame.h, 0, 0, frame.w, frame.h);
+  c.globalCompositeOperation = "source-in";
+  c.fillStyle = color;
+  c.fillRect(0, 0, frame.w, frame.h);
+  c.globalCompositeOperation = "source-over";
+  return scratch;
 }

@@ -189,7 +189,7 @@ def cmd_pack() -> int:
     mp = PUBLIC / "manifest.json"
     prev = json.loads(mp.read_text()) if mp.exists() else {}
     atlas.save(PUBLIC / "atlas.png", optimize=True)
-    mp.write_text(json.dumps({"fighter": "effects", "version": int(prev.get("version", 0)) + 1, "scale": None,
+    mp.write_text(json.dumps({"fighter": "effects", "version": int(prev.get("version", 0)) + 1, "scale": 1,
                               "facing": "right", "clips": clips}, indent=1) + "\n")
     print(f"effects: {len(clips)} clips, {len(entries)} frames, atlas {packer.ATLAS_W}x{height}")
     return 0

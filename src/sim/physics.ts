@@ -1,7 +1,7 @@
 // Movement, gravity, pushboxes, stage walls, the screen-width separation limit
 // and facing. Integer subpixels only.
 import { MOVEMENT } from "../data/movement";
-import { isAirborne, landFighter } from "./fighter";
+import { canTurn, isAirborne, landFighter } from "./fighter";
 import { clampInt } from "./fixed";
 import type { FighterState, PlayerIndex, SimEvent } from "./types";
 
@@ -115,16 +115,18 @@ export function midpoint(fighters: readonly [FighterState, FighterState]): numbe
 
 /**
  * Fighters face each other, but only turn while both are on the ground: a
- * jump over the opponent swaps their facing when the jumper lands.
+ * jump over the opponent swaps their facing when the jumper lands. A fighter
+ * mid-attack, stunned or downed does not turn.
  */
 export function updateFacing(fighters: [FighterState, FighterState]): void {
   const [a, b] = fighters;
   if (isAirborne(a) || isAirborne(b)) return;
+  // Attacking, stunned or downed fighters keep their facing until they can act again.
   if (b.x > a.x) {
-    a.facing = 1;
-    b.facing = -1;
+    if (canTurn(a.state)) a.facing = 1;
+    if (canTurn(b.state)) b.facing = -1;
   } else if (b.x < a.x) {
-    a.facing = -1;
-    b.facing = 1;
+    if (canTurn(a.state)) a.facing = -1;
+    if (canTurn(b.state)) b.facing = 1;
   }
 }

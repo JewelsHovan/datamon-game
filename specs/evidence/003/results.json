@@ -1,0 +1,113 @@
+{
+  "intro": {
+    "pass": true,
+    "screenshot": "specs/evidence/003/01-intro-round1.png"
+  },
+  "fight phase": {
+    "pass": true,
+    "phase": "fight"
+  },
+  "real clips": {
+    "pass": true,
+    "clipSources": [
+      "manifest",
+      "manifest"
+    ],
+    "stats": {
+      "stepsLastFrame": 1,
+      "totalSteps": 100,
+      "frames": 102,
+      "fps": 59.904153360336366
+    },
+    "boxes": false,
+    "reducedEffects": false,
+    "liveEffects": 0
+  },
+  "light punch hits": {
+    "pass": true,
+    "hit": {
+      "type": "hit",
+      "player": 0,
+      "target": 1,
+      "move": "light_punch",
+      "strength": "light",
+      "x": 72520,
+      "y": 20900,
+      "damage": 40,
+      "combo": 1
+    },
+    "screenshot": "specs/evidence/003/02-light-punch-spark.png"
+  },
+  "heavy kick knockdown + dust": {
+    "pass": true,
+    "kd": {
+      "type": "knockdown",
+      "player": 1,
+      "x": 79400,
+      "y": 32000
+    },
+    "screenshot": "specs/evidence/003/03-knockdown-dust.png"
+  },
+  "block flash": {
+    "pass": true,
+    "blk": {
+      "type": "block",
+      "player": 0,
+      "target": 1,
+      "move": "light_punch",
+      "strength": "light",
+      "x": 80815,
+      "y": 20900
+    },
+    "screenshot": "specs/evidence/003/04-block-flash.png"
+  },
+  "projectile + box overlay": {
+    "pass": true,
+    "proj": {
+      "type": "projectile",
+      "player": 0,
+      "x": 65530,
+      "y": 21600
+    },
+    "screenshot": "specs/evidence/003/05-projectile-boxes.png"
+  },
+  "K.O.": {
+    "pass": true,
+    "ko": {
+      "type": "ko",
+      "player": 1,
+      "x": 122600,
+      "y": 32000
+    },
+    "screenshot": "specs/evidence/003/06-ko-slowmo.png"
+  },
+  "victory pose + round win": {
+    "pass": true,
+    "wins": [
+      1,
+      0
+    ],
+    "screenshot": "specs/evidence/003/07-victory.png"
+  },
+  "round 2 starts": {
+    "pass": true,
+    "round": {
+      "phase": "intro",
+      "phaseFrame": 1,
+      "number": 2,
+      "wins": [
+        1,
+        0
+      ],
+      "timer": 5940,
+      "winner": -1,
+      "reason": "",
+      "training": false
+    },
+    "screenshot": "specs/evidence/003/08-round2.png"
+  },
+  "no console errors": {
+    "pass": true,
+    "errors": []
+  }
+}
