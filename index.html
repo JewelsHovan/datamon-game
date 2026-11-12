@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Datamon: Merge Conflict</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: #000;
+        overflow: hidden;
+      }
+      #game {
+        position: absolute;
+        image-rendering: crisp-edges;
+        image-rendering: pixelated;
+        background: #000;
+      }
+      #debug-overlay {
+        position: absolute;
+        margin: 0;
+        padding: 6px 8px;
+        font: 12px/1.35 ui-monospace, Menlo, Consolas, monospace;
+        color: #e8ffe8;
+        background: rgba(0, 0, 0, 0.6);
+        pointer-events: none;
+        white-space: pre;
+      }
+      #debug-overlay[hidden] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="game" width="640" height="360"></canvas>
+    <pre id="debug-overlay" hidden></pre>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
