@@ -142,7 +142,7 @@ def test_julien_boxes():
             assert r["hurt"], f"{cid}[{i}] has no hurtbox"
     for cid, i in [("light_punch", 2), ("heavy_punch", 3), ("light_kick", 1), ("heavy_kick", 3), ("crouch_attack", 2), ("air_attack", 1)]:
         reach = b["clips"][cid][i]["reach"]
-        assert reach and reach[0] > 0, f"{cid}[{i}] needs a hitbox in front of the anchor"
+        assert reach and reach[0] + reach[2] > 30, f"{cid}[{i}] needs a hitbox reaching well in front of the anchor"
         assert reach[3] < 60, f"{cid}[{i}] hitbox is {reach[3]}px tall: it should cover the limb, not the body"
     assert all(r["reach"] is None for r in b["clips"]["idle"])
 

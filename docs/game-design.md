@@ -77,6 +77,7 @@ Each fighter ships `public/fighters/<slug>/atlas.png` and `public/fighters/<slug
   "version": 1,
   "scale": 0.27,
   "facing": "right",
+  "originX": 38,
   "clips": {
     "heavy_punch": {
       "loop": false,
@@ -88,7 +89,7 @@ Each fighter ships `public/fighters/<slug>/atlas.png` and `public/fighters/<slug
 }
 ```
 
-- `x, y, w, h`: the frame's rectangle in the atlas. `ax, ay`: the anchor inside that rectangle (the point that sits on the fighter's position: back foot on the floor). `hold`: default ticks at 60 Hz; move frame data may override holds.
+- `x, y, w, h`: the frame's rectangle in the atlas. `ax, ay`: the anchor inside that rectangle, the point that sits on the fighter's position: the body center on the floor, matching the pushbox. The pipeline anchors frames on the back foot (stable across poses) and the packer shifts every anchor by the idle stance's body-center offset (`originX`). `hold`: default ticks at 60 Hz; move frame data may override holds.
 - Art faces right. Facing left is drawn mirrored around the anchor.
 - `scale` records the factor applied to the generated art, for provenance only; the game draws atlas pixels 1:1 at 640x360.
 

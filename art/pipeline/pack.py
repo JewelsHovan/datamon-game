@@ -39,6 +39,17 @@ def shelf_pack(sizes: list[tuple[int, int]], width: int = ATLAS_W) -> tuple[list
     return pos, y + shelf_h
 
 
+def body_center_offset(idle: list[tuple[dict, Image.Image]]) -> int:
+    """Mean horizontal distance from the back-foot anchor to the opaque pixels' center, over idle frames."""
+    import numpy as np
+
+    offs = []
+    for fm, im in idle:
+        xs = np.nonzero(np.array(im)[..., 3] > 0)[1]
+        offs.append(xs.mean() - fm["ax"])
+    return int(round(sum(offs) / len(offs)))
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("slug")
@@ -60,13 +71,16 @@ def main() -> int:
         clip_meta[c] = fj
         for fm in fj["frames"]:
             entries.append((c, fm, Image.open(fdir / c / fm["file"]).convert("RGBA")))
+    # The game puts a fighter's position (and pushbox) at the body center. Frames are anchored on
+    # the back foot, so shift every anchor forward by the idle stance's body-center offset.
+    origin_x = body_center_offset([(fm, im) for c, fm, im in entries if c == "idle"]) if "idle" in clip_meta else 0
     pos, height = shelf_pack([(im.width, im.height) for _, _, im in entries])
     atlas = Image.new("RGBA", (ATLAS_W, height), (0, 0, 0, 0))
     clips: dict = {}
     for (c, fm, im), (x, y) in zip(entries, pos):
         atlas.paste(im, (x, y))
         clips.setdefault(c, {"loop": clip_meta[c]["loop"], "frames": []})["frames"].append(
-            {"x": x, "y": y, "w": im.width, "h": im.height, "ax": fm["ax"], "ay": fm["ay"], "hold": fm["hold"]})
+            {"x": x, "y": y, "w": im.width, "h": im.height, "ax": fm["ax"] + origin_x, "ay": fm["ay"], "hold": fm["hold"]})
 
     out = common.PUBLIC_FIGHTERS / args.slug
     out.mkdir(parents=True, exist_ok=True)
@@ -74,7 +88,7 @@ def main() -> int:
     prev = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
     idle_scale = clip_meta.get("idle", {}).get("scale")
     manifest = {"fighter": args.slug, "version": int(prev.get("version", 0)) + 1, "scale": idle_scale,
-                "facing": "right", "clips": clips}
+                "facing": "right", "originX": origin_x, "clips": clips}
     atlas.save(out / "atlas.png", optimize=True)
     manifest_path.write_text(json.dumps(manifest, indent=1) + "\n")
     print(f"{args.slug}: {len(clips)} clips, {len(entries)} frames, atlas {ATLAS_W}x{height} -> {out.relative_to(common.ROOT)}")
