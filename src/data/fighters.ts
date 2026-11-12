@@ -17,24 +17,26 @@ export interface FighterInfo {
   health: number;
   /** Damage dealt, in percent of the move's base damage. */
   damagePct: number;
+  /** Walk speed, in percent of the shared walk speeds (kept close to 100 so feet do not slide). */
+  walkPct: number;
 }
 
 export const FIGHTERS: Readonly<Record<string, FighterInfo>> = Object.freeze({
   "julien-hovan": {
     slug: "julien-hovan", archetype: "all-rounder", archetypeLabel: "All-rounder",
-    specialMove: "special", specialName: "Data Orb", health: 1000, damagePct: 100,
+    specialMove: "special", specialName: "Data Orb", health: 1000, damagePct: 100, walkPct: 100,
   },
   "felicia-gorgacheva": {
     slug: "felicia-gorgacheva", archetype: "trickster", archetypeLabel: "Trickster",
-    specialMove: "teleport", specialName: "Context Switch", health: 950, damagePct: 100,
+    specialMove: "teleport", specialName: "Context Switch", health: 950, damagePct: 100, walkPct: 104,
   },
   "pentcho-tchomakov": {
     slug: "pentcho-tchomakov", archetype: "bruiser", archetypeLabel: "Bruiser",
-    specialMove: "charge", specialName: "Hotfix Charge", health: 1100, damagePct: 108,
+    specialMove: "charge", specialName: "Hotfix Charge", health: 1100, damagePct: 108, walkPct: 92,
   },
   "alex-andrianavalontsalama": {
     slug: "alex-andrianavalontsalama", archetype: "rusher", archetypeLabel: "Rusher",
-    specialMove: "rush", specialName: "Rapid Deploy", health: 950, damagePct: 95,
+    specialMove: "rush", specialName: "Rapid Deploy", health: 950, damagePct: 95, walkPct: 108,
   },
 });
 
@@ -42,6 +44,6 @@ export const FIGHTERS: Readonly<Record<string, FighterInfo>> = Object.freeze({
 export function fighterInfo(slug: string): FighterInfo {
   return FIGHTERS[slug] ?? {
     slug, archetype: "all-rounder", archetypeLabel: "All-rounder",
-    specialMove: "special", specialName: "Data Orb", health: 1000, damagePct: 100,
+    specialMove: "special", specialName: "Data Orb", health: 1000, damagePct: 100, walkPct: 100,
   };
 }

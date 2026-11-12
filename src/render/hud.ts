@@ -27,7 +27,8 @@ interface Popup {
 }
 
 export class Hud {
-  private trail: [number, number] = [COMBAT.maxHealth, COMBAT.maxHealth];
+  /** Damage trail per bar; -1 until the first tick sets it to the fighter's health. */
+  private trail: [number, number] = [-1, -1];
   private trailWait: [number, number] = [0, 0];
   private popups: Popup[] = [];
   private combo: [{ hits: number; age: number }, { hits: number; age: number }] = [{ hits: 0, age: 99 }, { hits: 0, age: 99 }];
@@ -51,7 +52,7 @@ export class Hud {
       } else if (e.type === "tech") {
         this.popups.push({ text: "TECH", color: "#7fd6ff", x: VIEW_WIDTH / 2, y: 120, age: 0, life: 40, size: 16 });
       } else if (e.type === "round_start") {
-        this.trail = [COMBAT.maxHealth, COMBAT.maxHealth];
+        this.trail = [-1, -1];
       }
     }
   }
@@ -103,14 +104,15 @@ export class Hud {
     ctx.fillStyle = "#1b1a48";
     ctx.fillRect(x0, BAR_Y, BAR_W, BAR_H);
     // Bars drain toward the outer edge, anchored at the center of the screen.
-    const w = (hp: number) => Math.round((BAR_W * hp) / COMBAT.maxHealth);
+    // Fighters have different health (spec 006): a full bar is that fighter's own maximum.
+    const w = (hp: number) => Math.round((BAR_W * Math.max(0, hp)) / f.maxHealth);
     const trailW = w(this.trail[i]);
     const hpW = w(f.health);
     const anchorRight = left; // P1's bar is anchored on its right (center) end
     const at = (width: number) => (anchorRight ? x0 + BAR_W - width : x0);
     ctx.fillStyle = "#ff6170";
     ctx.fillRect(at(trailW), BAR_Y, trailW, BAR_H);
-    const low = f.health <= COMBAT.maxHealth * 0.25;
+    const low = f.health <= f.maxHealth * 0.25;
     ctx.fillStyle = low ? "#ffab4c" : "#ffc94a";
     ctx.fillRect(at(hpW), BAR_Y, hpW, BAR_H);
     ctx.fillStyle = "rgba(255,255,255,0.35)";
@@ -191,7 +193,7 @@ export class Hud {
       const w = r.wins[0] >= ROUND.roundsToWin ? 0 : 1;
       text(ctx, `${this.people[w].shortName.toUpperCase()}`, VIEW_WIDTH / 2, 120, 24, "#ffc94a", "center");
       text(ctx, "WINS THE MATCH", VIEW_WIDTH / 2, 156, 16, "#eeedff", "center");
-      if (state.fighters[w].health >= COMBAT.maxHealth) text(ctx, "PERFECT", VIEW_WIDTH / 2, 186, 16, "#63e294", "center");
+      if (state.fighters[w].health >= state.fighters[w].maxHealth) text(ctx, "PERFECT", VIEW_WIDTH / 2, 186, 16, "#63e294", "center");
       text(ctx, "PROD IS DOWN.", VIEW_WIDTH / 2, 230, 8, "#aeaadc", "center");
       return;
     }

@@ -2,6 +2,7 @@
 // point of contact of sim events, screen shake, a white flash on the defender,
 // a camera nudge toward big hits, and a reduced-effects switch. Effects only
 // read sim events and state; they keep their own render-time clocks.
+import { MOVES, type Segment } from "../data/moves";
 import { MOVEMENT } from "../data/movement";
 import { SUBPX } from "../sim/fixed";
 import type { SimEvent, SimState } from "../sim/types";
@@ -37,6 +38,17 @@ interface Live {
   scale: number;
 }
 
+/** The segment showing at `tick` and the tick it started on. */
+function segmentStart(segments: readonly Segment[], tick: number): { segment: Segment; start: number } {
+  let t = 0;
+  for (const segment of segments) {
+    if (tick < t + segment.ticks) return { segment, start: t };
+    t += segment.ticks;
+  }
+  const last = segments[segments.length - 1]!;
+  return { segment: last, start: t - last.ticks };
+}
+
 /** Shake amplitude in pixels by hit strength. */
 export const SHAKE = Object.freeze({ light: 2, heavy: 4, special: 4, ko: 8, decayFrames: 10 });
 
@@ -45,6 +57,8 @@ export class EffectsLayer {
   private shakeAmp = 0;
   private shakeAge = 0;
   private nudge = 0;
+  /** Last move tick each fighter's trail was spawned for. */
+  private trailKey: [string, string] = ["", ""];
   /** Fighters to draw white this frame, with frames left. */
   readonly flash: [number, number] = [0, 0];
   /** Full-screen white flash frames left (K.O.). */
@@ -103,6 +117,38 @@ export class EffectsLayer {
         case "land":
           this.spawn("dust", state.fighters[e.player].x, MOVEMENT.floorY, 1, false, 0.6);
           break;
+        case "dash": {
+          // Dust kicked up behind the feet.
+          const f = state.fighters[e.player];
+          const behind = (-f.facing * e.dir) as 1 | -1;
+          this.spawn("dust", e.x + behind * 1800, MOVEMENT.floorY, behind, false, 0.7);
+          break;
+        }
+        case "teleport":
+          this.spawn(e.phase === "out" ? "teleport_out" : "teleport_in", e.x, MOVEMENT.floorY, 1, true, 1);
+          break;
+        case "wall_bounce":
+          this.spawn("hit_heavy", e.x, e.y, (e.x < MOVEMENT.stageWidth / 2 ? 1 : -1) as 1 | -1, true, 1.2);
+          this.spawn("dust", e.x, e.y + 4000, 1, false, 0.8);
+          this.shake(SHAKE.heavy);
+          if (!this.reduced) this.flash[e.player] = 2;
+          break;
+        case "armor":
+          // The armor takes the hit: a shield flash on the charging fighter.
+          this.spawn("block", e.x, e.y, state.fighters[e.player].facing, true, 1.2);
+          this.shake(SHAKE.light);
+          if (!this.reduced) this.flash[e.player] = 3;
+          break;
+        case "block_push": {
+          const toward = (state.fighters[e.target].x >= state.fighters[e.player].x ? 1 : -1) as 1 | -1;
+          this.spawn("rush_streaks", e.x, e.y, toward, true, 0.6);
+          this.spawn("block", e.x, e.y, toward, true, 1);
+          this.shake(1);
+          break;
+        }
+        case "roll":
+          this.spawn("dust", state.fighters[e.player].x, MOVEMENT.floorY, 1, false, 0.6);
+          break;
         case "ko":
           this.spawn("hit_heavy", e.x, e.y - 9000, 1);
           this.shake(SHAKE.ko);
@@ -110,6 +156,32 @@ export class EffectsLayer {
           break;
       }
     }
+  }
+
+  /**
+   * Trails that follow a special while it runs, read from sim state every step:
+   * Hotfix Charge streaks, Rapid Deploy streaks and the uppercut arc.
+   */
+  follow(state: SimState): void {
+    state.fighters.forEach((f, i) => {
+      const m = f.move;
+      if (!m || f.hitstop > 0 || (m.id !== "charge" && m.id !== "rush")) {
+        this.trailKey[i] = "";
+        return;
+      }
+      const key = `${state.frame - m.tick}:${m.tick}`;
+      if (this.trailKey[i] === key) return; // the same move tick (hit-stop just ended)
+      this.trailKey[i] = key;
+      const def = MOVES[m.id];
+      const { segment, start } = segmentStart(def.segments, m.tick);
+      if (segment.launch && m.tick === start) {
+        this.spawn("uppercut_arc", f.x + f.facing * 2400, f.y - 10000, f.facing);
+        return;
+      }
+      if (!segment.vx) return;
+      if (m.id === "charge" && (m.tick - start) % 4 === 0) this.spawn("charge_streaks", f.x - f.facing * 3000, f.y - 6500, f.facing, true, 0.9);
+      if (m.id === "rush" && segment.vx >= 300 && (m.tick - start) % 3 === 0) this.spawn("rush_streaks", f.x - f.facing * 2600, f.y - 8500, f.facing, true, 0.8);
+    });
   }
 
   /** Advances render-time clocks by one animation frame. */

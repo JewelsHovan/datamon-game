@@ -124,6 +124,29 @@ export const SFX = {
     tone("triangle", 70, env(0.001, 0.12), 0.25, { sweep: { to: 40, time: 0.12 }, delay: 0.14 }),
     noise(env(0.002, 0.12), 0.12, lp(400), { delay: 0.14 }),
   ],
+  /** Dash: a quick low scuff. */
+  dash: [noise(env(0.004, 0.08), 0.2, bp(700, 1.2, 1600, 0.08)), noise(env(0.002, 0.04), 0.08, lp(500))],
+  /** Context Switch: a falling zap out, a rising zap in. */
+  teleport_out: [tone("pulse12", 1400, env(0.002, 0.14), 0.08, { sweep: { to: 300, time: 0.13 }, filter: lp(4000) }), noise(env(0.002, 0.08), 0.1, hp(3000))],
+  teleport_in: [tone("pulse12", 300, env(0.002, 0.14), 0.08, { sweep: { to: 1400, time: 0.12 }, filter: lp(4000) }), noise(env(0.002, 0.06), 0.1, hp(3000))],
+  /** A body slamming into the wall. */
+  wall_bounce: [
+    tone("sine", 110, env(0.001, 0.22), 0.55, { sweep: { to: 40, time: 0.2 } }),
+    noise(env(0.001, 0.12), 0.35, bp(900, 0.8)),
+    noise(env(0.002, 0.25), 0.1, hp(2500), { delay: 0.02 }),
+  ],
+  /** Armor absorbing a hit: a dull metal clank. */
+  armor: [
+    tone("square", 620, env(0.001, 0.16), 0.06, { filter: lp(3000) }),
+    tone("square", 930, env(0.001, 0.12), 0.04, { filter: lp(3000) }),
+    noise(env(0.001, 0.05), 0.25, bp(1800, 0.9)),
+  ],
+  /** Block push: a shove and a whoosh. */
+  block_push: [noise(env(0.01, 0.14), 0.26, bp(500, 1, 1400, 0.12)), tone("sine", 160, env(0.001, 0.1), 0.3, { sweep: { to: 80, time: 0.1 } })],
+  /** Get-up roll: a soft tumble. */
+  roll: [noise(env(0.02, 0.2), 0.12, lp(700, 300, 0.2))],
+  /** Taunt: two cheeky blips. */
+  taunt: [tone("pulse25", 784, env(0.002, 0.06), 0.06, { filter: lp(3500) }), tone("pulse25", 1047, env(0.002, 0.09), 0.06, { delay: 0.1, filter: lp(3500) })],
   jump: [
     tone("triangle", 280, env(0.002, 0.09), 0.14, { sweep: { to: 560, time: 0.08 } }),
     noise(env(0.005, 0.04), 0.05, bp(1200)),
@@ -298,8 +321,8 @@ const NONE: readonly StingerCue[] = [];
 
 function whooshFor(move: MoveId): SfxName {
   if (move === "throw") return "whoosh_throw";
-  if (move === "special") return "whoosh_special";
   const strength: HitStrength = MOVES[move]?.strength ?? "light";
+  if (strength === "special") return "whoosh_special";
   return strength === "heavy" ? "whoosh_heavy" : "whoosh_light";
 }
 
@@ -352,5 +375,19 @@ export function routeEvent(e: SimEvent): Route {
     }
     case "match_end":
       return route(null, { stingers: [{ name: "match_win", delay: 0.1 }], duck: { delay: 0.1, depth: 0.25, hold: 2.2, release: 0.8 } });
+    case "dash":
+      return route("dash");
+    case "teleport":
+      return route(e.phase === "out" ? "teleport_out" : "teleport_in");
+    case "wall_bounce":
+      return route("wall_bounce");
+    case "armor":
+      return route("armor");
+    case "block_push":
+      return route("block_push");
+    case "roll":
+      return route("roll");
+    case "taunt":
+      return route("taunt");
   }
 }

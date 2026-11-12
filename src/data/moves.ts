@@ -13,7 +13,11 @@ export type MoveId =
   | "crouch_attack"
   | "air_attack"
   | "special"
-  | "throw";
+  | "throw"
+  // signature specials (spec 006)
+  | "teleport"
+  | "charge"
+  | "rush";
 
 /** How a move must be blocked. mid: either; low: crouching; overhead: standing. */
 export type HitHeight = "mid" | "low" | "overhead";
@@ -25,6 +29,21 @@ export interface Segment {
   frame: number;
   ticks: number;
   active?: boolean;
+  /** Forward speed during this segment (subpixels per frame). */
+  vx?: number;
+  /** Hitbox [x, y, w, h] in px (anchor space) when the art has no reach box for this frame. */
+  reach?: readonly [number, number, number, number];
+  /** Not drawn and cannot be hit (a teleport's vanish). */
+  hidden?: boolean;
+  /** Cannot be hit. */
+  invuln?: boolean;
+  /** Absorbs one hit: damage is taken, no stun (once per move). */
+  armor?: boolean;
+  /** Per-hit overrides for multi-hit moves. */
+  damage?: number;
+  hitstop?: number;
+  knockdown?: boolean;
+  launch?: number;
 }
 
 export interface MoveDef {
@@ -53,6 +72,13 @@ export interface MoveDef {
   whiffRecovery?: number;
   /** Throws launch the opponent on this tick (after a successful grab). */
   tossTick?: number;
+  /** Knockdowns launch the victim upward at this speed (subpixels per frame). */
+  launch?: number;
+  /** Each active segment can hit once (a flurry), instead of one hit per move. */
+  multiHit?: boolean;
+  /** Teleport: vanish on the first tick, reappear on the second. */
+  vanishTick?: number;
+  reappearTick?: number;
 }
 
 // Clip set v2 (spec 012): more frames per attack, same startup / active / recovery as spec 003.
@@ -82,7 +108,7 @@ export const MOVES: Readonly<Record<MoveId, MoveDef>> = Object.freeze({
     id: "heavy_kick", clip: "heavy_kick", height: "mid", strength: "heavy", knockdown: true,
     // stance, pivot, chamber, travel, [sweep up, impact], follow, down, land: 10 / 8 / 14
     segments: [{ frame: 0, ticks: 3 }, { frame: 1, ticks: 3 }, { frame: 2, ticks: 3 }, { frame: 3, ticks: 1 }, { frame: 4, ticks: 3, active: true }, { frame: 5, ticks: 5, active: true }, { frame: 6, ticks: 5 }, { frame: 7, ticks: 4 }, { frame: 8, ticks: 5 }],
-    damage: 110, hitstun: 26, blockstun: 18, hitstop: 11, push: 1600,
+    damage: 110, hitstun: 26, blockstun: 18, hitstop: 11, push: 1600, launch: 650,
   },
   crouch_attack: {
     id: "crouch_attack", clip: "crouch_attack", height: "low", strength: "heavy", knockdown: true,
@@ -108,7 +134,33 @@ export const MOVES: Readonly<Record<MoveId, MoveDef>> = Object.freeze({
     // reach (grab at 3), grip, pull in, twist, swing, toss (at 16), recover: 34 total
     segments: [{ frame: 0, ticks: 3 }, { frame: 1, ticks: 4 }, { frame: 2, ticks: 4 }, { frame: 3, ticks: 3 }, { frame: 4, ticks: 2 }, { frame: 5, ticks: 8 }, { frame: 6, ticks: 10 }],
     grabTick: 3, tossTick: 16, whiffRecovery: 18,
-    damage: 120, hitstun: 0, blockstun: 0, hitstop: 10, push: 0,
+    damage: 120, hitstun: 0, blockstun: 0, hitstop: 10, push: 0, launch: 500,
+  },
+  // Signature specials (spec 006). Each uses its fighter's own "special" clip.
+  teleport: {
+    id: "teleport", clip: "special", height: "overhead", strength: "special",
+    // stance, crouch, [spin, spin] vanished, reappear crouch, kick chamber, [kick], land
+    segments: [{ frame: 0, ticks: 3 }, { frame: 1, ticks: 5 }, { frame: 2, ticks: 4, hidden: true }, { frame: 3, ticks: 4, hidden: true },
+      { frame: 4, ticks: 4, invuln: true }, { frame: 5, ticks: 3 }, { frame: 6, ticks: 8, active: true }, { frame: 7, ticks: 10 }],
+    vanishTick: 8, reappearTick: 16,
+    damage: 85, hitstun: 20, blockstun: 14, hitstop: 9, push: 1200, chip: 10,
+  },
+  charge: {
+    id: "charge", clip: "special", height: "mid", strength: "special", knockdown: true, launch: 500,
+    // stance, brace (armor), [burst, run, run, slam] moving with armor, stumble, stance
+    segments: [{ frame: 0, ticks: 4 }, { frame: 1, ticks: 6, armor: true }, { frame: 2, ticks: 4, active: true, armor: true, vx: 700 },
+      { frame: 3, ticks: 5, active: true, armor: true, vx: 700 }, { frame: 4, ticks: 5, active: true, armor: true, vx: 700, reach: [30, -124, 40, 64] },
+      { frame: 5, ticks: 4, active: true, vx: 300 }, { frame: 6, ticks: 9 }, { frame: 7, ticks: 9 }],
+    damage: 110, hitstun: 0, blockstun: 18, hitstop: 12, push: 1400, chip: 14,
+  },
+  rush: {
+    id: "rush", clip: "special", height: "mid", strength: "special", multiHit: true,
+    // stance, dash, [jab], [straight], [hook], crouch, [uppercut launches], rising, land
+    segments: [{ frame: 0, ticks: 3 }, { frame: 1, ticks: 5, vx: 800 }, { frame: 2, ticks: 3, active: true, vx: 300 },
+      { frame: 3, ticks: 3, active: true, vx: 300 }, { frame: 4, ticks: 3, active: true, vx: 300, reach: [24, -122, 48, 26] }, { frame: 5, ticks: 4, vx: 300 },
+      { frame: 6, ticks: 3, active: true, vx: 200, damage: 60, hitstop: 10, knockdown: true, launch: 900, reach: [6, -158, 48, 80] },
+      { frame: 7, ticks: 6 }, { frame: 8, ticks: 6 }],
+    damage: 28, hitstun: 16, blockstun: 10, hitstop: 5, push: 250, chip: 6,
   },
 });
 

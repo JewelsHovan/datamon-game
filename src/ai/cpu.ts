@@ -6,6 +6,7 @@
 // Buttons follow the round 3 scheme: Punch = BUTTON_LIGHT, Kick = BUTTON_HEAVY, Special.
 // Punch = jab, forward+Punch = heavy punch, Kick = snap kick, forward+Kick = roundhouse,
 // down+Kick = sweep, Punch+Kick = throw, Punch in the air = air kick.
+import { fighterInfo } from "../data/fighters";
 import { MOVEMENT } from "../data/movement";
 import { firstActiveTick, MOVES, type HitHeight, type MoveId } from "../data/moves";
 import {
@@ -37,7 +38,7 @@ const D = BUTTON_DOWN;
 /** Rough reach of each move from the attacker's center to the far edge of its hitbox, in px. */
 const REACH: Readonly<Record<MoveId, number>> = {
   light_punch: 66, heavy_punch: 76, light_kick: 86, heavy_kick: 92, crouch_attack: 98,
-  air_attack: 74, throw: 72, special: 9999,
+  air_attack: 74, throw: 72, special: 9999, teleport: 9999, charge: 230, rush: 170,
 };
 
 /** What the CPU saw of the opponent on one frame. */
@@ -171,7 +172,8 @@ export function createCpu(level: CpuLevel, player: PlayerIndex, seed: number): C
         }
         // Block attacks in range and incoming projectiles.
         let threat: { key: string; height: HitHeight } | null = null;
-        if (v.move && v.move !== "throw" && v.move !== "special") {
+        // The projectile special is blocked as a shot below; a teleport is guarded once it reappears.
+        if (v.move && v.move !== "throw" && v.move !== "special" && !(v.move === "teleport" && v.moveTick < 16)) {
           const def = MOVES[v.move];
           const startup = firstActiveTick(def);
           if (v.moveTick <= startup + 6 && dist < REACH[v.move] + 18) threat = { key: `m${v.frame - v.moveTick}`, height: def.height };
@@ -219,14 +221,16 @@ export function createCpu(level: CpuLevel, player: PlayerIndex, seed: number): C
       const opDown = v.state === "knockdown" || v.state === "ko";
       if (opDown) return start(hold(chance(0.5) ? back : 0, 16));
       const myShot = state.projectiles.some((p) => p.owner === player);
+      const mySpecial = fighterInfo(me.slug).specialMove;
       if (dist > 220) {
-        if (!myShot && chance(lv.special)) return start(press(S));
+        // Long range suits the projectile and the teleport; the charge and rush need to close in first.
+        if (!myShot && (mySpecial === "special" || mySpecial === "teleport") && chance(lv.special)) return start(press(S));
         if (chance(lv.aggression)) return start(hold(fwd, between(12, 30)));
         return start(hold(chance(0.5) ? back : 0, 12));
       }
       if (dist > 110) {
         if (chance(lv.jumpIn)) return start([...hold(U | fwd, 3), ...hold(0, 10)]);
-        if (!myShot && chance(lv.special * 0.5)) return start(press(S));
+        if (!myShot && chance(lv.special * (mySpecial === "special" ? 0.5 : 1))) return start(press(S));
         if (chance(lv.aggression)) return start(hold(fwd, between(8, 20)));
         return start(hold(back, between(6, 14)));
       }

@@ -140,6 +140,7 @@ export class FightScene implements Scene {
     const events = this.state.events;
     // Every step, even without events: audio's last-10-seconds tick reads the round clock.
     this.m.services.hooks.simEvents?.(events, this.state);
+    this.effects.follow(this.state);
     if (events.length) {
       this.effects.onEvents(events, this.state);
       this.hud.onEvents(events);
@@ -189,7 +190,9 @@ export class FightScene implements Scene {
     for (const f of state.fighters) drawShadow(ctx, f, camera);
     // The fighter being hit is drawn last, so impacts read on top.
     const order: (0 | 1)[] = state.fighters[0].state === "hitstun" || state.fighters[0].state === "knockdown" ? [1, 0] : [0, 1];
-    for (const i of order) drawFighter(ctx, clipSets[i], state.fighters[i], camera, effects.flash[i] > 0 ? "#ffffff" : undefined);
+    // Round 1 opens with both fighters' intro clips (spec 012).
+    const introFrame = state.round.phase === "intro" && state.round.number === 1 && !state.round.training ? state.round.phaseFrame : -1;
+    for (const i of order) drawFighter(ctx, clipSets[i], state.fighters[i], camera, effects.flash[i] > 0 ? "#ffffff" : undefined, introFrame);
     effects.drawProjectiles(ctx, state, camera);
     effects.draw(ctx, camera);
     if (this.showBoxes) drawBoxes(ctx, state, camera);

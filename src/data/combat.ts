@@ -21,6 +21,36 @@ export const COMBAT = Object.freeze({
   blockHitstopReduction: 2,
 });
 
+export const MOVES_V2 = Object.freeze({
+  /** A second tap of a direction within this many frames dashes (spec 012). */
+  dashWindow: 10,
+  dashForwardFrames: 16,
+  dashBackFrames: 18,
+  /** Back dash cannot be hit for its first frames. */
+  dashBackInvuln: 6,
+  /** Dash speeds (subpixels per frame): fast part, then the slowdown. */
+  dashForwardSpeed: 550,
+  dashForwardTail: 200,
+  dashBackSpeed: 450,
+  dashBackTail: 150,
+  /** Horizontal drift of a launched fighter while airborne (subpixels per frame); the ground slide is KNOCKDOWN.slideSpeed. */
+  airDrift: 150,
+  /** Hits an airborne knocked-down fighter can take before falling out of reach. */
+  maxJuggle: 2,
+  /** Pop of a juggle hit and of a wall bounce (subpixels per frame, upward). */
+  jugglePop: 550,
+  wallBouncePop: 600,
+  /** Get-up roll: holding back while lying rolls away this far over the roll. */
+  rollFrames: 36,
+  rollSpeed: 250,
+  /** Block push: Punch+Kick in blockstun; the attacker slides back this far. */
+  blockPushFrames: 12,
+  /** Extra input-buffer frames for the block push, so a press during the block's hit-stop counts. */
+  blockPushHitstopGrace: 10,
+  blockPushDistance: 6000,
+  tauntFrames: 50,
+});
+
 export const KNOCKDOWN = Object.freeze({
   /** Backward slide speed while launched: 3 px per frame. */
   slideSpeed: 300,

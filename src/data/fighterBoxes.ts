@@ -68,10 +68,10 @@ export function moveHurt(slug: string, move: MoveDef, frame: number): readonly B
   return b?.clips[move.clip]?.[frame]?.hurt ?? GENERIC_HURT[move.air ? "air" : move.id === "crouch_attack" ? "crouch" : "stand"]!;
 }
 
-/** The hitbox of an active frame: the art's reach box, or the generic one for that move. */
-export function moveHitbox(slug: string, move: MoveDef, frame: number): BoxPx | null {
+/** The hitbox of an active frame: the art's reach box, the segment's fallback, or the generic one for that move. */
+export function moveHitbox(slug: string, move: MoveDef, frame: number, fallback?: BoxPx): BoxPx | null {
   const reach = BOXES[slug]?.clips[move.clip]?.[frame]?.reach;
-  return reach ?? GENERIC_REACH[move.id] ?? null;
+  return reach ?? fallback ?? GENERIC_REACH[move.id] ?? null;
 }
 
 /** Converts a pixel box in anchor space to a stage rect for a fighter at (x, y) facing `facing`. */

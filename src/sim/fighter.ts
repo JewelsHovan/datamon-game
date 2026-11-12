@@ -2,8 +2,11 @@
 // in advanceFighter, the floor contact in landFighter (called by physics when an
 // airborne fighter reaches the floor), and the combat ones through combat.ts
 // helpers called from here and from hit application.
+import { MOVES_V2 } from "../data/combat";
+import { fighterInfo } from "../data/fighters";
+import { MOVES, segmentAt } from "../data/moves";
 import { MOVEMENT } from "../data/movement";
-import { advanceDowned, tickGroundMove, tryAirMove, tryGroundMove } from "./combat";
+import { advanceDowned, dashInput, tickGroundMove, tryAirMove, tryBlockPush, tryGroundMove, tryTaunt } from "./combat";
 import { DIR_BACK, DIR_DOWN, DIR_FORWARD, DIR_UP } from "./inputBits";
 import { inputAt, toFacingRelative } from "./inputHistory";
 import type { FighterState, FighterStateName, JumpDir, PlayerIndex, SimEvent, SimState } from "./types";
@@ -64,12 +67,31 @@ function launch(f: FighterState, player: PlayerIndex, events: SimEvent[]): void 
 function groundVelocity(f: FighterState): number {
   switch (f.state) {
     case "walk_forward":
-      return f.facing * MOVEMENT.walkForwardSpeed;
+      return f.facing * Math.floor((MOVEMENT.walkForwardSpeed * fighterInfo(f.slug).walkPct) / 100);
     case "walk_back":
-      return -f.facing * MOVEMENT.walkBackSpeed;
+      return -f.facing * Math.floor((MOVEMENT.walkBackSpeed * fighterInfo(f.slug).walkPct) / 100);
+    case "dash_forward":
+      // Fast for the first two thirds, then a short slowdown.
+      return f.facing * (f.stateFrame <= 10 ? MOVES_V2.dashForwardSpeed : MOVES_V2.dashForwardTail);
+    case "dash_back":
+      return -f.facing * (f.stateFrame <= 11 ? MOVES_V2.dashBackSpeed : MOVES_V2.dashBackTail);
+    case "attack": {
+      // Specials that travel (Hotfix Charge, Rapid Deploy) move with their segments.
+      if (!f.move) return 0;
+      const vx = segmentAt(MOVES[f.move.id].segments, f.move.tick).segment.vx ?? 0;
+      return f.facing * vx;
+    }
     default:
       return 0;
   }
+}
+
+/** Ends a timed state: back to neutral once `frames` have passed. */
+function timedState(f: FighterState, player: PlayerIndex, state: SimState, control: boolean, dirs: number, frames: number): void {
+  if (f.stateFrame < frames) return;
+  f.state = "idle";
+  f.stateFrame = 0;
+  neutral(f, player, state, control, dirs);
 }
 
 /** Fighters may move and attack only while the round is being fought (or in training). */
@@ -79,7 +101,15 @@ export function controlEnabled(state: SimState): boolean {
 
 /** Acting from neutral: start a buffered move, otherwise walk, crouch or jump. */
 function neutral(f: FighterState, player: PlayerIndex, state: SimState, control: boolean, dirs: number): void {
+  if (control && tryTaunt(f, player, state)) return;
   if (control && tryGroundMove(f, player, state)) return;
+  const dash = control ? dashInput(f) : 0;
+  if (dash !== 0) {
+    f.state = dash === 1 ? "dash_forward" : "dash_back";
+    f.stateFrame = 0;
+    state.events.push({ type: "dash", player, dir: dash, x: f.x });
+    return;
+  }
   groundedControl(f, control ? dirs : 0);
 }
 
@@ -125,6 +155,7 @@ export function advanceFighter(f: FighterState, player: PlayerIndex, state: SimS
       break;
     case "hitstun":
     case "blockstun":
+      if (f.state === "blockstun" && control && tryBlockPush(f, player, state)) break;
       f.stun -= 1;
       if (f.stun <= 0) {
         f.state = "idle";
@@ -145,6 +176,18 @@ export function advanceFighter(f: FighterState, player: PlayerIndex, state: SimS
       advanceDowned(f, player, state);
       break;
     case "victory":
+      break;
+    case "dash_forward":
+      timedState(f, player, state, control, dirs, MOVES_V2.dashForwardFrames);
+      break;
+    case "dash_back":
+      timedState(f, player, state, control, dirs, MOVES_V2.dashBackFrames);
+      break;
+    case "block_push":
+      timedState(f, player, state, control, dirs, MOVES_V2.blockPushFrames);
+      break;
+    case "taunt":
+      timedState(f, player, state, control, dirs, MOVES_V2.tauntFrames);
       break;
     default:
       f.comboHits = 0;

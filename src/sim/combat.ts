@@ -1,7 +1,8 @@
 // Combat (spec 003): starting moves from buffered input, move timelines,
 // projectiles, throws, hit detection for both fighters at once, and applying
 // hits (damage, hit-stop, stun, pushback, knockdown, K.O.).
-import { COMBAT, KNOCKDOWN, PROJECTILE } from "../data/combat";
+import { COMBAT, KNOCKDOWN, MOVES_V2, PROJECTILE } from "../data/combat";
+import { fighterInfo } from "../data/fighters";
 import {
   moveHitbox,
   moveHurt,
@@ -21,8 +22,9 @@ import {
   segmentAt,
   type MoveDef,
   type MoveId,
+  type Segment,
 } from "../data/moves";
-import { BUTTON_KICK, BUTTON_PUNCH, BUTTON_SPECIAL, DIR_BACK, DIR_DOWN, DIR_FORWARD } from "./inputBits";
+import { BUTTON_KICK, BUTTON_LEFT, BUTTON_PUNCH, BUTTON_RIGHT, BUTTON_SPECIAL, DIR_BACK, DIR_DOWN, DIR_FORWARD } from "./inputBits";
 import { inputAt, toFacingRelative, wasPressed } from "./inputHistory";
 import type { FighterState, PlayerIndex, Projectile, SimEvent, SimState } from "./types";
 
@@ -34,8 +36,8 @@ const WALL_RIGHT = MOVEMENT.stageWidth - MOVEMENT.screenMargin;
 // ---------------------------------------------------------------- input ----
 
 /** Frame of the most recent unconsumed press of `bit` inside the buffer, or -1. */
-export function bufferedPress(f: FighterState, bit: number, now: number): number {
-  for (let age = 0; age < COMBAT.bufferFrames; age++) {
+export function bufferedPress(f: FighterState, bit: number, now: number, span: number = COMBAT.bufferFrames): number {
+  for (let age = 0; age < span; age++) {
     if (wasPressed(f.input, bit, age) && now - age > f.consumedFrame) return now - age;
   }
   return -1;
@@ -77,7 +79,9 @@ function chooseGroundMove(f: FighterState, player: PlayerIndex, state: SimState)
 }
 
 export function startMove(f: FighterState, player: PlayerIndex, id: MoveId, press: number, events: SimEvent[]): void {
-  f.move = { id, tick: 0, connected: false, grabbed: false };
+  // The Special button starts the fighter's own signature special (spec 006).
+  if (id === "special") id = fighterInfo(f.slug).specialMove;
+  f.move = { id, tick: 0, connected: false, grabbed: false, hitSeg: -1, armorUsed: false };
   f.consumedFrame = Math.max(f.consumedFrame, press);
   if (!MOVES[id].air) {
     f.state = "attack";
@@ -194,6 +198,10 @@ export function tickGroundMove(f: FighterState, player: PlayerIndex, state: SimS
   if (def.projectileTick !== undefined && m.tick === def.projectileTick && !ownsProjectile(state, player)) {
     spawnProjectile(f, player, state);
   }
+  if (def.vanishTick !== undefined && m.tick === def.vanishTick) {
+    state.events.push({ type: "teleport", player, phase: "out", x: f.x });
+  }
+  if (def.reappearTick !== undefined && m.tick === def.reappearTick) reappear(f, player, state);
   if (def.id === "throw") return tickThrow(f, player, state);
   if (m.tick >= moveDuration(def)) {
     f.move = null;
@@ -222,7 +230,7 @@ function tickThrow(f: FighterState, player: PlayerIndex, state: SimState): boole
       victim.x = clampWall(f.x + f.facing * 6000);
       const dealt = applyDamage(victim, def.damage, state);
       state.events.push({ type: "hit", player, target: (player === 0 ? 1 : 0) as PlayerIndex, move: "throw", strength: "heavy", x: victim.x, y: victim.y - 9000, damage: dealt, combo: 1 });
-      knockDown(victim, (player === 0 ? 1 : 0) as PlayerIndex, state);
+      knockDown(victim, (player === 0 ? 1 : 0) as PlayerIndex, state, def.launch ?? 0);
       f.hitstop = def.hitstop;
       victim.hitstop = def.hitstop;
     }
@@ -232,6 +240,17 @@ function tickThrow(f: FighterState, player: PlayerIndex, state: SimState): boole
     return true;
   }
   return false;
+}
+
+/** Context Switch: reappear behind the opponent, or in front of them when they are cornered. */
+function reappear(f: FighterState, player: PlayerIndex, state: SimState): void {
+  const opp = state.fighters[player === 0 ? 1 : 0];
+  const gap = 5600;
+  let x = opp.x - opp.facing * gap;
+  if (x < WALL_LEFT || x > WALL_RIGHT) x = opp.x + opp.facing * gap;
+  f.x = clampWall(x);
+  f.facing = opp.x >= f.x ? 1 : -1;
+  state.events.push({ type: "teleport", player, phase: "in", x: f.x });
 }
 
 function clampWall(x: number): number {
@@ -273,13 +292,21 @@ function projectileRect(p: Projectile): Rect {
 
 // ------------------------------------------------------- knockdown, K.O. ----
 
-export function knockDown(f: FighterState, player: PlayerIndex, state: SimState): void {
+export function knockDown(f: FighterState, player: PlayerIndex, state: SimState, launch = 0, tumble = false): void {
+  if (f.state !== "knockdown") {
+    f.juggle = 0;
+    f.tumble = false;
+  }
+  if (tumble) f.tumble = true;
   f.move = null;
   f.stun = 0;
   f.pushLeft = 0;
   f.pushFrames = 0;
   f.vx = 0;
-  if (f.y < MOVEMENT.floorY && f.vy < 0) f.vy = 0;
+  f.slideDir = (-f.facing) as -1 | 1;
+  f.rollFrom = -1;
+  if (launch > 0) f.vy = -launch;
+  else if (f.y < MOVEMENT.floorY && f.vy < 0) f.vy = 0;
   if (f.health <= 0 && !state.round.training) {
     f.state = "ko";
     state.events.push({ type: "ko", player, x: f.x, y: f.y });
@@ -289,24 +316,60 @@ export function knockDown(f: FighterState, player: PlayerIndex, state: SimState)
   f.stateFrame = 0;
 }
 
-/** Knockdown and K.O. motion: slide back, fall if launched in the air, get up (knockdown only). */
+function getUp(f: FighterState, state: SimState): void {
+  if (state.round.training && f.health <= 0) f.health = f.maxHealth;
+  f.state = "idle";
+  f.stateFrame = 0;
+  f.comboHits = 0;
+  f.juggle = 0;
+  f.wallBounced = false;
+  f.rollFrom = -1;
+  f.tumble = false;
+}
+
+/**
+ * Knockdown and K.O. motion. Launched fighters fly (held on the flying frames until they land),
+ * may bounce off a wall once per combo, then slide, lie, and get up or roll away (holding back).
+ */
 export function advanceDowned(f: FighterState, player: PlayerIndex, state: SimState): void {
-  f.vx = f.stateFrame <= KNOCKDOWN.slideFrames ? -f.facing * KNOCKDOWN.slideSpeed : 0;
-  if (f.y < MOVEMENT.floorY) {
+  if (f.rollFrom >= 0) {
+    f.vx = -f.facing * MOVES_V2.rollSpeed;
+    if (f.stateFrame - f.rollFrom >= MOVES_V2.rollFrames) getUp(f, state);
+    return;
+  }
+  const airborne = f.y < MOVEMENT.floorY || f.vy < 0;
+  f.vx = airborne ? f.slideDir * MOVES_V2.airDrift : f.stateFrame <= KNOCKDOWN.slideFrames ? f.slideDir * KNOCKDOWN.slideSpeed : 0;
+  if (airborne) {
     f.y += f.vy + HALF_GRAVITY;
     f.vy += MOVEMENT.gravity;
+    const atWall = (f.slideDir < 0 && f.x <= WALL_LEFT + 600) || (f.slideDir > 0 && f.x >= WALL_RIGHT - 600);
+    if (atWall && !f.wallBounced) {
+      f.wallBounced = true;
+      f.tumble = true;
+      f.slideDir = (-f.slideDir) as -1 | 1;
+      f.vy = Math.min(f.vy, -MOVES_V2.wallBouncePop);
+      f.hitstop = 6;
+      state.events.push({ type: "wall_bounce", player, x: f.x, y: f.y - 6000 });
+    }
     if (f.y >= MOVEMENT.floorY) {
       f.y = MOVEMENT.floorY;
       f.vy = 0;
+      f.stateFrame = KNOCKDOWN.impactFrame;
+      state.events.push({ type: "knockdown", player, x: f.x, y: MOVEMENT.floorY });
+    } else if (f.stateFrame >= KNOCKDOWN.impactFrame) {
+      f.stateFrame = KNOCKDOWN.impactFrame - 1;
     }
+    return;
   }
   if (f.stateFrame === KNOCKDOWN.impactFrame) state.events.push({ type: "knockdown", player, x: f.x, y: MOVEMENT.floorY });
-  if (f.state === "knockdown" && f.stateFrame >= KNOCKDOWN.totalFrames) {
-    if (state.round.training && f.health <= 0) f.health = COMBAT.maxHealth;
-    f.state = "idle";
-    f.stateFrame = 0;
-    f.comboHits = 0;
+  if (f.state !== "knockdown") return;
+  const lying = f.stateFrame >= KNOCKDOWN.koHoldFrame && f.stateFrame < KNOCKDOWN.koHoldFrame + 16;
+  if (lying && (heldDirs(f) & DIR_BACK) !== 0) {
+    f.rollFrom = f.stateFrame;
+    state.events.push({ type: "roll", player });
+    return;
   }
+  if (f.stateFrame >= KNOCKDOWN.totalFrames) getUp(f, state);
 }
 
 /** Which knockdown-clip frame a downed fighter shows (K.O. stays on the lying frame). */
@@ -325,11 +388,19 @@ function poseOf(f: FighterState): "stand" | "crouch" | "air" {
 
 /** World-space hurtboxes; downed, held and celebrating fighters have none. */
 export function hurtRects(f: FighterState): Rect[] {
-  if (f.state === "knockdown" || f.state === "ko" || f.state === "held" || f.state === "victory") return [];
+  if (f.state === "knockdown" || f.state === "ko") {
+    // A launched fighter can be juggled a couple of times before falling out of reach.
+    const juggleable = f.state === "knockdown" && f.rollFrom < 0 && f.y < MOVEMENT.floorY - 1000 && f.juggle < MOVES_V2.maxJuggle;
+    return juggleable ? poseHurt(f.slug, "air").map((b) => toRect(b, f.x, f.y, f.facing)) : [];
+  }
+  if (f.state === "held" || f.state === "victory") return [];
+  if (f.state === "dash_back" && f.stateFrame < MOVES_V2.dashBackInvuln) return [];
   let boxes: readonly BoxPx[];
   if (f.move) {
     const def = MOVES[f.move.id];
-    boxes = moveHurt(f.slug, def, segmentAt(def.segments, f.move.tick).segment.frame);
+    const seg = segmentAt(def.segments, f.move.tick).segment;
+    if (seg.hidden || seg.invuln) return [];
+    boxes = moveHurt(f.slug, def, seg.frame);
   } else {
     boxes = poseHurt(f.slug, poseOf(f));
   }
@@ -339,11 +410,13 @@ export function hurtRects(f: FighterState): Rect[] {
 /** World-space hitbox of the fighter's active move frame, or null. */
 export function hitRect(f: FighterState): Rect | null {
   const m = f.move;
-  if (!m || m.connected || m.id === "throw" || m.id === "special") return null;
+  if (!m || m.id === "throw" || m.id === "special") return null;
   const def = MOVES[m.id];
-  const seg = segmentAt(def.segments, m.tick).segment;
+  const at = segmentAt(def.segments, m.tick);
+  const seg = at.segment;
   if (!seg.active) return null;
-  const box = moveHitbox(f.slug, def, seg.frame);
+  if (def.multiHit ? m.hitSeg === at.index : m.connected) return null;
+  const box = moveHitbox(f.slug, def, seg.frame, seg.reach);
   return box ? toRect(box, f.x, f.y, f.facing) : null;
 }
 
@@ -463,8 +536,9 @@ function applyPush(defender: FighterState, attacker: FighterState | null, push: 
   }
 }
 
-function strike(state: SimState, def: MoveDef, attacker: FighterState | null, attackerIdx: PlayerIndex, target: PlayerIndex, x: number, y: number): void {
+function strike(state: SimState, def: MoveDef, attacker: FighterState | null, attackerIdx: PlayerIndex, target: PlayerIndex, x: number, y: number, seg?: Segment): void {
   const d = state.fighters[target];
+  const hitstop = seg?.hitstop ?? def.hitstop;
   if (blocks(d, def.height)) {
     const crouching = (heldDirs(d) & DIR_DOWN) !== 0;
     d.state = "blockstun";
@@ -473,20 +547,41 @@ function strike(state: SimState, def: MoveDef, attacker: FighterState | null, at
     d.stunLow = crouching;
     d.move = null;
     if (def.chip) d.health = Math.max(d.health > 1 ? 1 : 0, d.health - def.chip);
-    d.hitstop = Math.max(0, def.hitstop - COMBAT.blockHitstopReduction);
+    d.hitstop = Math.max(0, hitstop - COMBAT.blockHitstopReduction);
     if (attacker) attacker.hitstop = d.hitstop;
     applyPush(d, attacker, def.push);
     state.events.push({ type: "block", player: attackerIdx, target, move: def.id, strength: def.strength, x, y });
     return;
   }
+  const scale = fighterInfo(state.fighters[attackerIdx].slug).damagePct;
+  const base = Math.max(1, Math.floor(((seg?.damage ?? def.damage) * scale) / 100));
+  const knocks = seg?.knockdown ?? def.knockdown ?? false;
+  const launch = seg?.launch ?? def.launch ?? 0;
+  // Armor: an armored segment takes the damage but keeps going (once per move).
+  if (d.move && !d.move.armorUsed && segmentAt(MOVES[d.move.id].segments, d.move.tick).segment.armor) {
+    d.move.armorUsed = true;
+    const dealt = applyDamage(d, base, state);
+    state.events.push({ type: "armor", player: target, x, y });
+    state.events.push({ type: "hit", player: attackerIdx, target, move: def.id, strength: def.strength, x, y, damage: dealt, combo: d.comboHits });
+    d.hitstop = 6;
+    if (attacker) attacker.hitstop = 6;
+    if (d.health <= 0) knockDown(d, target, state, launch);
+    return;
+  }
   const crouching = d.state === "crouch" || (d.state === "attack" && d.move?.id === "crouch_attack");
-  const dealt = applyDamage(d, def.damage, state);
+  const dealt = applyDamage(d, base, state);
   state.events.push({ type: "hit", player: attackerIdx, target, move: def.id, strength: def.strength, x, y, damage: dealt, combo: d.comboHits });
-  d.hitstop = def.hitstop;
-  if (attacker) attacker.hitstop = def.hitstop;
+  d.hitstop = hitstop;
+  if (attacker) attacker.hitstop = hitstop;
+  if (d.state === "knockdown") {
+    // A juggle: pop the falling fighter back up.
+    d.juggle += 1;
+    knockDown(d, target, state, Math.max(launch, MOVES_V2.jugglePop), true);
+    return;
+  }
   const airborne = d.y < MOVEMENT.floorY;
-  if (d.health <= 0 || def.knockdown || airborne) {
-    knockDown(d, target, state);
+  if (d.health <= 0 || knocks || airborne) {
+    knockDown(d, target, state, airborne ? Math.max(launch, 300) : launch, airborne);
     return;
   }
   d.state = "hitstun";
@@ -510,8 +605,15 @@ export function applyHits(state: SimState, hits: readonly PendingHit[]): void {
   for (const h of ordered) {
     if (h.kind === "strike") {
       const attacker = state.fighters[h.attacker];
-      if (attacker.move) attacker.move.connected = true;
-      strike(state, MOVES[h.move], attacker, h.attacker, h.target, h.x, h.y);
+      const def = MOVES[h.move];
+      let seg: Segment | undefined;
+      if (attacker.move) {
+        const at = segmentAt(def.segments, attacker.move.tick);
+        seg = at.segment;
+        attacker.move.connected = true;
+        attacker.move.hitSeg = at.index;
+      }
+      strike(state, def, attacker, h.attacker, h.target, h.x, h.y, seg);
     } else if (h.kind === "projectile") {
       strike(state, MOVES.special, null, h.owner, h.target, h.x, h.y);
     } else {
@@ -537,4 +639,52 @@ export function advancePush(f: FighterState): void {
   f.x = clampWall(f.x + delta);
   f.pushLeft -= delta;
   f.pushFrames -= 1;
+}
+
+// ------------------------------------------------- spec 012 input helpers ----
+
+/** A double tap of forward (1) or back (-1) within the dash window, or 0. */
+export function dashInput(f: FighterState): 1 | -1 | 0 {
+  const forwardBit = f.facing === 1 ? BUTTON_RIGHT : BUTTON_LEFT;
+  const backBit = f.facing === 1 ? BUTTON_LEFT : BUTTON_RIGHT;
+  for (const [dir, bit] of [[1, forwardBit], [-1, backBit]] as const) {
+    if (!wasPressed(f.input, bit, 0)) continue;
+    for (let age = 2; age <= MOVES_V2.dashWindow; age++) {
+      if (wasPressed(f.input, bit, age)) return dir;
+    }
+  }
+  return 0;
+}
+
+/** Down+Special taunts (vulnerable). */
+export function tryTaunt(f: FighterState, player: PlayerIndex, state: SimState): boolean {
+  const s = bufferedPress(f, BUTTON_SPECIAL, state.frame);
+  if (s < 0 || (heldDirs(f) & DIR_DOWN) === 0) return false;
+  f.consumedFrame = Math.max(f.consumedFrame, s);
+  f.state = "taunt";
+  f.stateFrame = 0;
+  f.move = null;
+  state.events.push({ type: "taunt", player });
+  return true;
+}
+
+/**
+ * Punch+Kick in blockstun shoves the attacker away. The press may come during the
+ * block's hit-stop, so the window covers the hit-stop as well as the usual buffer.
+ */
+export function tryBlockPush(f: FighterState, player: PlayerIndex, state: SimState): boolean {
+  const span = COMBAT.bufferFrames + MOVES_V2.blockPushHitstopGrace;
+  const p = bufferedPress(f, BUTTON_PUNCH, state.frame, span);
+  const k = bufferedPress(f, BUTTON_KICK, state.frame, span);
+  if (p < 0 || k < 0 || Math.abs(p - k) > COMBAT.throwChordFrames) return false;
+  f.consumedFrame = Math.max(f.consumedFrame, p, k);
+  f.state = "block_push";
+  f.stateFrame = 0;
+  f.stun = 0;
+  const opp = state.fighters[player === 0 ? 1 : 0];
+  const dir = opp.x >= f.x ? 1 : -1;
+  opp.pushLeft = dir * MOVES_V2.blockPushDistance;
+  opp.pushFrames = 10;
+  state.events.push({ type: "block_push", player, target: (player === 0 ? 1 : 0) as PlayerIndex, x: Math.floor((f.x + opp.x) / 2), y: f.y - 9000 });
+  return true;
 }

@@ -1,6 +1,6 @@
 // Round and match flow (spec 003, R7): intro, fight with a timer, K.O. or
 // time-out, the winner's celebration, the next round, and the match restart.
-import { ROUND } from "../data/combat";
+import { MOVES_V2, ROUND } from "../data/combat";
 import { resetFighters } from "./state";
 import type { PlayerIndex, SimState } from "./types";
 
@@ -59,9 +59,18 @@ export function advanceRound(state: SimState): void {
     }
     case "ko": {
       r.phaseFrame += 1;
-      if (r.phaseFrame === ROUND.victoryDelay && (r.winner === 0 || r.winner === 1)) {
+      if (r.winner === 0 || r.winner === 1) {
+        // The winner taunts first on rounds that do not end the match (spec 012), then poses.
         const w = state.fighters[r.winner as PlayerIndex];
-        if (w.state !== "ko") {
+        const final = r.wins[r.winner] >= ROUND.roundsToWin;
+        const poseAt = ROUND.victoryDelay + (final ? 0 : MOVES_V2.tauntFrames);
+        if (!final && r.phaseFrame === ROUND.victoryDelay && w.state !== "ko") {
+          w.state = "taunt";
+          w.stateFrame = 0;
+          w.move = null;
+          state.events.push({ type: "taunt", player: r.winner as PlayerIndex });
+        }
+        if (r.phaseFrame === poseAt && w.state !== "ko") {
           w.state = "victory";
           w.stateFrame = 0;
           w.move = null;

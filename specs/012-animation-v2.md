@@ -1,6 +1,6 @@
 # 012: Animation v2: smoother moves, more moves and reactions
 
-Status: in-progress
+Status: review
 Created: 2026-11-12
 
 ## Goal
@@ -20,9 +20,9 @@ Round 3 interview: the user liked the animations and picked every polish area. T
 ## Acceptance criteria
 - [x] A1. (R1, R2) pytest: `art/clips.json` matches the R1 table; the generator's dry run for heavy_kick uses 3840x1280 and lists 10 figures.
 - [x] A2. (R3) All 22 regenerated Julien clips pass the frame-by-frame review (same person, limbs, facing, planted feet, readable motion at game timing), approved, packed; GIFs in the HQ Animation lab.
-- [ ] A3. (R4) Vitest: startup and total of every move within 2 frames of the spec 003 values, unless the spec notes a change.
-- [ ] A4. (R5) Vitest for each mechanic: double-tap dash and its distance; back dash invulnerability; crouching hit uses crouch_hurt; an air hit allows exactly 2 juggle hits; wall bounce once per combo; get-up roll moves back; block push separates the fighters; taunt is punishable; determinism hash test still matches.
-- [ ] A5. (R5, R6) Browser screenshots in `specs/evidence/012/` of a dash, an air juggle, a wall bounce, a get-up roll, a block push, the intro and a taunt.
+- [x] A3. (R4) Vitest: startup and total of every move within 2 frames of the spec 003 values, unless the spec notes a change.
+- [x] A4. (R5) Vitest for each mechanic: double-tap dash and its distance; back dash invulnerability; crouching hit uses crouch_hurt; an air hit allows exactly 2 juggle hits; wall bounce once per combo; get-up roll moves back; block push separates the fighters; taunt is punishable; determinism hash test still matches.
+- [x] A5. (R5, R6) Browser screenshots in `specs/evidence/012/` of a dash, an air juggle, a wall bounce, a get-up roll, a block push, the intro and a taunt.
 
 ## Out of scope
 - New fighters and their specials (spec 006), battlemon summons (spec 007), audio (spec 010).
@@ -39,9 +39,9 @@ Round 3 interview: the user liked the animations and picked every polish area. T
 - [x] T1. Clip set v2 in `art/clips.json`, 3840x1280 support in `generate.py`, pytest.
 - [x] T2. Generate, review and approve Julien's 22 clips; pack; publish GIFs to the HQ.
 - [x] T3. Re-time `src/data/moves.ts`; add combat constants.
-- [ ] T4. Sim mechanics (dash, walk back, crouch hurt, air hurt and juggles, wall bounce, get-up roll, block push, intro, taunt) after spec 005 merges.
-- [ ] T5. Render clip selection for the new states; effects for the new moments.
-- [ ] T6. Tests and browser evidence.
+- [x] T4. Sim mechanics (dash, walk back, crouch hurt, air hurt and juggles, wall bounce, get-up roll, block push, intro, taunt) after spec 005 merges.
+- [x] T5. Render clip selection for the new states; effects for the new moments.
+- [x] T6. Tests and browser evidence.
 
 ## Implementation notes
 2026-11-12, lead session (art and re-timing; the sim mechanics T4-T6 follow once spec 005 merges).
@@ -54,6 +54,14 @@ Round 3 interview: the user liked the animations and picked every polish area. T
 - T3: `src/data/moves.ts` re-timed to v2 frames with the spec 003 startup/active/recovery unchanged; knockdown timeline 8 frames, still 74 ticks with impact at 16 and the K.O. hold at 24. Renderer: walk_back clip, crouch_hurt and the 4-frame hurt, jump frame 0 for the jumpsquat.
 - Walk speed synced to the stride (see Decisions) after the user flagged the walk in the lab.
 - Generation so far for this spec and 006: Julien 43 images in total across both rounds, the three new fighters 28-29 each, effects 11, stage 2 (141 logged).
+
+2026-11-12, lead session (T4-T6, after spec 005 merged).
+
+- Sim (`src/sim/combat.ts`, `fighter.ts`, `round.ts`): dashes on a double tap within 10 frames (forward 16 frames, back 18 with 6 invulnerable); down+Special taunts for 50 frames; Punch+Kick in blockstun is a 12-frame block push that slides the attacker 60 px (its input window also covers the block's hit-stop, otherwise a press during the hit-stop expired); knockdowns can launch (`launch` on a move or segment), launched fighters drift 1.5 px/frame in the air and slide 3 px/frame on the ground, an airborne knocked-down fighter takes up to 2 juggle hits (each pops it up again), the first wall contact while airborne bounces once per combo, holding back while lying rolls 90 px away (invulnerable, 36 frames); the round winner taunts before the victory pose unless the round ends the match. All constants in `MOVES_V2` (`src/data/combat.ts`).
+- Render: clips for dash_forward, dash_back, block_push, taunt, getup_roll, air_hurt (while tumbling: an air hit, a juggle or a wall bounce) and intro (both fighters, round 1 intro). Effects: dust on dashes and rolls, a heavy burst and dust on a wall bounce, a shield flash on block push and on armor. New sounds for dash, teleport, wall bounce, armor, block push, roll, taunt.
+- A3: `src/sim/mechanics.test.ts` compares every move's startup and total with spec 003's frame data (from `52510f0`): all within 2 frames.
+- A4: `src/sim/mechanics.test.ts`, 42 tests (dash distance and window, back-dash invulnerability and dodging a jab, walk_back, crouch_hurt, air_hurt, exactly 2 juggle hits, wall bounce once per combo, roll distance and invulnerability, block push distance and the hit-stop window, punishable taunt, intro clip, the winner's taunt, plus spec 006's specials and determinism with all four fighters). `./dm check`: typecheck, 295 tests, build all PASS.
+- A5: `specs/evidence/012/moves-check.mjs` plays each move with real key presses in headless Chrome and screenshots it: intro, dash forward and back, taunt, block push, air juggle (after Alex's uppercut), get-up roll, wall bounce. ALL PASS three runs in a row, no console errors. The earlier checks (001 browser-check, 003 fight-check, 005 flow-check) still pass.
 
 ## Review
 (filled by spec-review)

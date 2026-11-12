@@ -1,5 +1,6 @@
 // Creating and copying sim state.
 import { COMBAT, ROUND } from "../data/combat";
+import { fighterInfo } from "../data/fighters";
 import { MOVEMENT } from "../data/movement";
 import { cloneInputHistory, createInputHistory } from "./inputHistory";
 import { seedRng } from "./rng";
@@ -17,7 +18,7 @@ export function createFighter(slug: string, x: number, facing: Facing): FighterS
     stateFrame: 0,
     jumpDir: 0,
     input: createInputHistory(),
-    health: COMBAT.maxHealth,
+    health: fighterInfo(slug).health,
     move: null,
     hitstop: 0,
     stun: 0,
@@ -26,6 +27,12 @@ export function createFighter(slug: string, x: number, facing: Facing): FighterS
     pushFrames: 0,
     comboHits: 0,
     consumedFrame: -1,
+    maxHealth: fighterInfo(slug).health,
+    juggle: 0,
+    wallBounced: false,
+    slideDir: 0,
+    rollFrom: -1,
+    tumble: false,
   };
 }
 

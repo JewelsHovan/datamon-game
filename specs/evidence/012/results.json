@@ -1,0 +1,163 @@
+{
+  "intro clips": {
+    "pass": true,
+    "screenshot": "specs/evidence/012/01-intro.png"
+  },
+  "dash forward": {
+    "pass": true,
+    "state": "dash_forward",
+    "screenshot": "specs/evidence/012/02-dash-forward.png"
+  },
+  "dash back": {
+    "pass": true,
+    "state": "dash_back",
+    "screenshot": "specs/evidence/012/03-dash-back.png"
+  },
+  "taunt": {
+    "pass": true,
+    "screenshot": "specs/evidence/012/04-taunt.png"
+  },
+  "block for the push": {
+    "pass": true,
+    "events": [
+      "attack",
+      "block"
+    ]
+  },
+  "block push": {
+    "pass": true,
+    "screenshot": "specs/evidence/012/05-block-push.png"
+  },
+  "rush launches": {
+    "pass": true,
+    "y": 29561
+  },
+  "air juggle": {
+    "pass": true,
+    "juggle": 1,
+    "screenshot": "specs/evidence/012/06-air-juggle.png"
+  },
+  "get-up roll": {
+    "pass": true,
+    "screenshot": "specs/evidence/012/07-getup-roll.png"
+  },
+  "wall bounce": {
+    "pass": true,
+    "bounce": {
+      "type": "wall_bounce",
+      "player": 1,
+      "x": 124000,
+      "y": 25129
+    },
+    "screenshot": "specs/evidence/012/08-wall-bounce.png"
+  },
+  "006 data orb": {
+    "pass": true,
+    "screenshot": "specs/evidence/006/data-orb.png"
+  },
+  "006 context switch out": {
+    "pass": true,
+    "screenshot": "specs/evidence/006/context-switch-out.png"
+  },
+  "006 context switch kick": {
+    "pass": true,
+    "screenshot": "specs/evidence/006/context-switch-kick.png"
+  },
+  "006 hotfix charge": {
+    "pass": true,
+    "screenshot": "specs/evidence/006/hotfix-charge.png"
+  },
+  "006 hotfix charge hits": {
+    "pass": true,
+    "chargeHit": {
+      "type": "hit",
+      "player": 0,
+      "target": 1,
+      "move": "charge",
+      "strength": "special",
+      "x": 71407,
+      "y": 20450,
+      "damage": 118,
+      "combo": 1
+    }
+  },
+  "006 rapid deploy jab": {
+    "pass": true,
+    "screenshot": "specs/evidence/006/rapid-deploy-jab.png"
+  },
+  "006 rapid deploy uppercut": {
+    "pass": true,
+    "screenshot": "specs/evidence/006/rapid-deploy-uppercut.png"
+  },
+  "006 select shows archetypes": {
+    "pass": true,
+    "menu": {
+      "mode": "versus",
+      "stage": "pick",
+      "cursors": [
+        1,
+        2
+      ],
+      "under": [
+        "pentcho-tchomakov",
+        "alex-andrianavalontsalama"
+      ],
+      "locked": [
+        null,
+        null
+      ],
+      "level": "normal",
+      "tiles": [
+        "julien-hovan",
+        "pentcho-tchomakov",
+        "alex-andrianavalontsalama",
+        "andrea-vreugdenhil",
+        "antonia-nistor",
+        "aurelien-bouffanais",
+        "dana-domanko",
+        "duc-an-nguyen",
+        "elina-gu",
+        "emile-moffatt",
+        "ethan-pirso",
+        "felicia-gorgacheva",
+        "francesco-finn",
+        "guillaume-delmas-frenette",
+        "guillaume-pregent",
+        "jerry-zhu",
+        "jewoo-lee",
+        "jonah-lee",
+        "jonathan-kim",
+        "logan-labossiere",
+        "megane-darnaud",
+        "milen-thomas",
+        "minh-ngoc-do",
+        "oyku-cildir",
+        "philippe-miranda-jean",
+        "richard-el-chaar",
+        "sarah-kotb",
+        "saransh-padhy",
+        "scott-carr",
+        "stephanie-fontaine",
+        "tabarek-al-khalidi",
+        "tyler-nagano",
+        "veronica-marallag",
+        "victor-desautels",
+        "vincent-anctil",
+        "wild-guevera",
+        "william-chan",
+        "random"
+      ],
+      "playable": [
+        "julien-hovan",
+        "pentcho-tchomakov",
+        "alex-andrianavalontsalama",
+        "felicia-gorgacheva"
+      ]
+    },
+    "screenshot": "specs/evidence/006/select-pentcho-alex.png"
+  },
+  "no console errors": {
+    "pass": true,
+    "errors": []
+  }
+}

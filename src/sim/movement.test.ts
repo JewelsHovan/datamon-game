@@ -7,6 +7,7 @@ import {
   BUTTON_UP as U,
 } from "./inputBits";
 import { MAX_SEPARATION, WALL_LEFT, WALL_RIGHT, pushboxesOverlap } from "./physics";
+import { fighterInfo } from "../data/fighters";
 import { createSandboxState } from "./state";
 import { step } from "./step";
 import {
@@ -108,7 +109,9 @@ describe("movement (A8)", () => {
     const start = fresh();
     const s = repeat(start, 10, [0, R]);
     expect(s.fighters[1].state).toBe("walk_back");
-    expect(s.fighters[1].x - start.fighters[1].x).toBe(10 * MOVEMENT.walkBackSpeed);
+    // Each fighter walks at its own percentage of the shared speed (spec 006).
+    const speed = Math.floor((MOVEMENT.walkBackSpeed * fighterInfo(SANDBOX_P2).walkPct) / 100);
+    expect(s.fighters[1].x - start.fighters[1].x).toBe(10 * speed);
   });
 
   it("a fighter held against a wall stays at the wall", () => {

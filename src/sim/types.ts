@@ -27,6 +27,11 @@ export const FIGHTER_STATES = [
   "knockdown",
   "ko",
   "victory",
+  // spec 012
+  "dash_forward",
+  "dash_back",
+  "block_push",
+  "taunt",
 ] as const;
 
 export type FighterStateName = (typeof FIGHTER_STATES)[number];
@@ -47,6 +52,10 @@ export interface MoveInstance {
   connected: boolean;
   /** Throws: the grab succeeded. */
   grabbed: boolean;
+  /** Multi-hit moves: index of the last segment that connected (-1 none). */
+  hitSeg: number;
+  /** Armored moves: the armor already absorbed its hit. */
+  armorUsed: boolean;
 }
 
 export interface FighterState {
@@ -77,6 +86,19 @@ export interface FighterState {
   comboHits: number;
   /** Sim frame of the last press consumed by a move (presses at or before it are spent). */
   consumedFrame: number;
+  // spec 006 / 012
+  /** Health at the start of a round (per fighter). */
+  maxHealth: number;
+  /** Hits taken while airborne in the current knockdown. */
+  juggle: number;
+  /** Bounced off a wall in the current combo. */
+  wallBounced: boolean;
+  /** Knockdown slide direction (-1, 0, 1); flips on a wall bounce. */
+  slideDir: -1 | 0 | 1;
+  /** State frame at which a get-up roll started (-1: standing up normally). */
+  rollFrom: number;
+  /** Launched by an air hit, a juggle or a wall bounce: tumbles (air_hurt) until landing. */
+  tumble: boolean;
 }
 
 export interface Projectile {
@@ -117,6 +139,13 @@ export type SimEvent =
   | { type: "projectile"; player: PlayerIndex; x: number; y: number }
   | { type: "clash"; x: number; y: number }
   | { type: "ko"; player: PlayerIndex; x: number; y: number }
+  | { type: "dash"; player: PlayerIndex; dir: 1 | -1; x: number }
+  | { type: "teleport"; player: PlayerIndex; phase: "out" | "in"; x: number }
+  | { type: "wall_bounce"; player: PlayerIndex; x: number; y: number }
+  | { type: "armor"; player: PlayerIndex; x: number; y: number }
+  | { type: "block_push"; player: PlayerIndex; target: PlayerIndex; x: number; y: number }
+  | { type: "taunt"; player: PlayerIndex }
+  | { type: "roll"; player: PlayerIndex }
   | { type: "round_start"; round: number }
   | { type: "fight" }
   | { type: "round_end"; winner: -1 | 0 | 1 | 2; reason: "ko" | "time" }

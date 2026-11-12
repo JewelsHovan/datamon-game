@@ -1,6 +1,6 @@
 # 006: Launch roster and signature specials
 
-Status: in-progress
+Status: review
 Created: 2026-11-12
 
 ## Goal
@@ -22,9 +22,9 @@ Round 3 interview ("4 fighters, own specials"); archetypes and specials are prop
 
 ## Acceptance criteria
 - [x] A1. (R1) For each new fighter: pytest checks of palette, idle height and manifest pass; every clip passed the frame-by-frame review; generation totals recorded.
-- [ ] A2. (R2, R3) Vitest per special: Felicia ends up on the other side of the opponent (or in front when cornered) and cannot be hit while dissolved; Pentcho's charge survives one hit and knocks down on contact; Alex's flurry lands up to four separate hits and the last launches; Julien's projectile behaves as in spec 003. Determinism test with all four fighters.
-- [ ] A3. (R4) Effect review in the HQ lab; browser screenshots of each special mid-animation in `specs/evidence/006/`.
-- [ ] A4. (R5) Select-screen screenshot showing all four with archetype and special names.
+- [x] A2. (R2, R3) Vitest per special: Felicia ends up on the other side of the opponent (or in front when cornered) and cannot be hit while dissolved; Pentcho's charge survives one hit and knocks down on contact; Alex's flurry lands up to four separate hits and the last launches; Julien's projectile behaves as in spec 003. Determinism test with all four fighters.
+- [x] A3. (R4) Effect review in the HQ lab; browser screenshots of each special mid-animation in `specs/evidence/006/`.
+- [x] A4. (R5) Select-screen screenshot showing all four with archetype and special names.
 
 ## Out of scope
 - Supers and battlemons (spec 007), CPU (spec 008), the other 33 fighters (spec 011).
@@ -38,9 +38,9 @@ Round 3 interview ("4 fighters, own specials"); archetypes and specials are prop
 ## Tasks
 - [x] T1. Generate, review and approve the three fighters' 26 clips each (after spec 012's T1).
 - [x] T2. Signature special clips per fighter and the special effects.
-- [ ] T3. Fighter data table and per-fighter move sets.
-- [ ] T4. The three new specials in the sim; tests.
-- [ ] T5. Select-screen info; browser evidence; HQ.
+- [x] T3. Fighter data table and per-fighter move sets.
+- [x] T4. The three new specials in the sim; tests.
+- [x] T5. Select-screen info; browser evidence; HQ.
 
 ## Implementation notes
 2026-11-12, lead session (art; the specials sim T3-T5 follow once spec 005 merges).
@@ -50,6 +50,15 @@ Round 3 interview ("4 fighters, own specials"); archetypes and specials are prop
 - Special effects generated and approved: teleport_out, teleport_in, charge_streaks, rush_streaks, uppercut_arc.
 - Alternate palettes reworked so they recolor the top garment (colors mostly in the torso band and not in the head band, skin excluded; black or grey garments are tinted): Julien maroon, Felicia navy, Pentcho blue blazer, Alex mustard.
 - A1: pytest passes for palettes, idle heights and manifests of all four.
+
+2026-11-12, lead session (T3-T5).
+
+- Fighter table `src/data/fighters.ts`: archetype, health (950-1100), damage (95-108%), walk speed (92-108%), the signature special's move id and display name. The Special button starts the fighter's own special (`startMove` resolves it); the HUD bar scales to each fighter's own maximum health.
+- Specials are move timelines in `src/data/moves.ts` with per-segment flags: Context Switch (`hidden` segments, vanish at tick 8, reappear at tick 16 behind the opponent or in front of a cornered one, then an overhead kick), Hotfix Charge (`armor` segments absorb one hit, `vx` carries Pentcho forward, a connected charge launches), Rapid Deploy (`multiHit`: dash, three punches, an uppercut that launches; each segment hits once). Segments may carry a fallback `reach` box where the art detector found none (Alex's hook and uppercut, Pentcho's slam).
+- Effects follow the specials from sim state each step: charge_streaks, rush_streaks, uppercut_arc; teleport_out and teleport_in on the teleport events. The CPU knows the new specials (reach, and which range each suits).
+- A2: `src/sim/mechanics.test.ts` (Context Switch side switch, cornered case, invulnerable vanish; Hotfix Charge armor once, knockdown, 108% damage; Rapid Deploy 4 hits with a launch, a jab juggle after it in a 12-frame window; the Data Orb; 2400-frame random-input determinism for four pairings incl. a JSON round trip).
+- A3: the special effects were reviewed and approved when generated (T2); screenshots of each special mid-animation in `specs/evidence/006/` from `specs/evidence/012/moves-check.mjs`.
+- A4: `specs/evidence/006/select-pentcho-alex.png` with Pentcho (Bruiser, Hotfix Charge) and Alex (Rusher, Rapid Deploy); `specs/evidence/006/select-julien-felicia.png` (from spec 005's flow check, this run) shows Julien (All-rounder, Data Orb) and Felicia (Trickster, Context Switch).
 
 ## Review
 (filled by spec-review)

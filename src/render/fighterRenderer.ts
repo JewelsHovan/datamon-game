@@ -29,8 +29,24 @@ function moveChoice(f: FighterState): ClipChoice | null {
   return { clip: def.clip, tick: m.tick, reverse: false, frame };
 }
 
-/** Which clip a fighter shows, and how far into it, from sim state only. */
-export function clipForFighter(f: FighterState): ClipChoice {
+/** A Context Switch in its vanished frames: nothing is drawn. */
+export function isHidden(f: FighterState): boolean {
+  if (!f.move) return false;
+  return segmentAt(MOVES[f.move.id].segments, f.move.tick).segment.hidden === true;
+}
+
+/** air_hurt while tumbling: jolt, spin on the way up, tumble down, flat just before the floor. */
+function tumbleFrame(f: FighterState): number {
+  if (f.stateFrame < 6) return 0;
+  if (f.vy < 0) return 1;
+  return MOVEMENT.floorY - f.y > 4000 ? 2 : 3;
+}
+
+/**
+ * Which clip a fighter shows, and how far into it, from sim state only.
+ * `introFrame` >= 0 during the round 1 intro: idle fighters play their intro clip.
+ */
+export function clipForFighter(f: FighterState, introFrame = -1): ClipChoice {
   switch (f.state) {
     case "attack":
       return moveChoice(f) ?? { clip: "idle", tick: f.stateFrame, reverse: false };
@@ -44,11 +60,22 @@ export function clipForFighter(f: FighterState): ClipChoice {
       return { clip: "hurt", tick: 0, reverse: false, frame: 0 };
     case "knockdown":
     case "ko":
+      if (f.rollFrom >= 0) return { clip: "getup_roll", tick: f.stateFrame - f.rollFrom, reverse: false };
+      if (f.tumble && f.y < MOVEMENT.floorY) return { clip: "air_hurt", tick: 0, reverse: false, frame: tumbleFrame(f) };
       return { clip: "knockdown", tick: f.stateFrame, reverse: false, frame: downedFrame(f) };
     case "victory":
       return { clip: "victory", tick: f.stateFrame, reverse: false };
     case "idle":
+      if (introFrame >= 0) return { clip: "intro", tick: introFrame, reverse: false };
       return { clip: "idle", tick: f.stateFrame, reverse: false };
+    case "dash_forward":
+      return { clip: "dash_forward", tick: f.stateFrame, reverse: false };
+    case "dash_back":
+      return { clip: "dash_back", tick: f.stateFrame, reverse: false };
+    case "block_push":
+      return { clip: "block_push", tick: 0, reverse: false, frame: f.stateFrame < 4 ? 0 : f.stateFrame < 8 ? 1 : 2 };
+    case "taunt":
+      return { clip: "taunt", tick: f.stateFrame, reverse: false };
     case "walk_forward":
       return { clip: "walk", tick: f.stateFrame, reverse: false };
     case "walk_back":
@@ -71,8 +98,8 @@ export function resolveClip(set: ClipSet, name: string): Clip {
   return clip;
 }
 
-export function frameForFighter(set: ClipSet, f: FighterState): ClipFrame {
-  let choice = clipForFighter(f);
+export function frameForFighter(set: ClipSet, f: FighterState, introFrame = -1): ClipFrame {
+  let choice = clipForFighter(f, introFrame);
   // Walk-sheet placeholders have no walk_back clip: play the walk cycle backwards instead.
   if (choice.clip === "walk_back" && !set.clips.walk_back) choice = { ...choice, clip: "walk", reverse: true };
   const clip = resolveClip(set, choice.clip);
@@ -90,6 +117,7 @@ const FLOOR_Y_PX = MOVEMENT.floorY / SUBPX;
 
 /** A hard-edged ellipse on the floor that shrinks as the fighter rises. */
 export function drawShadow(ctx: CanvasRenderingContext2D, f: FighterState, camera: Camera): void {
+  if (isHidden(f)) return;
   const cx = Math.round(f.x / SUBPX) - camera.x;
   const cy = FLOOR_Y_PX - camera.y;
   const height = (MOVEMENT.floorY - f.y) / SUBPX;
@@ -113,8 +141,10 @@ export function drawFighter(
   f: FighterState,
   camera: Camera,
   tint?: string,
+  introFrame = -1,
 ): void {
-  const frame = frameForFighter(set, f);
+  if (isHidden(f)) return;
+  const frame = frameForFighter(set, f, introFrame);
   const sx = Math.round(f.x / SUBPX) - camera.x;
   const sy = Math.round(f.y / SUBPX) - camera.y;
   const source = tint ? tinted(set, frame, tint) : null;
