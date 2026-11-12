@@ -16,10 +16,11 @@ export const MOVEMENT = Object.freeze({
   /** Starting distance between the two fighters: 200 px. */
   startSeparation: 20000,
 
-  /** Walk forward: 2.7 px per frame. */
-  walkForwardSpeed: 270,
-  /** Walk back: 2.0 px per frame (slower than forward). */
-  walkBackSpeed: 200,
+  /** Walk forward: 1.8 px per frame. Matched to the art: a step moves the feet about 32 px per
+   * 18-tick walk cycle, so the feet do not slide (spec 012; was 2.7). */
+  walkForwardSpeed: 180,
+  /** Walk back: 1.5 px per frame over a 20-tick cycle (slower than forward; was 2.0). */
+  walkBackSpeed: 150,
 
   /** Frames spent in the jump squat before leaving the ground. */
   jumpsquatFrames: 4,

@@ -22,12 +22,12 @@
    "loop": true,
    "anchor": "torso",
    "holds": [
-    5,
-    5,
-    5,
-    5,
-    5,
-    5
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
    ],
    "poses": [
     "fighting stance, guard up",
@@ -42,12 +42,12 @@
    "loop": true,
    "anchor": "torso",
    "holds": [
-    5,
-    5,
-    5,
-    5,
-    5,
-    5
+    3,
+    4,
+    3,
+    4,
+    3,
+    3
    ],
    "poses": [
     "fighting stance, guard up, weight on the front foot",

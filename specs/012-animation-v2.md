@@ -30,6 +30,7 @@ Round 3 interview: the user liked the animations and picked every polish area. T
 ## Decisions
 - One clip per strip is kept; longer clips use the wider 3840x1280 canvas rather than two strips, so the model keeps one consistent drawing of the motion.
 - Juggle limit and wall bounce count live in `src/data/combat.ts`.
+- Walk speed is matched to the art so feet do not slide: each walk step moves the feet about 30 px per cycle, so forward walk is 1.8 px/frame over an 18-tick cycle and back walk 1.5 px/frame over 20 ticks (spec 001 had 2.7 and 2.0 with a 30-tick cycle, which slid the feet about 2.7x; the user flagged the walk in the HQ lab).
 
 ## Open questions
 - None.

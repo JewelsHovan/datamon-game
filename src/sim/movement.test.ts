@@ -42,8 +42,8 @@ describe("movement (A8)", () => {
       floorY: 32000,
       stageWidth: 128000,
       screenMargin: 4000,
-      walkForwardSpeed: 270,
-      walkBackSpeed: 200,
+      walkForwardSpeed: 180, // spec 012: matched to the walk art stride (was 270)
+      walkBackSpeed: 150, // spec 012 (was 200)
       jumpsquatFrames: 4,
       jumpLaunchSpeed: 1160,
       gravity: 58,
