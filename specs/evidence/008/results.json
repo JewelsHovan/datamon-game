@@ -1,0 +1,50 @@
+{
+  "hard CPU fight": {
+    "pass": true,
+    "menu": {
+      "mode": "cpu",
+      "fighters": [
+        "julien-hovan",
+        "pentcho-tchomakov"
+      ],
+      "cpu": [
+        null,
+        "hard"
+      ],
+      "phase": "fight",
+      "round": 1,
+      "wins": [
+        0,
+        0
+      ],
+      "legends": [
+        [
+          "F PUNCH  G KICK  H SPECIAL",
+          "WASD MOVE  F+G THROW"
+        ],
+        [
+          "CPU HARD"
+        ]
+      ]
+    }
+  },
+  "CPU walks": {
+    "pass": true,
+    "state": "walk_forward",
+    "screenshot": "specs/evidence/008/01-cpu-walks.png"
+  },
+  "CPU attacks": {
+    "pass": true,
+    "move": "charge",
+    "screenshot": "specs/evidence/008/03-cpu-attacks.png"
+  },
+  "CPU blocks": {
+    "pass": true,
+    "state": "blockstun",
+    "screenshot": "specs/evidence/008/02-cpu-blocks.png"
+  },
+  "no console errors": {
+    "pass": true,
+    "errors": []
+  }
+}

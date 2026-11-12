@@ -112,10 +112,10 @@ interface MatchResult {
   maxStuck: number;
 }
 
-function cpuMatch(p1: CpuLevel | null, p2: CpuLevel | null, seed: number, limit = 40000): MatchResult {
+function cpuMatch(p1: CpuLevel | null, p2: CpuLevel | null, seed: number, limit = 40000, slugs: [string, string] = [SLUG, SLUG]): MatchResult {
   const c1 = p1 ? createCpu(p1, 0, seed) : null;
   const c2 = p2 ? createCpu(p2, 1, seed + 1000) : null;
-  let s: SimState = createMatchState(seed, SLUG, SLUG);
+  let s: SimState = createMatchState(seed, slugs[0], slugs[1]);
   const stuck = [0, 0];
   let maxStuck = 0;
   for (let t = 1; t <= limit; t++) {
@@ -142,6 +142,19 @@ describe("matches (A4, A5)", () => {
     const r = cpuMatch("hard", "hard", 9);
     expect(r.winner).not.toBe(-1);
     expect(r.maxStuck).toBeLessThanOrEqual(300);
+  });
+
+  it("every launch fighter's CPU finishes Hard vs Hard matches without stuck states (spec 006 specials)", () => {
+    const pairs: [string, string][] = [
+      ["felicia-gorgacheva", "pentcho-tchomakov"],
+      ["alex-andrianavalontsalama", "felicia-gorgacheva"],
+      ["pentcho-tchomakov", "alex-andrianavalontsalama"],
+    ];
+    for (const [i, pair] of pairs.entries()) {
+      const r = cpuMatch("hard", "hard", 21 + i, 40000, pair);
+      expect(r.winner, pair.join(" vs ")).not.toBe(-1);
+      expect(r.maxStuck).toBeLessThanOrEqual(300);
+    }
   });
 
   it("Hard beats Easy in most of 5 seeded matches", () => {

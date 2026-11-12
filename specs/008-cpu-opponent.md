@@ -1,6 +1,6 @@
 # 008: CPU opponent with three difficulty levels
 
-Status: in-progress
+Status: review
 Created: 2026-11-12
 
 ## Goal
@@ -17,12 +17,12 @@ The user asked for a CPU to practice against, with 3 difficulty levels (2026-11-
 - R5. Works for any fighter (uses the generic Special input; fighter-specific tactics later).
 
 ## Acceptance criteria
-- [ ] A1. (R1, R2) Vitest: two CPUs with the same seed fed the same states return the same inputs; `decide` never mutates the state it is given.
-- [ ] A2. (R3, R4) Vitest against a scripted attacker that throws light punches up close: Hard blocks at least 70% of them, Normal 30 to 70%, Easy at most 30%.
-- [ ] A3. (R3, R4) Vitest against a scripted jumper: Hard anti-airs (hits the jumper before landing) at least 50% of the jumps, Easy at most 20%.
-- [ ] A4. (R3, R4) Vitest: each level fights a passive dummy and wins the match; Hard wins faster than Easy (fewer frames).
-- [ ] A5. (R3) Vitest: Hard vs Hard and Easy vs Hard CPU matches run to a match end without errors or stuck states (no fighter non-actionable for more than 300 frames), and Hard beats Easy in most of 5 seeded matches.
-- [ ] A6. In the browser, `?cpu=hard` starts a fight where the CPU visibly walks, blocks and attacks (screenshots in `specs/evidence/008/`).
+- [x] A1. (R1, R2) Vitest: two CPUs with the same seed fed the same states return the same inputs; `decide` never mutates the state it is given.
+- [x] A2. (R3, R4) Vitest against a scripted attacker that throws light punches up close: Hard blocks at least 70% of them, Normal 30 to 70%, Easy at most 30%.
+- [x] A3. (R3, R4) Vitest against a scripted jumper: Hard anti-airs (hits the jumper before landing) at least 50% of the jumps, Easy at most 20%.
+- [x] A4. (R3, R4) Vitest: each level fights a passive dummy and wins the match; Hard wins faster than Easy (fewer frames).
+- [x] A5. (R3) Vitest: Hard vs Hard and Easy vs Hard CPU matches run to a match end without errors or stuck states (no fighter non-actionable for more than 300 frames), and Hard beats Easy in most of 5 seeded matches.
+- [x] A6. In the browser, `?cpu=hard` starts a fight where the CPU visibly walks, blocks and attacks (screenshots in `specs/evidence/008/`).
 
 ## Out of scope
 - Fighter-specific CPU tactics for each signature special; arcade ladder (later); a learning AI.
@@ -35,12 +35,17 @@ The user asked for a CPU to practice against, with 3 difficulty levels (2026-11-
 - None.
 
 ## Tasks
-- [ ] T1. `src/ai/levels.ts` (parameter table) and `src/ai/cpu.ts` (controller: delayed view, seeded RNG, plans, behaviors), matching the interface spec 005 uses.
-- [ ] T2. Vitest suite for A1 to A5 (after spec 005 merges, since the button mapping changes).
-- [ ] T3. Browser evidence.
+- [x] T1. `src/ai/levels.ts` (parameter table) and `src/ai/cpu.ts` (controller: delayed view, seeded RNG, plans, behaviors), matching the interface spec 005 uses.
+- [x] T2. Vitest suite for A1 to A5 (after spec 005 merges, since the button mapping changes).
+- [x] T3. Browser evidence.
 
 ## Implementation notes
-(filled by spec-tackle)
+2026-11-12, lead session.
+
+- `src/ai/levels.ts` holds the parameter table (reaction delay, block, anti-air, tech, throw, combo, special, jump-in, aggression, mistakes, gaps between actions); `src/ai/cpu.ts` is the controller: it sees the opponent through a delayed view, draws from its own mulberry32 RNG (seeded, so a match replays exactly), runs short input plans, guards by anticipation in jab range (no one reacts to a 3-frame jab) and answers threats it can see in time. Pure: `decide` reads the state and never writes it.
+- Spec 006 specials: the CPU knows each move's reach (`REACH`), uses the projectile and the teleport from long range and the charge and rush from mid range, does not guard a teleport before it reappears, and blocks the charge and rush like other attacks.
+- A1-A5: `src/ai/cpu.test.ts`, 7 tests (determinism and no mutation; close jabs blocked: Hard at least 70%, Normal 30-70%, Easy at most 30%; anti-air: Hard at least half the jump-ins, Easy at most 20%; each level beats a passive dummy, Hard faster than Easy; Hard vs Hard ends with no fighter stuck over 300 frames; Hard beats Easy in at least 3 of 5; Hard vs Hard with every launch fighter's special ends cleanly).
+- A6: `specs/evidence/008/cpu-check.mjs` opens `?cpu=hard&p1=julien-hovan&p2=pentcho-tchomakov` and screenshots the CPU walking in, blocking a jab and attacking (a Hotfix Charge in this run). ALL PASS, no console errors. The VS CPU path from the title (select, CPU level) is covered by spec 005's flow check.
 
 ## Review
 (filled by spec-review)
