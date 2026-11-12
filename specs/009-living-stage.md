@@ -1,6 +1,6 @@
 # 009: Living stage
 
-Status: ready
+Status: in-progress
 Created: 2026-11-12
 
 ## Goal

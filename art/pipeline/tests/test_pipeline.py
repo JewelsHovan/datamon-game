@@ -23,9 +23,10 @@ JULIEN = common.FIGHTERS / "julien-hovan"
 MANIFEST = common.PUBLIC_FIGHTERS / "julien-hovan" / "manifest.json"
 
 # The "Core animation set" table in docs/game-design.md
-CORE = {"idle": 4, "walk": 6, "crouch": 2, "jump": 4, "light_punch": 4, "heavy_punch": 6, "light_kick": 4,
-        "heavy_kick": 6, "crouch_attack": 4, "air_attack": 3, "block": 2, "hurt": 3, "knockdown": 6,
-        "throw": 5, "special": 6, "summon": 4, "victory": 4}
+CORE = {"idle": 4, "walk": 6, "walk_back": 6, "dash_forward": 5, "dash_back": 5, "crouch": 3, "jump": 6,
+        "light_punch": 6, "heavy_punch": 8, "light_kick": 6, "heavy_kick": 9, "crouch_attack": 6, "air_attack": 5,
+        "throw": 7, "block": 2, "block_push": 3, "hurt": 4, "crouch_hurt": 3, "air_hurt": 4, "knockdown": 8,
+        "getup_roll": 6, "intro": 6, "taunt": 6, "victory": 6, "summon": 4, "special": 8}  # clip set v2 (spec 012)
 
 
 # A1 -------------------------------------------------------------------------------------------
@@ -36,7 +37,7 @@ def test_clip_definitions_match_design_doc():
         assert len(c["holds"]) == len(c["poses"]), cid
         assert c["anchor"] in ("backfoot", "torso"), cid
         assert all(isinstance(h, int) and h > 0 for h in c["holds"]), cid
-        assert len(c["poses"]) + 1 <= 8, f"{cid}: more than 8 figures per strip"
+        assert len(c["poses"]) + 1 <= 11, f"{cid}: more than 11 figures per strip"
 
 
 # A3 -------------------------------------------------------------------------------------------
@@ -161,3 +162,17 @@ def test_effects_manifest():
         tallest = max(f["h"] for f in c["frames"])
         assert abs(tallest - defs[eid]["target"]) <= 2, f"{eid}: tallest frame {tallest}px, target {defs[eid]['target']}"
         assert len(c["frames"]) == len(defs[eid]["frames"]), eid
+
+
+# Spec 012 A1: wide strips and per-fighter specials ---------------------------------------------
+def test_generator_sizes_and_specials():
+    import generate
+    clips = common.load_clips()
+    assert generate.size_for(len(common.clip_def("julien-hovan", "heavy_kick", clips)["poses"]) + 1) == "3840x1280"
+    assert generate.size_for(5) == "3072x1024" and generate.size_for(4) == "2048x1024"
+    prompt = generate.build_prompt("heavy_kick", clips, has_idle_ref=True, slug="julien-hovan")
+    assert "10 full-body figures" in prompt and "(10)" in prompt
+    for slug in ("felicia-gorgacheva", "pentcho-tchomakov", "alex-andrianavalontsalama"):
+        own = common.clip_def(slug, "special", clips)
+        assert own != clips["clips"]["special"], slug
+        assert own["poses"][0] in generate.build_prompt("special", clips, has_idle_ref=False, slug=slug)

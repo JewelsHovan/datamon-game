@@ -2,7 +2,7 @@
 
 Usage:  uv run --with pillow --with numpy --with scipy python -I art/pipeline/batch_review.py SLUG OUT_DIR [CLIP ...]
 
-Skips approved clips. Prints one line per clip (frames found or the error) and writes
+Skips approved clips unless clips are named. Prints one line per clip (frames found or the error) and writes
 OUT_DIR/mosaic-N.png with up to 4 clips each (frames aligned on the anchor, floor line).
 """
 
@@ -26,12 +26,13 @@ def newest_raw(slug: str, clip: str) -> Path | None:
 def main(argv: list[str]) -> int:
     slug, out = argv[0], Path(argv[1])
     out.mkdir(parents=True, exist_ok=True)
-    clips = argv[2:] or list(common.load_clips()["clips"])
+    explicit = argv[2:]
+    clips = explicit or list(common.load_clips()["clips"])
     status = common.load_status(slug)
     sheets = []
     for c in clips:
-        if status.get(c, {}).get("state") == "approved":
-            continue
+        if status.get(c, {}).get("state") == "approved" and not explicit:
+            continue  # named clips are reprocessed even if approved (a regeneration under review)
         raw = newest_raw(slug, c)
         if raw is None:
             print(f"{c:14} no raw image")

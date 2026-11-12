@@ -1,0 +1,20 @@
+{
+  "style": "Detailed 16-bit pixel art background for a 2D side-view fighting game, crisp pixel edges, limited palette, soft lighting, no characters, no people, no text, no logos, no UI.",
+  "stages": {
+    "office": {
+      "name": "Open-plan office at dusk",
+      "setting": "A modern open-plan tech office on a high floor at dusk.",
+      "floorColor": "#4a3b3f",
+      "layers": {
+        "far": {
+          "factor": 0.35, "height": 360, "y": 0, "gen_size": "3072x1280", "colors": 64,
+          "prompt": "The view through a wall of tall floor-to-ceiling office windows with thin dark vertical frames: a city skyline at dusk, a purple and orange gradient sky with a few clouds, distant towers with some lit windows, a river reflecting the sunset far below. The lowest fifth of the image is the dark interior wall below the windows. Wide panoramic composition, even detail across the whole width."
+        },
+        "mid": {
+          "factor": 0.7, "height": 360, "y": 0, "gen_size": "3840x1280", "colors": 64, "transparent": true,
+          "prompt": "Office furniture standing on one shared floor line along the bottom edge of the image, spread evenly across the whole width: rows of white desks with dual monitors showing code and dashboards, office chairs, tall potted plants, a whiteboard on wheels covered in architecture box-and-arrow diagrams, a standing coffee station with a coffee machine, a bookshelf, hanging pendant lamps from the top edge. Everything is cut out on a transparent background: no walls, no windows, no floor surface, no sky. Lit warmly from the side, slightly darker and lower contrast than a foreground character would be."
+        }
+      }
+    }
+  }
+}

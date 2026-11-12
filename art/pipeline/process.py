@@ -75,6 +75,37 @@ def cut_figures(img: Image.Image, min_share: float = 0.12) -> list[Figure]:
     return figures
 
 
+def _figure_from(sub: np.ndarray, x0: int, y0: int) -> Figure | None:
+    """A Figure from an RGBA crop with hard alpha, trimmed to its opaque pixels."""
+    m = sub[..., 3] > 0
+    ys, xs = np.nonzero(m)
+    if len(ys) == 0:
+        return None
+    t, b, l, r = ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
+    sub, m = sub[t:b, l:r], m[t:b, l:r]
+    h = m.shape[0]
+    band = max(3, int(h * 0.05))
+    backfoot = float(np.nonzero(m[h - band:].any(axis=0))[0].min())
+    mass = float(np.nonzero(m)[1].mean())
+    return Figure(Image.fromarray(sub), int(x0 + l), int(y0 + t), backfoot, mass)
+
+
+def split_widest(figures: list[Figure]) -> list[Figure]:
+    """Splits the widest figure at its thinnest column in the middle 30-70% of its width.
+    Used when touching figures (a lunging grab reaching into the next frame) merged into one."""
+    i = max(range(len(figures)), key=lambda k: figures[k].img.width)
+    fig = figures[i]
+    a = np.array(fig.img)
+    counts = (a[..., 3] > 0).sum(axis=0)
+    w = len(counts)
+    lo, hi = int(w * 0.3), max(int(w * 0.3) + 1, int(w * 0.7))
+    cut = lo + int(np.argmin(counts[lo:hi]))
+    left = _figure_from(a[:, :cut].copy(), fig.x0, fig.y0)
+    right = _figure_from(a[:, cut:].copy(), fig.x0 + cut, fig.y0)
+    parts = [p for p in (left, right) if p is not None]
+    return figures[:i] + parts + figures[i + 1:]
+
+
 def downscale(img: Image.Image, k: float) -> Image.Image:
     w, h = max(1, round(img.width * k)), max(1, round(img.height * k))
     small = np.array(img.resize((w, h), Image.BOX))
@@ -112,6 +143,11 @@ def process_strip(img: Image.Image, clip: dict, palette: list[str] | None, overr
     """Return (frames, calibration_figure). frames: list of dicts with image + anchor + hold."""
     figures = cut_figures(img)
     expected = len(clip["poses"]) + 1
+    # Up to two merged pairs (touching hands) are split; anything worse goes back for regeneration.
+    for _ in range(2):
+        if len(figures) >= expected or not figures:
+            break
+        figures = split_widest(figures)
     if len(figures) != expected:
         raise FrameCountError(f"expected {expected} figures (1 calibration + {expected - 1} frames), found {len(figures)}")
     calib, rest = figures[0], figures[1:]
@@ -191,7 +227,7 @@ def main() -> int:
     if args.clip not in clips:
         print(f"unknown clip {args.clip}", file=sys.stderr)
         return 2
-    clip = clips[args.clip]
+    clip = common.clip_def(args.slug, args.clip)
     img = Image.open(args.raw).convert("RGBA")
     fdir = common.fighter_dir(args.slug)
     overrides = common.load_json(fdir / "anchors.json", {}).get(args.clip, {})

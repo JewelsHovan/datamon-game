@@ -1,163 +1,611 @@
 {
-  "calibration_pose": "the standard fighting stance: side-on, lead fist up at chin height, rear fist guarding the cheek, knees bent, weight on the back foot (size reference frame)",
-  "clips": {
-    "idle": {
-      "loop": true, "anchor": "backfoot", "holds": [8, 8, 8, 8],
-      "poses": [
-        "fighting stance, side-on, lead fist up at chin height, rear fist guarding the cheek, knees bent, weight on the back foot",
-        "the same stance with the chest rising slightly and shoulders up a notch",
-        "the same stance at the top of the breath, fists bobbing up a little",
-        "the same stance settling back down, shoulders relaxing"
-      ]
-    },
-    "walk": {
-      "loop": true, "anchor": "torso", "holds": [5, 5, 5, 5, 5, 5],
-      "poses": [
-        "fighting stance, guard up",
-        "lead foot sliding forward, guard up",
-        "lead foot planted forward in a wide stance, guard up",
-        "rear foot starting to drag forward, guard up",
-        "rear foot almost caught up in a narrow stance, guard up",
-        "settling back into the fighting stance, guard up"
-      ]
-    },
-    "crouch": {
-      "loop": false, "anchor": "backfoot", "holds": [3, 6],
-      "poses": [
-        "dropping down, knees bending deeply, guard up",
-        "full crouch, low and compact, lead knee forward, fists guarding the face"
-      ]
-    },
-    "jump": {
-      "loop": false, "anchor": "torso", "holds": [4, 8, 10, 8],
-      "poses": [
-        "takeoff crouch, knees bent, arms swinging upward",
-        "rising into the air, body stretched upward, knees starting to tuck",
-        "apex in mid-air, knees tucked to the chest, fists in guard",
-        "falling, legs extending downward to land, arms out for balance"
-      ]
-    },
-    "light_punch": {
-      "loop": false, "anchor": "backfoot", "holds": [3, 3, 5, 5],
-      "poses": [
-        "fighting stance, lead shoulder starting to turn",
-        "quick jab, lead arm halfway extended",
-        "jab fully extended straight forward at head height, fist clenched",
-        "lead arm retracting back to the guard"
-      ]
-    },
-    "heavy_punch": {
-      "loop": false, "anchor": "backfoot", "holds": [4, 3, 2, 6, 6, 6],
-      "poses": [
-        "fighting stance, fists up",
-        "wind-up, rear shoulder pulled back, weight shifting to the back foot",
-        "torso rotating forward, rear fist starting to travel",
-        "impact, rear arm fully extended at head height, body leaning in",
-        "follow-through, arm still extended, beginning to retract",
-        "recovering back to the fighting stance"
-      ]
-    },
-    "light_kick": {
-      "loop": false, "anchor": "backfoot", "holds": [3, 4, 5, 5],
-      "poses": [
-        "lifting the lead knee, guard up",
-        "snap kick, lead leg fully extended straight forward at waist height",
-        "retracting the leg, knee still raised",
-        "back in the fighting stance"
-      ]
-    },
-    "heavy_kick": {
-      "loop": false, "anchor": "backfoot", "holds": [4, 4, 3, 7, 6, 7],
-      "poses": [
-        "fighting stance, hips beginning to turn",
-        "chambering the rear leg, knee raised high",
-        "roundhouse kick traveling forward, body leaning back",
-        "impact, kicking leg fully extended at head height, foot pointed forward",
-        "follow-through, leg sweeping past and coming down",
-        "landing back into the fighting stance"
-      ]
-    },
-    "crouch_attack": {
-      "loop": false, "anchor": "backfoot", "holds": [3, 4, 7, 6],
-      "poses": [
-        "crouched low with guard up",
-        "low sweep starting, lead leg sliding forward along the ground",
-        "sweep fully extended along the ground, body very low, one hand touching the floor",
-        "pulling the leg back into the crouched guard"
-      ]
-    },
-    "air_attack": {
-      "loop": false, "anchor": "torso", "holds": [4, 10, 6],
-      "poses": [
-        "airborne with knees tucked to the chest",
-        "flying kick in mid-air, lead leg extended diagonally down and forward, body angled",
-        "airborne, leg retracting, knees tucking again"
-      ]
-    },
-    "block": {
-      "loop": false, "anchor": "backfoot", "holds": [6, 6],
-      "poses": [
-        "standing block, both forearms raised in front of the face, leaning slightly back, braced",
-        "crouching block, crouched low with forearms crossed in front of the head"
-      ]
-    },
-    "hurt": {
-      "loop": false, "anchor": "backfoot", "holds": [8, 8, 6],
-      "poses": [
-        "hit in the head: head snapped back, upper body bent backward, arms flung out",
-        "hit in the stomach: doubled over forward, one arm clutching the stomach",
-        "recovering, straightening up, guard coming back up"
-      ]
-    },
-    "knockdown": {
-      "loop": false, "anchor": "torso", "holds": [5, 6, 6, 20, 8, 8],
-      "poses": [
-        "launched backward off the feet, body arching back, arms flung forward",
-        "flying backward through the air, body horizontal",
-        "crashing onto the ground on the back",
-        "lying flat on the back on the ground, dazed",
-        "pushing up off the ground onto one knee",
-        "standing back up into the fighting stance"
-      ]
-    },
-    "throw": {
-      "loop": false, "anchor": "backfoot", "holds": [4, 6, 6, 8, 8],
-      "poses": [
-        "lunging forward with both hands reaching out to grab (the opponent is not shown)",
-        "both hands gripping an unseen opponent's collar, pulling in",
-        "twisting the hips and shoulders, pulling hard",
-        "tossing forward, both arms thrown out in front",
-        "recovering into the fighting stance"
-      ]
-    },
-    "special": {
-      "loop": false, "anchor": "backfoot", "holds": [4, 6, 6, 3, 10, 8],
-      "poses": [
-        "fighting stance",
-        "drawing both hands back to the rear hip, palms cupped together, gathering energy (draw no energy or effects)",
-        "hands at the hip, body coiled and low",
-        "thrusting both palms forward at chest height",
-        "palms fully extended forward, leaning into it",
-        "recovering to the fighting stance"
-      ]
-    },
-    "summon": {
-      "loop": false, "anchor": "backfoot", "holds": [4, 8, 6, 14],
-      "poses": [
-        "fighting stance",
-        "one hand raised high overhead, other fist at the hip",
-        "sweeping the raised arm forward, pointing ahead commandingly",
-        "pointing forward with the arm fully extended, confident pose"
-      ]
-    },
-    "victory": {
-      "loop": true, "anchor": "backfoot", "holds": [10, 10, 10, 10],
-      "poses": [
-        "celebrating, one fist pumped in the air, other arm down, grinning",
-        "fist raised higher, shoulders lifted",
-        "both arms raised in triumph",
-        "back to one fist raised"
-      ]
-    }
+ "version": 2,
+ "calibration_pose": "the standard fighting stance: side-on, lead fist up at chin height, rear fist guarding the cheek, knees bent, weight on the back foot (size reference frame)",
+ "clips": {
+  "idle": {
+   "loop": true,
+   "anchor": "backfoot",
+   "holds": [
+    8,
+    8,
+    8,
+    8
+   ],
+   "poses": [
+    "fighting stance, side-on, lead fist up at chin height, rear fist guarding the cheek, knees bent, weight on the back foot",
+    "the same stance with the chest rising slightly and shoulders up a notch",
+    "the same stance at the top of the breath, fists bobbing up a little",
+    "the same stance settling back down, shoulders relaxing"
+   ]
+  },
+  "walk": {
+   "loop": true,
+   "anchor": "torso",
+   "holds": [
+    5,
+    5,
+    5,
+    5,
+    5,
+    5
+   ],
+   "poses": [
+    "fighting stance, guard up",
+    "lead foot sliding forward, guard up",
+    "lead foot planted forward in a wide stance, guard up",
+    "rear foot starting to drag forward, guard up",
+    "rear foot almost caught up in a narrow stance, guard up",
+    "settling back into the fighting stance, guard up"
+   ]
+  },
+  "walk_back": {
+   "loop": true,
+   "anchor": "torso",
+   "holds": [
+    5,
+    5,
+    5,
+    5,
+    5,
+    5
+   ],
+   "poses": [
+    "fighting stance, guard up, weight on the front foot",
+    "rear foot sliding backward, guard up",
+    "rear foot planted back in a wide stance, guard up",
+    "front foot starting to drag back, guard up",
+    "front foot almost caught up in a narrow stance, guard up",
+    "settling back into the fighting stance, guard up"
+   ]
+  },
+  "dash_forward": {
+   "loop": false,
+   "anchor": "torso",
+   "holds": [
+    3,
+    3,
+    4,
+    3,
+    3
+   ],
+   "poses": [
+    "leaning forward, pushing off hard with the rear foot",
+    "fast low forward step, body leaning in, guard up",
+    "gliding forward, both feet low to the ground, guard up",
+    "front foot planting, body still leaning forward",
+    "settling into the fighting stance"
+   ]
+  },
+  "dash_back": {
+   "loop": false,
+   "anchor": "torso",
+   "holds": [
+    3,
+    4,
+    4,
+    4,
+    3
+   ],
+   "poses": [
+    "pushing off the front foot, leaning back",
+    "hopping backward, feet just off the ground, guard up",
+    "airborne backward hop, knees slightly bent, guard up",
+    "landing on the rear foot",
+    "settling into the fighting stance"
+   ]
+  },
+  "crouch": {
+   "loop": false,
+   "anchor": "backfoot",
+   "holds": [
+    2,
+    2,
+    6
+   ],
+   "poses": [
+    "dropping down, knees starting to bend, guard up",
+    "lower, knees bent deeply, guard up",
+    "full crouch, low and compact, lead knee forward, fists guarding the face"
+   ]
+  },
+  "jump": {
+   "loop": false,
+   "anchor": "torso",
+   "holds": [
+    4,
+    6,
+    8,
+    8,
+    7,
+    7
+   ],
+   "poses": [
+    "takeoff crouch, knees bent, arms swinging upward",
+    "leaving the ground, legs pushing off, body stretched upward",
+    "rising, knees beginning to tuck, fists coming up to guard",
+    "apex in mid-air, knees tucked to the chest, fists in guard",
+    "starting to fall, legs extending downward",
+    "falling with legs extended to land, arms out for balance"
+   ]
+  },
+  "light_punch": {
+   "loop": false,
+   "anchor": "backfoot",
+   "holds": [
+    2,
+    2,
+    2,
+    3,
+    3,
+    4
+   ],
+   "poses": [
+    "fighting stance, lead shoulder starting to turn",
+    "lead fist beginning to snap forward",
+    "jab halfway extended",
+    "jab fully extended straight forward at head height, fist clenched",
+    "lead arm retracting",
+    "back to the guard"
+   ]
+  },
+  "heavy_punch": {
+   "loop": false,
+   "anchor": "backfoot",
+   "holds": [
+    3,
+    3,
+    3,
+    2,
+    2,
+    6,
+    5,
+    6
+   ],
+   "poses": [
+    "fighting stance, fists up",
+    "wind-up beginning, weight shifting back",
+    "full wind-up, rear shoulder pulled far back, body coiled",
+    "hips and torso rotating forward, rear fist starting to travel",
+    "rear fist halfway forward, body driving in",
+    "impact, rear arm fully extended at head height, body leaning in",
+    "follow-through, arm still extended, beginning to retract",
+    "recovering back to the fighting stance"
+   ]
+  },
+  "light_kick": {
+   "loop": false,
+   "anchor": "backfoot",
+   "holds": [
+    2,
+    3,
+    4,
+    3,
+    3,
+    3
+   ],
+   "poses": [
+    "lifting the lead knee, guard up",
+    "lead knee high, foot chambered",
+    "snap kick, lead leg fully extended straight forward at waist height",
+    "leg starting to retract, knee still raised",
+    "lowering the leg",
+    "back in the fighting stance"
+   ]
+  },
+  "heavy_kick": {
+   "loop": false,
+   "anchor": "backfoot",
+   "holds": [
+    3,
+    3,
+    3,
+    3,
+    2,
+    6,
+    5,
+    4,
+    5
+   ],
+   "poses": [
+    "fighting stance, hips beginning to turn",
+    "pivoting on the lead foot, rear knee lifting",
+    "chambering the rear leg, knee raised high",
+    "roundhouse kick traveling forward, body leaning back",
+    "kicking leg sweeping up toward head height",
+    "impact, kicking leg fully extended at head height, foot pointed forward",
+    "follow-through, leg sweeping past",
+    "leg coming down, body turning back",
+    "landing back into the fighting stance"
+   ]
+  },
+  "crouch_attack": {
+   "loop": false,
+   "anchor": "backfoot",
+   "holds": [
+    3,
+    3,
+    3,
+    5,
+    4,
+    6
+   ],
+   "poses": [
+    "crouched low with guard up",
+    "shifting weight, one hand reaching toward the floor",
+    "low sweep starting, lead leg sliding forward along the ground",
+    "sweep fully extended along the ground, body very low, one hand touching the floor",
+    "sweep follow-through, leg still low",
+    "pulling the leg back into the crouched guard"
+   ]
+  },
+  "air_attack": {
+   "loop": false,
+   "anchor": "torso",
+   "holds": [
+    3,
+    3,
+    8,
+    6,
+    6
+   ],
+   "poses": [
+    "airborne with knees tucked to the chest",
+    "airborne, lead knee chambering for a kick",
+    "flying kick in mid-air, lead leg extended diagonally down and forward, body angled",
+    "flying kick still fully extended, body angled",
+    "airborne, leg retracting, knees tucking again"
+   ]
+  },
+  "throw": {
+   "loop": false,
+   "anchor": "backfoot",
+   "holds": [
+    3,
+    4,
+    4,
+    5,
+    3,
+    7,
+    8
+   ],
+   "poses": [
+    "lunging forward with both hands reaching out to grab (the opponent is not shown)",
+    "both hands gripping an unseen opponent's collar",
+    "pulling the unseen opponent in close",
+    "twisting the hips and shoulders, pulling hard",
+    "swinging both arms forward to toss",
+    "tossing forward, both arms thrown out in front",
+    "recovering into the fighting stance"
+   ],
+   "size": "3840x1280"
+  },
+  "block": {
+   "loop": false,
+   "anchor": "backfoot",
+   "holds": [
+    6,
+    6
+   ],
+   "poses": [
+    "standing block, both forearms raised in front of the face, leaning slightly back, braced",
+    "crouching block, crouched low with forearms crossed in front of the head"
+   ]
+  },
+  "block_push": {
+   "loop": false,
+   "anchor": "backfoot",
+   "holds": [
+    4,
+    6,
+    6
+   ],
+   "poses": [
+    "blocking with both forearms up, braced",
+    "shoving both forearms forward explosively, pushing an unseen opponent away",
+    "arms still extended forward after the shove, guard starting to return"
+   ]
+  },
+  "hurt": {
+   "loop": false,
+   "anchor": "backfoot",
+   "holds": [
+    6,
+    6,
+    8,
+    6
+   ],
+   "poses": [
+    "hit in the head: head snapped back, upper body bent backward, arms flung out",
+    "staggering backward one step, off balance",
+    "hit in the stomach: doubled over forward, one arm clutching the stomach",
+    "recovering, straightening up, guard coming back up"
+   ]
+  },
+  "crouch_hurt": {
+   "loop": false,
+   "anchor": "backfoot",
+   "holds": [
+    6,
+    8,
+    6
+   ],
+   "poses": [
+    "in a full low crouch with knees fully bent, as low as a crouching guard, hit: head snapped back while staying low",
+    "in a full low crouch with knees fully bent, recoiling, one arm raised to cover the face, staying low",
+    "in a full low crouch with knees fully bent, recovering into the crouched guard, fists up"
+   ]
+  },
+  "air_hurt": {
+   "loop": false,
+   "anchor": "torso",
+   "holds": [
+    6,
+    8,
+    8,
+    8
+   ],
+   "poses": [
+    "hit in mid-air, body jolted backward, arms and legs flung out",
+    "spinning backward in the air, body horizontal",
+    "tumbling, falling backward head-first toward the ground",
+    "falling flat on the back, about to hit the ground"
+   ]
+  },
+  "knockdown": {
+   "loop": false,
+   "anchor": "torso",
+   "holds": [
+    6,
+    6,
+    6,
+    4,
+    26,
+    8,
+    8,
+    8
+   ],
+   "poses": [
+    "launched backward off the feet, body arching back, arms flung forward",
+    "flying backward through the air, body horizontal",
+    "crashing onto the ground on the back",
+    "bouncing slightly off the ground, limbs loose",
+    "lying flat on the back on the ground, dazed",
+    "rolling to one side, pushing up with one arm",
+    "pushing up onto one knee",
+    "standing back up into the fighting stance"
+   ]
+  },
+  "getup_roll": {
+   "loop": false,
+   "anchor": "torso",
+   "holds": [
+    6,
+    6,
+    6,
+    6,
+    6,
+    6
+   ],
+   "poses": [
+    "lying flat on the back on the ground",
+    "tucking the knees and rolling backward over one shoulder",
+    "in the middle of a backward roll, curled up tight",
+    "coming out of the roll onto the knees",
+    "rising from the knees, guard coming up",
+    "back in the fighting stance"
+   ]
+  },
+  "intro": {
+   "loop": false,
+   "anchor": "backfoot",
+   "holds": [
+    12,
+    12,
+    12,
+    10,
+    8,
+    10
+   ],
+   "poses": [
+    "standing relaxed and upright, adjusting a sleeve",
+    "rolling the shoulders, confident smile",
+    "cracking the knuckles of both hands in front of the chest",
+    "raising one fist, ready",
+    "dropping into the fighting stance, fists coming up",
+    "fighting stance, fists up, focused"
+   ]
+  },
+  "taunt": {
+   "loop": false,
+   "anchor": "backfoot",
+   "holds": [
+    6,
+    10,
+    10,
+    10,
+    10,
+    6
+   ],
+   "poses": [
+    "fighting stance",
+    "standing up straight, beckoning forward with one hand: come on",
+    "beckoning again with the hand, smirking",
+    "brushing dust off one shoulder casually",
+    "shrugging with both palms up",
+    "back to the fighting stance"
+   ]
+  },
+  "victory": {
+   "loop": true,
+   "anchor": "backfoot",
+   "holds": [
+    10,
+    10,
+    10,
+    10,
+    10,
+    10
+   ],
+   "poses": [
+    "standing tall, one fist pumped in the air, other arm down, grinning",
+    "fist raised higher, shoulders lifted",
+    "both arms raised in triumph",
+    "both arms raised, head tilted back, laughing",
+    "lowering one arm, the other fist still up",
+    "one fist raised, confident pose"
+   ]
+  },
+  "summon": {
+   "loop": false,
+   "anchor": "backfoot",
+   "holds": [
+    4,
+    8,
+    6,
+    14
+   ],
+   "poses": [
+    "fighting stance",
+    "one hand raised high overhead, other fist at the hip",
+    "sweeping the raised arm forward, pointing ahead commandingly",
+    "pointing forward with the arm fully extended, confident pose"
+   ]
+  },
+  "special": {
+   "loop": false,
+   "anchor": "backfoot",
+   "holds": [
+    4,
+    4,
+    5,
+    5,
+    3,
+    3,
+    10,
+    9
+   ],
+   "poses": [
+    "fighting stance",
+    "drawing both hands back toward the rear hip",
+    "hands cupped together at the hip, gathering energy (draw no energy or effects)",
+    "body coiled and low, hands at the hip",
+    "starting to thrust both palms forward",
+    "thrusting both palms forward at chest height",
+    "palms fully extended forward, leaning into it",
+    "recovering to the fighting stance"
+   ]
   }
+ },
+ "specials": {
+  "julien-hovan": {
+   "name": "Data Orb",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [
+     4,
+     4,
+     5,
+     5,
+     3,
+     3,
+     10,
+     9
+    ],
+    "poses": [
+     "fighting stance",
+     "drawing both hands back toward the rear hip",
+     "hands cupped together at the hip, gathering energy (draw no energy or effects)",
+     "body coiled and low, hands at the hip",
+     "starting to thrust both palms forward",
+     "thrusting both palms forward at chest height",
+     "palms fully extended forward, leaning into it",
+     "recovering to the fighting stance"
+    ]
+   }
+  },
+  "felicia-gorgacheva": {
+   "name": "Context Switch",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [
+     4,
+     5,
+     4,
+     4,
+     4,
+     3,
+     8,
+     8
+    ],
+    "poses": [
+     "fighting stance",
+     "crouching low, one hand touching the ground, gathering (draw no effects)",
+     "spinning on the spot, hair whipping around",
+     "mid-spin, arms pulled in tight",
+     "landing from the spin in a low crouch, ready to strike",
+     "springing up into a jumping kick, leg chambered",
+     "the kick fully extended forward at head height",
+     "landing back into the fighting stance"
+    ]
+   }
+  },
+  "pentcho-tchomakov": {
+   "name": "Hotfix Charge",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [
+     5,
+     5,
+     4,
+     4,
+     4,
+     6,
+     6,
+     6
+    ],
+    "poses": [
+     "fighting stance",
+     "lowering the shoulder, bracing, rear foot digging in",
+     "bursting forward into a charge, lead shoulder first",
+     "charging run, lead shoulder forward, head down",
+     "charging run, the other foot forward, shoulder still leading",
+     "shoulder slam impact, body fully extended forward",
+     "stumbling to a stop, straightening up",
+     "back to the fighting stance"
+    ]
+   }
+  },
+  "alex-andrianavalontsalama": {
+   "name": "Rapid Deploy",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [
+     3,
+     4,
+     3,
+     3,
+     3,
+     4,
+     3,
+     7,
+     8
+    ],
+    "poses": [
+     "fighting stance",
+     "dashing forward low, fists ready",
+     "quick lead jab extended at chest height",
+     "quick rear straight punch extended at chest height",
+     "quick lead hook to the body",
+     "crouching low, rear fist cocked down for an uppercut",
+     "rising uppercut, fist driving upward, body rising onto the toes",
+     "uppercut fully extended overhead, both feet leaving the ground",
+     "landing back into the fighting stance"
+    ]
+   }
+  }
+ }
 }

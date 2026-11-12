@@ -58,8 +58,8 @@ def build_refs(slug: str) -> list[Path]:
     return out
 
 
-def build_prompt(clip_id: str, clips: dict, has_idle_ref: bool) -> str:
-    clip = clips["clips"][clip_id]
+def build_prompt(clip_id: str, clips: dict, has_idle_ref: bool, slug: str = "") -> str:
+    clip = common.clip_def(slug, clip_id, clips)
     poses = [clips["calibration_pose"]] + clip["poses"]
     lines = " ".join(f"({i + 1}) {p};" for i, p in enumerate(poses))
     prompt = STYLE.format(n=len(poses)) + f" Frames from left to right: {lines}"
@@ -69,7 +69,11 @@ def build_prompt(clip_id: str, clips: dict, has_idle_ref: bool) -> str:
 
 
 def size_for(n_figures: int) -> str:
-    return "2048x1024" if n_figures <= 4 else "3072x1024"
+    if n_figures <= 4:
+        return "2048x1024"
+    if n_figures <= 8:
+        return "3072x1024"
+    return "3840x1280"  # up to 11 figures: the widest 3:1 canvas the model accepts
 
 
 def log_count(slug: str) -> int:
@@ -103,11 +107,12 @@ def main() -> int:
         return 2
 
     refs = build_refs(args.slug)
-    prompt = build_prompt(args.clip, clips, has_idle_ref=len(refs) > 1)
-    n_fig = len(clips["clips"][args.clip]["poses"]) + 1
+    prompt = build_prompt(args.clip, clips, has_idle_ref=len(refs) > 1, slug=args.slug)
+    cdef = common.clip_def(args.slug, args.clip, clips)
+    n_fig = len(cdef["poses"]) + 1
     scripts = Path(os.environ.get("IMAGE_COMPASS_SCRIPTS", DEFAULT_SCRIPTS))
     cmd = ["uv", "run", str(scripts / "generate_openai.py"), "--prompt", prompt, "--model", MODEL,
-           "--size", size_for(n_fig), "--quality", args.quality, "--background", "transparent",
+           "--size", cdef.get("size") or size_for(n_fig), "--quality", args.quality, "--background", "transparent",
            "--output-format", "png", "--variant", f"{args.slug}-{args.clip}", "--n", str(args.n), "--json"]
     for r in refs:
         cmd += ["--ref", str(r)]
@@ -130,7 +135,7 @@ def main() -> int:
             target = dest / f"{stamp}-{i}.png"
             shutil.move(p, target)
             log.write(json.dumps({"at": dt.datetime.now().isoformat(timespec="seconds"), "slug": args.slug, "clip": args.clip,
-                                  "model": MODEL, "size": size_for(n_fig), "quality": args.quality,
+                                  "model": MODEL, "size": cdef.get("size") or size_for(n_fig), "quality": args.quality,
                                   "refs": [str(r.relative_to(common.ROOT)) for r in refs],
                                   "raw": str(target.relative_to(common.ROOT))}) + "\n")
             print(target)

@@ -28,6 +28,14 @@ def load_clips() -> dict:
     return json.loads(CLIPS_FILE.read_text())
 
 
+def clip_def(slug: str, clip_id: str, clips: dict | None = None) -> dict:
+    """A clip's definition for one fighter: the fighter's own signature special, or the shared clip."""
+    clips = clips or load_clips()
+    if clip_id == "special" and slug in clips.get("specials", {}):
+        return clips["specials"][slug]["clip"]
+    return clips["clips"][clip_id]
+
+
 def people() -> dict[str, dict]:
     src = CATALOG.read_text()
     m = re.search(r"CHARACTER_MODELS = Object\.freeze\((\[.*?\])\);", src, re.S)
