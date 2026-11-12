@@ -132,10 +132,14 @@ export function advanceFighter(f: FighterState, player: PlayerIndex, state: SimS
         groundedControl(f, control ? dirs : 0);
       }
       break;
-    case "held":
-      // The thrower moves and releases the victim; this is only a safety net.
-      if (f.stateFrame > 60) enter(f, "idle");
+    case "held": {
+      // Held only while the opponent is in a throw that grabbed; otherwise released at once.
+      const thrower = state.fighters[player === 0 ? 1 : 0];
+      if (!(thrower.state === "attack" && thrower.move?.id === "throw" && thrower.move.grabbed) || f.stateFrame > 60) {
+        enter(f, "idle");
+      }
       break;
+    }
     case "knockdown":
     case "ko":
       advanceDowned(f, player, state);

@@ -37,12 +37,12 @@ export const KNOCKDOWN = Object.freeze({
 export const PROJECTILE = Object.freeze({
   /** Horizontal speed: 6 px per frame. */
   speed: 600,
-  /** Spawn offset from the thrower's position: 64 px forward, 104 px up. */
+  /** Spawn offset from the thrower's position: 64 px forward, 92 px up (chest height). */
   spawnX: 6400,
-  spawnY: -10400,
-  /** Hitbox half-size: 14 x 11 px. */
+  spawnY: -9200,
+  /** Hitbox half-size: 14 x 13 px. Low and tall enough that crouching does not dodge it (QA F4). */
   halfW: 1400,
-  halfH: 1100,
+  halfH: 1300,
 });
 
 export const ROUND = Object.freeze({

@@ -16,6 +16,7 @@ function decide(state: SimState, winner: -1 | 0 | 1 | 2, reason: "ko" | "time"):
   r.winner = winner;
   r.reason = reason;
   if (winner === 0 || winner === 1) r.wins[winner] += 1;
+  state.projectiles = []; // nothing in flight once the round is decided
   state.events.push({ type: "round_end", winner, reason });
   enterPhase(state, "ko");
 }

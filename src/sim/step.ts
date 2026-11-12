@@ -46,11 +46,12 @@ export function step(prev: SimState, inputs: InputPair): SimState {
   resolveSpacing(state.fighters, previousMid);
   updateFacing(state.fighters);
 
-  // 5. Detect hits for both fighters at once (trades happen).
-  const hits = detectHits(state);
-
-  // 6. Apply hits.
-  applyHits(state, hits);
+  // 5-6. Detect hits for both fighters at once (trades happen), then apply them. Only while the
+  // round is being fought: nothing lands after a K.O. or the time-out buzzer.
+  if (state.round.training || state.round.phase === "fight") {
+    const hits = detectHits(state);
+    applyHits(state, hits);
+  }
 
   // 7. Round timers and round state.
   advanceRound(state);

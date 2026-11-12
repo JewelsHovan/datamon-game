@@ -203,10 +203,22 @@ function spawnProjectile(f: FighterState, player: PlayerIndex, state: SimState):
   state.events.push({ type: "projectile", player, x: p.x, y: p.y });
 }
 
-/** Moves projectiles and drops the ones that left the stage. */
+/**
+ * Left edge of the view, as the camera computes it: centered on the fighters' midpoint and
+ * clamped to the stage. Kept in the sim so projectiles leave play when they leave the screen.
+ */
+export function viewLeft(state: SimState): number {
+  const mid = Math.floor((state.fighters[0].x + state.fighters[1].x) / 2);
+  const left = mid - (MOVEMENT.screenWidth >> 1);
+  return Math.max(0, Math.min(MOVEMENT.stageWidth - MOVEMENT.screenWidth, left));
+}
+
+/** Moves projectiles and drops the ones that left the screen. */
 export function advanceProjectiles(state: SimState): void {
   for (const p of state.projectiles) p.x += p.vx;
-  state.projectiles = state.projectiles.filter((p) => p.x > -PROJECTILE.halfW && p.x < MOVEMENT.stageWidth + PROJECTILE.halfW);
+  const left = viewLeft(state);
+  const right = left + MOVEMENT.screenWidth;
+  state.projectiles = state.projectiles.filter((p) => p.x > left - PROJECTILE.halfW && p.x < right + PROJECTILE.halfW);
 }
 
 function projectileRect(p: Projectile): Rect {
@@ -446,7 +458,10 @@ export function applyHits(state: SimState, hits: readonly PendingHit[]): void {
     const a = strikes[0]!;
     state.events.push({ type: "trade", x: Math.floor((a.x + strikes[1]!.x) / 2), y: Math.floor((a.y + strikes[1]!.y) / 2) });
   }
-  for (const h of hits) {
+  // Grabs resolve last, and only for a thrower still in the throw: a thrower struck on the
+  // same step (by a jab or a projectile) loses the grab instead of leaving a victim held by nobody.
+  const ordered = [...hits.filter((h) => h.kind !== "grab"), ...hits.filter((h) => h.kind === "grab")];
+  for (const h of ordered) {
     if (h.kind === "strike") {
       const attacker = state.fighters[h.attacker];
       if (attacker.move) attacker.move.connected = true;
@@ -456,10 +471,10 @@ export function applyHits(state: SimState, hits: readonly PendingHit[]): void {
     } else {
       const thrower = state.fighters[h.attacker];
       const victim = state.fighters[h.target];
-      if (thrower.move) {
-        thrower.move.grabbed = true;
-        thrower.move.connected = true;
-      }
+      if (thrower.move?.id !== "throw" || thrower.state !== "attack") continue;
+      if (victim.state === "hitstun" || victim.state === "knockdown" || victim.state === "ko") continue;
+      thrower.move.grabbed = true;
+      thrower.move.connected = true;
       victim.state = "held";
       victim.stateFrame = 0;
       victim.move = null;

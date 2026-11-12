@@ -289,3 +289,49 @@ describe("determinism with combat (A8)", () => {
     expect(hashState(c.state)).toBe(hashState(a.state));
   });
 });
+
+describe("QA fixes (2026-11-12 run)", () => {
+  it("F1: a throw met by a jab on the same frame never leaves anyone held", () => {
+    const r = run(duel(50), [[L | H, L], ...frames(40)]);
+    const states = r.events.length;
+    expect(states).toBeGreaterThan(0);
+    let s = duel(50);
+    s = step(s, [L | H, L]);
+    for (let t = 0; t < 40; t++) {
+      s = step(s, [0, 0]);
+      expect(s.fighters[0].state).not.toBe("held");
+      expect(s.fighters[1].state === "held" && !(s.fighters[0].move?.id === "throw" && s.fighters[0].move.grabbed)).toBe(false);
+    }
+  });
+
+  it("F2: nothing lands after the time-out buzzer", () => {
+    let s = duel(300);
+    s.round.timer = 20;
+    s = step(s, [0, S]); // P2 fires; the round times out before it arrives
+    for (let t = 0; t < 120; t++) s = step(s, [0, 0]);
+    expect(s.round.reason).toBe("time");
+    expect(s.fighters[0].health).toBe(COMBAT.maxHealth);
+    expect(s.projectiles.length).toBe(0);
+  });
+
+  it("F3: a projectile is gone once it leaves the screen, and the next special works", () => {
+    let s = duel(80);
+    s = step(s, [S, 0]);
+    for (let t = 0; t < 14; t++) s = step(s, [0, U]); // P2 jumps over it
+    let gone = -1;
+    for (let t = 0; t < 120 && gone < 0; t++) {
+      s = step(s, [0, 0]);
+      if (s.projectiles.length === 0) gone = t;
+    }
+    expect(gone).toBeGreaterThanOrEqual(0);
+    expect(gone).toBeLessThan(80);
+    for (let t = 0; t < 40; t++) s = step(s, [0, 0]);
+    s = step(s, [S, 0]);
+    expect(s.fighters[0].move?.id).toBe("special");
+  });
+
+  it("F4: crouching does not dodge the projectile", () => {
+    const r = run(duel(300), [[S, D], ...frames(120, 0, D)]);
+    expect(r.events.flat().filter((e) => e.type === "hit" && e.move === "special").length).toBe(1);
+  });
+});
