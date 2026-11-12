@@ -292,11 +292,11 @@ describe("determinism with combat (A8)", () => {
 
 describe("QA fixes (2026-11-12 run)", () => {
   it("F1: a throw met by a jab on the same frame never leaves anyone held", () => {
-    const r = run(duel(50), [[L | H, L], ...frames(40)]);
+    const r = run(duel(50), [[P | K, P], ...frames(40)]);
     const states = r.events.length;
     expect(states).toBeGreaterThan(0);
     let s = duel(50);
-    s = step(s, [L | H, L]);
+    s = step(s, [P | K, P]);
     for (let t = 0; t < 40; t++) {
       s = step(s, [0, 0]);
       expect(s.fighters[0].state).not.toBe("held");

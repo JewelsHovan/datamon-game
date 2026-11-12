@@ -4,6 +4,7 @@
 // directly (browser checks). A mirror match draws P2 in the alternate palette.
 // F2 hit and hurt boxes, F3 reduced effects (F1, the debug overlay, lives in
 // game.ts). In VS CPU, P2's input each step comes from the CPU controller.
+import { stageReact } from "../render/stage";
 import type { CpuController, CpuLevel } from "../ai/cpu";
 import { ROUND } from "../data/combat";
 import { getPerson, type Person } from "../data/catalog";
@@ -137,15 +138,17 @@ export class FightScene implements Scene {
     }
     this.state = step(this.state, this.inputsFor(input));
     const events = this.state.events;
+    // Every step, even without events: audio's last-10-seconds tick reads the round clock.
+    this.m.services.hooks.simEvents?.(events, this.state);
     if (events.length) {
       this.effects.onEvents(events, this.state);
       this.hud.onEvents(events);
-      this.m.services.hooks.simEvents?.(events);
       for (const e of events) {
         this.log.push(e);
         if (e.type === "ko") {
           this.slowmo = SLOWMO_FRAMES;
           this.slowCounter = 0;
+          stageReact("ko", e.x); // background coworkers stop and watch
         }
       }
       if (this.log.length > 500) this.log.splice(0, this.log.length - 500);

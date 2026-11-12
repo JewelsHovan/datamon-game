@@ -98,9 +98,7 @@ function antiAirRate(level: CpuLevel, seed: number): number {
 }
 
 describe("anti-air by level (A3)", () => {
-  // Re-enabled when spec 005 merges: until then the old Light/Heavy mapping turns the CPU's
-  // Kick into a heavy punch whose long active window swats jumpers by accident.
-  it.skip("Hard anti-airs at least half the jump-ins, Easy few", () => {
+  it("Hard anti-airs at least half the jump-ins, Easy few", () => {
     const hard = [1, 2].map((seed) => antiAirRate("hard", seed)).reduce((x, y) => x + y) / 2;
     const easy = [1, 2].map((seed) => antiAirRate("easy", seed)).reduce((x, y) => x + y) / 2;
     expect(hard).toBeGreaterThanOrEqual(0.5);

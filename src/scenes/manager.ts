@@ -12,7 +12,7 @@ import type { ClipSet } from "../render/clips";
 import type { EffectAtlas } from "../render/effects";
 import { text } from "../render/hud";
 import { VIEW_WIDTH } from "../render/screen";
-import type { InputPair, PlayerIndex, SimEvent } from "../sim/types";
+import type { InputPair, PlayerIndex, SimEvent, SimState } from "../sim/types";
 import { ControlsScene } from "./controls";
 import { FightScene } from "./fight";
 import { PauseScene } from "./pause";
@@ -51,8 +51,8 @@ export interface SceneArt {
 
 /** Presentation hooks (audio wiring point). None of them can change the flow. */
 export interface GameHooks {
-  /** Every sim step's events during a fight, e.g. audio.onEvents(events). */
-  simEvents?(events: readonly SimEvent[]): void;
+  /** Every sim step during a fight (events may be empty), e.g. audio.onEvents(events, state.round). */
+  simEvents?(events: readonly SimEvent[], state: SimState): void;
   /** Menu cursor moves, confirms and backs, e.g. audio.ui(kind). */
   ui?(kind: "move" | "confirm" | "back"): void;
   /** The scene changed, e.g. audio.music(name === "fight" ? "fight" : ...). */
