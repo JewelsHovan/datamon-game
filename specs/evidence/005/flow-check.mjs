@@ -231,22 +231,37 @@ try {
   await waitFrames(30);
   record("A5 select", (await scene()) === "select", { menu: await menu(), screenshot: await shot("a5-02-select") });
 
-  // A dimmed "coming soon" tile cannot be confirmed.
-  await tap("KeyD");
+  // A dimmed "coming soon" tile cannot be confirmed: step right until P1 is on one
+  // (several fighters are playable now, so it is not simply the tile next to Julien).
+  const playable = (await menu()).playable;
+  let steps = 0;
+  while (steps < 12 && playable.includes((await menu()).under[0])) {
+    await tap("KeyD");
+    steps++;
+  }
   await tap("KeyF");
   const refused = await menu();
-  record("A5 coming soon cannot be picked", refused.under[0] === "pentcho-tchomakov" && refused.locked[0] === null, {
+  record("A5 coming soon cannot be picked", !playable.includes(refused.under[0]) && refused.under[0] !== "random" && refused.locked[0] === null, {
     under: refused.under,
     locked: refused.locked,
+    playable,
     screenshot: await shot("a5-03-coming-soon"),
   });
-  await tap("KeyA");
+  for (let k = 0; k < steps; k++) await tap("KeyA");
   await tap("KeyF"); // P1 picks Julien
-  for (const code of ["ArrowUp", "ArrowLeft"]) await tap(code); // P2 to the random tile (up wraps to the last row, left to its end)
+  // P2 walks to the random tile (the last tile of the 8-column grid): down to its row, then across.
+  {
+    const m0 = await menu();
+    const target = m0.tiles.length - 1;
+    for (let k = 0; k < 10 && Math.floor((await menu()).cursors[1] / 8) !== Math.floor(target / 8); k++) await tap("ArrowDown");
+    for (let k = 0; k < 10 && (await menu()).cursors[1] !== target; k++) {
+      await tap((await menu()).cursors[1] < target ? "ArrowRight" : "ArrowLeft");
+    }
+  }
   const beforeRandom = await menu();
   await tap("KeyL"); // P2 picks the random tile
   const picked = await menu();
-  record("A5 picks", picked.locked[0] === "julien-hovan" && beforeRandom.under[1] === "random" && picked.locked[1] === "julien-hovan", {
+  record("A5 picks", picked.locked[0] === "julien-hovan" && beforeRandom.under[1] === "random" && playable.includes(picked.locked[1]), {
     locked: picked.locked,
     p2Under: beforeRandom.under[1],
     screenshot: await shot("a5-04-select-ready"),
@@ -401,7 +416,9 @@ try {
   ws.close();
   chrome.kill();
   await sleep(300);
-  rmSync(profile, { recursive: true, force: true });
+  try {
+    rmSync(profile, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 }); // Chrome may still be exiting
+  } catch {}
 }
 console.log(failures === 0 ? "ALL PASS" : `${failures} FAILED`);
 process.exit(failures === 0 ? 0 : 1);

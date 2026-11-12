@@ -264,7 +264,9 @@ try {
   writeFileSync(join(OUT, "results.json"), JSON.stringify(results, null, 2));
   ws.close();
   chrome.kill();
-  rmSync(profile, { recursive: true, force: true });
+  try {
+    rmSync(profile, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 }); // Chrome may still be exiting
+  } catch {}
 }
 console.log(failures === 0 ? "ALL PASS" : `${failures} FAILED`);
 process.exit(failures === 0 ? 0 : 1);

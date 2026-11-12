@@ -354,7 +354,9 @@ try {
   ws.close();
   chrome.kill();
   await sleep(300);
-  rmSync(profile, { recursive: true, force: true });
+  try {
+    rmSync(profile, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 }); // Chrome may still be exiting
+  } catch {}
 }
 console.log(failures === 0 ? "ALL PASS" : `${failures} FAILED`);
 process.exit(failures === 0 ? 0 : 1);
