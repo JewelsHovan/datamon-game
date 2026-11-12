@@ -1,0 +1,262 @@
+{
+  "A9 1440x900": {
+    "pass": true,
+    "canvas": {
+      "width": 640,
+      "height": 360,
+      "cssWidth": "1280px",
+      "cssHeight": "720px",
+      "imageRendering": "pixelated",
+      "innerWidth": 1440,
+      "innerHeight": 900
+    },
+    "scale": 2,
+    "fighters": [
+      {
+        "slug": "julien-hovan",
+        "state": "idle",
+        "stateFrame": 48,
+        "x": 54000,
+        "y": 32000,
+        "facing": 1
+      },
+      {
+        "slug": "felicia-gorgacheva",
+        "state": "idle",
+        "stateFrame": 48,
+        "x": 74000,
+        "y": 32000,
+        "facing": -1
+      }
+    ],
+    "screenshot": "specs/evidence/001/a9-1440x900.png"
+  },
+  "A9 800x600": {
+    "pass": true,
+    "canvas": {
+      "width": 640,
+      "height": 360,
+      "cssWidth": "640px",
+      "cssHeight": "360px",
+      "imageRendering": "pixelated",
+      "innerWidth": 800,
+      "innerHeight": 600
+    },
+    "scale": 1,
+    "fighters": [
+      {
+        "slug": "julien-hovan",
+        "state": "idle",
+        "stateFrame": 46,
+        "x": 54000,
+        "y": 32000,
+        "facing": 1
+      },
+      {
+        "slug": "felicia-gorgacheva",
+        "state": "idle",
+        "stateFrame": 46,
+        "x": 74000,
+        "y": 32000,
+        "facing": -1
+      }
+    ],
+    "screenshot": "specs/evidence/001/a9-800x600.png"
+  },
+  "A4": {
+    "pass": true,
+    "before": 71,
+    "after": 670,
+    "advanced": 599,
+    "wallMs": 10002,
+    "expectedForWall": 600,
+    "fps": 60.00774293180276
+  },
+  "A10 P1 walk": {
+    "pass": true,
+    "a": {
+      "slug": "julien-hovan",
+      "state": "walk_forward",
+      "stateFrame": 16,
+      "x": 58590,
+      "y": 32000,
+      "facing": 1
+    },
+    "b": {
+      "slug": "julien-hovan",
+      "state": "walk_forward",
+      "stateFrame": 29,
+      "x": 62100,
+      "y": 32000,
+      "facing": 1
+    },
+    "walkFrames": [
+      2,
+      3
+    ],
+    "screenshots": [
+      "specs/evidence/001/a10-p1-walk-1.png",
+      "specs/evidence/001/a10-p1-walk-2.png"
+    ]
+  },
+  "A10 P1 crouch": {
+    "pass": true,
+    "p1": {
+      "slug": "julien-hovan",
+      "state": "crouch",
+      "stateFrame": 18,
+      "x": 63450,
+      "y": 32000,
+      "facing": 1
+    },
+    "screenshot": "specs/evidence/001/a10-p1-crouch.png"
+  },
+  "A10 P1 jump": {
+    "pass": true,
+    "p1": {
+      "slug": "julien-hovan",
+      "state": "airborne",
+      "stateFrame": 18,
+      "x": 63450,
+      "y": 20429,
+      "facing": 1
+    },
+    "screenshot": "specs/evidence/001/a10-p1-jump.png"
+  },
+  "A10 P2 walk": {
+    "pass": true,
+    "a": {
+      "slug": "felicia-gorgacheva",
+      "state": "walk_forward",
+      "stateFrame": 18,
+      "x": 68870,
+      "y": 32000,
+      "facing": -1
+    },
+    "b": {
+      "slug": "felicia-gorgacheva",
+      "state": "walk_forward",
+      "stateFrame": 31,
+      "x": 66705,
+      "y": 32000,
+      "facing": -1
+    },
+    "walkFrames": [
+      2,
+      3
+    ],
+    "screenshot": "specs/evidence/001/a10-p2-walk.png"
+  },
+  "A10 P2 crouch": {
+    "pass": true,
+    "p2": {
+      "slug": "felicia-gorgacheva",
+      "state": "crouch",
+      "stateFrame": 18,
+      "x": 66705,
+      "y": 32000,
+      "facing": -1
+    },
+    "screenshot": "specs/evidence/001/a10-p2-crouch.png"
+  },
+  "A10 P2 jump": {
+    "pass": true,
+    "p2": {
+      "slug": "felicia-gorgacheva",
+      "state": "airborne",
+      "stateFrame": 18,
+      "x": 66705,
+      "y": 20429,
+      "facing": -1
+    },
+    "screenshot": "specs/evidence/001/a10-p2-jump.png"
+  },
+  "A10 push": {
+    "pass": true,
+    "before": [
+      {
+        "slug": "julien-hovan",
+        "state": "idle",
+        "stateFrame": 206,
+        "x": 62105,
+        "y": 32000,
+        "facing": 1
+      },
+      {
+        "slug": "felicia-gorgacheva",
+        "state": "idle",
+        "stateFrame": 41,
+        "x": 66705,
+        "y": 32000,
+        "facing": -1
+      }
+    ],
+    "during": [
+      {
+        "slug": "julien-hovan",
+        "state": "walk_forward",
+        "stateFrame": 179,
+        "x": 86405,
+        "y": 32000,
+        "facing": 1
+      },
+      {
+        "slug": "felicia-gorgacheva",
+        "state": "idle",
+        "stateFrame": 221,
+        "x": 91005,
+        "y": 32000,
+        "facing": -1
+      }
+    ],
+    "screenshot": "specs/evidence/001/a10-p1-pushes-p2.png"
+  },
+  "A11 params": {
+    "pass": true,
+    "slugs": [
+      "jewoo-lee",
+      "veronica-marallag"
+    ],
+    "clipSources": [
+      "placeholder",
+      "placeholder"
+    ],
+    "screenshot": "specs/evidence/001/a11-jewoo-vs-veronica.png"
+  },
+  "A11 unknown slug": {
+    "pass": true,
+    "slugs": [
+      "julien-hovan",
+      "felicia-gorgacheva"
+    ],
+    "warnings": [
+      {
+        "type": "warning",
+        "text": "Unknown fighter \"nobody\" for p1; using julien-hovan."
+      }
+    ],
+    "screenshot": "specs/evidence/001/a11-unknown-p1.png"
+  },
+  "A11 F1 overlay": {
+    "pass": true,
+    "before": {
+      "hidden": true,
+      "display": "none",
+      "text": ""
+    },
+    "shown": {
+      "hidden": false,
+      "display": "block",
+      "text": "sim frame   57\nrender fps  60.0\nsteps/frame 2\nP1 state    idle (julien-hovan)\nP2 state    idle (felicia-gorgacheva)"
+    },
+    "hidden": {
+      "hidden": true,
+      "display": "none",
+      "text": "sim frame   59\nrender fps  60.0\nsteps/frame 1\nP1 state    idle (julien-hovan)\nP2 state    idle (felicia-gorgacheva)"
+    },
+    "screenshots": [
+      "specs/evidence/001/a11-overlay-on.png",
+      "specs/evidence/001/a11-overlay-off.png"
+    ]
+  }
+}
