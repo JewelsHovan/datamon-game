@@ -4,7 +4,16 @@ A 2D pixel-art 1v1 fighting game (working title "Datamon: Merge Conflict") built
 
 ## Status
 
-Designed, not built yet. `docs/game-design.md` holds every design decision, the binding game loop architecture rules, and the spec roadmap. Read it before writing or tackling a spec.
+Playable and live at https://datamon-game.julienh15.workers.dev; specs are in progress (`./dm specs`). `docs/game-design.md` holds every design decision, the binding game loop architecture rules, and the spec roadmap. Read it before writing or tackling a spec.
+
+## Commands
+
+Use `./dm` (`scripts/dm.mjs`) rather than raw npm, vite or wrangler. Every command has an exit code, logs to `.dm/logs/`, and takes `--json`.
+
+- `./dm doctor` before anything else in a fresh checkout; `./dm check` (typecheck, test, build) before handing work off.
+- `./dm dev` / `./dm dev stop`: background dev server on a free port. Use its printed URL; other sessions may hold 5173.
+- `./dm preview`: a Cloudflare preview URL that is not live. Use it to show work or to point `game-qa` at a deployed build.
+- `./dm deploy`: production. Only from `main`, with a clean tree, after the gates; it smoke-tests the live URL. The public repo and site are live, so deploy only when the user asks.
 
 Stack: Vite + TypeScript + Canvas 2D (no engine), Vitest, npm. `src/sim` is a pure, deterministic 60 Hz simulation and must stay free of DOM, clock and `Math.random`.
 

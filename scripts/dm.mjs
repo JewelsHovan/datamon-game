@@ -233,6 +233,7 @@ Ship
                               (not live); prints the preview URL
   deploy                      gates, build, deploy to production, smoke-test the URL
         --allow-dirty         deploy with uncommitted changes (off by default)
+        --allow-branch        deploy from a branch other than main
         --skip-check          skip the gates (build still runs)
   url                         print the production URL from the last deploy
 
@@ -353,6 +354,10 @@ Exit codes: 0 ok, 1 a gate, deploy or check failed, 2 usage error, 3 missing pre
 
   async deploy() {
     const g = gitInfo();
+    if (g.branch !== "main" && !flag("allow-branch")) {
+      warn(`dm: on branch ${g.branch}. Production deploys come from main; use ./dm preview here, or pass --allow-branch.`);
+      finish(EXIT.fail, { stage: "git", branch: g.branch });
+    }
     if (g.dirty.length && !flag("allow-dirty")) {
       warn(`dm: ${g.dirty.length} uncommitted path(s). Commit first so the deploy maps to a commit, or pass --allow-dirty.`);
       finish(EXIT.fail, { stage: "git", dirty: g.dirty });
