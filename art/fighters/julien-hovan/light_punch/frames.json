@@ -1,0 +1,40 @@
+{
+ "clip": "light_punch",
+ "loop": false,
+ "scale": 0.16037,
+ "raw": "art/raw/julien-hovan/light_punch/20261112-150440-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 79,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 92,
+   "h": 141,
+   "ax": 0,
+   "ay": 140,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 105,
+   "h": 141,
+   "ax": 0,
+   "ay": 140,
+   "hold": 5
+  },
+  {
+   "file": "03.png",
+   "w": 78,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 5
+  }
+ ]
+}

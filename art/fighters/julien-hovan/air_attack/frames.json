@@ -1,0 +1,32 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.18229,
+ "raw": "art/raw/julien-hovan/air_attack/20261112-150445-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 59,
+   "h": 110,
+   "ax": -9,
+   "ay": 109,
+   "hold": 4
+  },
+  {
+   "file": "01.png",
+   "w": 126,
+   "h": 124,
+   "ax": 13,
+   "ay": 123,
+   "hold": 10
+  },
+  {
+   "file": "02.png",
+   "w": 60,
+   "h": 116,
+   "ax": -10,
+   "ay": 115,
+   "hold": 6
+  }
+ ]
+}

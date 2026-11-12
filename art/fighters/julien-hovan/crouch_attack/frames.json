@@ -1,0 +1,40 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.18421,
+ "raw": "art/raw/julien-hovan/crouch_attack/20261112-150439-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 70,
+   "h": 106,
+   "ax": 3,
+   "ay": 105,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 118,
+   "h": 91,
+   "ax": 13,
+   "ay": 90,
+   "hold": 4
+  },
+  {
+   "file": "02.png",
+   "w": 135,
+   "h": 88,
+   "ax": 0,
+   "ay": 87,
+   "hold": 7
+  },
+  {
+   "file": "03.png",
+   "w": 70,
+   "h": 106,
+   "ax": 3,
+   "ay": 105,
+   "hold": 6
+  }
+ ]
+}

@@ -191,6 +191,23 @@ textarea {
 .src { font-family: var(--font-mono); font-size: var(--step--1); color: var(--faint); white-space: nowrap; }
 .lbody { padding: 0 18px 16px; display: flex; flex-direction: column; gap: 12px; }
 
+/* Animation lab */
+.lab-fighter { display: flex; flex-direction: column; gap: 12px; }
+.lab-fighter + .lab-fighter { margin-top: 24px; }
+.lab-title { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+.clip { background: var(--panel); border: 2px solid var(--line); display: flex; flex-direction: column; min-width: 0; }
+.clip.flagged { border-color: var(--p2); }
+.clip.liked { border-color: var(--good); }
+.clip-view { background: #222056; display: flex; align-items: flex-end; justify-content: center; height: 230px; overflow: hidden; }
+.clip-view img { image-rendering: pixelated; max-width: 100%; max-height: 100%; object-fit: contain; }
+.clip-body { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 8px; }
+.clip-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.clip-name { font-family: var(--font-mono); font-weight: 500; }
+.clip-meta { font-family: var(--font-mono); font-size: var(--step--1); color: var(--faint); font-variant-numeric: tabular-nums; }
+.clip-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.clip-actions .btn[aria-pressed="true"] { border-color: var(--amber); color: var(--amber); }
+
 /* Roster */
 .roster { display: grid; grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: 10px; }
 .mug { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; }
@@ -262,6 +279,14 @@ textarea {
       </div>
       <div class="floor"><span class="who p1" id="f1-name">P1</span><span class="who p2" id="f2-name">P2</span></div>
     </div>
+  </section>
+
+  <section aria-labelledby="lab-h">
+    <div class="section-head">
+      <h2 id="lab-h">Animation lab</h2>
+      <p class="sub">Every generated clip, playing at game timing on the 640x360 pixel grid (shown at 3x). The yellow cross is the anchor that sits on the fighter's position. Flag anything that looks off and Claude regenerates it.</p>
+    </div>
+    <div id="lab"><div class="empty">Clips appear here as they are generated.</div></div>
   </section>
 
   <section id="ladder-section" aria-labelledby="ladder-h">
@@ -337,7 +362,7 @@ $("copy-cmd").addEventListener("click", () => {
 });
 
 /* ---------- live state ---------- */
-const state = { project: null, specs: [], decisions: [], log: null, readOnly: false };
+const state = { project: null, specs: [], decisions: [], clips: [], log: null, readOnly: false };
 let db = null;
 const writeQueue = {};
 const openRows = new Set();
@@ -413,7 +438,7 @@ function chipFor(d) {
 function renderCalls() {
   const open = state.decisions.filter((d) => d.group === "open").sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
   const waitingYou = open.filter((d) => d.state === "open").length;
-  const waitingClaude = state.decisions.filter(isPending).length;
+  const waitingClaude = state.decisions.filter(isPending).length + state.clips.filter(clipPending).length;
   $("n-you").textContent = state.decisions.length ? waitingYou : "-";
   $("n-claude").textContent = state.decisions.length ? waitingClaude : "-";
   if (!open.length) return;
@@ -450,6 +475,48 @@ function renderLocked() {
         <p class="flash" data-flash="${esc(d.id)}">${esc(flashes[d.id] || "")}</p>${noteHtml(d)}</div>` : ""}
     </div>`;
   }).join("");
+}
+
+function clipPending(c) { return c.userVerdict === "needs-work" && !(c.resolvedAt && c.resolvedAt >= (c.userAt || "")); }
+function renderLab() {
+  if (!state.clips.length) return;
+  const focusId = document.activeElement?.dataset?.clipnote;
+  if (focusId) { pendingRender = true; return; }
+  const byFighter = {};
+  for (const c of state.clips) (byFighter[c.fighter] ||= []).push(c);
+  $("lab").innerHTML = Object.entries(byFighter).map(([slug, list]) => {
+    list.sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
+    const liked = list.filter((c) => c.userVerdict === "good").length;
+    const flagged = list.filter((c) => c.userVerdict === "needs-work").length;
+    return `<div class="lab-fighter">
+      <div class="lab-title"><h3>${esc(list[0].fighterName || slug)}</h3>
+        <span class="clip-meta">${list.length} clips · ${liked} marked great · ${flagged} flagged</span></div>
+      <div class="lab-grid">${list.map((c) => {
+        const id = esc(c.id);
+        const v = c.userVerdict;
+        return `<article class="clip ${v === "needs-work" ? "flagged" : v === "good" ? "liked" : ""}">
+          <div class="clip-view">${c.gif ? `<img src="${esc(c.gif)}" alt="${esc(c.clip)} animation" loading="lazy">` : ""}</div>
+          <div class="clip-body">
+            <div class="clip-head"><span class="clip-name">${esc(c.clip)}</span><span class="clip-meta">${c.frames} frames · ${c.ticks} ticks</span></div>
+            ${clipPending(c) ? `<span class="chip pending">Flagged · Claude regenerates next session</span>` : c.resolvedAt && v === "needs-work" ? `<span class="chip applied">Regenerated</span>` : ""}
+            <div class="clip-actions">
+              <button class="btn" type="button" data-clip="${id}" data-verdict="good" aria-pressed="${v === "good"}" ${state.readOnly ? "disabled" : ""}>Looks great</button>
+              <button class="btn" type="button" data-clip="${id}" data-verdict="needs-work" aria-pressed="${v === "needs-work"}" ${state.readOnly ? "disabled" : ""}>Needs work</button>
+            </div>
+            ${v === "needs-work" ? `<div class="note-field"><label for="cnote-${id}">What looks off?</label>
+              <textarea id="cnote-${id}" data-clipnote="${id}" rows="2" ${state.readOnly ? "disabled" : ""}>${esc(c.userNote || "")}</textarea></div>` : ""}
+          </div>
+        </article>`;
+      }).join("")}</div>
+    </div>`;
+  }).join("");
+}
+function writeClip(id, patch) {
+  if (!db || state.readOnly) return;
+  const ref = db.collection("clips").doc(id);
+  writeQueue["clip:" + id] = (writeQueue["clip:" + id] || Promise.resolve())
+    .then(() => ref.update(patch))
+    .catch((e) => { if (e?.code === "invalid_argument" || e?.code === "not_granted") setReadOnly("You can view the lab but not flag clips."); });
 }
 
 function renderLog() {
@@ -503,11 +570,25 @@ function pick(decId, optId) {
 document.addEventListener("click", (ev) => {
   const opt = ev.target.closest("[data-opt]");
   if (opt) { pick(opt.dataset.dec, opt.dataset.opt); return; }
+  const cv = ev.target.closest("[data-verdict]");
+  if (cv) {
+    const c = state.clips.find((x) => x.id === cv.dataset.clip);
+    const verdict = c && c.userVerdict === cv.dataset.verdict ? null : cv.dataset.verdict;
+    writeClip(cv.dataset.clip, { userVerdict: verdict, userAt: new Date().toISOString() });
+    return;
+  }
   const tog = ev.target.closest("[data-toggle]");
   if (tog) { const id = tog.dataset.toggle; openRows.has(id) ? openRows.delete(id) : openRows.add(id); renderLocked(); }
 });
 const noteTimers = {};
 document.addEventListener("input", (ev) => {
+  const cid = ev.target.dataset?.clipnote;
+  if (cid) {
+    clearTimeout(noteTimers["clip:" + cid]);
+    const value = ev.target.value;
+    noteTimers["clip:" + cid] = setTimeout(() => writeClip(cid, { userNote: value, userAt: new Date().toISOString() }), 900);
+    return;
+  }
   const id = ev.target.dataset?.note;
   if (!id) return;
   clearTimeout(noteTimers[id]);
@@ -518,7 +599,7 @@ document.addEventListener("input", (ev) => {
   }, 900);
 });
 document.addEventListener("focusout", (ev) => {
-  if (ev.target.dataset?.note && pendingRender) { pendingRender = false; setTimeout(() => { renderCalls(); renderLocked(); }, 0); }
+  if ((ev.target.dataset?.note || ev.target.dataset?.clipnote) && pendingRender) { pendingRender = false; setTimeout(() => { renderCalls(); renderLocked(); renderLab(); }, 0); }
 });
 
 /* ---------- boot ---------- */
@@ -534,14 +615,15 @@ async function boot() {
   } catch { /* keep inputs; a refused write decides */ }
 
   let answered = 0;
-  const loadTimer = setTimeout(() => { if (answered < 4) $("phase").textContent = "Can't reach the data yet"; }, 10000);
-  const mark = (snap) => { if (!snap.metadata.fromCache) { answered++; if (answered >= 4) clearTimeout(loadTimer); } };
+  const loadTimer = setTimeout(() => { if (answered < 5) $("phase").textContent = "Can't reach the data yet"; }, 10000);
+  const mark = (snap) => { if (!snap.metadata.fromCache) { answered++; if (answered >= 5) clearTimeout(loadTimer); } };
   const onErr = () => { clearTimeout(loadTimer); $("phase").textContent = "Data unavailable"; };
 
   db.doc("hub/project").onSnapshot((s) => { mark(s); state.project = s.exists ? s.data() : null; renderProject(); }, onErr);
   db.doc("hub/log").onSnapshot((s) => { mark(s); state.log = s.exists ? s.data() : null; renderLog(); }, onErr);
   db.collection("specs").onSnapshot((q) => { mark(q); state.specs = q.docs.map((d) => ({ id: d.id, ...d.data() })); renderLadder(); }, onErr);
   db.collection("decisions").onSnapshot((q) => { mark(q); state.decisions = q.docs.map((d) => ({ id: d.id, ...d.data() })); renderCalls(); renderLocked(); }, onErr);
+  db.collection("clips").onSnapshot((q) => { mark(q); state.clips = q.docs.map((d) => ({ id: d.id, ...d.data() })); renderLab(); renderCalls(); }, onErr);
 }
 boot();
 </script>

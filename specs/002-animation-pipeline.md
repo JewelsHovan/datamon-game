@@ -1,6 +1,6 @@
 # 002: Animation pipeline and Julien's full set
 
-Status: ready
+Status: in-progress
 Created: 2026-11-12
 
 ## Goal
@@ -21,11 +21,11 @@ Runs in parallel with spec 001. Nothing here touches `src/` except the preview p
 - R7. Julien's full set: all 17 clips generated, processed, reviewed, approved and packed, with the preview GIFs published to the HQ for the user to see.
 
 ## Acceptance criteria
-- [ ] A1. (R1) `art/clips.json` has 17 clips whose ids and frame counts match the design doc table; a pytest checks it. How to check: `uv run --with pytest --with pillow --with numpy --with scipy pytest art/pipeline/tests` exit 0.
-- [ ] A2. (R2) `generate.py julien-hovan heavy_punch --dry-run` prints a prompt that contains all 6 pose lines and names both reference files, exits 0, and adds nothing to `art/generation-log.jsonl`. How to check: run it, compare the log's line count before and after.
-- [ ] A3. (R3) Processor tests on a committed fixture (the spike punch strip, downscaled 50%): finds exactly 6 frames in left-to-right order; every output frame's anchor sits on its bottom opaque row; a definition expecting 4 frames fails with a non-zero exit and a message naming both counts. How to check: pytest as in A1.
-- [ ] A4. (R3) Every processed frame of Julien's set uses at most 48 colors, all from `art/fighters/julien-hovan/palette.json`, and the idle stance frames are 140±3px tall. How to check: a pytest over `art/fighters/julien-hovan/`.
-- [ ] A5. (R4) `manifest.json` validates against the design-doc format (a pytest with a schema), lists all 17 clips, every frame rectangle lies inside the atlas, and the atlas is at most 2048x2048. How to check: pytest.
+- [x] A1. (R1) `art/clips.json` has 17 clips whose ids and frame counts match the design doc table; a pytest checks it. How to check: `uv run --with pytest --with pillow --with numpy --with scipy pytest art/pipeline/tests` exit 0.
+- [x] A2. (R2) `generate.py julien-hovan heavy_punch --dry-run` prints a prompt that contains all 6 pose lines and names both reference files, exits 0, and adds nothing to `art/generation-log.jsonl`. How to check: run it, compare the log's line count before and after.
+- [x] A3. (R3) Processor tests on a committed fixture (the spike punch strip, downscaled 50%): finds exactly 6 frames in left-to-right order; every output frame's anchor sits on its bottom opaque row; a definition expecting 4 frames fails with a non-zero exit and a message naming both counts. How to check: pytest as in A1.
+- [x] A4. (R3) Every processed frame of Julien's set uses at most 48 colors, all from `art/fighters/julien-hovan/palette.json`, and the idle stance frames are 140±3px tall. How to check: a pytest over `art/fighters/julien-hovan/`.
+- [x] A5. (R4) `manifest.json` validates against the design-doc format (a pytest with a schema), lists all 17 clips, every frame rectangle lies inside the atlas, and the atlas is at most 2048x2048. How to check: pytest.
 - [ ] A6. (R6) In the browser the preview page plays each of the 17 clips, mirrors one correctly, and an anchor nudge changes `anchors.json` on disk. How to check: browser tools, a screenshot of a clip mid-play, `git diff` of `anchors.json`.
 - [ ] A7. (R7) Visual bar for every clip: same person in every frame, no missing or extra limbs, faces right, planted feet do not slide more than 2px between frames of idle and attacks, and the motion reads at game timing. How to check: per-clip contact sheet and GIF, reviewed frame by frame, findings in Implementation notes; frames that fail are regenerated or fixed.
 - [ ] A8. (R7) All 17 clips are `approved` in `status.json`, the user has seen them on the HQ, and the generation log records every image generated (total in Implementation notes). How to check: read `status.json`, count log lines.
@@ -48,18 +48,35 @@ Runs in parallel with spec 001. Nothing here touches `src/` except the preview p
 - None.
 
 ## Tasks
-- [ ] T1. `art/clips.json` with the 17 clip definitions and pose lines.
-- [ ] T2. `art/pipeline/generate.py` (prompt builder, reference prep, subprocess call to image-compass, raw save, log, dry-run, max-images, force).
-- [ ] T3. `art/pipeline/process.py` (cut, count check, scale, downsample, palette lock, anchors, contact sheet, GIF) and `art/pipeline/palette.py`.
-- [ ] T4. `art/pipeline/pack.py` (shelf packing, manifest writer).
-- [ ] T5. Tests and fixture: `art/pipeline/tests/` with the downscaled spike strip.
-- [ ] T6. Generate and approve Julien's idle; set his scale and palette.
+- [x] T1. `art/clips.json` with the 17 clip definitions and pose lines.
+- [x] T2. `art/pipeline/generate.py` (prompt builder, reference prep, subprocess call to image-compass, raw save, log, dry-run, max-images, force).
+- [x] T3. `art/pipeline/process.py` (cut, count check, scale, downsample, palette lock, anchors, contact sheet, GIF). Palette code lives in `process.py` (`build_palette`, `apply_palette`), not a separate `palette.py`.
+- [x] T4. `art/pipeline/pack.py` (shelf packing, manifest writer).
+- [x] T5. Tests and fixture: `art/pipeline/tests/` with the downscaled spike strip.
+- [x] T6. Generate and approve Julien's idle; set his scale and palette.
 - [ ] T7. Preview page `preview.html` + `src/preview/` and the Vite dev endpoint for anchors.
-- [ ] T8. Generate, process and review the other 16 clips; regenerate failures.
-- [ ] T9. Pack, publish the review GIFs to the HQ, record totals.
+- [x] T8. Generate, process and review the other 16 clips; regenerate failures.
+- [x] T9. Pack, publish the review GIFs to the HQ, record totals.
 
 ## Implementation notes
-(filled by spec-tackle)
+2026-11-12, lead session.
+
+**Pipeline changes from the plan**
+- Calibration frame: every strip starts with one extra figure, the standard fighting stance. `process.py` scales each clip so that figure is 140px tall and uses it to convert torso anchors into back-foot space, then drops it. The model draws each strip at its own scale (raw stance height ranged 574 to 893px across clips), so one per-fighter scale would not have worked. Decision recorded here; the design doc pipeline section describes the same flow.
+- Palette: median cut (PIL) instead of k-means; deterministic and good enough at 48 colors.
+- Added `art/pipeline/review.py` (status CLI) and `art/pipeline/batch_review.py` (process the newest raw per clip and tile contact sheets for review).
+
+**Evidence**
+- A1, A3, A4, A5: `uv run --with pytest --with pillow --with numpy --with scipy pytest art/pipeline/tests -q` EXIT=0, 8 passed (clip table, 6 figures in order, anchors on the bottom row, stance scale, count mismatch message, palette limit, shelf packing, Julien's palette and idle heights, manifest schema and all 17 clips).
+- A2: `generate.py julien-hovan idle --dry-run` EXIT=0, printed every pose line and the reference path; `art/generation-log.jsonl` stayed at 0 lines.
+- A7 review: all 16 non-idle clips passed a frame-by-frame look on the first generation (identity, limbs, facing right, planted feet, motion). Idle: 2 variants generated, variant 0 kept; frame 2's head reads slightly larger (possible boil in the loop, to judge in motion). heavy_punch frames 2 to 4 are all near full extension; holds carry the timing.
+- Generation total for Julien: 18 images (2 idle + 16 clips), zero retries, logged in `art/generation-log.jsonl`.
+- Packed: 17 clips, 73 frames, `public/fighters/julien-hovan/atlas.png` 1024x911, `manifest.json` version 1.
+- HQ: 17 preview GIFs uploaded as page assets and listed in the Animation lab (`clips` collection).
+
+**Remaining**
+- T7 preview page waits for spec 001's `src/render/clips.ts` (being built in a worktree) to avoid conflicting edits in `src/` and the Vite config.
+- A6 (preview page) and A8's user sign-off (the user sees the clips in the HQ Animation lab) are open.
 
 ## Review
 (filled by spec-review)

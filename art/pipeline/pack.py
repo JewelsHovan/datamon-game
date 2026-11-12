@@ -1,0 +1,85 @@
+"""Pack a fighter's approved clips into public/fighters/SLUG/atlas.png + manifest.json (spec 002, R4).
+
+Usage:  uv run --with pillow python -I art/pipeline/pack.py SLUG [--all]
+
+Only clips whose status is "approved" are packed, unless --all (for previewing work in progress).
+The manifest follows the "Animation clip format" in docs/game-design.md.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+from PIL import Image
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import common  # noqa: E402
+
+ATLAS_W = 1024
+PAD = 2
+
+
+def shelf_pack(sizes: list[tuple[int, int]], width: int = ATLAS_W) -> tuple[list[tuple[int, int]], int]:
+    """Place rectangles on shelves, tallest first. Returns positions (input order) and atlas height."""
+    order = sorted(range(len(sizes)), key=lambda i: -sizes[i][1])
+    pos: list[tuple[int, int]] = [(0, 0)] * len(sizes)
+    x = y = shelf_h = 0
+    for i in order:
+        w, h = sizes[i]
+        if w + PAD > width:
+            raise ValueError(f"frame {w}px wide does not fit a {width}px atlas")
+        if x + w + PAD > width:
+            x, y, shelf_h = 0, y + shelf_h + PAD, 0
+        pos[i] = (x, y)
+        x += w + PAD
+        shelf_h = max(shelf_h, h)
+    return pos, y + shelf_h
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("slug")
+    ap.add_argument("--all", action="store_true", help="pack generated clips too, not only approved ones")
+    args = ap.parse_args()
+
+    fdir = common.fighter_dir(args.slug)
+    status = common.load_status(args.slug)
+    order = list(common.load_clips()["clips"])
+    wanted = [c for c in order if status.get(c, {}).get("state") == "approved" or (args.all and (fdir / c / "frames.json").exists())]
+    if not wanted:
+        print(f"no {'processed' if args.all else 'approved'} clips for {args.slug}", file=sys.stderr)
+        return 2
+
+    entries = []  # (clip, frame meta, image)
+    clip_meta = {}
+    for c in wanted:
+        fj = json.loads((fdir / c / "frames.json").read_text())
+        clip_meta[c] = fj
+        for fm in fj["frames"]:
+            entries.append((c, fm, Image.open(fdir / c / fm["file"]).convert("RGBA")))
+    pos, height = shelf_pack([(im.width, im.height) for _, _, im in entries])
+    atlas = Image.new("RGBA", (ATLAS_W, height), (0, 0, 0, 0))
+    clips: dict = {}
+    for (c, fm, im), (x, y) in zip(entries, pos):
+        atlas.paste(im, (x, y))
+        clips.setdefault(c, {"loop": clip_meta[c]["loop"], "frames": []})["frames"].append(
+            {"x": x, "y": y, "w": im.width, "h": im.height, "ax": fm["ax"], "ay": fm["ay"], "hold": fm["hold"]})
+
+    out = common.PUBLIC_FIGHTERS / args.slug
+    out.mkdir(parents=True, exist_ok=True)
+    manifest_path = out / "manifest.json"
+    prev = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
+    idle_scale = clip_meta.get("idle", {}).get("scale")
+    manifest = {"fighter": args.slug, "version": int(prev.get("version", 0)) + 1, "scale": idle_scale,
+                "facing": "right", "clips": clips}
+    atlas.save(out / "atlas.png", optimize=True)
+    manifest_path.write_text(json.dumps(manifest, indent=1) + "\n")
+    print(f"{args.slug}: {len(clips)} clips, {len(entries)} frames, atlas {ATLAS_W}x{height} -> {out.relative_to(common.ROOT)}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

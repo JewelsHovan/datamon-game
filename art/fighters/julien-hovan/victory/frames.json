@@ -1,0 +1,40 @@
+{
+ "clip": "victory",
+ "loop": true,
+ "scale": 0.17699,
+ "raw": "art/raw/julien-hovan/victory/20261112-150440-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 78,
+   "h": 152,
+   "ax": 0,
+   "ay": 151,
+   "hold": 10
+  },
+  {
+   "file": "01.png",
+   "w": 78,
+   "h": 163,
+   "ax": 0,
+   "ay": 162,
+   "hold": 10
+  },
+  {
+   "file": "02.png",
+   "w": 80,
+   "h": 156,
+   "ax": 0,
+   "ay": 155,
+   "hold": 10
+  },
+  {
+   "file": "03.png",
+   "w": 80,
+   "h": 152,
+   "ax": 0,
+   "ay": 151,
+   "hold": 10
+  }
+ ]
+}
