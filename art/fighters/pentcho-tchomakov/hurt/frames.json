@@ -1,0 +1,40 @@
+{
+ "clip": "hurt",
+ "loop": false,
+ "scale": 0.16647,
+ "raw": "art/raw/pentcho-tchomakov/hurt/20261112-172917-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 88,
+   "h": 135,
+   "ax": 11,
+   "ay": 134,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 102,
+   "h": 134,
+   "ax": 23,
+   "ay": 133,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 77,
+   "h": 115,
+   "ax": 0,
+   "ay": 114,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 77,
+   "h": 136,
+   "ax": 0,
+   "ay": 135,
+   "hold": 6
+  }
+ ]
+}

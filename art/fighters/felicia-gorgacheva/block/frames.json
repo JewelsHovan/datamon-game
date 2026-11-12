@@ -1,0 +1,24 @@
+{
+ "clip": "block",
+ "loop": false,
+ "scale": 0.15234,
+ "raw": "art/raw/felicia-gorgacheva/block/20261112-172917-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 74,
+   "h": 138,
+   "ax": 0,
+   "ay": 137,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 74,
+   "h": 99,
+   "ax": 4,
+   "ay": 98,
+   "hold": 6
+  }
+ ]
+}

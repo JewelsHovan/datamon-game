@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.23411,
+ "raw": "art/raw/pentcho-tchomakov/crouch_attack/20261112-172913-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 74,
+   "h": 104,
+   "ax": 0,
+   "ay": 103,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 83,
+   "h": 98,
+   "ax": 0,
+   "ay": 97,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 121,
+   "h": 94,
+   "ax": 3,
+   "ay": 93,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 124,
+   "h": 83,
+   "ax": 0,
+   "ay": 82,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 84,
+   "h": 95,
+   "ax": 8,
+   "ay": 94,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 73,
+   "h": 98,
+   "ax": 0,
+   "ay": 97,
+   "hold": 6
+  }
+ ]
+}

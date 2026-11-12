@@ -1,0 +1,40 @@
+{
+ "clip": "idle",
+ "loop": true,
+ "scale": 0.1697,
+ "raw": "art/raw/felicia-gorgacheva/idle/20261112-172624-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 73,
+   "h": 141,
+   "ax": 0,
+   "ay": 140,
+   "hold": 8
+  },
+  {
+   "file": "01.png",
+   "w": 73,
+   "h": 144,
+   "ax": 0,
+   "ay": 143,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 73,
+   "h": 145,
+   "ax": 0,
+   "ay": 144,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 74,
+   "h": 141,
+   "ax": 0,
+   "ay": 140,
+   "hold": 8
+  }
+ ]
+}

@@ -1,0 +1,32 @@
+{
+ "clip": "crouch",
+ "loop": false,
+ "scale": 0.18229,
+ "raw": "art/raw/alex-andrianavalontsalama/crouch/20261112-172918-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 79,
+   "h": 131,
+   "ax": 1,
+   "ay": 130,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 72,
+   "h": 111,
+   "ax": 4,
+   "ay": 110,
+   "hold": 2
+  },
+  {
+   "file": "02.png",
+   "w": 61,
+   "h": 88,
+   "ax": 1,
+   "ay": 87,
+   "hold": 6
+  }
+ ]
+}

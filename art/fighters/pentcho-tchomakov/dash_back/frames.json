@@ -1,0 +1,48 @@
+{
+ "clip": "dash_back",
+ "loop": false,
+ "scale": 0.17435,
+ "raw": "art/raw/pentcho-tchomakov/dash_back/20261112-172915-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 62,
+   "h": 137,
+   "ax": -12,
+   "ay": 136,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 57,
+   "h": 136,
+   "ax": -12,
+   "ay": 135,
+   "hold": 4
+  },
+  {
+   "file": "02.png",
+   "w": 59,
+   "h": 131,
+   "ax": -11,
+   "ay": 130,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 76,
+   "h": 133,
+   "ax": 2,
+   "ay": 132,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 79,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

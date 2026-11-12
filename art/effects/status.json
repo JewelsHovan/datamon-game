@@ -3,6 +3,10 @@
     "raw": "art/raw/effects/block/20261112-151307.png",
     "state": "approved"
   },
+  "charge_streaks": {
+    "raw": "art/raw/effects/charge_streaks/20261112-172641.png",
+    "state": "approved"
+  },
   "dust": {
     "raw": "art/raw/effects/dust/20261112-151303.png",
     "state": "approved"
@@ -21,6 +25,22 @@
   },
   "orb_burst": {
     "raw": "art/raw/effects/orb_burst/20261112-151303.png",
+    "state": "approved"
+  },
+  "rush_streaks": {
+    "raw": "art/raw/effects/rush_streaks/20261112-172642.png",
+    "state": "approved"
+  },
+  "teleport_in": {
+    "raw": "art/raw/effects/teleport_in/20261112-172641.png",
+    "state": "approved"
+  },
+  "teleport_out": {
+    "raw": "art/raw/effects/teleport_out/20261112-172642.png",
+    "state": "approved"
+  },
+  "uppercut_arc": {
+    "raw": "art/raw/effects/uppercut_arc/20261112-172642.png",
     "state": "approved"
   }
 }

@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.18568,
+ "raw": "art/raw/alex-andrianavalontsalama/air_attack/20261112-172914-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 59,
+   "h": 113,
+   "ax": -18,
+   "ay": 112,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 64,
+   "h": 132,
+   "ax": -15,
+   "ay": 131,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 125,
+   "h": 107,
+   "ax": 6,
+   "ay": 106,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 133,
+   "h": 102,
+   "ax": 15,
+   "ay": 101,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 59,
+   "h": 113,
+   "ax": -18,
+   "ay": 112,
+   "hold": 6
+  }
+ ]
+}

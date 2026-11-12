@@ -47,8 +47,8 @@ const GENERIC_REACH: Readonly<Record<string, BoxPx>> = {
 /** Which representative frame stands in for a non-attack pose. */
 const POSE_FRAMES: Readonly<Record<"stand" | "crouch" | "air", readonly [string, number]>> = {
   stand: ["idle", 0],
-  crouch: ["crouch", 1],
-  air: ["jump", 2],
+  crouch: ["crouch", 2],
+  air: ["jump", 3],
 };
 
 export function boxesFor(slug: string): FighterBoxes | undefined {

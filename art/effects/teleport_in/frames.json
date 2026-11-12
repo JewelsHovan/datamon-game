@@ -1,0 +1,47 @@
+{
+ "clip": "teleport_in",
+ "loop": false,
+ "raw": "art/raw/effects/teleport_in/20261112-172641.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 91,
+   "h": 94,
+   "ax": 45,
+   "ay": 93,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 78,
+   "h": 135,
+   "ax": 39,
+   "ay": 134,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 84,
+   "h": 142,
+   "ax": 42,
+   "ay": 141,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 82,
+   "h": 150,
+   "ax": 41,
+   "ay": 149,
+   "hold": 3
+  },
+  {
+   "file": "04.png",
+   "w": 89,
+   "h": 82,
+   "ax": 44,
+   "ay": 81,
+   "hold": 5
+  }
+ ]
+}

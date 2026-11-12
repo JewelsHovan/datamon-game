@@ -1,0 +1,56 @@
+{
+ "clip": "getup_roll",
+ "loop": false,
+ "scale": 0.20468,
+ "raw": "art/raw/julien-hovan/getup_roll/20261112-172624-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 134,
+   "h": 34,
+   "ax": 27,
+   "ay": 33,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 80,
+   "h": 84,
+   "ax": 6,
+   "ay": 83,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 76,
+   "h": 67,
+   "ax": 3,
+   "ay": 66,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 81,
+   "h": 91,
+   "ax": 9,
+   "ay": 90,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 77,
+   "h": 126,
+   "ax": 5,
+   "ay": 125,
+   "hold": 6
+  },
+  {
+   "file": "05.png",
+   "w": 75,
+   "h": 140,
+   "ax": 1,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

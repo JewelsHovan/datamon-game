@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.16607,
+ "raw": "art/raw/pentcho-tchomakov/crouch_hurt/20261112-173017-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 63,
+   "h": 105,
+   "ax": 5,
+   "ay": 104,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 65,
+   "h": 93,
+   "ax": 10,
+   "ay": 92,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 64,
+   "h": 95,
+   "ax": 7,
+   "ay": 94,
+   "hold": 6
+  }
+ ]
+}

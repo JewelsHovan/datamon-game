@@ -1,0 +1,24 @@
+{
+ "clip": "block",
+ "loop": false,
+ "scale": 0.15521,
+ "raw": "art/raw/alex-andrianavalontsalama/block/20261112-172917-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 79,
+   "h": 140,
+   "ax": 1,
+   "ay": 139,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 64,
+   "h": 92,
+   "ax": 7,
+   "ay": 91,
+   "hold": 6
+  }
+ ]
+}

@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.17413,
+ "raw": "art/raw/julien-hovan/crouch_hurt/20261112-173015-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 69,
+   "h": 114,
+   "ax": 4,
+   "ay": 113,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 67,
+   "h": 98,
+   "ax": 2,
+   "ay": 97,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 66,
+   "h": 98,
+   "ax": 3,
+   "ay": 97,
+   "hold": 6
+  }
+ ]
+}

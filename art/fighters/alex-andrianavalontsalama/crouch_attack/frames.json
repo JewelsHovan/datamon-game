@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.22117,
+ "raw": "art/raw/alex-andrianavalontsalama/crouch_attack/20261112-172911-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 69,
+   "h": 104,
+   "ax": 1,
+   "ay": 103,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 74,
+   "h": 92,
+   "ax": 0,
+   "ay": 91,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 113,
+   "h": 89,
+   "ax": 0,
+   "ay": 88,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 115,
+   "h": 81,
+   "ax": 0,
+   "ay": 80,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 82,
+   "h": 88,
+   "ax": 0,
+   "ay": 87,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 68,
+   "h": 104,
+   "ax": 1,
+   "ay": 103,
+   "hold": 6
+  }
+ ]
+}

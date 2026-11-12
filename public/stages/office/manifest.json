@@ -1,0 +1,23 @@
+{
+ "stage": "office",
+ "name": "Open-plan office at dusk",
+ "floorColor": "#4a3b3f",
+ "layers": [
+  {
+   "id": "far",
+   "file": "far.png",
+   "w": 864,
+   "h": 360,
+   "factor": 0.35,
+   "y": 0
+  },
+  {
+   "id": "mid",
+   "file": "mid.png",
+   "w": 1088,
+   "h": 360,
+   "factor": 0.7,
+   "y": 0
+  }
+ ]
+}

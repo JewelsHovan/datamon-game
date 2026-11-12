@@ -1,0 +1,56 @@
+{
+ "clip": "taunt",
+ "loop": false,
+ "scale": 0.16908,
+ "raw": "art/raw/alex-andrianavalontsalama/taunt/20261112-172915-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 72,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 51,
+   "h": 145,
+   "ax": 3,
+   "ay": 144,
+   "hold": 10
+  },
+  {
+   "file": "02.png",
+   "w": 45,
+   "h": 145,
+   "ax": 3,
+   "ay": 144,
+   "hold": 10
+  },
+  {
+   "file": "03.png",
+   "w": 59,
+   "h": 141,
+   "ax": 3,
+   "ay": 140,
+   "hold": 10
+  },
+  {
+   "file": "04.png",
+   "w": 86,
+   "h": 142,
+   "ax": 23,
+   "ay": 141,
+   "hold": 10
+  },
+  {
+   "file": "05.png",
+   "w": 74,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

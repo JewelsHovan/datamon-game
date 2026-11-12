@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.20927,
+ "raw": "art/raw/alex-andrianavalontsalama/air_hurt/20261112-172914-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 132,
+   "h": 139,
+   "ax": 19,
+   "ay": 138,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 131,
+   "h": 80,
+   "ax": 17,
+   "ay": 79,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 100,
+   "h": 139,
+   "ax": 3,
+   "ay": 138,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 145,
+   "h": 70,
+   "ax": 29,
+   "ay": 69,
+   "hold": 8
+  }
+ ]
+}

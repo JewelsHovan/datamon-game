@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.21944,
+ "raw": "art/raw/felicia-gorgacheva/crouch_attack/20261112-172916-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 58,
+   "h": 105,
+   "ax": 11,
+   "ay": 104,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 78,
+   "h": 94,
+   "ax": 6,
+   "ay": 93,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 113,
+   "h": 86,
+   "ax": 5,
+   "ay": 85,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 130,
+   "h": 73,
+   "ax": 5,
+   "ay": 72,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 87,
+   "h": 92,
+   "ax": 5,
+   "ay": 91,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 57,
+   "h": 105,
+   "ax": 11,
+   "ay": 104,
+   "hold": 6
+  }
+ ]
+}

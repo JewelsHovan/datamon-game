@@ -1,0 +1,24 @@
+{
+ "clip": "block",
+ "loop": false,
+ "scale": 0.14815,
+ "raw": "art/raw/pentcho-tchomakov/block/20261112-172916-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 70,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 71,
+   "h": 89,
+   "ax": 1,
+   "ay": 88,
+   "hold": 6
+  }
+ ]
+}

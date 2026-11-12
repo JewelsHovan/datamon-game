@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.20772,
+ "raw": "art/raw/julien-hovan/air_hurt/20261112-172623-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 121,
+   "h": 129,
+   "ax": 15,
+   "ay": 128,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 149,
+   "h": 76,
+   "ax": 29,
+   "ay": 75,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 97,
+   "h": 138,
+   "ax": 2,
+   "ay": 137,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 155,
+   "h": 57,
+   "ax": 34,
+   "ay": 56,
+   "hold": 8
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.19608,
+ "raw": "art/raw/felicia-gorgacheva/air_hurt/20261112-172915-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 120,
+   "h": 123,
+   "ax": 9,
+   "ay": 122,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 143,
+   "h": 83,
+   "ax": 25,
+   "ay": 82,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 96,
+   "h": 123,
+   "ax": 3,
+   "ay": 122,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 156,
+   "h": 46,
+   "ax": 33,
+   "ay": 45,
+   "hold": 8
+  }
+ ]
+}

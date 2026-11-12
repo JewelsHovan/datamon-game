@@ -1,0 +1,40 @@
+{
+ "clip": "idle",
+ "loop": true,
+ "scale": 0.16929,
+ "raw": "art/raw/alex-andrianavalontsalama/idle/20261112-172625-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 81,
+   "h": 141,
+   "ax": 0,
+   "ay": 140,
+   "hold": 8
+  },
+  {
+   "file": "01.png",
+   "w": 82,
+   "h": 141,
+   "ax": 0,
+   "ay": 140,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 82,
+   "h": 142,
+   "ax": 0,
+   "ay": 141,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 81,
+   "h": 141,
+   "ax": 0,
+   "ay": 140,
+   "hold": 8
+  }
+ ]
+}

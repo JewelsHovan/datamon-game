@@ -1,52 +1,68 @@
 {
  "clip": "knockdown",
  "loop": false,
- "scale": 0.2439,
- "raw": "art/raw/julien-hovan/knockdown/20261112-150439-0.png",
+ "scale": 0.25594,
+ "raw": "art/raw/julien-hovan/knockdown/20261112-172627-0.png",
  "frames": [
   {
    "file": "00.png",
-   "w": 111,
-   "h": 124,
+   "w": 121,
+   "h": 130,
    "ax": 16,
-   "ay": 123,
-   "hold": 5
+   "ay": 129,
+   "hold": 6
   },
   {
    "file": "01.png",
-   "w": 143,
-   "h": 64,
-   "ax": 25,
-   "ay": 63,
+   "w": 135,
+   "h": 66,
+   "ax": 23,
+   "ay": 65,
    "hold": 6
   },
   {
    "file": "02.png",
-   "w": 138,
-   "h": 42,
-   "ax": 24,
-   "ay": 41,
+   "w": 110,
+   "h": 71,
+   "ax": 14,
+   "ay": 70,
    "hold": 6
   },
   {
    "file": "03.png",
-   "w": 142,
-   "h": 33,
-   "ax": 26,
-   "ay": 32,
-   "hold": 20
+   "w": 102,
+   "h": 66,
+   "ax": 9,
+   "ay": 65,
+   "hold": 4
   },
   {
    "file": "04.png",
-   "w": 83,
-   "h": 97,
-   "ax": 4,
-   "ay": 96,
-   "hold": 8
+   "w": 138,
+   "h": 35,
+   "ax": 24,
+   "ay": 34,
+   "hold": 26
   },
   {
    "file": "05.png",
-   "w": 78,
+   "w": 88,
+   "h": 70,
+   "ax": -3,
+   "ay": 69,
+   "hold": 8
+  },
+  {
+   "file": "06.png",
+   "w": 82,
+   "h": 100,
+   "ax": 3,
+   "ay": 99,
+   "hold": 8
+  },
+  {
+   "file": "07.png",
+   "w": 83,
    "h": 140,
    "ax": 0,
    "ay": 139,

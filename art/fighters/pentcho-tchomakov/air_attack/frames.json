@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.18843,
+ "raw": "art/raw/pentcho-tchomakov/air_attack/20261112-172914-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 73,
+   "h": 105,
+   "ax": 1,
+   "ay": 104,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 77,
+   "h": 119,
+   "ax": 1,
+   "ay": 118,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 130,
+   "h": 117,
+   "ax": 13,
+   "ay": 116,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 127,
+   "h": 91,
+   "ax": 16,
+   "ay": 90,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 65,
+   "h": 109,
+   "ax": -4,
+   "ay": 108,
+   "hold": 6
+  }
+ ]
+}

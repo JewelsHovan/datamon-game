@@ -1,0 +1,56 @@
+{
+ "clip": "getup_roll",
+ "loop": false,
+ "scale": 0.22801,
+ "raw": "art/raw/alex-andrianavalontsalama/getup_roll/20261112-172915-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 136,
+   "h": 33,
+   "ax": 23,
+   "ay": 32,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 74,
+   "h": 95,
+   "ax": 0,
+   "ay": 94,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 71,
+   "h": 76,
+   "ax": -3,
+   "ay": 75,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 97,
+   "h": 93,
+   "ax": 11,
+   "ay": 92,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 91,
+   "h": 122,
+   "ax": 10,
+   "ay": 121,
+   "hold": 6
+  },
+  {
+   "file": "05.png",
+   "w": 81,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "clip": "hurt",
+ "loop": false,
+ "scale": 0.16413,
+ "raw": "art/raw/alex-andrianavalontsalama/hurt/20261112-172914-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 105,
+   "h": 131,
+   "ax": 24,
+   "ay": 130,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 107,
+   "h": 133,
+   "ax": 27,
+   "ay": 132,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 74,
+   "h": 114,
+   "ax": 0,
+   "ay": 113,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 83,
+   "h": 134,
+   "ax": 0,
+   "ay": 133,
+   "hold": 6
+  }
+ ]
+}

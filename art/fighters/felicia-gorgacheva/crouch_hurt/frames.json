@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.1697,
+ "raw": "art/raw/felicia-gorgacheva/crouch_hurt/20261112-173018-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 73,
+   "h": 105,
+   "ax": 17,
+   "ay": 104,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 61,
+   "h": 96,
+   "ax": 5,
+   "ay": 95,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 62,
+   "h": 97,
+   "ax": 5,
+   "ay": 96,
+   "hold": 6
+  }
+ ]
+}

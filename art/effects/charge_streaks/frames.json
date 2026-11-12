@@ -1,0 +1,39 @@
+{
+ "clip": "charge_streaks",
+ "loop": false,
+ "raw": "art/raw/effects/charge_streaks/20261112-172641.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 223,
+   "h": 120,
+   "ax": 112,
+   "ay": 60,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 296,
+   "h": 118,
+   "ax": 148,
+   "ay": 57,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 284,
+   "h": 115,
+   "ax": 142,
+   "ay": 55,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 249,
+   "h": 95,
+   "ax": 124,
+   "ay": 36,
+   "hold": 3
+  }
+ ]
+}

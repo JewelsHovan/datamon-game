@@ -1,0 +1,56 @@
+{
+ "clip": "jump",
+ "loop": false,
+ "scale": 0.19802,
+ "raw": "art/raw/felicia-gorgacheva/jump/20261112-172913-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 81,
+   "h": 122,
+   "ax": 2,
+   "ay": 121,
+   "hold": 4
+  },
+  {
+   "file": "01.png",
+   "w": 60,
+   "h": 172,
+   "ax": -13,
+   "ay": 171,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 65,
+   "h": 124,
+   "ax": -7,
+   "ay": 123,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 65,
+   "h": 105,
+   "ax": -6,
+   "ay": 104,
+   "hold": 8
+  },
+  {
+   "file": "04.png",
+   "w": 58,
+   "h": 151,
+   "ax": -9,
+   "ay": 150,
+   "hold": 7
+  },
+  {
+   "file": "05.png",
+   "w": 80,
+   "h": 136,
+   "ax": 0,
+   "ay": 135,
+   "hold": 7
+  }
+ ]
+}

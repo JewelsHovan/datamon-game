@@ -1,0 +1,32 @@
+{
+ "clip": "crouch",
+ "loop": false,
+ "scale": 0.16241,
+ "raw": "art/raw/pentcho-tchomakov/crouch/20261112-172919-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 70,
+   "h": 128,
+   "ax": 0,
+   "ay": 127,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 72,
+   "h": 109,
+   "ax": 0,
+   "ay": 108,
+   "hold": 2
+  },
+  {
+   "file": "02.png",
+   "w": 64,
+   "h": 86,
+   "ax": 9,
+   "ay": 85,
+   "hold": 6
+  }
+ ]
+}

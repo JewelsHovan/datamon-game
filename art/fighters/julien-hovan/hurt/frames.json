@@ -1,28 +1,36 @@
 {
  "clip": "hurt",
  "loop": false,
- "scale": 0.17263,
- "raw": "art/raw/julien-hovan/hurt/20261112-150444-0.png",
+ "scale": 0.15873,
+ "raw": "art/raw/julien-hovan/hurt/20261112-172623-0.png",
  "frames": [
   {
    "file": "00.png",
-   "w": 92,
-   "h": 137,
-   "ax": 25,
-   "ay": 136,
-   "hold": 8
+   "w": 98,
+   "h": 141,
+   "ax": 15,
+   "ay": 140,
+   "hold": 6
   },
   {
    "file": "01.png",
-   "w": 77,
-   "h": 119,
-   "ax": 0,
-   "ay": 118,
-   "hold": 8
+   "w": 105,
+   "h": 140,
+   "ax": 21,
+   "ay": 139,
+   "hold": 6
   },
   {
    "file": "02.png",
-   "w": 74,
+   "w": 75,
+   "h": 124,
+   "ax": 0,
+   "ay": 123,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 79,
    "h": 140,
    "ax": 0,
    "ay": 139,

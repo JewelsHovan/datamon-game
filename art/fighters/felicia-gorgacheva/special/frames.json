@@ -1,0 +1,72 @@
+{
+ "clip": "special",
+ "loop": false,
+ "scale": 0.19074,
+ "raw": "art/raw/felicia-gorgacheva/special/20261112-172919-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 72,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 4
+  },
+  {
+   "file": "01.png",
+   "w": 68,
+   "h": 89,
+   "ax": 1,
+   "ay": 88,
+   "hold": 5
+  },
+  {
+   "file": "02.png",
+   "w": 77,
+   "h": 149,
+   "ax": 28,
+   "ay": 148,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 71,
+   "h": 151,
+   "ax": 27,
+   "ay": 150,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 80,
+   "h": 87,
+   "ax": 0,
+   "ay": 86,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 72,
+   "h": 159,
+   "ax": 28,
+   "ay": 158,
+   "hold": 3
+  },
+  {
+   "file": "06.png",
+   "w": 115,
+   "h": 129,
+   "ax": 25,
+   "ay": 128,
+   "hold": 8
+  },
+  {
+   "file": "07.png",
+   "w": 73,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 8
+  }
+ ]
+}

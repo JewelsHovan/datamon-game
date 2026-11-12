@@ -1,0 +1,64 @@
+{
+ "clip": "throw",
+ "loop": false,
+ "scale": 0.16073,
+ "raw": "art/raw/felicia-gorgacheva/throw/20261112-173214-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 90,
+   "h": 138,
+   "ax": 0,
+   "ay": 137,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 87,
+   "h": 138,
+   "ax": 0,
+   "ay": 137,
+   "hold": 4
+  },
+  {
+   "file": "02.png",
+   "w": 67,
+   "h": 137,
+   "ax": 2,
+   "ay": 136,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 65,
+   "h": 138,
+   "ax": 7,
+   "ay": 137,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 72,
+   "h": 138,
+   "ax": 5,
+   "ay": 137,
+   "hold": 3
+  },
+  {
+   "file": "05.png",
+   "w": 90,
+   "h": 138,
+   "ax": 1,
+   "ay": 137,
+   "hold": 7
+  },
+  {
+   "file": "06.png",
+   "w": 71,
+   "h": 139,
+   "ax": 0,
+   "ay": 138,
+   "hold": 8
+  }
+ ]
+}

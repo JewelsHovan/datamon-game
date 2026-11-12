@@ -1,0 +1,132 @@
+{
+  "air_attack": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/air_attack/20261112-172914-0.png",
+    "state": "approved"
+  },
+  "air_hurt": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/air_hurt/20261112-172914-0.png",
+    "state": "approved"
+  },
+  "block": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/block/20261112-172916-0.png",
+    "state": "approved"
+  },
+  "block_push": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/block_push/20261112-172917-0.png",
+    "state": "approved"
+  },
+  "crouch": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/crouch/20261112-172919-0.png",
+    "state": "approved"
+  },
+  "crouch_attack": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/crouch_attack/20261112-172913-0.png",
+    "state": "approved"
+  },
+  "crouch_hurt": {
+    "note": "low crouch v2, review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/crouch_hurt/20261112-173017-0.png",
+    "state": "approved"
+  },
+  "dash_back": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/dash_back/20261112-172915-0.png",
+    "state": "approved"
+  },
+  "dash_forward": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/dash_forward/20261112-172914-0.png",
+    "state": "approved"
+  },
+  "getup_roll": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/getup_roll/20261112-172913-0.png",
+    "state": "approved"
+  },
+  "heavy_kick": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/heavy_kick/20261112-172918-0.png",
+    "state": "approved"
+  },
+  "heavy_punch": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/heavy_punch/20261112-172920-0.png",
+    "state": "approved"
+  },
+  "hurt": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/hurt/20261112-172917-0.png",
+    "state": "approved"
+  },
+  "idle": {
+    "note": "variant 1 of 2, the steadiest across frames",
+    "raw": "art/raw/pentcho-tchomakov/idle/20261112-172624-1.png",
+    "state": "approved"
+  },
+  "intro": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/intro/20261112-172918-0.png",
+    "state": "approved"
+  },
+  "jump": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/jump/20261112-172915-0.png",
+    "state": "approved"
+  },
+  "knockdown": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/knockdown/20261112-172918-0.png",
+    "state": "approved"
+  },
+  "light_kick": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/light_kick/20261112-172915-0.png",
+    "state": "approved"
+  },
+  "light_punch": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/light_punch/20261112-172916-0.png",
+    "state": "approved"
+  },
+  "special": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/special/20261112-172916-0.png",
+    "state": "approved"
+  },
+  "summon": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/summon/20261112-172916-0.png",
+    "state": "approved"
+  },
+  "taunt": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/taunt/20261112-172914-0.png",
+    "state": "approved"
+  },
+  "throw": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/throw/20261112-172915-0.png",
+    "state": "approved"
+  },
+  "victory": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/victory/20261112-172915-0.png",
+    "state": "approved"
+  },
+  "walk": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/walk/20261112-172911-0.png",
+    "state": "approved"
+  },
+  "walk_back": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/pentcho-tchomakov/walk_back/20261112-172909-0.png",
+    "state": "approved"
+  }
+}

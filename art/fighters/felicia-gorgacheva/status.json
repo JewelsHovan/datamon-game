@@ -1,0 +1,132 @@
+{
+  "air_attack": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/air_attack/20261112-172918-0.png",
+    "state": "approved"
+  },
+  "air_hurt": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/air_hurt/20261112-172915-0.png",
+    "state": "approved"
+  },
+  "block": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/block/20261112-172917-0.png",
+    "state": "approved"
+  },
+  "block_push": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/block_push/20261112-172916-0.png",
+    "state": "approved"
+  },
+  "crouch": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/crouch/20261112-172911-0.png",
+    "state": "approved"
+  },
+  "crouch_attack": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/crouch_attack/20261112-172916-0.png",
+    "state": "approved"
+  },
+  "crouch_hurt": {
+    "note": "low crouch v2, review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/crouch_hurt/20261112-173018-0.png",
+    "state": "approved"
+  },
+  "dash_back": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/dash_back/20261112-172916-0.png",
+    "state": "approved"
+  },
+  "dash_forward": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/dash_forward/20261112-172911-0.png",
+    "state": "approved"
+  },
+  "getup_roll": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/getup_roll/20261112-172914-0.png",
+    "state": "approved"
+  },
+  "heavy_kick": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/heavy_kick/20261112-172917-0.png",
+    "state": "approved"
+  },
+  "heavy_punch": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/heavy_punch/20261112-172919-0.png",
+    "state": "approved"
+  },
+  "hurt": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/hurt/20261112-172918-0.png",
+    "state": "approved"
+  },
+  "idle": {
+    "note": "variant 0 of 2, the steadiest across frames",
+    "raw": "art/raw/felicia-gorgacheva/idle/20261112-172624-0.png",
+    "state": "approved"
+  },
+  "intro": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/intro/20261112-172915-0.png",
+    "state": "approved"
+  },
+  "jump": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/jump/20261112-172913-0.png",
+    "state": "approved"
+  },
+  "knockdown": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/knockdown/20261112-172918-0.png",
+    "state": "approved"
+  },
+  "light_kick": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/light_kick/20261112-172914-0.png",
+    "state": "approved"
+  },
+  "light_punch": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/light_punch/20261112-172915-0.png",
+    "state": "approved"
+  },
+  "special": {
+    "note": "Context Switch, review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/special/20261112-172919-0.png",
+    "state": "approved"
+  },
+  "summon": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/summon/20261112-172916-0.png",
+    "state": "approved"
+  },
+  "taunt": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/taunt/20261112-172915-0.png",
+    "state": "approved"
+  },
+  "throw": {
+    "note": "3840x1280 strip, clean frames",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/throw/20261112-173214-0.png",
+    "state": "approved"
+  },
+  "victory": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/victory/20261112-172914-0.png",
+    "state": "approved"
+  },
+  "walk": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/walk/20261112-172913-0.png",
+    "state": "approved"
+  },
+  "walk_back": {
+    "note": "v2 set, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/felicia-gorgacheva/walk_back/20261112-172910-0.png",
+    "state": "approved"
+  }
+}

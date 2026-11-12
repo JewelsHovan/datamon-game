@@ -1,23 +1,31 @@
 {
  "clip": "crouch",
  "loop": false,
- "scale": 0.15677,
- "raw": "art/raw/julien-hovan/crouch/20261112-150510-0.png",
+ "scale": 0.17052,
+ "raw": "art/raw/julien-hovan/crouch/20261112-172624-0.png",
  "frames": [
   {
    "file": "00.png",
-   "w": 75,
-   "h": 113,
-   "ax": 5,
-   "ay": 112,
-   "hold": 3
+   "w": 71,
+   "h": 128,
+   "ax": 0,
+   "ay": 127,
+   "hold": 2
   },
   {
    "file": "01.png",
-   "w": 73,
-   "h": 85,
+   "w": 68,
+   "h": 110,
+   "ax": 1,
+   "ay": 109,
+   "hold": 2
+  },
+  {
+   "file": "02.png",
+   "w": 64,
+   "h": 87,
    "ax": 3,
-   "ay": 84,
+   "ay": 86,
    "hold": 6
   }
  ]

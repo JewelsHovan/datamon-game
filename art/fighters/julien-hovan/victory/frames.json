@@ -1,39 +1,55 @@
 {
  "clip": "victory",
  "loop": true,
- "scale": 0.17699,
- "raw": "art/raw/julien-hovan/victory/20261112-150440-0.png",
+ "scale": 0.17857,
+ "raw": "art/raw/julien-hovan/victory/20261112-172624-0.png",
  "frames": [
   {
    "file": "00.png",
-   "w": 78,
-   "h": 152,
-   "ax": 0,
-   "ay": 151,
+   "w": 69,
+   "h": 165,
+   "ax": 2,
+   "ay": 164,
    "hold": 10
   },
   {
    "file": "01.png",
-   "w": 78,
-   "h": 163,
-   "ax": 0,
-   "ay": 162,
+   "w": 69,
+   "h": 169,
+   "ax": 5,
+   "ay": 168,
    "hold": 10
   },
   {
    "file": "02.png",
-   "w": 80,
-   "h": 156,
-   "ax": 0,
-   "ay": 155,
+   "w": 73,
+   "h": 158,
+   "ax": 8,
+   "ay": 157,
    "hold": 10
   },
   {
    "file": "03.png",
-   "w": 80,
-   "h": 152,
+   "w": 74,
+   "h": 158,
+   "ax": 9,
+   "ay": 157,
+   "hold": 10
+  },
+  {
+   "file": "04.png",
+   "w": 68,
+   "h": 162,
    "ax": 0,
-   "ay": 151,
+   "ay": 161,
+   "hold": 10
+  },
+  {
+   "file": "05.png",
+   "w": 69,
+   "h": 156,
+   "ax": 2,
+   "ay": 155,
    "hold": 10
   }
  ]

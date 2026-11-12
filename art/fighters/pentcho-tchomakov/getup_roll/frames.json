@@ -1,0 +1,56 @@
+{
+ "clip": "getup_roll",
+ "loop": false,
+ "scale": 0.20741,
+ "raw": "art/raw/pentcho-tchomakov/getup_roll/20261112-172913-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 120,
+   "h": 32,
+   "ax": 20,
+   "ay": 31,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 85,
+   "h": 83,
+   "ax": 9,
+   "ay": 82,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 68,
+   "h": 74,
+   "ax": 0,
+   "ay": 73,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 91,
+   "h": 78,
+   "ax": 13,
+   "ay": 77,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 80,
+   "h": 116,
+   "ax": 7,
+   "ay": 115,
+   "hold": 6
+  },
+  {
+   "file": "05.png",
+   "w": 74,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

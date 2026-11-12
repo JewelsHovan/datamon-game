@@ -39,34 +39,47 @@ def hue_dist(a: float, b: float) -> float:
 
 
 def build(slug: str) -> dict[str, str]:
+    """Recolor the top garment: colors that show up mostly in the torso band and rarely in the
+    head band (so hair and face stay), excluding skin tones. Chromatic colors rotate to a target
+    hue far from the garment's; near-black and grey garments get tinted instead."""
     fdir = common.fighter_dir(slug)
     palette = json.loads((fdir / "palette.json").read_text())
-    counts = {c: 0 for c in palette}
+    torso = {c: 0 for c in palette}
+    head = {c: 0 for c in palette}
     for f in sorted((fdir / "idle").glob("*.png")):
         a = np.array(Image.open(f).convert("RGBA"))
         h = a.shape[0]
-        a = a[int(h * 0.24): int(h * 0.58)]  # torso band: the top garment defines the fighter's look
-        for p in a[a[..., 3] > 0][:, :3]:
-            key = "#%02x%02x%02x" % tuple(p)
-            if key in counts:
-                counts[key] += 1
+        for band, store in ((a[int(h * 0.30): int(h * 0.58)], torso), (a[: int(h * 0.24)], head)):
+            for p in band[band[..., 3] > 0][:, :3]:
+                key = "#%02x%02x%02x" % tuple(p)
+                if key in store:
+                    store[key] += 1
+    total = max(1, sum(torso.values()))
+
+    def skin(c: str) -> bool:
+        h, s_, v = hsv(c)
+        return 8 <= h <= 45 and 0.18 <= s_ <= 0.7 and v >= 0.5
+
+    garment = [c for c in palette if torso[c] >= 0.005 * total and head[c] <= torso[c] * 0.25 and not skin(c)]
     weights = np.zeros(36)
-    for c, n in counts.items():
-        h, s, v = hsv(c)
-        if s > 0.18 and v > 0.12 and not (SKIN[0] <= h <= SKIN[1]):
-            weights[int(h // 10) % 36] += n
-    dominant = float(weights.argmax() * 10 + 5)
-    target = max(TARGETS, key=lambda t: hue_dist(dominant, t))
-    shift = (target - dominant) % 360
-    out = {}
-    for c in palette:
-        h, s, v = hsv(c)
-        if s > 0.12 and hue_dist(h, dominant) <= FAMILY and not (SKIN[0] <= h <= SKIN[1]):
-            r, g, b = colorsys.hsv_to_rgb(((h + shift) % 360) / 360, min(1.0, s * 1.8), min(1.0, v * 1.15))
-            out[c] = "#%02x%02x%02x" % (round(r * 255), round(g * 255), round(b * 255))
+    chromatic = 0
+    for c in garment:
+        h, s_, v = hsv(c)
+        if s_ >= 0.15:
+            weights[int(h // 10) % 36] += torso[c]
+            chromatic += torso[c]
+    dominant = float(weights.argmax() * 10 + 5) if chromatic else -1.0
+    target = max(TARGETS, key=lambda t: hue_dist(dominant, t)) if dominant >= 0 else 215.0
+    out = {c: c for c in palette}
+    for c in garment:
+        h, s_, v = hsv(c)
+        if s_ < 0.15:  # black or grey garment: tint it
+            r, g, b = colorsys.hsv_to_rgb(target / 360, 0.55, min(1.0, max(v * 1.35, 0.28)))
         else:
-            out[c] = c
-    print(f"{slug}: dominant hue {dominant:.0f}, rotated to {target:.0f}, {sum(1 for k, v in out.items() if k != v)} of {len(out)} colors changed")
+            r, g, b = colorsys.hsv_to_rgb(((h + (target - dominant)) % 360) / 360, min(1.0, s_ * 1.6), min(1.0, v * 1.15))
+        out[c] = "#%02x%02x%02x" % (round(r * 255), round(g * 255), round(b * 255))
+    changed = sum(1 for k, v in out.items() if k != v)
+    print(f"{slug}: garment colors {len(garment)}, dominant hue {dominant:.0f}, target {target:.0f}, {changed} of {len(out)} colors changed")
     return out
 
 

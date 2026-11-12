@@ -1,0 +1,56 @@
+{
+ "clip": "walk_back",
+ "loop": true,
+ "scale": 0.16726,
+ "raw": "art/raw/felicia-gorgacheva/walk_back/20261112-172910-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 67,
+   "h": 140,
+   "ax": -5,
+   "ay": 139,
+   "hold": 5
+  },
+  {
+   "file": "01.png",
+   "w": 63,
+   "h": 138,
+   "ax": -4,
+   "ay": 137,
+   "hold": 5
+  },
+  {
+   "file": "02.png",
+   "w": 82,
+   "h": 140,
+   "ax": 8,
+   "ay": 139,
+   "hold": 5
+  },
+  {
+   "file": "03.png",
+   "w": 53,
+   "h": 140,
+   "ax": -11,
+   "ay": 139,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 52,
+   "h": 140,
+   "ax": -12,
+   "ay": 139,
+   "hold": 5
+  },
+  {
+   "file": "05.png",
+   "w": 70,
+   "h": 140,
+   "ax": -1,
+   "ay": 139,
+   "hold": 5
+  }
+ ]
+}

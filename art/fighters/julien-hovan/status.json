@@ -1,7 +1,12 @@
 {
   "air_attack": {
-    "note": "first generation, frame-by-frame review passed",
-    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/air_attack/20261112-150445-0.png",
+    "note": "v2, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/air_attack/20261112-172622-0.png",
+    "state": "approved"
+  },
+  "air_hurt": {
+    "note": "v2, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/air_hurt/20261112-172623-0.png",
     "state": "approved"
   },
   "block": {
@@ -9,29 +14,54 @@
     "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/block/20261112-150445-0.png",
     "state": "approved"
   },
+  "block_push": {
+    "note": "v2, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/block_push/20261112-172628-0.png",
+    "state": "approved"
+  },
   "crouch": {
-    "note": "first generation, frame-by-frame review passed",
-    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/crouch/20261112-150510-0.png",
+    "note": "v2, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/crouch/20261112-172624-0.png",
     "state": "approved"
   },
   "crouch_attack": {
-    "note": "first generation, frame-by-frame review passed",
-    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/crouch_attack/20261112-150439-0.png",
+    "note": "v2, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/crouch_attack/20261112-172622-0.png",
+    "state": "approved"
+  },
+  "crouch_hurt": {
+    "note": "low crouch v2, review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/crouch_hurt/20261112-173015-0.png",
+    "state": "approved"
+  },
+  "dash_back": {
+    "note": "v2, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/dash_back/20261112-172626-0.png",
+    "state": "approved"
+  },
+  "dash_forward": {
+    "note": "v2, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/dash_forward/20261112-172623-0.png",
+    "state": "approved"
+  },
+  "getup_roll": {
+    "note": "v2, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/getup_roll/20261112-172624-0.png",
     "state": "approved"
   },
   "heavy_kick": {
-    "note": "first generation, frame-by-frame review passed",
-    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/heavy_kick/20261112-150440-0.png",
+    "note": "v2, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/heavy_kick/20261112-172627-0.png",
     "state": "approved"
   },
   "heavy_punch": {
-    "note": "first generation, frame-by-frame review passed",
-    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/heavy_punch/20261112-150440-0.png",
+    "note": "v2, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/heavy_punch/20261112-172625-0.png",
     "state": "approved"
   },
   "hurt": {
-    "note": "first generation, frame-by-frame review passed",
-    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/hurt/20261112-150444-0.png",
+    "note": "v2, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/hurt/20261112-172623-0.png",
     "state": "approved"
   },
   "idle": {
@@ -39,29 +69,34 @@
     "raw": "art/raw/julien-hovan/idle/20261112-150319-0.png",
     "state": "approved"
   },
+  "intro": {
+    "note": "v2, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/intro/20261112-172625-0.png",
+    "state": "approved"
+  },
   "jump": {
-    "note": "first generation, frame-by-frame review passed",
-    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/jump/20261112-150439-0.png",
+    "note": "v2, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/jump/20261112-172624-0.png",
     "state": "approved"
   },
   "knockdown": {
-    "note": "first generation, frame-by-frame review passed",
-    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/knockdown/20261112-150439-0.png",
+    "note": "v2, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/knockdown/20261112-172627-0.png",
     "state": "approved"
   },
   "light_kick": {
-    "note": "first generation, frame-by-frame review passed",
-    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/light_kick/20261112-150438-0.png",
+    "note": "v2, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/light_kick/20261112-172623-0.png",
     "state": "approved"
   },
   "light_punch": {
-    "note": "first generation, frame-by-frame review passed",
-    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/light_punch/20261112-150440-0.png",
+    "note": "v2, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/light_punch/20261112-172624-0.png",
     "state": "approved"
   },
   "special": {
-    "note": "first generation, frame-by-frame review passed",
-    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/special/20261112-150439-0.png",
+    "note": "v2, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/special/20261112-172625-0.png",
     "state": "approved"
   },
   "summon": {
@@ -69,19 +104,29 @@
     "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/summon/20261112-150510-0.png",
     "state": "approved"
   },
+  "taunt": {
+    "note": "v2, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/taunt/20261112-172625-0.png",
+    "state": "approved"
+  },
   "throw": {
-    "note": "first generation, frame-by-frame review passed",
-    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/throw/20261112-150440-0.png",
+    "note": "3840x1280 strip, clean frames",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/throw/20261112-173212-0.png",
     "state": "approved"
   },
   "victory": {
-    "note": "first generation, frame-by-frame review passed",
-    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/victory/20261112-150440-0.png",
+    "note": "v2, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/victory/20261112-172624-0.png",
     "state": "approved"
   },
   "walk": {
     "note": "first generation, frame-by-frame review passed",
     "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/walk/20261112-150439-0.png",
+    "state": "approved"
+  },
+  "walk_back": {
+    "note": "v2, frame-by-frame review passed",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/art/raw/julien-hovan/walk_back/20261112-172624-0.png",
     "state": "approved"
   }
 }

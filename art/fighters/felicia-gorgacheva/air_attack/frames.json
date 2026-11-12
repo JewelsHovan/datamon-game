@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.17766,
+ "raw": "art/raw/felicia-gorgacheva/air_attack/20261112-172918-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 68,
+   "h": 107,
+   "ax": -1,
+   "ay": 106,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 72,
+   "h": 123,
+   "ax": 0,
+   "ay": 122,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 120,
+   "h": 117,
+   "ax": 10,
+   "ay": 116,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 121,
+   "h": 104,
+   "ax": 9,
+   "ay": 103,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 66,
+   "h": 104,
+   "ax": -2,
+   "ay": 103,
+   "hold": 6
+  }
+ ]
+}

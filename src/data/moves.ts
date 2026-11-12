@@ -55,49 +55,58 @@ export interface MoveDef {
   tossTick?: number;
 }
 
+// Clip set v2 (spec 012): more frames per attack, same startup / active / recovery as spec 003.
 export const MOVES: Readonly<Record<MoveId, MoveDef>> = Object.freeze({
   light_punch: {
     id: "light_punch", clip: "light_punch", height: "mid", strength: "light",
-    segments: [{ frame: 0, ticks: 3 }, { frame: 1, ticks: 2, active: true }, { frame: 2, ticks: 2, active: true }, { frame: 3, ticks: 7 }],
+    // stance, snap, [half, full], retract, guard: startup 3, active 4, recovery 7
+    segments: [{ frame: 0, ticks: 1 }, { frame: 1, ticks: 2 }, { frame: 2, ticks: 1, active: true }, { frame: 3, ticks: 3, active: true }, { frame: 4, ticks: 3 }, { frame: 5, ticks: 4 }],
     damage: 40, hitstun: 15, blockstun: 11, hitstop: 6, push: 900,
     cancels: ["heavy_punch", "heavy_kick", "special"],
   },
   heavy_punch: {
     id: "heavy_punch", clip: "heavy_punch", height: "mid", strength: "heavy",
-    segments: [{ frame: 0, ticks: 4 }, { frame: 1, ticks: 4 }, { frame: 2, ticks: 2, active: true }, { frame: 3, ticks: 5, active: true }, { frame: 4, ticks: 5 }, { frame: 5, ticks: 7 }],
+    // stance, wind-up, full wind-up, rotate, [halfway, impact], follow-through, recover: 8 / 7 / 12
+    segments: [{ frame: 0, ticks: 2 }, { frame: 1, ticks: 2 }, { frame: 2, ticks: 3 }, { frame: 3, ticks: 1 }, { frame: 4, ticks: 2, active: true }, { frame: 5, ticks: 5, active: true }, { frame: 6, ticks: 5 }, { frame: 7, ticks: 7 }],
     damage: 90, hitstun: 22, blockstun: 16, hitstop: 10, push: 1400,
     cancels: ["special"],
   },
   light_kick: {
     id: "light_kick", clip: "light_kick", height: "mid", strength: "light",
-    segments: [{ frame: 0, ticks: 4 }, { frame: 1, ticks: 4, active: true }, { frame: 2, ticks: 5 }, { frame: 3, ticks: 5 }],
+    // lift, chamber, [extended], retract, lower, stance: 4 / 4 / 10
+    segments: [{ frame: 0, ticks: 2 }, { frame: 1, ticks: 2 }, { frame: 2, ticks: 4, active: true }, { frame: 3, ticks: 3 }, { frame: 4, ticks: 3 }, { frame: 5, ticks: 4 }],
     damage: 50, hitstun: 17, blockstun: 12, hitstop: 7, push: 1000,
     cancels: ["heavy_kick", "special"],
   },
   heavy_kick: {
     id: "heavy_kick", clip: "heavy_kick", height: "mid", strength: "heavy", knockdown: true,
-    segments: [{ frame: 0, ticks: 5 }, { frame: 1, ticks: 5 }, { frame: 2, ticks: 3, active: true }, { frame: 3, ticks: 5, active: true }, { frame: 4, ticks: 6 }, { frame: 5, ticks: 8 }],
+    // stance, pivot, chamber, travel, [sweep up, impact], follow, down, land: 10 / 8 / 14
+    segments: [{ frame: 0, ticks: 3 }, { frame: 1, ticks: 3 }, { frame: 2, ticks: 3 }, { frame: 3, ticks: 1 }, { frame: 4, ticks: 3, active: true }, { frame: 5, ticks: 5, active: true }, { frame: 6, ticks: 5 }, { frame: 7, ticks: 4 }, { frame: 8, ticks: 5 }],
     damage: 110, hitstun: 26, blockstun: 18, hitstop: 11, push: 1600,
   },
   crouch_attack: {
     id: "crouch_attack", clip: "crouch_attack", height: "low", strength: "heavy", knockdown: true,
-    segments: [{ frame: 0, ticks: 6 }, { frame: 1, ticks: 3, active: true }, { frame: 2, ticks: 5, active: true }, { frame: 3, ticks: 10 }],
+    // crouch, reach, [sweep start, full], follow, pull back: 6 / 8 / 10
+    segments: [{ frame: 0, ticks: 3 }, { frame: 1, ticks: 3 }, { frame: 2, ticks: 3, active: true }, { frame: 3, ticks: 5, active: true }, { frame: 4, ticks: 4 }, { frame: 5, ticks: 6 }],
     damage: 70, hitstun: 20, blockstun: 14, hitstop: 8, push: 1000,
   },
   air_attack: {
     id: "air_attack", clip: "air_attack", height: "overhead", strength: "light", air: true,
-    segments: [{ frame: 0, ticks: 3 }, { frame: 1, ticks: 14, active: true }, { frame: 2, ticks: 200 }],
+    // tuck, chamber, [kick, kick held], retract (holds until landing): 3 / 14
+    segments: [{ frame: 0, ticks: 2 }, { frame: 1, ticks: 1 }, { frame: 2, ticks: 7, active: true }, { frame: 3, ticks: 7, active: true }, { frame: 4, ticks: 200 }],
     damage: 70, hitstun: 18, blockstun: 12, hitstop: 8, push: 800,
   },
   special: {
     id: "special", clip: "special", height: "mid", strength: "special",
-    segments: [{ frame: 0, ticks: 4 }, { frame: 1, ticks: 6 }, { frame: 2, ticks: 6 }, { frame: 3, ticks: 3 }, { frame: 4, ticks: 10 }, { frame: 5, ticks: 10 }],
+    // stance, draw back, cupped, coiled, (projectile at 16) thrust, thrusting, full, recover: 39 total
+    segments: [{ frame: 0, ticks: 3 }, { frame: 1, ticks: 4 }, { frame: 2, ticks: 5 }, { frame: 3, ticks: 4 }, { frame: 4, ticks: 3 }, { frame: 5, ticks: 3 }, { frame: 6, ticks: 9 }, { frame: 7, ticks: 8 }],
     projectileTick: 16,
     damage: 80, hitstun: 20, blockstun: 14, hitstop: 8, push: 1200, chip: 12,
   },
   throw: {
     id: "throw", clip: "throw", height: "mid", strength: "heavy", knockdown: true,
-    segments: [{ frame: 0, ticks: 4 }, { frame: 1, ticks: 6 }, { frame: 2, ticks: 6 }, { frame: 3, ticks: 8 }, { frame: 4, ticks: 10 }],
+    // reach (grab at 3), grip, pull in, twist, swing, toss (at 16), recover: 34 total
+    segments: [{ frame: 0, ticks: 3 }, { frame: 1, ticks: 4 }, { frame: 2, ticks: 4 }, { frame: 3, ticks: 3 }, { frame: 4, ticks: 2 }, { frame: 5, ticks: 8 }, { frame: 6, ticks: 10 }],
     grabTick: 3, tossTick: 16, whiffRecovery: 18,
     damage: 120, hitstun: 0, blockstun: 0, hitstop: 10, push: 0,
   },
@@ -105,8 +114,9 @@ export const MOVES: Readonly<Record<MoveId, MoveDef>> = Object.freeze({
 
 /** The knockdown timeline (knockdown clip frames); its ticks add up to KNOCKDOWN.totalFrames. */
 export const KNOCKDOWN_SEGMENTS: readonly Segment[] = [
-  { frame: 0, ticks: 8 }, { frame: 1, ticks: 8 }, { frame: 2, ticks: 8 },
-  { frame: 3, ticks: 32 }, { frame: 4, ticks: 10 }, { frame: 5, ticks: 8 },
+  // launched, flying, crash (dust at 16), bounce, lying (K.O. holds from 24), roll to side, one knee, stand
+  { frame: 0, ticks: 8 }, { frame: 1, ticks: 8 }, { frame: 2, ticks: 4 }, { frame: 3, ticks: 4 },
+  { frame: 4, ticks: 24 }, { frame: 5, ticks: 10 }, { frame: 6, ticks: 8 }, { frame: 7, ticks: 8 },
 ];
 
 export function moveDuration(move: MoveDef): number {

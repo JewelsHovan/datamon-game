@@ -1,0 +1,48 @@
+{
+ "clip": "dash_forward",
+ "loop": false,
+ "scale": 0.18301,
+ "raw": "art/raw/julien-hovan/dash_forward/20261112-172623-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 98,
+   "h": 134,
+   "ax": 19,
+   "ay": 133,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 96,
+   "h": 129,
+   "ax": 18,
+   "ay": 128,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 84,
+   "h": 130,
+   "ax": 9,
+   "ay": 129,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 89,
+   "h": 134,
+   "ax": 14,
+   "ay": 133,
+   "hold": 3
+  },
+  {
+   "file": "04.png",
+   "w": 78,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

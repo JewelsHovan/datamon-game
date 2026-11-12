@@ -1,0 +1,72 @@
+{
+ "clip": "knockdown",
+ "loop": false,
+ "scale": 0.23256,
+ "raw": "art/raw/pentcho-tchomakov/knockdown/20261112-172918-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 116,
+   "h": 127,
+   "ax": 14,
+   "ay": 126,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 142,
+   "h": 66,
+   "ax": 27,
+   "ay": 65,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 127,
+   "h": 46,
+   "ax": 24,
+   "ay": 45,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 118,
+   "h": 72,
+   "ax": 15,
+   "ay": 71,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 119,
+   "h": 26,
+   "ax": 18,
+   "ay": 25,
+   "hold": 26
+  },
+  {
+   "file": "05.png",
+   "w": 100,
+   "h": 62,
+   "ax": 2,
+   "ay": 61,
+   "hold": 8
+  },
+  {
+   "file": "06.png",
+   "w": 81,
+   "h": 103,
+   "ax": 6,
+   "ay": 102,
+   "hold": 8
+  },
+  {
+   "file": "07.png",
+   "w": 77,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 8
+  }
+ ]
+}

@@ -1,0 +1,39 @@
+{
+ "clip": "rush_streaks",
+ "loop": false,
+ "raw": "art/raw/effects/rush_streaks/20261112-172642.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 259,
+   "h": 96,
+   "ax": 130,
+   "ay": 45,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 315,
+   "h": 100,
+   "ax": 158,
+   "ay": 50,
+   "hold": 2
+  },
+  {
+   "file": "02.png",
+   "w": 260,
+   "h": 100,
+   "ax": 130,
+   "ay": 50,
+   "hold": 2
+  },
+  {
+   "file": "03.png",
+   "w": 213,
+   "h": 65,
+   "ax": 106,
+   "ay": 29,
+   "hold": 2
+  }
+ ]
+}

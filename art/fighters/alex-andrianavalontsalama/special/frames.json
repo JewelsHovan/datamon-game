@@ -1,0 +1,80 @@
+{
+ "clip": "special",
+ "loop": false,
+ "scale": 0.21472,
+ "raw": "art/raw/alex-andrianavalontsalama/special/20261112-172918-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 77,
+   "h": 139,
+   "ax": 0,
+   "ay": 138,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 84,
+   "h": 116,
+   "ax": 5,
+   "ay": 115,
+   "hold": 4
+  },
+  {
+   "file": "02.png",
+   "w": 108,
+   "h": 138,
+   "ax": 0,
+   "ay": 137,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 111,
+   "h": 138,
+   "ax": 0,
+   "ay": 137,
+   "hold": 3
+  },
+  {
+   "file": "04.png",
+   "w": 80,
+   "h": 125,
+   "ax": 0,
+   "ay": 124,
+   "hold": 3
+  },
+  {
+   "file": "05.png",
+   "w": 81,
+   "h": 94,
+   "ax": 0,
+   "ay": 93,
+   "hold": 4
+  },
+  {
+   "file": "06.png",
+   "w": 62,
+   "h": 155,
+   "ax": 0,
+   "ay": 154,
+   "hold": 3
+  },
+  {
+   "file": "07.png",
+   "w": 66,
+   "h": 181,
+   "ax": 0,
+   "ay": 180,
+   "hold": 7
+  },
+  {
+   "file": "08.png",
+   "w": 81,
+   "h": 140,
+   "ax": 1,
+   "ay": 139,
+   "hold": 8
+  }
+ ]
+}

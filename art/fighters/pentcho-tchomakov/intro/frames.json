@@ -1,0 +1,56 @@
+{
+ "clip": "intro",
+ "loop": false,
+ "scale": 0.17789,
+ "raw": "art/raw/pentcho-tchomakov/intro/20261112-172918-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 54,
+   "h": 151,
+   "ax": 0,
+   "ay": 150,
+   "hold": 12
+  },
+  {
+   "file": "01.png",
+   "w": 75,
+   "h": 150,
+   "ax": 7,
+   "ay": 149,
+   "hold": 12
+  },
+  {
+   "file": "02.png",
+   "w": 58,
+   "h": 150,
+   "ax": 0,
+   "ay": 149,
+   "hold": 12
+  },
+  {
+   "file": "03.png",
+   "w": 66,
+   "h": 150,
+   "ax": 0,
+   "ay": 149,
+   "hold": 10
+  },
+  {
+   "file": "04.png",
+   "w": 76,
+   "h": 136,
+   "ax": 0,
+   "ay": 135,
+   "hold": 8
+  },
+  {
+   "file": "05.png",
+   "w": 75,
+   "h": 139,
+   "ax": 0,
+   "ay": 138,
+   "hold": 10
+  }
+ ]
+}

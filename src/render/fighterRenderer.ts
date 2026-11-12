@@ -24,7 +24,7 @@ function moveChoice(f: FighterState): ClipChoice | null {
   let frame = segmentAt(def.segments, m.tick).segment.frame;
   if (def.id === "throw" && !m.grabbed && m.tick > def.grabTick!) {
     // A whiffed throw keeps reaching for a moment, then recovers.
-    frame = m.tick < def.grabTick! + 10 ? 0 : 4;
+    frame = m.tick < def.grabTick! + 10 ? 0 : 6;
   }
   return { clip: def.clip, tick: m.tick, reverse: false, frame };
 }
@@ -35,7 +35,9 @@ export function clipForFighter(f: FighterState): ClipChoice {
     case "attack":
       return moveChoice(f) ?? { clip: "idle", tick: f.stateFrame, reverse: false };
     case "hitstun":
-      return { clip: "hurt", tick: 0, reverse: false, frame: f.stunLow ? 1 : f.stun <= 4 ? 2 : 0 };
+      // Crouching hits use crouch_hurt; standing hits snap back, stagger, then recover.
+      if (f.stunLow) return { clip: "crouch_hurt", tick: 0, reverse: false, frame: f.stun <= 4 ? 2 : f.stateFrame < 6 ? 0 : 1 };
+      return { clip: "hurt", tick: 0, reverse: false, frame: f.stun <= 4 ? 3 : f.stateFrame < 6 ? (f.comboHits % 2 === 0 ? 2 : 0) : 1 };
     case "blockstun":
       return { clip: "block", tick: 0, reverse: false, frame: f.stunLow ? 1 : 0 };
     case "held":
@@ -50,13 +52,13 @@ export function clipForFighter(f: FighterState): ClipChoice {
     case "walk_forward":
       return { clip: "walk", tick: f.stateFrame, reverse: false };
     case "walk_back":
-      return { clip: "walk", tick: f.stateFrame, reverse: true };
+      return { clip: "walk_back", tick: f.stateFrame, reverse: false };
     case "crouch":
       return { clip: "crouch", tick: f.stateFrame, reverse: false };
     case "jumpsquat":
+      return { clip: "jump", tick: 0, reverse: false, frame: 0 };
     case "landing":
-      // The crouch clip's first frame doubles as the pre-jump squat and the landing squat.
-      return { clip: "crouch", tick: 0, reverse: false };
+      return { clip: "crouch", tick: 0, reverse: false, frame: 1 };
     case "airborne":
       return moveChoice(f) ?? { clip: "jump", tick: f.stateFrame, reverse: false };
   }
@@ -70,7 +72,9 @@ export function resolveClip(set: ClipSet, name: string): Clip {
 }
 
 export function frameForFighter(set: ClipSet, f: FighterState): ClipFrame {
-  const choice = clipForFighter(f);
+  let choice = clipForFighter(f);
+  // Walk-sheet placeholders have no walk_back clip: play the walk cycle backwards instead.
+  if (choice.clip === "walk_back" && !set.clips.walk_back) choice = { ...choice, clip: "walk", reverse: true };
   const clip = resolveClip(set, choice.clip);
   if (choice.frame !== undefined && set.clips[choice.clip]) {
     return clip.frames[Math.min(choice.frame, clip.frames.length - 1)]!;

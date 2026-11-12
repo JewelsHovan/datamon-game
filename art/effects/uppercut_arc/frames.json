@@ -1,0 +1,39 @@
+{
+ "clip": "uppercut_arc",
+ "loop": false,
+ "raw": "art/raw/effects/uppercut_arc/20261112-172642.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 60,
+   "h": 54,
+   "ax": 30,
+   "ay": 3,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 69,
+   "h": 102,
+   "ax": 34,
+   "ay": 46,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 88,
+   "h": 120,
+   "ax": 44,
+   "ay": 60,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 74,
+   "h": 105,
+   "ax": 37,
+   "ay": 49,
+   "hold": 4
+  }
+ ]
+}
