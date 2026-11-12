@@ -1,0 +1,39 @@
+{
+ "clip": "orb",
+ "loop": true,
+ "raw": "art/raw/effects/orb/20261112-151333.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 48,
+   "h": 32,
+   "ax": 24,
+   "ay": 16,
+   "hold": 4
+  },
+  {
+   "file": "01.png",
+   "w": 42,
+   "h": 34,
+   "ax": 21,
+   "ay": 17,
+   "hold": 4
+  },
+  {
+   "file": "02.png",
+   "w": 42,
+   "h": 34,
+   "ax": 21,
+   "ay": 17,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 48,
+   "h": 33,
+   "ax": 24,
+   "ay": 16,
+   "hold": 4
+  }
+ ]
+}

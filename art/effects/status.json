@@ -1,0 +1,26 @@
+{
+  "block": {
+    "raw": "art/raw/effects/block/20261112-151307.png",
+    "state": "approved"
+  },
+  "dust": {
+    "raw": "art/raw/effects/dust/20261112-151303.png",
+    "state": "approved"
+  },
+  "hit_heavy": {
+    "raw": "art/raw/effects/hit_heavy/20261112-151333.png",
+    "state": "approved"
+  },
+  "hit_light": {
+    "raw": "art/raw/effects/hit_light/20261112-151305.png",
+    "state": "approved"
+  },
+  "orb": {
+    "raw": "art/raw/effects/orb/20261112-151333.png",
+    "state": "approved"
+  },
+  "orb_burst": {
+    "raw": "art/raw/effects/orb_burst/20261112-151303.png",
+    "state": "approved"
+  }
+}

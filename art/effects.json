@@ -1,0 +1,61 @@
+{
+  "style": "Pixel-art fighting game visual effect animation strip: {n} frames in one horizontal row, evenly spaced with wide empty gaps so no two frames touch or overlap, each frame centered in its own slot. Bright, punchy 16-bit arcade pixel art with crisp pixel edges and a few dark accent pixels. No characters, no people, no text, no numbers, no frame borders, no background. Transparent background.",
+  "effects": {
+    "hit_light": {
+      "target": 40, "anchor": "center", "holds": [2, 3, 3, 4],
+      "frames": [
+        "a small, very bright white and yellow four-pointed impact star",
+        "a larger white-yellow starburst with short radiating spikes",
+        "the starburst breaking apart into a ring of small yellow sparks",
+        "a few small fading orange sparks drifting outward"
+      ]
+    },
+    "hit_heavy": {
+      "target": 72, "anchor": "center", "holds": [2, 3, 3, 4, 5],
+      "frames": [
+        "a bright white flash core with sharp orange spikes",
+        "a big explosive orange and white starburst with long jagged spikes",
+        "the starburst with a thin white shockwave ring expanding around it",
+        "the burst breaking into chunky orange and red sparks and a fading ring",
+        "scattered small embers fading out"
+      ]
+    },
+    "block": {
+      "target": 56, "anchor": "center", "holds": [2, 3, 4, 4],
+      "frames": [
+        "a bright white-cyan flash shaped like a vertical lens",
+        "a glowing cyan hexagon-pattern energy shield arc, curved like a parenthesis",
+        "the shield arc flickering with small white sparks at its edges",
+        "the shield arc dissolving into faint cyan pixels"
+      ]
+    },
+    "dust": {
+      "target": 36, "anchor": "bottom", "holds": [3, 3, 4, 4, 5],
+      "frames": [
+        "a small low puff of grey-brown dust hugging the ground",
+        "a wider dust cloud spreading left and right along the ground",
+        "a large soft dust cloud rising slightly",
+        "the dust cloud thinning and breaking into wisps",
+        "a few faint dust wisps"
+      ]
+    },
+    "orb": {
+      "target": 34, "anchor": "center", "holds": [4, 4, 4, 4],
+      "frames": [
+        "a glowing cyan and white energy orb with a bright core and a small trailing tail to the left, tiny square data pixels orbiting it",
+        "the same energy orb, data pixels rotated a quarter turn, tail flickering",
+        "the same energy orb, slightly brighter core, data pixels rotated further",
+        "the same energy orb, tail stretched, data pixels completing the rotation"
+      ]
+    },
+    "orb_burst": {
+      "target": 56, "anchor": "center", "holds": [2, 3, 4, 5],
+      "frames": [
+        "a cyan-white energy orb flaring into a bright flash",
+        "an expanding ring of cyan energy with square data pixels flying outward",
+        "the ring breaking into many small cyan and white square pixels",
+        "a few fading cyan square pixels"
+      ]
+    }
+  }
+}

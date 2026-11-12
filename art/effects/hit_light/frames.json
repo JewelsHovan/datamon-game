@@ -1,0 +1,39 @@
+{
+ "clip": "hit_light",
+ "loop": false,
+ "raw": "art/raw/effects/hit_light/20261112-151305.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 19,
+   "h": 20,
+   "ax": 9,
+   "ay": 9,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 40,
+   "h": 40,
+   "ax": 20,
+   "ay": 20,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 39,
+   "h": 39,
+   "ax": 20,
+   "ay": 20,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 31,
+   "h": 28,
+   "ax": 15,
+   "ay": 12,
+   "hold": 4
+  }
+ ]
+}

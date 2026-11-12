@@ -1,0 +1,47 @@
+{
+ "clip": "dust",
+ "loop": false,
+ "raw": "art/raw/effects/dust/20261112-151303.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 38,
+   "h": 13,
+   "ax": 19,
+   "ay": 12,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 57,
+   "h": 17,
+   "ax": 29,
+   "ay": 16,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 55,
+   "h": 36,
+   "ax": 27,
+   "ay": 35,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 53,
+   "h": 28,
+   "ax": 27,
+   "ay": 27,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 41,
+   "h": 21,
+   "ax": 20,
+   "ay": 20,
+   "hold": 5
+  }
+ ]
+}

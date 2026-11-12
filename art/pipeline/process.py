@@ -142,7 +142,8 @@ def review_images(frames: list[dict], out_dir: Path, zoom: int = 3) -> None:
     left = max(f["ax"] for f in frames) + 12
     right = max(f["image"].width - f["ax"] for f in frames) + 12
     top = max(f["ay"] for f in frames) + 12
-    W, H = left + right, top + 16
+    below = max(f["image"].height - f["ay"] for f in frames) + 12
+    W, H = left + right, top + below
 
     def canvas(f) -> Image.Image:
         c = Image.new("RGBA", (W, H), STAGE_BG)
