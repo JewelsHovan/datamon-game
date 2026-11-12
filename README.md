@@ -10,10 +10,12 @@ This repo is also a working example for AI onboarding: everything an agent needs
 
 ## Controls
 
-| | Move | Light | Heavy | Special | Throw |
+| | Move | Punch | Kick | Special | Start |
 |---|---|---|---|---|---|
-| Player 1 | WASD | F | G | H | F+G |
-| Player 2 | Arrows | , | . | / | , + . |
+| Player 1 | WASD | F | G | H | Enter |
+| Player 2 | Arrows | L | ; | ' | Numpad Enter |
+
+Forward plus Punch or Kick gives the heavy version, down plus either sweeps low, and Punch+Kick throws. Keys can be rebound on the controls screen, and gamepads work too. You can also fight the CPU.
 
 ## Run it locally
 
