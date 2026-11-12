@@ -1,0 +1,143 @@
+"""Derive hurtboxes and hitboxes from a fighter's packed frames (spec 003, R3).
+
+Usage:  uv run --with pillow --with numpy python -I art/pipeline/boxes.py SLUG [--overlay OUT_DIR]
+
+Boxes are in anchor space for art facing right: x grows forward from the anchor, y grows
+downward from the anchor (so y is negative above the floor). Each box is [x, y, w, h].
+- hurt: up to 3 boxes, the opaque extent of the head, torso and legs bands of the frame.
+- reach: the limb that sticks out past the frame's own body front (rows whose front edge is
+  SPIKE_PX beyond the median row front), as one box; null when nothing sticks out. Move data decides which
+  frames are active, and their hitbox is that frame's reach box.
+Overrides in art/fighters/SLUG/boxes-overrides.json: {"clip": {"frameIndex": {"hurt": [...], "reach": [...]}}}.
+Writes public/fighters/SLUG/boxes.json.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+import numpy as np
+from PIL import Image, ImageDraw
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import common  # noqa: E402
+
+BANDS = (0.0, 0.24, 0.58, 1.0)  # head, torso, legs, as fractions of frame height from the top
+SPIKE_PX = 18  # a limb must reach this far past the body's median front edge
+BODY_INSET = 6  # the hitbox starts a little in front of the body edge
+MIN_REACH_PX = 24
+HIT_PAD = 4  # hitboxes reach a little past the art so contact reads generously
+
+
+def frame_mask(atlas: np.ndarray, f: dict) -> np.ndarray:
+    return atlas[f["y"]:f["y"] + f["h"], f["x"]:f["x"] + f["w"], 3] > 0
+
+
+def hurtboxes(mask: np.ndarray, ax: int, ay: int) -> list[list[int]]:
+    h = mask.shape[0]
+    out = []
+    for top, bottom in zip(BANDS, BANDS[1:]):
+        r0, r1 = int(h * top), int(h * bottom)
+        band = mask[r0:r1]
+        cols = np.nonzero(band.any(axis=0))[0]
+        rows = np.nonzero(band.any(axis=1))[0]
+        if len(cols) == 0:
+            continue
+        x0, x1 = cols.min() + 2, cols.max() - 1  # shrink 2px each side: boxes slightly inside the art
+        if x1 <= x0:
+            x0, x1 = cols.min(), cols.max() + 1
+        out.append([int(x0 - ax), int(r0 + rows.min() - ay), int(x1 - x0), int(rows.max() - rows.min() + 1)])
+    return out
+
+
+def reach_box(mask: np.ndarray, ax: int, ay: int) -> list[int] | None:
+    """The limb that sticks out past this frame's own body front (rows whose front edge exceeds
+    the median row front by SPIKE_PX), as one box; null when nothing sticks out that far."""
+    h = mask.shape[0]
+    fronts = np.array([np.nonzero(row)[0].max() if row.any() else -1 for row in mask])
+    core = fronts[int(h * 0.1): int(h * 0.9)]
+    core = core[core >= 0]
+    if len(core) == 0:
+        return None
+    body_front = int(np.median(core))
+    spike = fronts > body_front + SPIKE_PX
+    if not spike.any():
+        return None
+    # keep only the run of spiking rows around the frontmost point (the attacking limb),
+    # so a wide stance's front foot does not stretch the box down to the floor
+    peak = int(np.argmax(np.where(spike, fronts, -1)))
+    r0 = r1 = peak
+    while r0 > 0 and spike[r0 - 1]:
+        r0 -= 1
+    while r1 < h - 1 and spike[r1 + 1]:
+        r1 += 1
+    x0, x1 = body_front + BODY_INSET, int(fronts[r0:r1 + 1].max())
+    if (x1 - x0 + 1) * (r1 - r0 + 1) < MIN_REACH_PX:
+        return None
+    x0, x1, r0, r1 = x0, x1 + HIT_PAD, r0 - HIT_PAD, r1 + HIT_PAD
+    return [int(x0 - ax), int(r0 - ay), int(x1 - x0 + 1), int(r1 - r0 + 1)]
+
+
+def compute(slug: str) -> dict:
+    out_dir = common.PUBLIC_FIGHTERS / slug
+    manifest = json.loads((out_dir / "manifest.json").read_text())
+    atlas = np.array(Image.open(out_dir / "atlas.png").convert("RGBA"))
+    overrides = common.load_json(common.fighter_dir(slug) / "boxes-overrides.json", {})
+    clips = {}
+    for cid, clip in manifest["clips"].items():
+        rows = []
+        for i, f in enumerate(clip["frames"]):
+            m = frame_mask(atlas, f)
+            entry = {"hurt": hurtboxes(m, f["ax"], f["ay"]), "reach": reach_box(m, f["ax"], f["ay"])}
+            entry.update(overrides.get(cid, {}).get(str(i), {}))
+            rows.append(entry)
+        clips[cid] = rows
+    return {"fighter": slug, "manifestVersion": manifest["version"], "clips": clips}
+
+
+def overlay(slug: str, boxes: dict, out: Path, clips: list[str]) -> None:
+    out_dir = common.PUBLIC_FIGHTERS / slug
+    manifest = json.loads((out_dir / "manifest.json").read_text())
+    atlas = Image.open(out_dir / "atlas.png").convert("RGBA")
+    zoom = 3
+    for cid in clips:
+        frames = manifest["clips"][cid]["frames"]
+        left = max(f["ax"] for f in frames) + 10
+        right = max(f["w"] - f["ax"] for f in frames) + 10
+        top = max(f["ay"] for f in frames) + 10
+        W, H = left + right, top + 10
+        sheet = Image.new("RGBA", (W * len(frames), H), (34, 32, 86, 255))
+        for i, f in enumerate(frames):
+            ox = i * W
+            sheet.alpha_composite(atlas.crop((f["x"], f["y"], f["x"] + f["w"], f["y"] + f["h"])), (ox + left - f["ax"], top - f["ay"]))
+            d = ImageDraw.Draw(sheet)
+            for b in boxes["clips"][cid][i]["hurt"]:
+                d.rectangle((ox + left + b[0], top + b[1], ox + left + b[0] + b[2] - 1, top + b[1] + b[3] - 1), outline=(79, 176, 255, 255))
+            rb = boxes["clips"][cid][i]["reach"]
+            if rb:
+                d.rectangle((ox + left + rb[0], top + rb[1], ox + left + rb[0] + rb[2] - 1, top + rb[1] + rb[3] - 1), outline=(255, 97, 112, 255))
+        sheet.resize((sheet.width * zoom, sheet.height * zoom), Image.NEAREST).save(out / f"boxes-{cid}.png")
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("slug")
+    ap.add_argument("--overlay", type=Path, help="write box overlay sheets for review into this directory")
+    ap.add_argument("--clips", nargs="*", default=["heavy_punch", "heavy_kick", "crouch_attack", "air_attack", "light_punch"])
+    args = ap.parse_args()
+    boxes = compute(args.slug)
+    path = common.PUBLIC_FIGHTERS / args.slug / "boxes.json"
+    path.write_text(json.dumps(boxes, separators=(",", ":")) + "\n")
+    n_reach = sum(1 for rows in boxes["clips"].values() for r in rows if r["reach"])
+    print(f"{args.slug}: boxes for {len(boxes['clips'])} clips, {n_reach} frames with reach -> {path.relative_to(common.ROOT)}")
+    if args.overlay:
+        args.overlay.mkdir(parents=True, exist_ok=True)
+        overlay(args.slug, boxes, args.overlay, args.clips)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

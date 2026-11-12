@@ -123,3 +123,23 @@ def test_julien_manifest_valid():
     status = common.load_status("julien-hovan")
     if all(status.get(c, {}).get("state") == "approved" for c in CORE):
         assert set(m["clips"]) == set(CORE)
+
+
+# Spec 003 A2: boxes derived from the art --------------------------------------------------------
+BOXES = common.PUBLIC_FIGHTERS / "julien-hovan" / "boxes.json"
+
+
+@pytest.mark.skipif(not BOXES.exists(), reason="boxes.json not generated yet")
+def test_julien_boxes():
+    b = json.loads(BOXES.read_text())
+    m = json.loads(MANIFEST.read_text())
+    assert set(b["clips"]) == set(m["clips"])
+    for cid, rows in b["clips"].items():
+        assert len(rows) == len(m["clips"][cid]["frames"]), cid
+        for i, r in enumerate(rows):
+            assert r["hurt"], f"{cid}[{i}] has no hurtbox"
+    for cid, i in [("light_punch", 2), ("heavy_punch", 3), ("light_kick", 1), ("heavy_kick", 3), ("crouch_attack", 2), ("air_attack", 1)]:
+        reach = b["clips"][cid][i]["reach"]
+        assert reach and reach[0] > 0, f"{cid}[{i}] needs a hitbox in front of the anchor"
+        assert reach[3] < 60, f"{cid}[{i}] hitbox is {reach[3]}px tall: it should cover the limb, not the body"
+    assert all(r["reach"] is None for r in b["clips"]["idle"])
