@@ -84,7 +84,7 @@ function run(name, cmd, cmdArgs, { echo = false } = {}) {
   const out = fs.openSync(log, "w");
   const started = Date.now();
   return new Promise((resolve) => {
-    const child = spawn(cmd, cmdArgs, { cwd: ROOT, env: { ...process.env, FORCE_COLOR: "0", CI: "1" } });
+    const child = spawn(cmd, cmdArgs, { cwd: ROOT, env: { ...process.env, FORCE_COLOR: "0", NO_COLOR: "1", CI: "1" } });
     let output = "";
     const onData = (chunk) => {
       output += chunk;
