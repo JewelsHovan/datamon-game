@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// dm: the agent CLI for Datamon: Merge Conflict.
+// dm: the agent CLI for Compass: Cardinal Clash.
 // One entry point for the things an agent does in this repo: check the toolchain,
 // run the dev server, run the gates, ship previews and production deploys, and
 // read project status. Every command has a stable exit code, writes full logs to
@@ -217,7 +217,7 @@ function readSpecs() {
 
 const commands = {
   async help() {
-    say(`dm: agent CLI for Datamon: Merge Conflict
+    say(`dm: agent CLI for Compass: Cardinal Clash
 
 Usage: ./dm <command> [options] [--json]
 
@@ -379,7 +379,7 @@ Exit codes: 0 ok, 1 a gate, deploy or check failed, 2 usage error, 3 missing pre
     let smoke = null;
     for (let i = 0; i < 10 && !(smoke && smoke.ok); i++) {
       const page = await httpOk(url);
-      const pageOk = page.status === 200 && /<title>[^<]*Merge Conflict/i.test(page.body);
+      const pageOk = page.status === 200 && /<canvas[^>]+id="game"/i.test(page.body);
       const asset = await httpOk(new URL("fighters/julien-hovan/manifest.json", url).href);
       smoke = { ok: pageOk && asset.status === 200, page: page.status, asset: asset.status };
       if (!smoke.ok) await new Promise((res) => setTimeout(res, 3000));

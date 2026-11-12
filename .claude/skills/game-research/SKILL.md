@@ -1,6 +1,6 @@
 ---
 name: game-research
-description: Daily research loop for Datamon: Merge Conflict. Picks the next angles from docs/research/agenda.md, researches what great fighting games do there, checks the findings against docs/game-design.md, and ranks proposed additions in docs/research/additions.md. Use for "game research", "run the daily research", "what should we add to the game", "research additions for the game", or one focused angle ("/game-research assists"). For one-off research on another topic, use research; to turn an addition into a spec, use spec-create.
+description: Daily research loop for Compass: Cardinal Clash. Picks the next angles from docs/research/agenda.md, researches what great fighting games do there, checks the findings against docs/game-design.md, and ranks proposed additions in docs/research/additions.md. Use for "game research", "run the daily research", "what should we add to the game", "research additions for the game", or one focused angle ("/game-research assists"). For one-off research on another topic, use research; to turn an addition into a spec, use spec-create.
 argument-hint: "[angle] [--daily]"
 ---
 

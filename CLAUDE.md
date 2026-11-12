@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-A 2D pixel-art 1v1 fighting game (working title "Datamon: Merge Conflict") built from the Datamon assets: Compass people fight and summon "battlemon" creatures for supers.
+A 2D pixel-art 1v1 fighting game ("Compass: Cardinal Clash"; the repo and earlier docs call it "Datamon: Merge Conflict") built from the Datamon assets: Compass people fight and summon "battlemon" creatures for supers.
 
 ## Status
 

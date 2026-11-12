@@ -1,4 +1,4 @@
-# Datamon: Merge Conflict
+# Compass: Cardinal Clash
 
 A 2D pixel-art 1v1 fighting game starring Compass colleagues, built in one day by a handful of Claude Code sessions working in parallel. The human made the decisions; the agents wrote the specs, generated and processed the art, built the engine and verified each other's work.
 
