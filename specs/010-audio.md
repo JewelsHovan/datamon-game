@@ -125,3 +125,5 @@ audio.ui("move"); audio.ui("confirm"); audio.ui("back"); // menu cursor, accept,
 
 ## Review
 (filled by spec-review)
+
+Lead verification after merge (2026-11-12): typecheck, build and `npm test` (189 passed) exit 0 on main. `audio-check.mjs` against the main dev server: 11 of 12 on the second run. The failing check ("fight loop plays at 150 BPM") counts music steps against wall-clock time while the music runs on the AudioContext clock; headless Chrome on this machine ran that clock at about 0.8x real time (measured clockRate 0.796 on the first run), giving 16 of 20 steps. The scheduler's exact timing is covered by `src/audio/music.test.ts` against a controlled clock; the by-ear check in a real browser is the user's.
