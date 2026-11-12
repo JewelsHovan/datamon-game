@@ -133,12 +133,17 @@ function pidAlive(pid) {
   }
 }
 
-function portFree(port) {
+// Free on both loopbacks: another Vite on [::1]:5173 would shadow ours at "localhost".
+function portFreeOn(port, host) {
   return new Promise((resolve) => {
     const srv = net.createServer();
-    srv.once("error", () => resolve(false));
-    srv.listen(port, "127.0.0.1", () => srv.close(() => resolve(true)));
+    srv.once("error", (err) => resolve(err.code === "EADDRNOTAVAIL" || err.code === "EAFNOSUPPORT"));
+    srv.listen(port, host, () => srv.close(() => resolve(true)));
   });
+}
+
+async function portFree(port) {
+  return (await portFreeOn(port, "127.0.0.1")) && (await portFreeOn(port, "::1"));
 }
 
 async function freePort(start) {
