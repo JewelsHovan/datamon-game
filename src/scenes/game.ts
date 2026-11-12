@@ -67,7 +67,12 @@ function loadImage(src: string): Promise<HTMLImageElement | null> {
 async function fontReady(win: Window): Promise<void> {
   const fonts = (win.document as Document & { fonts?: FontFaceSet }).fonts;
   if (!fonts) return;
-  await Promise.race([fonts.load(`16px ${HUD_FONT}`).then(() => undefined), new Promise<void>((r) => setTimeout(r, 2500))]);
+  // The font stylesheet loads without blocking the page (index.html), so wait for it first;
+  // either way the title shows within 2.5 s, in the fallback font if the font is slow.
+  const link = win.document.querySelector<HTMLLinkElement>('link[href*="Press+Start+2P"]');
+  const sheet = link && !link.sheet ? new Promise<void>((r) => { link.addEventListener("load", () => r(), { once: true }); link.addEventListener("error", () => r(), { once: true }); }) : Promise.resolve();
+  const font = sheet.then(() => fonts.load(`16px ${HUD_FONT}`)).then(() => undefined);
+  await Promise.race([font, new Promise<void>((r) => setTimeout(r, 2500))]);
 }
 
 /** Menu art: portraits and preview clips, loaded on first use. */
@@ -102,6 +107,14 @@ export async function startGame(options: GameOptions): Promise<GameHandle> {
   const { ctx } = screen;
   ctx.fillStyle = "#000";
   ctx.fillRect(0, 0, screen.canvas.width, screen.canvas.height);
+  // Something on screen at once: on a cold load the pixel font and manifests take a moment.
+  ctx.fillStyle = "#aeaadc";
+  ctx.font = "bold 12px monospace";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText("LOADING", screen.canvas.width / 2, screen.canvas.height / 2);
+  ctx.textAlign = "start";
+  ctx.textBaseline = "alphabetic";
 
   const people = getPeople();
   const pick = pickFighters(options.search);
