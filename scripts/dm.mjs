@@ -109,7 +109,7 @@ function tail(text, n = 25) {
 
 function sh(cmd, cmdArgs) {
   const r = spawnSync(cmd, cmdArgs, { cwd: ROOT, encoding: "utf8" });
-  return { code: r.status ?? 1, out: (r.stdout || "").trim(), err: (r.stderr || "").trim() };
+  return { code: r.status ?? 1, out: (r.stdout || "").trimEnd(), err: (r.stderr || "").trimEnd() };
 }
 
 function git(...a) {
