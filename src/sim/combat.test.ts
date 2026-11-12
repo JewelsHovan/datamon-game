@@ -7,9 +7,9 @@ import { blocks, hitRect } from "./combat";
 import { hashState } from "./hash";
 import {
   BUTTON_DOWN,
-  BUTTON_HEAVY,
+  BUTTON_KICK,
   BUTTON_LEFT,
-  BUTTON_LIGHT,
+  BUTTON_PUNCH,
   BUTTON_RIGHT,
   BUTTON_SPECIAL,
   BUTTON_UP,
@@ -20,8 +20,8 @@ import { createFighter, createMatchState } from "./state";
 import { step } from "./step";
 import type { InputPair, SimEvent, SimState } from "./types";
 
-const L = BUTTON_LIGHT;
-const H = BUTTON_HEAVY;
+const P = BUTTON_PUNCH;
+const K = BUTTON_KICK;
 const S = BUTTON_SPECIAL;
 const R = BUTTON_RIGHT;
 const LEFT = BUTTON_LEFT;
@@ -65,13 +65,13 @@ function stepsWith(r: Run, type: SimEvent["type"]): number[] {
 /** Inputs that start `id` for P1 (facing right) with a single-frame press. */
 function pressFor(id: MoveId): number {
   switch (id) {
-    case "light_punch": return L;
-    case "heavy_punch": return H;
-    case "light_kick": return R | L;
-    case "heavy_kick": return R | H;
-    case "crouch_attack": return D | L;
+    case "light_punch": return P;
+    case "heavy_punch": return R | P;
+    case "light_kick": return K;
+    case "heavy_kick": return R | K;
+    case "crouch_attack": return D | P;
     case "special": return S;
-    case "throw": return L | H;
+    case "throw": return P | K;
     default: return 0;
   }
 }
@@ -99,10 +99,10 @@ describe("frame data (A1)", () => {
 
   it("a press buffered in the last frames of a move starts the next move as soon as it ends", () => {
     let s = duel(400);
-    s = step(s, [L, 0]);
+    s = step(s, [P, 0]);
     const d = moveDuration(MOVES.light_punch);
     for (let t = 1; t < d - 2; t++) s = step(s, [0, 0]);
-    s = step(s, [L, 0]); // pressed 2 frames before the move ends
+    s = step(s, [P, 0]); // pressed 2 frames before the move ends
     s = step(s, [0, 0]);
     s = step(s, [0, 0]);
     expect(s.fighters[0].move?.id).toBe("light_punch");
@@ -111,10 +111,10 @@ describe("frame data (A1)", () => {
 
   it("a press older than the buffer is dropped", () => {
     let s = duel(400);
-    s = step(s, [L, 0]);
+    s = step(s, [P, 0]);
     const d = moveDuration(MOVES.light_punch);
     for (let t = 1; t < d - COMBAT.bufferFrames - 2; t++) s = step(s, [0, 0]);
-    s = step(s, [H, 0]); // too early to buffer into the end of the move
+    s = step(s, [K, 0]); // too early to buffer into the end of the move
     for (let t = 0; t < COMBAT.bufferFrames + 4; t++) s = step(s, [0, 0]);
     expect(s.fighters[0].move).toBeNull();
   });
@@ -122,13 +122,13 @@ describe("frame data (A1)", () => {
 
 describe("hits (A3)", () => {
   it("a point-blank light punch hits, freezes both for 6 frames, then hitstun runs", () => {
-    const r = run(duel(60), [[L, 0], ...frames(40)]);
+    const r = run(duel(60), [[P, 0], ...frames(40)]);
     const hit = stepsWith(r, "hit");
     expect(hit).toEqual([1 + firstActiveTick(MOVES.light_punch)]);
     const h = hit[0]!;
     // Replay to inspect the state right after the hit.
     let s = duel(60);
-    s = step(s, [L, 0]);
+    s = step(s, [P, 0]);
     for (let t = 2; t <= h; t++) s = step(s, [0, 0]);
     expect(s.fighters[0].hitstop).toBe(6);
     expect(s.fighters[1].hitstop).toBe(6);
@@ -145,14 +145,14 @@ describe("hits (A3)", () => {
   });
 
   it("simultaneous attacks trade: both land and a trade event fires", () => {
-    const r = run(duel(60), [[L, L], ...frames(20)]);
+    const r = run(duel(60), [[P, P], ...frames(20)]);
     expect(stepsWith(r, "trade").length).toBe(1);
     expect(r.state.fighters[0].health).toBeLessThan(COMBAT.maxHealth);
     expect(r.state.fighters[1].health).toBeLessThan(COMBAT.maxHealth);
   });
 
   it("a move hits at most once", () => {
-    const r = run(duel(60), [[H, 0], ...frames(60)]);
+    const r = run(duel(60), [[R | P, 0], ...frames(60)]);
     expect(r.events.flat().filter((e) => e.type === "hit").length).toBe(1);
   });
 
@@ -161,7 +161,7 @@ describe("hits (A3)", () => {
     s.fighters[1].x = WALL_RIGHT;
     s.fighters[0].x = WALL_RIGHT - 6000;
     const before = s.fighters[0].x;
-    const r = run(s, [[H, 0], ...frames(40)]);
+    const r = run(s, [[R | P, 0], ...frames(40)]);
     expect(stepsWith(r, "hit").length).toBe(1);
     expect(r.state.fighters[1].x).toBe(WALL_RIGHT);
     expect(before - r.state.fighters[0].x).toBeGreaterThanOrEqual(1000);
@@ -192,22 +192,22 @@ describe("blocking and throws (A4)", () => {
 
   it("in a match: standing block stops light_punch, but crouch_attack hits through it", () => {
     // P2 faces left, so holding right is back.
-    const blocked = run(duel(60), [[L, R], ...frames(20, 0, R)]);
+    const blocked = run(duel(60), [[P, R], ...frames(20, 0, R)]);
     expect(stepsWith(blocked, "block").length).toBe(1);
     expect(stepsWith(blocked, "hit").length).toBe(0);
     expect(blocked.state.fighters[1].health).toBe(COMBAT.maxHealth);
-    const low = run(duel(60), [[D | L, R], ...frames(20, 0, R)]);
+    const low = run(duel(60), [[D | P, R], ...frames(20, 0, R)]);
     expect(stepsWith(low, "hit").length).toBe(1);
   });
 
   it("in a match: crouching block stops crouch_attack", () => {
-    const r = run(duel(60), [[D | L, R | D], ...frames(20, 0, R | D)]);
+    const r = run(duel(60), [[D | P, R | D], ...frames(20, 0, R | D)]);
     expect(stepsWith(r, "block").length).toBe(1);
     expect(stepsWith(r, "hit").length).toBe(0);
   });
 
   it("a throw beats a standing block", () => {
-    const r = run(duel(60), [[L | H, R], ...frames(60, 0, R)]);
+    const r = run(duel(60), [[P | K, R], ...frames(60, 0, R)]);
     expect(stepsWith(r, "throw").length).toBe(1);
     expect(r.state.fighters[1].health).toBe(COMBAT.maxHealth - MOVES.throw.damage);
     expect(r.events.flat().some((e) => e.type === "knockdown" && e.player === 1)).toBe(true);
@@ -217,7 +217,7 @@ describe("blocking and throws (A4)", () => {
     let s = duel(60);
     for (let t = 0; t < 8; t++) s = step(s, [0, U]); // P2 jumps
     expect(s.fighters[1].state).toBe("airborne");
-    const r = run(s, [[L | H, 0], ...frames(30)]);
+    const r = run(s, [[P | K, 0], ...frames(30)]);
     expect(stepsWith(r, "throw").length).toBe(0);
     expect(r.state.fighters[1].health).toBe(COMBAT.maxHealth);
   });
@@ -257,7 +257,7 @@ function scriptedMatch(maxFrames: number, roundTrip = -1): { state: SimState; ha
     const gap = Math.abs(b.x - a.x);
     const forward = a.facing === 1 ? R : LEFT;
     let p1 = 0;
-    if (a.state === "idle" || a.state === "walk_forward") p1 = gap > 7000 ? forward : t % 2 === 0 ? forward | H : 0;
+    if (a.state === "idle" || a.state === "walk_forward") p1 = gap > 7000 ? forward : t % 2 === 0 ? forward | K : 0;
     s = step(s, [p1, 0]);
     events.push(...s.events);
     if (t % 500 === 0) hashes.push(hashState(s));

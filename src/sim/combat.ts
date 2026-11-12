@@ -22,7 +22,7 @@ import {
   type MoveDef,
   type MoveId,
 } from "../data/moves";
-import { BUTTON_HEAVY, BUTTON_LIGHT, BUTTON_SPECIAL, DIR_BACK, DIR_DOWN, DIR_FORWARD } from "./inputBits";
+import { BUTTON_KICK, BUTTON_PUNCH, BUTTON_SPECIAL, DIR_BACK, DIR_DOWN, DIR_FORWARD } from "./inputBits";
 import { inputAt, toFacingRelative, wasPressed } from "./inputHistory";
 import type { FighterState, PlayerIndex, Projectile, SimEvent, SimState } from "./types";
 
@@ -49,21 +49,31 @@ function ownsProjectile(state: SimState, player: PlayerIndex): boolean {
   return state.projectiles.some((p) => p.owner === player);
 }
 
+/**
+ * The button scheme (spec 005, R1): which grounded normal a Punch or Kick press
+ * starts with the directions held. Punch = light_punch, forward+Punch =
+ * heavy_punch; Kick = light_kick, forward+Kick = heavy_kick; down+either =
+ * crouch_attack. Punch+Kick (throw), Special and air attacks are picked by the callers.
+ */
+export function normalFor(button: typeof BUTTON_PUNCH | typeof BUTTON_KICK, dirs: number): MoveId {
+  const kick = button === BUTTON_KICK;
+  if ((dirs & DIR_DOWN) !== 0) return "crouch_attack";
+  if ((dirs & DIR_FORWARD) !== 0) return kick ? "heavy_kick" : "heavy_punch";
+  return kick ? "light_kick" : "light_punch";
+}
+
 /** Picks a grounded move from buffered presses, or null. Throws win over everything. */
 function chooseGroundMove(f: FighterState, player: PlayerIndex, state: SimState): { id: MoveId; press: number } | null {
   const now = state.frame;
-  const l = bufferedPress(f, BUTTON_LIGHT, now);
-  const h = bufferedPress(f, BUTTON_HEAVY, now);
+  const p = bufferedPress(f, BUTTON_PUNCH, now);
+  const k = bufferedPress(f, BUTTON_KICK, now);
   const s = bufferedPress(f, BUTTON_SPECIAL, now);
-  if (l >= 0 && h >= 0 && Math.abs(l - h) <= COMBAT.throwChordFrames) return { id: "throw", press: Math.max(l, h) };
+  if (p >= 0 && k >= 0 && Math.abs(p - k) <= COMBAT.throwChordFrames) return { id: "throw", press: Math.max(p, k) };
   if (s >= 0 && !ownsProjectile(state, player)) return { id: "special", press: s };
-  const dirs = heldDirs(f);
-  const press = Math.max(l, h);
+  const press = Math.max(p, k);
   if (press < 0) return null;
-  const heavy = h >= l;
-  if ((dirs & DIR_DOWN) !== 0) return { id: "crouch_attack", press };
-  if ((dirs & DIR_FORWARD) !== 0) return { id: heavy ? "heavy_kick" : "light_kick", press };
-  return { id: heavy ? "heavy_punch" : "light_punch", press };
+  // The newer press wins when both are buffered but too far apart for a throw.
+  return { id: normalFor(k >= p ? BUTTON_KICK : BUTTON_PUNCH, heldDirs(f)), press };
 }
 
 export function startMove(f: FighterState, player: PlayerIndex, id: MoveId, press: number, events: SimEvent[]): void {
@@ -85,10 +95,10 @@ export function tryGroundMove(f: FighterState, player: PlayerIndex, state: SimSt
   return true;
 }
 
-/** Airborne fighters: one air attack per jump. */
+/** Airborne fighters: Punch or Kick starts the air attack, one per jump. */
 export function tryAirMove(f: FighterState, player: PlayerIndex, state: SimState): boolean {
   if (f.move) return false;
-  const press = Math.max(bufferedPress(f, BUTTON_LIGHT, state.frame), bufferedPress(f, BUTTON_HEAVY, state.frame));
+  const press = Math.max(bufferedPress(f, BUTTON_PUNCH, state.frame), bufferedPress(f, BUTTON_KICK, state.frame));
   if (press < 0) return false;
   startMove(f, player, "air_attack", press, state.events);
   return true;
@@ -101,17 +111,45 @@ function cancelWindowOpen(move: MoveDef, tick: number): boolean {
   return tick >= start && tick < start + activeTicks + 8;
 }
 
-/** A light or heavy punch whose chord partner arrives within the chord window becomes a throw. */
+/** The chord partner of the button that started a grounded normal (0 when either can be). */
+function chordPartner(id: MoveId): number {
+  switch (id) {
+    case "light_punch":
+    case "heavy_punch":
+      return BUTTON_KICK;
+    case "light_kick":
+    case "heavy_kick":
+      return BUTTON_PUNCH;
+    default:
+      return 0;
+  }
+}
+
+/**
+ * A Punch or Kick normal whose chord partner arrives within the chord window
+ * becomes a throw. The starting press is already consumed, so for a crouch
+ * attack (started by either button) any fresh Punch or Kick press is the partner.
+ */
 function tryThrowConversion(f: FighterState, player: PlayerIndex, state: SimState): boolean {
   const m = f.move;
-  if (!m || (m.id !== "light_punch" && m.id !== "heavy_punch") || m.tick > COMBAT.throwChordFrames) return false;
-  const other = m.id === "light_punch" ? BUTTON_HEAVY : BUTTON_LIGHT;
-  const press = bufferedPress(f, other, state.frame);
+  if (!m || m.tick > COMBAT.throwChordFrames) return false;
+  const partner = chordPartner(m.id);
+  if (partner === 0 && m.id !== "crouch_attack") return false;
+  const press =
+    partner !== 0
+      ? bufferedPress(f, partner, state.frame)
+      : Math.max(bufferedPress(f, BUTTON_PUNCH, state.frame), bufferedPress(f, BUTTON_KICK, state.frame));
   if (press < 0) return false;
   startMove(f, player, "throw", press, state.events);
   return true;
 }
 
+/**
+ * Cancels from a connected move. The press maps to a move with the same
+ * scheme as from neutral (normalFor, Special); the move's cancel list decides
+ * whether it may follow: light_punch into forward+Punch, forward+Kick or
+ * Special; light_kick into forward+Kick or Special; heavy_punch into Special.
+ */
 function tryCancel(f: FighterState, player: PlayerIndex, state: SimState): boolean {
   const m = f.move;
   if (!m || !m.connected) return false;
@@ -120,10 +158,18 @@ function tryCancel(f: FighterState, player: PlayerIndex, state: SimState): boole
   const now = state.frame;
   const dirs = heldDirs(f);
   const s = bufferedPress(f, BUTTON_SPECIAL, now);
-  const h = bufferedPress(f, BUTTON_HEAVY, now);
+  const p = bufferedPress(f, BUTTON_PUNCH, now);
+  const k = bufferedPress(f, BUTTON_KICK, now);
   const candidates: { id: MoveId; press: number }[] = [];
   if (s >= 0 && !ownsProjectile(state, player)) candidates.push({ id: "special", press: s });
-  if (h >= 0) candidates.push({ id: (dirs & DIR_FORWARD) !== 0 ? "heavy_kick" : "heavy_punch", press: h });
+  // Newer press first, so the button pressed last decides when both are buffered.
+  const normals = [
+    { button: BUTTON_PUNCH, press: p },
+    { button: BUTTON_KICK, press: k },
+  ].sort((a, b) => b.press - a.press);
+  for (const n of normals) {
+    if (n.press >= 0) candidates.push({ id: normalFor(n.button, dirs), press: n.press });
+  }
   for (const c of candidates) {
     if (def.cancels.includes(c.id)) {
       startMove(f, player, c.id, c.press, state.events);

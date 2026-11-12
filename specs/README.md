@@ -12,7 +12,7 @@ Files are `NNN-short-slug.md`. The skills keep this index in sync.
 | 002 | [Animation pipeline and Julien's full set](002-animation-pipeline.md) | in-progress |
 | 003 | [Combat core: the first real fight](003-combat-core.md) | in-progress |
 | 004 | [Effects and feel](004-effects-and-feel.md) | in-progress |
-| 005 | [Controls for two and the match flow](005-controls-and-match-flow.md) | in-progress |
+| 005 | [Controls for two and the match flow](005-controls-and-match-flow.md) | review |
 | 006 | [Launch roster and signature specials](006-launch-roster.md) | in-progress |
 | 009 | [Living stage](009-living-stage.md) | ready |
 | 010 | [Audio](010-audio.md) | in-progress |

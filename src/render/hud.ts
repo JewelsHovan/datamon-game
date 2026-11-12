@@ -1,8 +1,10 @@
 // Minimal fight HUD (spec 003, R7): health bars with a delayed damage trail,
-// portraits and names, round pips, the timer, the announcer and combo text.
+// portraits and names, round pips, the timer, the announcer and combo text,
+// and each player's key legend under their bar (spec 005, R7).
 // Drawn at the 640x360 internal resolution in the Press Start 2P pixel font.
 import { COMBAT, ROUND } from "../data/combat";
 import type { Person } from "../data/catalog";
+import { keyLabel, type KeyBindings } from "../input/keymap";
 import type { SimEvent, SimState } from "../sim/types";
 import { VIEW_WIDTH } from "./screen";
 
@@ -32,7 +34,9 @@ export class Hud {
 
   constructor(
     private readonly people: [Person, Person],
-    private readonly portraits: [HTMLImageElement | null, HTMLImageElement | null],
+    private readonly portraits: [CanvasImageSource | null, CanvasImageSource | null],
+    /** Appended to each name, e.g. "CPU". */
+    private readonly tags: [string, string] = ["", ""],
   ) {}
 
   onEvents(events: readonly SimEvent[]): void {
@@ -65,10 +69,14 @@ export class Hud {
     this.popups = this.popups.filter((p) => p.age < p.life);
   }
 
-  draw(ctx: CanvasRenderingContext2D, state: SimState): void {
+  /** Key legend lines per player, drawn under the bars when draw() is asked to. */
+  legends: [readonly string[] | null, readonly string[] | null] = [null, null];
+
+  draw(ctx: CanvasRenderingContext2D, state: SimState, showLegends = false): void {
     ctx.save();
     ctx.textBaseline = "top";
     for (const i of [0, 1] as const) this.drawBar(ctx, state, i);
+    if (showLegends) for (const i of [0, 1] as const) this.drawLegend(ctx, i);
     this.drawTimer(ctx, state);
     this.drawAnnouncer(ctx, state);
     for (const i of [0, 1] as const) this.drawCombo(ctx, i);
@@ -124,7 +132,7 @@ export class Hud {
       ctx.restore();
     }
     // Name and round pips
-    const name = this.people[i].shortName.toUpperCase() + (i === 1 && state.fighters[0].slug === state.fighters[1].slug ? " (ALT)" : "");
+    const name = this.people[i].shortName.toUpperCase() + (i === 1 && state.fighters[0].slug === state.fighters[1].slug ? " (ALT)" : "") + (this.tags[i] ? ` ${this.tags[i]}` : "");
     text(ctx, name, left ? x0 : x0 + BAR_W, BAR_Y + BAR_H + 6, 8, "#eeedff", left ? "left" : "right");
     if (!state.round.training) {
       for (let k = 0; k < ROUND.roundsToWin; k++) {
@@ -136,6 +144,20 @@ export class Hud {
         ctx.fillRect(cx - 4, BAR_Y + BAR_H + 6, 8, 8);
       }
     }
+  }
+
+  private drawLegend(ctx: CanvasRenderingContext2D, i: 0 | 1): void {
+    const lines = this.legends[i];
+    if (!lines || lines.length === 0) return;
+    const left = i === 0;
+    const width = Math.max(...lines.map((l) => l.length)) * 8 + 10;
+    const x = left ? MARGIN + 34 : VIEW_WIDTH - MARGIN - 34;
+    const y = BAR_Y + BAR_H + 22;
+    ctx.fillStyle = "rgba(13, 12, 34, 0.72)";
+    ctx.fillRect(left ? x - 5 : x - width + 5, y - 4, width, lines.length * 12 + 6);
+    ctx.fillStyle = left ? "#4aa8ff" : "#ff5a5a";
+    ctx.fillRect(left ? x - 5 : x + 4, y - 4, 1, lines.length * 12 + 6);
+    lines.forEach((line, k) => text(ctx, line, x, y + k * 12, 8, "#eeedff", left ? "left" : "right"));
   }
 
   private drawTimer(ctx: CanvasRenderingContext2D, state: SimState): void {
@@ -170,7 +192,7 @@ export class Hud {
       text(ctx, `${this.people[w].shortName.toUpperCase()}`, VIEW_WIDTH / 2, 120, 24, "#ffc94a", "center");
       text(ctx, "WINS THE MATCH", VIEW_WIDTH / 2, 156, 16, "#eeedff", "center");
       if (state.fighters[w].health >= COMBAT.maxHealth) text(ctx, "PERFECT", VIEW_WIDTH / 2, 186, 16, "#63e294", "center");
-      text(ctx, "PROD IS DOWN. RESTARTING...", VIEW_WIDTH / 2, 230, 8, "#aeaadc", "center");
+      text(ctx, "PROD IS DOWN.", VIEW_WIDTH / 2, 230, 8, "#aeaadc", "center");
       return;
     }
     if (line) text(ctx, line, VIEW_WIDTH / 2, 130 - Math.round(size / 2), size, color, "center");
@@ -203,4 +225,21 @@ export function text(
   for (const [dx, dy] of [[-1, 0], [1, 0], [0, -1], [0, 1], [1, 1], [2, 2]] as const) ctx.fillText(s, Math.round(x) + dx, Math.round(y) + dy);
   ctx.fillStyle = color;
   ctx.fillText(s, Math.round(x), Math.round(y));
+}
+
+/** How a player's four directions read on a legend: "WASD", "ARROWS", or the four keys. */
+export function moveLabel(b: KeyBindings): string {
+  const keys = [b.up[0], b.left[0], b.down[0], b.right[0]];
+  if (keys.join() === "ArrowUp,ArrowLeft,ArrowDown,ArrowRight") return "ARROWS";
+  const labels = keys.map(keyLabel);
+  return labels.every((l) => l.length === 1) ? labels.join("") : labels.join(" ");
+}
+
+/** A player's key legend (their actual bindings), two lines; pad buttons when they hold a gamepad. */
+export function legendLines(b: KeyBindings, hasPad = false): [string, string] {
+  if (hasPad) return ["A PUNCH  B KICK  X/Y SPECIAL", "D-PAD MOVE  A+B THROW"];
+  const p = keyLabel(b.punch[0]);
+  const k = keyLabel(b.kick[0]);
+  const s = keyLabel(b.special[0]);
+  return [`${p} PUNCH  ${k} KICK  ${s} SPECIAL`, `${moveLabel(b)} MOVE  ${p}+${k} THROW`];
 }

@@ -121,6 +121,10 @@ async function viewport(width, height) {
 // Spec 003/004 fight checks: play the real game with keyboard events and
 // screenshot the moments that matter. Usage as spec 001's browser-check.mjs:
 //   node specs/evidence/003/fight-check.mjs http://127.0.0.1:5199/ specs/evidence/003
+// Spec 005: buttons are Punch / Kick / Special (P1 F G H, P2 L ; '); forward+Kick
+// (D + G) is the heavy kick. The page now opens on the title screen, so the
+// check goes straight to the fight with the ?p1=&p2= shortcut.
+const FIGHT_URL = "?p1=julien-hovan&p2=julien-hovan";
 async function open(query = "") {
   await page("Page.navigate", { url: BASE + query });
   for (let i = 0; i < 150; i++) {
@@ -136,7 +140,7 @@ async function shot(name) {
   writeFileSync(path, Buffer.from(data, "base64"));
   return path;
 }
-const KEYS = { KeyD: "d", KeyA: "a", KeyS: "s", KeyW: "w", KeyF: "f", KeyG: "g", KeyH: "h", ArrowLeft: "ArrowLeft", ArrowRight: "ArrowRight", ArrowDown: "ArrowDown", Comma: ",", Period: ".", Slash: "/", F2: "F2" };
+const KEYS = { KeyD: "d", KeyA: "a", KeyS: "s", KeyW: "w", KeyF: "f", KeyG: "g", KeyH: "h", ArrowLeft: "ArrowLeft", ArrowRight: "ArrowRight", ArrowDown: "ArrowDown", KeyL: "l", Semicolon: ";", Quote: "'", F2: "F2" };
 async function key(type, code) {
   await page("Input.dispatchKeyEvent", { type, code, key: KEYS[code] ?? code, windowsVirtualKeyCode: 0 });
 }
@@ -178,7 +182,7 @@ async function approach(maxGap = 62) {
 
 try {
   await viewport(1280, 720);
-  await open("");
+  await open(FIGHT_URL);
   await sleep(300);
   record("intro", true, { screenshot: await shot("01-intro-round1") });
   const fighting = await waitFor((s) => s.round.phase === "fight", 6000);
