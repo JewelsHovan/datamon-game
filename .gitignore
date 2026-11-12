@@ -6,3 +6,5 @@ dist/
 hq/index.html
 art/raw/
 .claude-images/
+__pycache__/
+.pytest_cache/
