@@ -14,6 +14,7 @@ import { createDebugOverlay } from "../render/debugOverlay";
 import { loadEffects, type EffectAtlas } from "../render/effects";
 import { HUD_FONT } from "../render/hud";
 import { createScreen } from "../render/screen";
+import { stageInfo, type StageInfo } from "../render/stage";
 import { hashState } from "../sim/hash";
 import type { SimEvent, SimState } from "../sim/types";
 import { matchFromPick, pickFighters } from "./fight";
@@ -29,7 +30,7 @@ export interface GameHandle {
   /** A JSON copy of the current fight's sim state, or null. */
   snapshot(): SimState | null;
   /** Render-side info: where each fighter's clips came from, the loop stats, toggles. */
-  info(): { clipSources: [string, string] | null; stats: LoopStats; boxes: boolean; reducedEffects: boolean; liveEffects: number };
+  info(): { clipSources: [string, string] | null; stats: LoopStats; boxes: boolean; reducedEffects: boolean; liveEffects: number; stage: StageInfo };
   /** Every sim event of the current fight (newest last, capped). */
   events(): SimEvent[];
   /** The current scene. */
@@ -196,6 +197,7 @@ export async function startGame(options: GameOptions): Promise<GameHandle> {
       boxes: m.fight?.showBoxes ?? false,
       reducedEffects: m.fight?.effects.reduced ?? false,
       liveEffects: m.fight?.effects.count ?? 0,
+      stage: stageInfo(),
     }),
     events: () => m.fight?.log.slice() ?? [],
     get scene() {

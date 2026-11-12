@@ -1,5 +1,5 @@
 // The stage (spec 009): painted parallax layers generated through the art pipeline
-// (public/stages/<id>/), coworkers walking between the skyline and the furniture, a dimming
+// (public/stages/<id>/), coworkers walking past in front of the furniture (darkened, behind the fighters), a dimming
 // pass that keeps fighters readable, and a code-drawn floor on the sim's floor line.
 // Falls back to the original gradient until the stage has loaded. drawStage keeps its
 // spec 001 signature; call stageReact("ko", x) on a K.O. so the walkers stop and watch.
@@ -42,6 +42,21 @@ let pendingKo: number | null = null;
 let sky: CanvasGradient | null = null;
 let skyCtx: CanvasRenderingContext2D | null = null;
 let frame = 0;
+
+/** What the last drawn stage frame showed (browser checks read it through `window.__game.info()`). */
+export interface StageInfo {
+  loaded: boolean;
+  cameraX: number;
+  /** Layer offsets in px, far to near (parallax: each layer shifts by its own amount). */
+  layerOffsets: number[];
+  /** Walkers on the mid layer: screen x of their feet, and whether they stopped to watch a K.O. */
+  walkers: { screenX: number; onScreen: boolean; watching: boolean }[];
+}
+let lastInfo: StageInfo = { loaded: false, cameraX: 0, layerOffsets: [], walkers: [] };
+
+export function stageInfo(): StageInfo {
+  return { ...lastInfo, layerOffsets: [...lastInfo.layerOffsets], walkers: lastInfo.walkers.map((w) => ({ ...w })) };
+}
 
 function loadImage(src: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
@@ -102,8 +117,11 @@ function drawWalkers(ctx: CanvasRenderingContext2D, camera: Camera, mid: Layer):
   pendingKo = null;
   stepWalkers(s.walkers, s.cast.length, ko);
   const offset = Math.round(camera.x * mid.factor);
+  lastInfo.walkers = [];
   for (const w of s.walkers.walkers) {
     if (w.wait > 0) continue;
+    const feetX = Math.round(w.x) - offset;
+    lastInfo.walkers.push({ screenX: feetX, onScreen: feetX > -20 && feetX < VIEW_WIDTH + 20, watching: w.watching > 0 });
     const set = s.cast[w.who % s.cast.length]!;
     const walking = w.watching === 0;
     const clip = set.clips[walking ? "walk" : "idle"] ?? set.clips.idle ?? Object.values(set.clips)[0]!;
@@ -187,14 +205,16 @@ export function drawStage(ctx: CanvasRenderingContext2D, camera: Camera): void {
     return;
   }
   const [far, ...rest] = stage.layers;
+  lastInfo = { loaded: true, cameraX: camera.x, layerOffsets: [...stage.layers.map((l) => Math.round(camera.x * l.factor)), camera.x], walkers: lastInfo.walkers };
   if (far) {
     ctx.drawImage(far.img, -Math.round(camera.x * far.factor), far.y - camera.y);
     drawCityLights(ctx, camera, far);
   }
   const mid = rest[rest.length - 1];
   if (mid) {
-    drawWalkers(ctx, camera, mid);
     for (const l of rest) ctx.drawImage(l.img, -Math.round(camera.x * l.factor), l.y - camera.y);
+    // In front of the furniture (behind it they were hidden by desks and monitors), darkened and behind the fighters.
+    drawWalkers(ctx, camera, mid);
   }
   // Lower the background's contrast so fighters read first.
   ctx.fillStyle = "rgba(16, 12, 40, 0.24)";

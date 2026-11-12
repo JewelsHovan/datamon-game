@@ -1,0 +1,38 @@
+{
+  "center": {
+    "cameraX": 320,
+    "layerOffsets": [
+      112,
+      224,
+      320
+    ],
+    "fighters": [
+      540,
+      740
+    ]
+  },
+  "left": {
+    "cameraX": 0,
+    "layerOffsets": [
+      0,
+      0,
+      0
+    ],
+    "fighters": [
+      249,
+      387
+    ]
+  },
+  "right": {
+    "cameraX": 640,
+    "layerOffsets": [
+      224,
+      448,
+      640
+    ],
+    "fighters": [
+      937,
+      983
+    ]
+  }
+}

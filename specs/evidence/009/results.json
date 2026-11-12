@@ -1,0 +1,119 @@
+{
+  "stage loaded": {
+    "pass": true
+  },
+  "A2 camera center": {
+    "pass": true,
+    "cameraX": 320,
+    "layerOffsets": [
+      112,
+      224,
+      320
+    ],
+    "fighters": [
+      540,
+      740
+    ],
+    "screenshot": "specs/evidence/009/01-camera-center.png"
+  },
+  "A2 camera left": {
+    "pass": true,
+    "cameraX": 0,
+    "layerOffsets": [
+      0,
+      0,
+      0
+    ],
+    "fighters": [
+      249,
+      387
+    ],
+    "screenshot": "specs/evidence/009/02-camera-left.png"
+  },
+  "A2 camera right": {
+    "pass": true,
+    "cameraX": 640,
+    "layerOffsets": [
+      224,
+      448,
+      640
+    ],
+    "fighters": [
+      937,
+      983
+    ],
+    "screenshot": "specs/evidence/009/03-camera-right.png"
+  },
+  "A2 parallax: each layer shifts by its own amount (far < mid < floor)": {
+    "pass": true,
+    "shiftsLeftToRight": [
+      224,
+      448,
+      640
+    ]
+  },
+  "A3 walkers mid-walk": {
+    "pass": true,
+    "walkers": [
+      {
+        "screenX": -43,
+        "onScreen": false,
+        "watching": false
+      },
+      {
+        "screenX": -456,
+        "onScreen": false,
+        "watching": false
+      },
+      {
+        "screenX": 13,
+        "onScreen": true,
+        "watching": false
+      },
+      {
+        "screenX": 247,
+        "onScreen": true,
+        "watching": false
+      }
+    ],
+    "screenshot": "specs/evidence/009/04-walkers-walking.png"
+  },
+  "A3 walkers watch the K.O.": {
+    "pass": true,
+    "ko": true,
+    "walkers": [
+      {
+        "screenX": -368,
+        "onScreen": false,
+        "watching": true
+      },
+      {
+        "screenX": 172,
+        "onScreen": true,
+        "watching": true
+      },
+      {
+        "screenX": 579,
+        "onScreen": true,
+        "watching": true
+      },
+      {
+        "screenX": -267,
+        "onScreen": false,
+        "watching": true
+      }
+    ],
+    "onScreenWatching": 2,
+    "screenshot": "specs/evidence/009/05-walkers-watch-ko.png"
+  },
+  "A4 render fps": {
+    "pass": true,
+    "samples": 74,
+    "min": 59.9,
+    "avg": 60
+  },
+  "no console errors": {
+    "pass": true,
+    "errors": []
+  }
+}
