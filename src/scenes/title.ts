@@ -28,8 +28,8 @@ export class TitleScene implements Scene {
   render(ctx: CanvasRenderingContext2D, frame: number): void {
     drawBackdrop(ctx, frame);
     const bob = Math.round(Math.sin(frame / 40) * 2);
-    text(ctx, "DATAMON", VIEW_WIDTH / 2, 52 + bob, 40, GOLD, "center");
-    text(ctx, "MERGE CONFLICT", VIEW_WIDTH / 2, 102, 16, "#ff6170", "center");
+    text(ctx, "COMPASS", VIEW_WIDTH / 2, 52 + bob, 40, GOLD, "center");
+    text(ctx, "CARDINAL CLASH", VIEW_WIDTH / 2, 102, 16, "#ff6170", "center");
     if (Math.floor(frame / 30) % 2 === 0) text(ctx, "PRESS START", VIEW_WIDTH / 2, 138, 8, INK, "center");
     this.menu.draw(ctx, VIEW_WIDTH / 2, 170, frame, 16, 28);
     const b = this.m.services.bindings;

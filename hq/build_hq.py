@@ -1,4 +1,4 @@
-"""Build hq/index.html (the Merge Conflict HQ artifact page) from hq/template.html.
+"""Build hq/index.html (the Cardinal Clash HQ artifact page) from hq/template.html.
 
 Embeds the 37 roster portraits and the two spec-001 sandbox fighters as data URIs.
 Run from the repo root:  uv run --with pillow python -I hq/build_hq.py

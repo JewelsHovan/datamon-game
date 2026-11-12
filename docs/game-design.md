@@ -1,6 +1,6 @@
-# Game design: Datamon: Merge Conflict
+# Game design: Compass: Cardinal Clash
 
-Working title. A 2D pixel-art 1v1 fighting game where Compass people fight, and summon battlemon creatures for their supers. Quality bar: the animation is the star.
+A 2D pixel-art 1v1 fighting game where Compass people fight, and summon battlemon creatures for their supers. Quality bar: the animation is the star.
 
 This is the durable reference for decisions. Specs link here instead of repeating them; when a decision changes, change it here first. Decisions the user can still change are mirrored on the project HQ page (see `CLAUDE.md`).
 
@@ -50,6 +50,12 @@ The spike generated a pose grid and a 6-frame punch for Julien with `gpt-image-2
 | Alex A. | Rusher | Rapid Deploy: dashing three-punch flurry ending in an uppercut | rush_streaks |
 
 Stats per archetype (health, walk speed, damage scale) live in one data table; the all-rounder is the baseline.
+
+### Game title (2026-11-12, HQ page)
+
+| Topic | Choice | What it means |
+|---|---|---|
+| Title | Compass: Cardinal Clash | Replaces the working title "Datamon: Merge Conflict". The title screen shows COMPASS large with CARDINAL CLASH as the subtitle; the browser tab and the HQ page use the full name. The in-fight "MERGE CONFLICT!" callout on a trade stays (an in-joke, not the title). The repo and the site URL keep the datamon-game name for now. |
 
 ### Defaults (set while writing specs)
 
