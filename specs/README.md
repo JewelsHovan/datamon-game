@@ -16,5 +16,5 @@ Files are `NNN-short-slug.md`. The skills keep this index in sync.
 | 006 | [Launch roster and signature specials](006-launch-roster.md) | in-progress |
 | 008 | [CPU opponent with three difficulty levels](008-cpu-opponent.md) | in-progress |
 | 009 | [Living stage](009-living-stage.md) | in-progress |
-| 010 | [Audio](010-audio.md) | in-progress |
+| 010 | [Audio](010-audio.md) | review |
 | 012 | [Animation v2: smoother moves, more moves and reactions](012-animation-v2.md) | in-progress |
