@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
     <title>Compass: Cardinal Clash</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -36,11 +36,194 @@
       #debug-overlay[hidden] {
         display: none;
       }
+      /* Touch and phones (spec 015): an app, not a page. No pinch or double-tap
+         zoom, no pull-to-refresh or bounce, no selection or long-press menu. */
+      html,
+      body {
+        overscroll-behavior: none;
+        touch-action: none;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-text-size-adjust: 100%;
+      }
+      #game,
+      #touch-controls,
+      #rotate-screen {
+        touch-action: none;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+      }
+      #touch-controls {
+        position: fixed;
+        inset: 0;
+        z-index: 2;
+        pointer-events: none;
+        font-family: "Press Start 2P", ui-monospace, monospace;
+      }
+      #touch-controls[hidden],
+      #touch-controls [hidden],
+      #rotate-screen[hidden] {
+        display: none;
+      }
+      .touch-dpad,
+      .touch-btn {
+        position: absolute;
+        box-sizing: border-box;
+        pointer-events: auto;
+        touch-action: none;
+      }
+      .touch-dpad {
+        border-radius: 50%;
+        background: rgba(13, 12, 34, 0.42);
+        border: 2px solid rgba(238, 237, 255, 0.28);
+      }
+      .touch-arm,
+      .touch-hub {
+        position: absolute;
+        background: rgba(238, 237, 255, 0.2);
+      }
+      .touch-hub {
+        left: 35%;
+        top: 35%;
+        width: 30%;
+        height: 30%;
+      }
+      .touch-arm-up,
+      .touch-arm-down {
+        left: 35%;
+        width: 30%;
+        height: 29%;
+      }
+      .touch-arm-left,
+      .touch-arm-right {
+        top: 35%;
+        width: 29%;
+        height: 30%;
+      }
+      .touch-arm-up { top: 6%; border-radius: 6px 6px 0 0; }
+      .touch-arm-down { bottom: 6%; border-radius: 0 0 6px 6px; }
+      .touch-arm-left { left: 6%; border-radius: 6px 0 0 6px; }
+      .touch-arm-right { right: 6%; border-radius: 0 6px 6px 0; }
+      .touch-arm::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 0;
+        height: 0;
+        border: 7px solid transparent;
+        transform: translate(-50%, -50%);
+      }
+      .touch-arm-up::after { border-bottom-color: rgba(238, 237, 255, 0.75); border-top-width: 0; }
+      .touch-arm-down::after { border-top-color: rgba(238, 237, 255, 0.75); border-bottom-width: 0; }
+      .touch-arm-left::after { border-right-color: rgba(238, 237, 255, 0.75); border-left-width: 0; }
+      .touch-arm-right::after { border-left-color: rgba(238, 237, 255, 0.75); border-right-width: 0; }
+      .touch-arm.lit {
+        background: rgba(255, 201, 74, 0.85);
+        box-shadow: 0 0 10px rgba(255, 201, 74, 0.6);
+      }
+      .touch-knob {
+        position: absolute;
+        left: 37%;
+        top: 37%;
+        width: 26%;
+        height: 26%;
+        border-radius: 50%;
+        background: rgba(238, 237, 255, 0.18);
+        border: 2px solid rgba(238, 237, 255, 0.35);
+        box-sizing: border-box;
+      }
+      .touch-dpad.active .touch-knob {
+        background: rgba(255, 201, 74, 0.55);
+        border-color: rgba(255, 201, 74, 0.9);
+      }
+      .touch-btn {
+        --c: #eeedff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.06em;
+        border-radius: 50%;
+        background: rgba(13, 12, 34, 0.45);
+        border: 0.045em solid var(--c);
+        color: var(--c);
+        line-height: 1;
+        opacity: 0.88;
+      }
+      .touch-btn-punch { --c: #ffc94a; }
+      .touch-btn-kick { --c: #ff6170; }
+      .touch-btn-special { --c: #6fe3ff; }
+      .touch-btn-throw { --c: #c39bff; }
+      .touch-btn-pause {
+        flex-direction: row;
+        gap: 0.13em;
+        border-radius: 22%;
+        opacity: 0.75;
+      }
+      .touch-glyph { font-size: 0.3em; }
+      .touch-btn-throw .touch-glyph { font-size: 0.2em; }
+      .touch-caption { font-size: 0.115em; }
+      .touch-pause-bar {
+        width: 0.13em;
+        height: 0.42em;
+        background: currentColor;
+      }
+      .touch-btn.pressed {
+        background: var(--c);
+        color: #0d0c22;
+        opacity: 1;
+        transform: scale(0.94);
+        box-shadow: 0 0 0.3em var(--c);
+      }
+      #rotate-screen {
+        position: fixed;
+        inset: 0;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+        background: rgba(8, 7, 24, 0.94);
+        color: #ffc94a;
+        font: 14px/1.6 "Press Start 2P", ui-monospace, monospace;
+        text-align: center;
+      }
+      #rotate-screen p {
+        margin: 0 24px;
+      }
+      #rotate-screen .rotate-sub {
+        color: #aeaadc;
+        font-size: 8px;
+      }
+      .rotate-phone {
+        width: 40px;
+        height: 70px;
+        border: 4px solid #eeedff;
+        border-radius: 8px;
+        box-sizing: border-box;
+        animation: rotate-phone 2.4s ease-in-out infinite;
+      }
+      @keyframes rotate-phone {
+        0%, 25% { transform: rotate(0deg); }
+        55%, 100% { transform: rotate(-90deg); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .rotate-phone { animation: none; transform: rotate(-90deg); }
+      }
     </style>
   </head>
   <body>
     <canvas id="game" width="640" height="360"></canvas>
     <pre id="debug-overlay" hidden></pre>
+    <div id="touch-controls" hidden></div>
+    <div id="rotate-screen" hidden>
+      <div class="rotate-phone"></div>
+      <p>ROTATE YOUR DEVICE</p>
+      <p class="rotate-sub">THE GAME PLAYS IN LANDSCAPE</p>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

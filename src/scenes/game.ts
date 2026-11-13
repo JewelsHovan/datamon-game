@@ -9,11 +9,12 @@ import { ControlBindings, safeLocalStorage } from "../input/bindings";
 import { createGamepads } from "../input/gamepad";
 import { createKeyboard } from "../input/keyboard";
 import { createInputSampler } from "../input/sampler";
+import { createTouchControls } from "../input/touch";
 import { browserClipDeps, loadAltClipSet, loadClipSet, type ClipSet } from "../render/clips";
 import { createDebugOverlay } from "../render/debugOverlay";
 import { loadEffects, type EffectAtlas } from "../render/effects";
 import { HUD_FONT } from "../render/hud";
-import { createScreen } from "../render/screen";
+import { createScreen, lockLandscapeOnFullscreen, type ScreenFit } from "../render/screen";
 import { stageInfo, type StageInfo } from "../render/stage";
 import { hashState } from "../sim/hash";
 import type { SimEvent, SimState } from "../sim/types";
@@ -30,7 +31,7 @@ export interface GameHandle {
   /** A JSON copy of the current fight's sim state, or null. */
   snapshot(): SimState | null;
   /** Render-side info: where each fighter's clips came from, the loop stats, toggles. */
-  info(): { clipSources: [string, string] | null; stats: LoopStats; boxes: boolean; reducedEffects: boolean; liveEffects: number; stage: StageInfo };
+  info(): { clipSources: [string, string] | null; stats: LoopStats; boxes: boolean; reducedEffects: boolean; liveEffects: number; stage: StageInfo; screen: ScreenInfo };
   /** Every sim event of the current fight (newest last, capped). */
   events(): SimEvent[];
   /** The current scene. */
@@ -39,6 +40,15 @@ export interface GameHandle {
   readonly frame: number;
   /** The current scene's state (cursors, menu index, picks, key test...). */
   menu(): Record<string, unknown> | null;
+}
+
+/** Screen fit and touch state (spec 015), for browser checks. */
+export interface ScreenInfo {
+  fit: ScreenFit;
+  /** The rotate screen is showing (the loop is frozen). */
+  rotating: boolean;
+  /** Touch controls: on screen, touch device, bits held by fingers now. Null without the controls element. */
+  touch: { visible: boolean; touchDevice: boolean; held: number } | null;
 }
 
 declare global {
@@ -51,6 +61,10 @@ export interface GameOptions {
   canvas: HTMLCanvasElement;
   overlay: HTMLElement;
   search: string;
+  /** The (empty) element the touch controls are built in; none on pages without touch play. */
+  touchControls?: HTMLElement | null;
+  /** The "rotate your device" element. */
+  rotateScreen?: HTMLElement | null;
   win?: Window;
   /** Presentation hooks (audio): sim events, menu sounds, scene changes. */
   hooks?: GameHooks;
@@ -104,7 +118,18 @@ class BrowserArt implements SceneArt {
 
 export async function startGame(options: GameOptions): Promise<GameHandle> {
   const win = options.win ?? window;
-  const screen = createScreen(options.canvas, win);
+  // Touch controls for P1 (spec 015), laid out on every fit; the first touch
+  // makes this a touch device, which fits again with a fractional scale.
+  const touch = options.touchControls ? createTouchControls(options.touchControls, win) : null;
+  let syncFrozen = () => {};
+  const screen = createScreen(options.canvas, win, {
+    touch: () => touch?.touchDevice ?? false,
+    rotateScreen: options.rotateScreen ?? null,
+    onFit: (fit, view) => touch?.layout(view.width, view.height, fit, view.insets),
+    onRotate: () => syncFrozen(),
+  });
+  if (touch) touch.onTouchDevice = () => screen.refit();
+  lockLandscapeOnFullscreen(win.document);
   const { ctx } = screen;
   ctx.fillStyle = "#000";
   ctx.fillRect(0, 0, screen.canvas.width, screen.canvas.height);
@@ -130,7 +155,8 @@ export async function startGame(options: GameOptions): Promise<GameHandle> {
     const who = `P${e.player + 1} CONTROLLER`;
     manager?.toast(e.type === "join" ? who : `${who} UNPLUGGED`, PLAYER_COLORS[e.player]);
   });
-  const sampler = createInputSampler(keyboard, pads);
+  // Touch merges into P1's bits; P1's keyboard or pad input hides the controls.
+  const sampler = createInputSampler(keyboard, pads, touch);
 
   const services: GameServices = {
     people,
@@ -156,7 +182,13 @@ export async function startGame(options: GameOptions): Promise<GameHandle> {
     info: fighterInfo,
     art: new BrowserArt(),
     prefersReducedMotion: win.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false,
-    hooks: options.hooks ?? {},
+    hooks: {
+      ...options.hooks,
+      scene(name, mode) {
+        touch?.setPauseShown(name === "fight" || name === "pause");
+        options.hooks?.scene?.(name, mode);
+      },
+    },
   };
   const m = new SceneManager(services);
   manager = m;
@@ -182,8 +214,10 @@ export async function startGame(options: GameOptions): Promise<GameHandle> {
       if (m.fight) overlay.update(m.fight.state, stats);
     },
   });
-  win.document.addEventListener("visibilitychange", () => loop.setHidden(win.document.hidden));
-  loop.setHidden(win.document.hidden);
+  // A hidden tab, or the rotate screen in portrait, freezes the game; it continues where it was.
+  syncFrozen = () => loop.setHidden(win.document.hidden || screen.rotating);
+  win.document.addEventListener("visibilitychange", syncFrozen);
+  syncFrozen();
 
   const handle: GameHandle = {
     get simFrame() {
@@ -198,6 +232,11 @@ export async function startGame(options: GameOptions): Promise<GameHandle> {
       reducedEffects: m.fight?.effects.reduced ?? false,
       liveEffects: m.fight?.effects.count ?? 0,
       stage: stageInfo(),
+      screen: {
+        fit: { ...screen.fit },
+        rotating: screen.rotating,
+        touch: touch ? { visible: touch.visible, touchDevice: touch.touchDevice, held: touch.held() } : null,
+      },
     }),
     events: () => m.fight?.log.slice() ?? [],
     get scene() {
