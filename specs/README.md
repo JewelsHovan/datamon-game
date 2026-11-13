@@ -18,3 +18,4 @@ Files are `NNN-short-slug.md`. The skills keep this index in sync.
 | 009 | [Living stage](009-living-stage.md) | review |
 | 010 | [Audio](010-audio.md) | review |
 | 012 | [Animation v2: smoother moves, more moves and reactions](012-animation-v2.md) | review |
+| 015 | [Touch controls and phone layout](015-touch-and-phones.md) | review |

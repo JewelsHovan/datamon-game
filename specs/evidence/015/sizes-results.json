@@ -1,0 +1,398 @@
+{
+  "A6 375x667 (portrait phone)": {
+    "pass": true,
+    "canvas": {
+      "x": 0,
+      "y": 228,
+      "w": 375,
+      "h": 210.9375,
+      "width": 640,
+      "height": 360,
+      "imageRendering": "pixelated"
+    },
+    "fit": {
+      "pass": true,
+      "inside": true,
+      "ratio": true,
+      "scaleOk": true,
+      "crisp": true,
+      "scale": 0.5859375
+    },
+    "controls": {
+      "pass": true,
+      "rotateShown": true
+    },
+    "titleControls": {
+      "pass": true,
+      "rotateShown": true
+    },
+    "screenshots": [
+      "specs/evidence/015/a6-375x667-title.png",
+      "specs/evidence/015/a6-375x667-under-rotate.png"
+    ]
+  },
+  "A6 390x844 (portrait phone)": {
+    "pass": true,
+    "canvas": {
+      "x": 0,
+      "y": 312,
+      "w": 390,
+      "h": 219.375,
+      "width": 640,
+      "height": 360,
+      "imageRendering": "pixelated"
+    },
+    "fit": {
+      "pass": true,
+      "inside": true,
+      "ratio": true,
+      "scaleOk": true,
+      "crisp": true,
+      "scale": 0.609375
+    },
+    "controls": {
+      "pass": true,
+      "rotateShown": true
+    },
+    "titleControls": {
+      "pass": true,
+      "rotateShown": true
+    },
+    "screenshots": [
+      "specs/evidence/015/a6-390x844-title.png",
+      "specs/evidence/015/a6-390x844-under-rotate.png"
+    ]
+  },
+  "A6 667x375 (phone)": {
+    "pass": true,
+    "canvas": {
+      "x": 0,
+      "y": 0,
+      "w": 666.65625,
+      "h": 375,
+      "width": 640,
+      "height": 360,
+      "imageRendering": "pixelated"
+    },
+    "fit": {
+      "pass": true,
+      "inside": true,
+      "ratio": true,
+      "scaleOk": true,
+      "crisp": true,
+      "scale": 1.0416666666666667
+    },
+    "controls": {
+      "pass": true,
+      "shown": true,
+      "count": 6,
+      "overBars": [],
+      "outside": []
+    },
+    "titleControls": {
+      "pass": true,
+      "shown": true,
+      "count": 5,
+      "overBars": [],
+      "outside": []
+    },
+    "screenshots": [
+      "specs/evidence/015/a6-667x375-title.png",
+      "specs/evidence/015/a6-667x375-fight.png"
+    ]
+  },
+  "A6 844x390 (phone)": {
+    "pass": true,
+    "canvas": {
+      "x": 75,
+      "y": 0,
+      "w": 693.328125,
+      "h": 390,
+      "width": 640,
+      "height": 360,
+      "imageRendering": "pixelated"
+    },
+    "fit": {
+      "pass": true,
+      "inside": true,
+      "ratio": true,
+      "scaleOk": true,
+      "crisp": true,
+      "scale": 1.0833333333333333
+    },
+    "controls": {
+      "pass": true,
+      "shown": true,
+      "count": 6,
+      "overBars": [],
+      "outside": []
+    },
+    "titleControls": {
+      "pass": true,
+      "shown": true,
+      "count": 5,
+      "overBars": [],
+      "outside": []
+    },
+    "screenshots": [
+      "specs/evidence/015/a6-844x390-title.png",
+      "specs/evidence/015/a6-844x390-fight.png"
+    ]
+  },
+  "A6 932x430 (phone)": {
+    "pass": true,
+    "canvas": {
+      "x": 83,
+      "y": 0,
+      "w": 764.4375,
+      "h": 430,
+      "width": 640,
+      "height": 360,
+      "imageRendering": "pixelated"
+    },
+    "fit": {
+      "pass": true,
+      "inside": true,
+      "ratio": true,
+      "scaleOk": true,
+      "crisp": true,
+      "scale": 1.1944444444444444
+    },
+    "controls": {
+      "pass": true,
+      "shown": true,
+      "count": 6,
+      "overBars": [],
+      "outside": []
+    },
+    "titleControls": {
+      "pass": true,
+      "shown": true,
+      "count": 5,
+      "overBars": [],
+      "outside": []
+    },
+    "screenshots": [
+      "specs/evidence/015/a6-932x430-title.png",
+      "specs/evidence/015/a6-932x430-fight.png"
+    ]
+  },
+  "A6 1024x768 (tablet)": {
+    "pass": true,
+    "canvas": {
+      "x": 0,
+      "y": 96,
+      "w": 1024,
+      "h": 576,
+      "width": 640,
+      "height": 360,
+      "imageRendering": "pixelated"
+    },
+    "fit": {
+      "pass": true,
+      "inside": true,
+      "ratio": true,
+      "scaleOk": true,
+      "crisp": true,
+      "scale": 1.6
+    },
+    "controls": {
+      "pass": true,
+      "shown": true,
+      "count": 6,
+      "overBars": [],
+      "outside": []
+    },
+    "titleControls": {
+      "pass": true,
+      "shown": true,
+      "count": 5,
+      "overBars": [],
+      "outside": []
+    },
+    "screenshots": [
+      "specs/evidence/015/a6-1024x768-title.png",
+      "specs/evidence/015/a6-1024x768-fight.png"
+    ]
+  },
+  "A6 1180x820 (tablet)": {
+    "pass": true,
+    "canvas": {
+      "x": 0,
+      "y": 78,
+      "w": 1180,
+      "h": 663.75,
+      "width": 640,
+      "height": 360,
+      "imageRendering": "pixelated"
+    },
+    "fit": {
+      "pass": true,
+      "inside": true,
+      "ratio": true,
+      "scaleOk": true,
+      "crisp": true,
+      "scale": 1.84375
+    },
+    "controls": {
+      "pass": true,
+      "shown": true,
+      "count": 6,
+      "overBars": [],
+      "outside": []
+    },
+    "titleControls": {
+      "pass": true,
+      "shown": true,
+      "count": 5,
+      "overBars": [],
+      "outside": []
+    },
+    "screenshots": [
+      "specs/evidence/015/a6-1180x820-title.png",
+      "specs/evidence/015/a6-1180x820-fight.png"
+    ]
+  },
+  "A6 1366x768 (desktop)": {
+    "pass": true,
+    "canvas": {
+      "x": 43,
+      "y": 24,
+      "w": 1280,
+      "h": 720,
+      "width": 640,
+      "height": 360,
+      "imageRendering": "pixelated"
+    },
+    "fit": {
+      "pass": true,
+      "inside": true,
+      "ratio": true,
+      "scaleOk": true,
+      "crisp": true,
+      "scale": 2
+    },
+    "controls": {
+      "pass": true,
+      "shown": false
+    },
+    "titleControls": {
+      "pass": true,
+      "shown": false
+    },
+    "screenshots": [
+      "specs/evidence/015/a6-1366x768-title.png",
+      "specs/evidence/015/a6-1366x768-fight.png"
+    ]
+  },
+  "A6 1920x1080 (desktop)": {
+    "pass": true,
+    "canvas": {
+      "x": 0,
+      "y": 0,
+      "w": 1920,
+      "h": 1080,
+      "width": 640,
+      "height": 360,
+      "imageRendering": "pixelated"
+    },
+    "fit": {
+      "pass": true,
+      "inside": true,
+      "ratio": true,
+      "scaleOk": true,
+      "crisp": true,
+      "scale": 3
+    },
+    "controls": {
+      "pass": true,
+      "shown": false
+    },
+    "titleControls": {
+      "pass": true,
+      "shown": false
+    },
+    "screenshots": [
+      "specs/evidence/015/a6-1920x1080-title.png",
+      "specs/evidence/015/a6-1920x1080-fight.png"
+    ]
+  },
+  "A6 2560x1440 (desktop)": {
+    "pass": true,
+    "canvas": {
+      "x": 0,
+      "y": 0,
+      "w": 2560,
+      "h": 1440,
+      "width": 640,
+      "height": 360,
+      "imageRendering": "pixelated"
+    },
+    "fit": {
+      "pass": true,
+      "inside": true,
+      "ratio": true,
+      "scaleOk": true,
+      "crisp": true,
+      "scale": 4
+    },
+    "controls": {
+      "pass": true,
+      "shown": false
+    },
+    "titleControls": {
+      "pass": true,
+      "shown": false
+    },
+    "screenshots": [
+      "specs/evidence/015/a6-2560x1440-title.png",
+      "specs/evidence/015/a6-2560x1440-fight.png"
+    ]
+  },
+  "A6 crisp crop 844x390 at x3": {
+    "pass": true,
+    "scale": 1.0833333333333333,
+    "screenshot": "specs/evidence/015/a6-crisp-844x390.png"
+  },
+  "A6 crisp crop 1024x768 at x2": {
+    "pass": true,
+    "scale": 1.6,
+    "screenshot": "specs/evidence/015/a6-crisp-1024x768.png"
+  },
+  "R3 safe-area insets: canvas and controls stay inside": {
+    "pass": true,
+    "insets": {
+      "top": 0,
+      "left": 47,
+      "right": 47,
+      "bottom": 21
+    },
+    "measuredInsets": [
+      "0px",
+      "47px",
+      "21px",
+      "47px"
+    ],
+    "canvas": {
+      "x": 94,
+      "y": 0,
+      "w": 656,
+      "h": 369,
+      "width": 640,
+      "height": 360,
+      "imageRendering": "pixelated"
+    },
+    "controls": {
+      "pass": true,
+      "shown": true,
+      "count": 6,
+      "overBars": [],
+      "outside": []
+    },
+    "screenshot": "specs/evidence/015/a6-844x390-notch.png"
+  },
+  "A6 no console errors": {
+    "pass": true,
+    "errors": []
+  }
+}
