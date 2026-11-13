@@ -1,0 +1,381 @@
+{
+  "A3 desktop + keyboard: controls hidden": {
+    "pass": true,
+    "touch": {
+      "visible": false,
+      "touchDevice": false,
+      "held": 0
+    },
+    "display": "none",
+    "menuMovedByKeyboard": true,
+    "scale": 2,
+    "screenshot": "specs/evidence/015/a3-01-desktop-keyboard.png"
+  },
+  "A3 first touch shows the controls": {
+    "pass": true,
+    "before": {
+      "visible": false,
+      "touchDevice": false,
+      "held": 0
+    },
+    "after": {
+      "visible": true,
+      "touchDevice": true,
+      "held": 0
+    },
+    "screenshot": "specs/evidence/015/a3-02-after-first-touch.png"
+  },
+  "A3 P2's key leaves them, P1's key press hides them again": {
+    "pass": true,
+    "afterP2Key": {
+      "visible": true,
+      "touchDevice": true,
+      "held": 0
+    },
+    "afterP1Key": {
+      "visible": false,
+      "touchDevice": true,
+      "held": 0
+    }
+  },
+  "A5 touch-action none on the game area and controls": {
+    "pass": true,
+    "touchAction": {
+      "html": "none",
+      "body": "none",
+      "#game": "none",
+      "#touch-controls": "none",
+      ".touch-dpad": "none",
+      ".touch-btn-punch": "none",
+      ".touch-btn-kick": "none",
+      ".touch-btn-special": "none",
+      ".touch-btn-throw": "none",
+      ".touch-btn-pause": "none"
+    }
+  },
+  "A5 overscroll-behavior none": {
+    "pass": true,
+    "overscroll": {
+      "html": "none",
+      "body": "none"
+    }
+  },
+  "A5 user-select none on the controls": {
+    "pass": true,
+    "userSelect": {
+      "#touch-controls": "none",
+      ".touch-dpad": "none",
+      ".touch-btn-punch": "none",
+      ".touch-btn-pause": "none"
+    },
+    "touchCallout": null
+  },
+  "A5 viewport meta disables zoom": {
+    "pass": true,
+    "viewport": "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+  },
+  "A5 pinch and double tap do not zoom": {
+    "pass": true,
+    "pinchScale": 1,
+    "doubleTapScale": 1,
+    "scrollY": 0
+  },
+  "A5 a press registers on touch-down (no 300 ms delay)": {
+    "pass": true,
+    "heldRightAfterTouchStart": 64
+  },
+  "R3 fullscreen asks for a landscape lock": {
+    "pass": true,
+    "locks": [
+      "landscape"
+    ]
+  },
+  "A2 phone: controls on the title (Pause hidden on menus), canvas fills the height": {
+    "pass": true,
+    "fit": {
+      "scale": 1.0833333333333333,
+      "cssWidth": 693.3333333333333,
+      "cssHeight": 390,
+      "left": 75,
+      "top": 0
+    },
+    "dpad": {
+      "x": 86,
+      "y": 304,
+      "w": 148,
+      "h": 148,
+      "left": 12,
+      "top": 230
+    },
+    "buttons": {
+      "punch": {
+        "x": 730,
+        "y": 348,
+        "w": 60,
+        "h": 60,
+        "left": 700,
+        "top": 318
+      },
+      "kick": {
+        "x": 802,
+        "y": 330,
+        "w": 60,
+        "h": 60,
+        "left": 772,
+        "top": 300
+      },
+      "special": {
+        "x": 730,
+        "y": 276,
+        "w": 60,
+        "h": 60,
+        "left": 700,
+        "top": 246
+      },
+      "throw": {
+        "x": 802,
+        "y": 258,
+        "w": 60,
+        "h": 60,
+        "left": 772,
+        "top": 228
+      },
+      "pause": {
+        "x": 812.5,
+        "y": 31.5,
+        "w": 39,
+        "h": 39,
+        "left": 793,
+        "top": 12
+      }
+    },
+    "screenshot": "specs/evidence/015/a2-01-title-controls.png"
+  },
+  "A2 title: VS CPU by touch": {
+    "pass": true,
+    "menu": {
+      "mode": "cpu",
+      "stage": "pick",
+      "cursors": [
+        0,
+        37
+      ],
+      "under": [
+        "julien-hovan",
+        "random"
+      ],
+      "locked": [
+        null,
+        null
+      ],
+      "level": "normal",
+      "tiles": [
+        "julien-hovan",
+        "pentcho-tchomakov",
+        "alex-andrianavalontsalama",
+        "andrea-vreugdenhil",
+        "antonia-nistor",
+        "aurelien-bouffanais",
+        "dana-domanko",
+        "duc-an-nguyen",
+        "elina-gu",
+        "emile-moffatt",
+        "ethan-pirso",
+        "felicia-gorgacheva",
+        "francesco-finn",
+        "guillaume-delmas-frenette",
+        "guillaume-pregent",
+        "jerry-zhu",
+        "jewoo-lee",
+        "jonah-lee",
+        "jonathan-kim",
+        "logan-labossiere",
+        "megane-darnaud",
+        "milen-thomas",
+        "minh-ngoc-do",
+        "oyku-cildir",
+        "philippe-miranda-jean",
+        "richard-el-chaar",
+        "sarah-kotb",
+        "saransh-padhy",
+        "scott-carr",
+        "stephanie-fontaine",
+        "tabarek-al-khalidi",
+        "tyler-nagano",
+        "veronica-marallag",
+        "victor-desautels",
+        "vincent-anctil",
+        "wild-guevera",
+        "william-chan",
+        "random"
+      ],
+      "playable": [
+        "pentcho-tchomakov",
+        "julien-hovan",
+        "alex-andrianavalontsalama",
+        "felicia-gorgacheva"
+      ]
+    }
+  },
+  "A2 select: fighter and level by touch": {
+    "pass": true,
+    "picked": "julien-hovan",
+    "locked": [
+      "julien-hovan",
+      "pentcho-tchomakov"
+    ],
+    "level": "easy",
+    "screenshot": "specs/evidence/015/a2-02-select-level.png"
+  },
+  "A2 VS CPU fight starts, Pause shows": {
+    "pass": true,
+    "menu": {
+      "mode": "cpu",
+      "fighters": [
+        "julien-hovan",
+        "pentcho-tchomakov"
+      ],
+      "cpu": [
+        null,
+        "easy"
+      ],
+      "phase": "fight",
+      "round": 1,
+      "wins": [
+        0,
+        0
+      ],
+      "legends": [
+        [
+          "F PUNCH  G KICK  H SPECIAL",
+          "WASD MOVE  F+G THROW"
+        ],
+        [
+          "CPU EASY"
+        ]
+      ]
+    },
+    "pause": {
+      "x": 812.5,
+      "y": 31.5,
+      "w": 39,
+      "h": 39,
+      "left": 793,
+      "top": 12
+    }
+  },
+  "A2 walk by d-pad": {
+    "pass": true,
+    "state": "walk_forward",
+    "movedPx": 57.6,
+    "screenshot": "specs/evidence/015/a2-03-walk.png"
+  },
+  "A2 jump by d-pad": {
+    "pass": true,
+    "jump": {
+      "type": "jump",
+      "player": 0,
+      "dir": 0
+    }
+  },
+  "A2 punch lands": {
+    "pass": true,
+    "hit": {
+      "type": "hit",
+      "player": 0,
+      "target": 1,
+      "move": "light_punch",
+      "strength": "light",
+      "x": 79510,
+      "y": 20900,
+      "damage": 40,
+      "combo": 1
+    }
+  },
+  "A2 multi-touch: d-pad held while Kick is tapped (forward + Kick)": {
+    "pass": true,
+    "attack": {
+      "type": "attack",
+      "player": 0,
+      "move": "heavy_kick"
+    },
+    "screenshot": "specs/evidence/015/a2-04-pressed-button.png"
+  },
+  "A2 special lands": {
+    "pass": true,
+    "hit": {
+      "type": "hit",
+      "player": 0,
+      "target": 1,
+      "move": "special",
+      "strength": "special",
+      "x": 82240,
+      "y": 22800,
+      "damage": 80,
+      "combo": 1
+    }
+  },
+  "A2 throw lands": {
+    "pass": true,
+    "throw": {
+      "type": "throw",
+      "player": 0,
+      "target": 1
+    }
+  },
+  "A2 pause and resume by touch": {
+    "pass": true,
+    "frames": [
+      677,
+      677,
+      694
+    ],
+    "screenshot": "specs/evidence/015/a2-05-pause.png"
+  },
+  "A2 match finished: results": {
+    "pass": true,
+    "results": {
+      "winner": 0,
+      "index": 0,
+      "item": "REMATCH"
+    },
+    "seconds": 57,
+    "screenshot": "specs/evidence/015/a2-06-results.png"
+  },
+  "A2 results menu by touch": {
+    "pass": true,
+    "item": "CHARACTER SELECT",
+    "scene": "select"
+  },
+  "A2 no console errors": {
+    "pass": true,
+    "errors": []
+  },
+  "A4 portrait: rotate screen on load": {
+    "pass": true,
+    "rotating": true,
+    "display": "flex",
+    "framesStepped": 0,
+    "screenshot": "specs/evidence/015/a4-01-portrait-rotate.png"
+  },
+  "A4 portrait mid-match: rotate screen, match frozen": {
+    "pass": true,
+    "rotating": true,
+    "frames": [
+      121,
+      121
+    ],
+    "screenshot": "specs/evidence/015/a4-02-portrait-mid-match.png"
+  },
+  "A4 landscape again: rotate screen gone, the match continues": {
+    "pass": true,
+    "rotating": false,
+    "frames": {
+      "frozen": 121,
+      "at100ms": 125,
+      "at500ms": 150
+    },
+    "round": 1,
+    "screenshot": "specs/evidence/015/a4-03-landscape-continues.png"
+  }
+}

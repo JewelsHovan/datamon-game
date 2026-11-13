@@ -13,10 +13,16 @@ if (!(canvas instanceof HTMLCanvasElement) || !(overlay instanceof HTMLElement))
 // Audio (spec 010): the AudioContext is created on the first click or key press; M mutes.
 const audio = createAudio();
 bindAudioControls(window, audio);
+// On touch, the end of a tap is what counts as a user gesture for audio (pointerdown is not).
+const resumeAudio = () => audio.resume();
+window.addEventListener("pointerup", resumeAudio, { capture: true });
+window.addEventListener("touchend", resumeAudio, { capture: true, passive: true });
 
 startGame({
   canvas,
   overlay,
+  touchControls: document.getElementById("touch-controls"),
+  rotateScreen: document.getElementById("rotate-screen"),
   search: window.location.search,
   hooks: {
     simEvents: (events, state) => audio.onEvents(events, state.round),
