@@ -1,6 +1,6 @@
 # 014: App shell and accessibility
 
-Status: ready
+Status: review
 Created: 2026-11-12
 
 ## Goal
@@ -19,14 +19,14 @@ Release readiness, part 2 of 3 (part 1: spec 013, speed and memory; part 3: spec
 - R7. Keyboard and focus: every menu item is reachable with the keyboard (already true; keep it), the pause menu lists the mute key, and the game pauses itself when the window loses focus during a fight (stuck keys are already cleared on blur).
 
 ## Acceptance criteria
-- [ ] A1. (R1, R3) A pytest (or script check) confirms each icon and the share image exist at the right size, and the PNG icons have hard pixel edges (no semi-transparent pixels outside the maskable safe zone's background). Screenshots of the icons in `specs/evidence/014/`.
-- [ ] A2. (R2) A browser check reads `Page.getAppManifest` and `Page.getInstallabilityErrors` over CDP on a production build: no manifest errors, no installability errors; the favicon and every icon URL answer 200.
-- [ ] A3. (R3) The built `index.html` has the description, `theme-color`, `og:title`, `og:description`, `og:image` (absolute URL of the live site), `twitter:card=summary_large_image`; a test parses them.
-- [ ] A4. (R4) A browser check selects FULLSCREEN on the title menu and sees `document.fullscreenElement` set, then leaves it with the same item from the pause menu; the item is hidden when `document.fullscreenEnabled` is false.
-- [ ] A5. (R5) A browser check reads the accessibility tree (`Accessibility.getFullAXTree`): the canvas is an image with a label that changes between title, select and fight, and the live region's text includes "Round 1", "Fight" and "K.O." during a match.
-- [ ] A6. (R6) Browser checks: blocking the fighter atlas request shows the failure screen with a Reload button (screenshot); with JavaScript disabled the noscript message shows.
-- [ ] A7. (R7) A browser check: blurring the window mid-fight opens the pause screen; the pause screen shows the mute key.
-- [ ] A8. No regression: `./dm check` exits 0 and the 001, 003, 005, 008, 009 and 012 browser checks pass; no console errors and no 404s on any screen.
+- [x] A1. (R1, R3) A pytest (or script check) confirms each icon and the share image exist at the right size, and the PNG icons have hard pixel edges (no semi-transparent pixels outside the maskable safe zone's background). Screenshots of the icons in `specs/evidence/014/`.
+- [x] A2. (R2) A browser check reads `Page.getAppManifest` and `Page.getInstallabilityErrors` over CDP on a production build: no manifest errors, no installability errors; the favicon and every icon URL answer 200.
+- [x] A3. (R3) The built `index.html` has the description, `theme-color`, `og:title`, `og:description`, `og:image` (absolute URL of the live site), `twitter:card=summary_large_image`; a test parses them.
+- [x] A4. (R4) A browser check selects FULLSCREEN on the title menu and sees `document.fullscreenElement` set, then leaves it with the same item from the pause menu; the item is hidden when `document.fullscreenEnabled` is false.
+- [x] A5. (R5) A browser check reads the accessibility tree (`Accessibility.getFullAXTree`): the canvas is an image with a label that changes between title, select and fight, and the live region's text includes "Round 1", "Fight" and "K.O." during a match.
+- [x] A6. (R6) Browser checks: blocking the fighter atlas request shows the failure screen with a Reload button (screenshot); with JavaScript disabled the noscript message shows.
+- [x] A7. (R7) A browser check: blurring the window mid-fight opens the pause screen; the pause screen shows the mute key.
+- [x] A8. No regression: `./dm check` exits 0 and the 001, 003, 005, 008, 009 and 012 browser checks pass; no console errors and no 404s on any screen.
 
 ## Out of scope
 - Offline play and a service worker.
@@ -42,15 +42,45 @@ Release readiness, part 2 of 3 (part 1: spec 013, speed and memory; part 3: spec
 - None.
 
 ## Tasks
-- [ ] T1. Icon and share-image script (`art/pipeline/app_icons.py` or similar) writing to `public/icons/` and `public/share.png`; pytest.
-- [ ] T2. `public/manifest.webmanifest` and the `index.html` head (icons, manifest, description, theme-color, Open Graph and Twitter tags, noscript).
-- [ ] T3. Fullscreen item on the title and pause menus, double-click on the canvas (`src/scenes/title.ts`, `src/scenes/pause.ts`, `src/scenes/game.ts`).
-- [ ] T4. Screen reader layer: canvas label and live region fed by scene changes and sim events (a small module, e.g. `src/a11y/announcer.ts`, hooked in `src/main.ts` or `src/scenes/game.ts`); vitest for the message mapping and throttling.
-- [ ] T5. Failure screen and startup error handling (`src/main.ts`, `src/scenes/game.ts`); pause on window blur during a fight; mute key on the pause screen.
-- [ ] T6. Browser checks for A2 and A4 to A7 in `specs/evidence/014/`; evidence and notes.
+- [x] T1. Icon and share-image script (`art/pipeline/app_icons.py` or similar) writing to `public/icons/` and `public/share.png`; pytest.
+- [x] T2. `public/manifest.webmanifest` and the `index.html` head (icons, manifest, description, theme-color, Open Graph and Twitter tags, noscript).
+- [x] T3. Fullscreen item on the title and pause menus, double-click on the canvas (`src/scenes/title.ts`, `src/scenes/pause.ts`, `src/scenes/game.ts`).
+- [x] T4. Screen reader layer: canvas label and live region fed by scene changes and sim events (a small module, e.g. `src/a11y/announcer.ts`, hooked in `src/main.ts` or `src/scenes/game.ts`); vitest for the message mapping and throttling.
+- [x] T5. Failure screen and startup error handling (`src/main.ts`, `src/scenes/game.ts`); pause on window blur during a fight; mute key on the pause screen.
+- [x] T6. Browser checks for A2 and A4 to A7 in `specs/evidence/014/`; evidence and notes.
 
 ## Implementation notes
-(filled by spec-tackle)
+2026-11-12, builder session (worktree branch, started from `d6644ad`).
+
+What was built:
+- T1 `art/pipeline/app_icons.py` composes everything from the game's own art, each image designed at a small size in game pixels and enlarged by a whole number (nearest neighbour), alpha only 0 or 255. Favicon (16, 32 and `public/favicon.ico` with both): the gold C of COMPASS on the navy panel. App icons (`icon-192`, `icon-512` with stepped transparent corners, `apple-touch-icon` 180 and `icon-maskable-512` full bleed): Julien's idle bust (the default P1) over the backdrop split in the versus colors, head and fists inside the maskable 80% circle. Share image 1200x630: COMPASS and CARDINAL CLASH lettering over the four launch fighters, two a side facing each other, with VS. The title lettering is the Press Start 2P glyphs (SIL OFL) rasterized at 8 px and kept in the script as pixel rows, drawn with the same outline and (2, 2) shadow as `hud.ts text()`, so the script needs no font file and no network. It reads each fighter's atlas name from the manifest when the manifest names one (spec 013 moves atlases to WebP), else `atlas.png`, else `atlas.webp`.
+- T2 `public/manifest.webmanifest` (name, short name, `display: fullscreen` with `display_override: [fullscreen, standalone]`, landscape, `#0b0a1f` theme and background, start URL and scope `./`, the three icons). `index.html` head: description, theme-color, color-scheme, icon links, manifest, Open Graph and Twitter tags (absolute `og:image` on the live site), a tiny inline script that shows the failure screen when the game's own script cannot load or throws before the game starts, and `onerror` on the font stylesheet (still non-blocking). Body: the `<noscript>` screen and the hidden `#failure` screen (role alert, RELOAD button). Both in the menus' colors and font; the viewport meta is untouched.
+- T3 `src/shell/fullscreen.ts` (whole page, webkit fallback, never throws). FULLSCREEN is the last title item (so the existing title indexes stay) and sits before QUIT TO SELECT on the pause menu; both are left out when `document.fullscreenEnabled` is false. Double-click on the canvas toggles too. The menus call the toggle on the step right after the key press, inside the key's user-activation window.
+- T4 `src/a11y/announcer.ts`: canvas `role="img"` with a label naming the game and the screen ("Compass: Cardinal Clash, fight: Julien H. versus Felicia G."), and a visually hidden polite live region (`role="status"`). Scenes describe themselves (`Scene.describe`, passed as a third argument of `GameHooks.scene`); sim events feed round number, Fight, K.O., round and match winners; pause, resume and rematch come from scene changes. Throttle: one message at a time, 900 ms apart, at most 4 waiting (oldest dropped), a newer screen change replaces a waiting one, repeats collapse. Wired in `src/main.ts` next to audio.
+- T5 `src/shell/failure.ts` plus `src/scenes/game.ts`: a fighter's atlas that does not load now rejects the clip load (`src/render/clips.ts`: only an unusable manifest still falls back to placeholders), a missing effects atlas rejects the fight load, and a font stylesheet that errors or a face that does not load rejects `startGame` (a font that is merely slow still shows in the fallback after 2.5 s, as before). Any of these, or a throw while starting, stops the loop, releases the keyboard (the game blocks Enter, Space and Tab, which the Reload button needs) and shows the failure screen naming what did not load, with focus on RELOAD. The select screen's preview loader no longer retries a failed clip set every frame. Window blur pauses a fight (`SceneManager.blur`). The pause panel shows `ESC: RESUME   M: MUTE` (`M: UNMUTE` while muted).
+- A8 404s: the title screen asked for all 37 people's `manifest.json` and 33 answered 404 (console errors in DevTools); the stage walkers did the same during fights. `ClipLoaderDeps.mayHaveArt` now limits the requests to the roster in `src/data/fighters.ts` (the browser deps set it; tests without it keep probing everyone). A new fighter needs its `FIGHTERS` entry to be picked, which spec 006 already requires for its archetype and special.
+- `specs/evidence/005/flow-check.mjs`: the pause menu step now walks to QUIT TO SELECT by name instead of pressing down twice (FULLSCREEN sits in between where the page can go fullscreen).
+
+Evidence:
+- A1: `uv run --with pytest --with pillow --with numpy --with scipy pytest art/pipeline/tests -q`, EXIT=0, 47 passed (`art/pipeline/tests/test_app_icons.py`: sizes, alpha only 0/255, full-bleed images opaque, every k x k block one color, maskable head and fists inside the safe circle, the ICO holds the crisp 16 and 32, regenerating gives the same pixels, atlas name from the manifest, the four launch fighters). Contact sheet `specs/evidence/014/a1-icons.png` (every icon at real size on light and dark, the maskable one with its safe zone, the share image), looked at; `public/share.png` looked at.
+- A2: production build (`npx vite build --outDir <tmp>/dist`, `npx vite preview ... --port 4391 --strictPort`), `node specs/evidence/014/install-check.mjs http://127.0.0.1:4391/ specs/evidence/014`, EXIT=0: `Page.getAppManifest` errors `[]`, `Page.getInstallabilityErrors` `[]`, favicon.ico, both favicons, the Apple icon, the manifest, the three manifest icons and share.png all 200 with image types. `install-results.json`, screenshot `a2-01-production-title.png`.
+- A3: `src/shell/head.test.ts` builds the page in memory with the project's Vite config and parses the built `index.html`: description, theme-color, og:title, og:description, og:image `https://datamon-game.julienh15.workers.dev/share.png` (1200x630), twitter:card `summary_large_image`, icon and manifest links resolving to files of the stated sizes, the non-blocking font link, noscript and failure markup; plus the manifest fields for R2. The install check also reads the same tags from the served production page.
+- A4 to A7 and the A8 error log: `node specs/evidence/014/shell-check.mjs http://127.0.0.1:5177/ specs/evidence/014` against `./dm dev`, results in `shell-results.json`:
+  - A4: trusted Enter (`Input.dispatchKeyEvent`) on the title's FULLSCREEN sets `document.fullscreenElement` to `HTML` (headless Chrome allowed it with the key's user activation); in the fight, Start pauses (Esc would make the browser itself leave fullscreen), the pause menu's FULLSCREEN sets it back to null; a double-click on the canvas enters and leaves too; with `document.fullscreenEnabled` overridden to false, neither menu lists FULLSCREEN. Screenshots `a4-01-title-fullscreen.png`, `a4-02-pause-fullscreen-item.png`, `a4-03-no-fullscreen-api-pause.png`.
+  - A5: `Accessibility.getFullAXTree`: the canvas is role `image` named "Compass: Cardinal Clash, title screen", then "..., VS player character select", then "..., fight: Julien H. versus Felicia G.", then "..., results: ..."; the live region (role status, polite) said, in order: "VS player: character select.", "Julien H. versus Felicia G.", "Round 1.", "Fight!", "K.O.!", "Julien H. wins round 1.", "Round 2.", "Fight!", "Paused.", "Resumed.", "K.O.!", "Julien H. wins round 2.", "Julien H. wins the match, 2 to 0!", "Results: player 1, Julien H., wins 2 to 0.". Screenshots `a5-01-title.png`, `a5-02-select.png`, `a5-03-results.png`.
+  - A6: with `Fetch.enable` failing `*/fighters/*/atlas*` on `?p1=julien-hovan&p2=felicia-gorgacheva`, the failure screen shows "Julien H.'s fighter art did not load. Check your connection, then reload." with RELOAD focused (`a6-01-atlas-blocked.png`); Enter on it reloads into the fight once the block is lifted. Also blocked: the effects atlas (`a6-02-effects-blocked.png`), the font stylesheet (`a6-03-font-blocked.png`), the game script itself (`a6-04-script-blocked.png`, shown by the inline handler), and an atlas during the select screen's preview (failure screen, each atlas requested once). `Emulation.setScriptExecutionDisabled`: the noscript message is in the accessibility tree (`a6-05-noscript.png`).
+  - A7: a second tab brought to the front (`Target.activateTarget`) blurs the window mid-fight in round 2 (`document.hasFocus()` false) and the scene is `pause`; the pause screen reads `ESC: RESUME   M: MUTE`, and `M: UNMUTE` after pressing M (`a7-01-blur-paused.png`, `a7-02-muted.png`).
+  - A8 log over title, select, versus, fight, pause, results and controls: no console errors, no 4xx/5xx responses (128 requests; manifest and icons 200).
+- A8: `./dm check` EXIT=0 (typecheck, 26 test files / 331 tests, build). Against the same dev server, each with its output in a temp dir: `001/browser-check.mjs` EXIT=0, `003/fight-check.mjs` EXIT=0, `005/flow-check.mjs` EXIT=0 (with the pause-menu walk above), `008/cpu-check.mjs` EXIT=0, `009/stage-check.mjs` EXIT=0, `012/moves-check.mjs` EXIT=0. No console errors or 404s on any screen per the shell check above and the production title screen per the install check.
+
+Unit tests added: `src/a11y/announcer.test.ts` (labels, messages, throttle), `src/shell/shell.test.ts` (fullscreen toggle and missing API, failure detail and focus), `src/shell/head.test.ts` (A3, R2), `src/scenes/flow.test.ts` "app shell (spec 014)" (FULLSCREEN items and toggles, pause hint, blur pauses only a fight, scene words, a failed fight load goes to `fatal`) and the roster `mayHaveArt` case, `src/render/clips.test.ts` (an atlas that does not load rejects; `mayHaveArt` skips the request).
+
+Follow-ups (not in this spec):
+- Menu cursor moves are not announced (the Decisions keep the live region to screens and fight moments), so a screen-reader user hears the screen but not the selected item. Worth a small follow-up if the game should be playable that way.
+- The font comes from Google Fonts: if that host is blocked the game now stops on the failure screen, as R6 asks. Self-hosting Press Start 2P (with spec 013's caching) would leave the failure screen to our own server's failures.
+- An exception thrown inside the running loop (after startup) still freezes the canvas; only load failures and startup throws reach the failure screen.
+- Stage layers that fail to load still degrade to the floor color (not listed in R6; `src/render/stage.ts` is being reworked by spec 013).
+- Spec 015's landscape lock on fullscreen belongs in `src/shell/fullscreen.ts` `toggle()`.
 
 ## Review
 (filled by spec-review)

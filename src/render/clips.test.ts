@@ -244,6 +244,26 @@ describe("clip loader", () => {
     expect(f.warnings.some((w) => w.includes("unusable manifest"))).toBe(true);
   });
 
+  it("rejects when the manifest's atlas does not load, so the page can show its failure screen (spec 014)", async () => {
+    const f = fakeDeps("julien-hovan");
+    f.deps.loadImage = async () => {
+      throw new Error("EncodingError: the atlas request was blocked");
+    };
+    await expect(loadClipSet(person("julien-hovan"), f.deps)).rejects.toThrow("blocked");
+    expect(f.warnings).toEqual([]);
+    // Not cached: a later attempt (after a reload) loads again.
+    const g = fakeDeps("julien-hovan");
+    expect((await loadClipSet(person("julien-hovan"), g.deps)).source).toBe("manifest");
+  });
+
+  it("skips the manifest request for people mayHaveArt rules out (no 404, spec 014 A8)", async () => {
+    const f = fakeDeps("jewoo-lee");
+    f.deps.mayHaveArt = (slug) => slug === "julien-hovan";
+    const set = await loadClipSet(person("jewoo-lee"), f.deps);
+    expect(set.source).toBe("placeholder");
+    expect(f.fetched).toEqual([FIGHTER_INDEX_URL]); // the index (spec 013) is read; no manifest request
+  });
+
   it("caches each fighter's clips", async () => {
     const f = fakeDeps(null);
     const p = person("jewoo-lee");

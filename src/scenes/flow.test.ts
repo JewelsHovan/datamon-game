@@ -403,6 +403,20 @@ describe("roster", () => {
     expect(fetched).toEqual(["./fighters/index.json"]);
   });
 
+  it("asks only for the manifests mayHaveArt allows, so people without art cost no 404 (spec 014 A8)", async () => {
+    const asked: string[] = [];
+    const found = await detectPlayable(getPeople(), {
+      fetchJson: async (url) => {
+        asked.push(url);
+        return null;
+      },
+      mayHaveArt: (slug) => slug === "julien-hovan" || slug === "felicia-gorgacheva",
+    });
+    expect(found.size).toBe(0);
+    // Without a fighter index (an older build) the probe runs, narrowed by mayHaveArt.
+    expect(asked.filter((u) => u !== "./fighters/index.json").sort()).toEqual(["./fighters/felicia-gorgacheva/manifest.json", "./fighters/julien-hovan/manifest.json"]);
+  });
+
   it("reads archetype and special from a fighter table when one exists, else the fallback", () => {
     expect(fighterInfo("julien-hovan", [])).toEqual({ archetype: "All-rounder", special: "Data Orb" });
     expect(fighterInfo("felicia-gorgacheva", [])).toEqual({ archetype: null, special: null });
@@ -410,5 +424,103 @@ describe("roster", () => {
     expect(fighterInfo("felicia-gorgacheva", [table])).toEqual({ archetype: "Trickster", special: "Context Switch" });
     const list = { FIGHTER_LIST: [{ slug: "alex-andrianavalontsalama", archetype: "all_rounder", special: { name: "Rapid Deploy" } }] };
     expect(infoFromModule(list, "alex-andrianavalontsalama")).toEqual({ archetype: "All-rounder", special: "Rapid Deploy" });
+  });
+});
+
+describe("app shell (spec 014)", () => {
+  /** Fakes with a fullscreen toggle that records its calls. */
+  function withFullscreen(enabled: boolean) {
+    const f = fakes();
+    const toggles: number[] = [];
+    const services: GameServices = { ...f.services, fullscreen: { enabled, toggle: () => toggles.push(1) } };
+    return { f: { ...f, services }, toggles };
+  }
+
+  it("FULLSCREEN is the last title item and toggles fullscreen; it is left out where the API is missing (R4)", () => {
+    const off = new Driver(fakes());
+    expect(off.m.scene.debug?.()).toMatchObject({ items: ["VS CPU", "VS PLAYER", "TRAINING", "CONTROLS"] });
+    const disabled = new Driver(withFullscreen(false).f);
+    expect((disabled.m.scene.debug?.() as { items: string[] }).items).not.toContain("FULLSCREEN");
+
+    const { f, toggles } = withFullscreen(true);
+    const d = new Driver(f);
+    expect(d.m.scene.debug?.()).toMatchObject({ items: ["VS CPU", "VS PLAYER", "TRAINING", "CONTROLS", "FULLSCREEN"] });
+    d.titlePick(4);
+    expect(toggles).toHaveLength(1);
+    expect(d.scene).toBe("title"); // stays on the title
+  });
+
+  it("the pause menu has FULLSCREEN before QUIT TO SELECT, and shows the mute key (R4, R7)", async () => {
+    const { f, toggles } = withFullscreen(true);
+    let muted = false;
+    const d = new Driver({ ...f, services: { ...f.services, soundMuted: () => muted } });
+    d.titlePick(1);
+    d.press(0, P);
+    d.press(1, P);
+    await d.throughVersus();
+    d.escape();
+    expect(d.m.scene.debug?.()).toMatchObject({ items: ["RESUME", "CONTROLS", "FULLSCREEN", "QUIT TO SELECT"], hint: "ESC: RESUME   M: MUTE" });
+    d.press(0, BUTTON_DOWN);
+    d.press(0, BUTTON_DOWN);
+    d.press(0, P); // FULLSCREEN
+    expect(toggles).toHaveLength(1);
+    expect(d.scene).toBe("pause");
+    muted = true;
+    expect(d.m.scene.debug?.()).toMatchObject({ hint: "ESC: RESUME   M: UNMUTE" });
+    d.press(0, BUTTON_DOWN);
+    d.press(0, P); // QUIT TO SELECT
+    expect(d.select.mode).toBe("versus");
+  });
+
+  it("losing window focus pauses a fight, and only a fight (R7)", async () => {
+    const d = new Driver(fakes());
+    d.m.blur();
+    expect(d.scene).toBe("title");
+    d.titlePick(1);
+    d.press(0, P);
+    d.press(1, P);
+    await d.throughVersus();
+    const fight = d.fight;
+    d.m.blur();
+    expect(d.scene).toBe("pause");
+    d.m.blur(); // already paused: stays on the pause menu
+    expect(d.scene).toBe("pause");
+    d.escape();
+    expect(d.m.scene).toBe(fight);
+  });
+
+  it("scene changes carry the scene's words for screen readers (R5)", async () => {
+    const seen: [string, string | null, string | undefined][] = [];
+    const f = fakes();
+    const services: GameServices = { ...f.services, hooks: { scene: (name, mode, detail) => seen.push([name, mode, detail]) } };
+    const d = new Driver({ ...f, services });
+    d.titlePick(1);
+    d.press(0, P);
+    d.press(1, P);
+    await d.throughVersus();
+    d.escape();
+    expect(seen).toEqual([
+      ["title", null, undefined],
+      ["select", "versus", undefined],
+      ["versus", "versus", "Julien H. versus Julien H."],
+      ["fight", "versus", "Julien H. versus Julien H."],
+      ["pause", "versus", "Julien H. versus Julien H."],
+    ]);
+  });
+
+  it("a fight that fails to load hands the error to fatal() instead of going back to select (R6)", async () => {
+    const f = fakes();
+    const errors: unknown[] = [];
+    const boom = new Error("atlas blocked");
+    const services: GameServices = { ...f.services, loadFight: () => Promise.reject(boom), fatal: (err) => errors.push(err) };
+    const d = new Driver({ ...f, services });
+    d.titlePick(1);
+    d.press(0, P);
+    d.press(1, P);
+    d.idle(READY_FRAMES);
+    await flush();
+    expect(errors).toEqual([boom]);
+    d.idle(300);
+    expect(d.scene).toBe("versus"); // the page's failure screen takes over; no silent return to select
   });
 });

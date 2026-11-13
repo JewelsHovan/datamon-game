@@ -55,8 +55,17 @@ export interface GameHooks {
   simEvents?(events: readonly SimEvent[], state: SimState): void;
   /** Menu cursor moves, confirms and backs, e.g. audio.ui(kind). */
   ui?(kind: "move" | "confirm" | "back"): void;
-  /** The scene changed, e.g. audio.music(name === "fight" ? "fight" : ...). */
-  scene?(name: SceneName, mode: GameMode | null): void;
+  /**
+   * The scene changed, e.g. audio.music(name === "fight" ? "fight" : ...). `detail` is the
+   * scene's own words for screen readers (Scene.describe), e.g. "Julien H. versus Felicia G.".
+   */
+  scene?(name: SceneName, mode: GameMode | null, detail?: string): void;
+}
+
+/** Page fullscreen (spec 014, src/shell/fullscreen.ts). */
+export interface FullscreenService {
+  readonly enabled: boolean;
+  toggle(): unknown;
 }
 
 export interface GameServices {
@@ -79,6 +88,12 @@ export interface GameServices {
   /** prefers-reduced-motion: fights start with reduced effects. */
   readonly prefersReducedMotion?: boolean;
   readonly hooks: GameHooks;
+  /** Fullscreen toggle; missing or not enabled leaves the FULLSCREEN menu items out (spec 014). */
+  readonly fullscreen?: FullscreenService;
+  /** Something the game needs failed to load: the page shows the failure screen (spec 014). */
+  fatal?(err: unknown): void;
+  /** Whether sound is muted, for the mute key on the pause screen. */
+  soundMuted?(): boolean;
 }
 
 export interface MenuInput {
@@ -100,6 +115,8 @@ export interface Scene {
   key?(code: string): boolean;
   /** State for tests and browser checks. */
   debug?(): Record<string, unknown>;
+  /** What the screen shows, in words, for screen readers (spec 014), e.g. "Julien H. versus Felicia G.". */
+  describe?(): string;
 }
 
 const DIRS = [BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT] as const;
@@ -127,7 +144,21 @@ export class SceneManager {
 
   go(scene: Scene): void {
     this.scene = scene;
-    this.services.hooks.scene?.(scene.name, this.mode);
+    this.services.hooks.scene?.(scene.name, this.mode, scene.describe?.());
+  }
+
+  /** The window lost focus: a fight in progress pauses itself (spec 014, R7). */
+  blur(): void {
+    if (this.fight && this.scene === this.fight) this.toPause(this.fight);
+  }
+
+  /** Whether the menus offer FULLSCREEN. */
+  get canFullscreen(): boolean {
+    return this.services.fullscreen?.enabled === true;
+  }
+
+  toggleFullscreen(): void {
+    void this.services.fullscreen?.toggle();
   }
 
   /** Runs one 60 Hz step with the sampled input. */

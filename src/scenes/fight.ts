@@ -77,6 +77,14 @@ export function pickFighters(search: string, warn: (msg: string) => void = conso
   };
 }
 
+/** A match in words, for screen readers: "Julien H. versus Felicia G., the CPU on hard". */
+export function matchWords(match: Match): string {
+  const { p1, p2, mode, cpuLevel } = match;
+  if (mode === "training") return `training with ${p1.shortName} and ${p2.shortName}`;
+  const cpu = mode === "cpu" ? `, the CPU on ${cpuLevel ?? "normal"}` : "";
+  return `${p1.shortName} versus ${p2.shortName}${cpu}`;
+}
+
 /** The match a URL shortcut starts. */
 export function matchFromPick(pick: FighterPick): Match {
   return {
@@ -207,6 +215,10 @@ export class FightScene implements Scene {
     }
     const r = state.round;
     hud.draw(ctx, state, paused || r.training || (r.phase === "intro" && r.number === 1));
+  }
+
+  describe(): string {
+    return matchWords(this.match);
   }
 
   debug(): Record<string, unknown> {

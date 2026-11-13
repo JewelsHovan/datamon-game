@@ -279,6 +279,12 @@ export interface ClipLoaderDeps {
   loadImage(url: string): Promise<AtlasImage>;
   createCanvas(width: number, height: number): Canvas2DLike & AtlasImage;
   warn(message: string): void;
+  /**
+   * Optional narrowing: false when the person cannot have generated art, so the loader
+   * skips the manifest request instead of letting it 404 (spec 014, A8). In the browser
+   * the fighter index (public/fighters/index.json, spec 013) already does this.
+   */
+  mayHaveArt?(slug: string): boolean;
 }
 
 export function manifestUrl(slug: string): string {
@@ -337,7 +343,8 @@ export async function loadClipSetUncached(person: Person, deps: ClipLoaderDeps):
   let json: unknown = null;
   const index = await loadFighterIndex(deps);
   try {
-    if (index === null || index.has(person.slug)) json = await deps.fetchJson(manifestUrl(person.slug));
+    // The fighter index (spec 013) is the source of truth; mayHaveArt (spec 014) can narrow it further.
+    if ((index === null || index.has(person.slug)) && deps.mayHaveArt?.(person.slug) !== false) json = await deps.fetchJson(manifestUrl(person.slug));
   } catch {
     json = null;
   }
@@ -360,6 +367,9 @@ export async function loadClipSetUncached(person: Person, deps: ClipLoaderDeps):
         clips: manifest.clips,
       };
     } catch (err) {
+      // A manifest naming art that does not load is a failed load (spec 014 shows the failure
+      // screen), not a fighter without art: only an unusable manifest falls back to placeholders.
+      if (!(err instanceof ManifestError)) throw err;
       deps.warn(`${person.slug}: unusable manifest, using placeholder clips (${String(err)})`);
     }
   }

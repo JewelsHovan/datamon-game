@@ -10,6 +10,9 @@ export const INK = "#eeedff";
 export const GOLD = "#ffc94a";
 export const DIM = "#8a87b8";
 
+/** The FULLSCREEN item, on the title and pause menus when the page can go fullscreen (spec 014). */
+export const FULLSCREEN_ITEM = "FULLSCREEN";
+
 /** Punch or Start confirms in menus; Kick goes back. */
 export const CONFIRM_BITS = BUTTON_PUNCH | BUTTON_START;
 export const BACK_BITS = BUTTON_KICK;

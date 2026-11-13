@@ -3,6 +3,7 @@
 // URL shortcuts use it with no splash, as a loading screen only.
 import { text } from "../render/hud";
 import { VIEW_HEIGHT, VIEW_WIDTH } from "../render/screen";
+import { matchWords } from "./fight";
 import type { FightAssets, Match, MenuInput, Scene, SceneManager } from "./manager";
 import { drawBackdrop, drawSmooth, GOLD, INK, PLAYER_COLORS } from "./ui";
 
@@ -25,14 +26,16 @@ export class VersusScene implements Scene {
       },
       (err: unknown) => {
         this.error = String(err);
-        console.error("Failed to load the fight", err);
+        // The page shows the failure screen (spec 014); without one, back to select after a moment.
+        if (m.services.fatal) m.services.fatal(err);
+        else console.error("Failed to load the fight", err);
       },
     );
   }
 
   step(_input: MenuInput): void {
     this.frames += 1;
-    if (this.error && this.frames >= 180) {
+    if (this.error && this.frames >= 180 && !this.m.services.fatal) {
       this.m.toSelect(this.match.mode, this.match);
       return;
     }
@@ -100,5 +103,9 @@ export class VersusScene implements Scene {
 
   debug(): Record<string, unknown> {
     return { frames: this.frames, loaded: this.assets !== null, error: this.error };
+  }
+
+  describe(): string {
+    return matchWords(this.match);
   }
 }

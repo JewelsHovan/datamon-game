@@ -19,7 +19,7 @@ export interface FighterInfo {
  */
 export async function detectPlayable(
   people: readonly Person[],
-  deps: Pick<ClipLoaderDeps, "fetchJson">,
+  deps: Pick<ClipLoaderDeps, "fetchJson" | "mayHaveArt">,
   onFound: (slug: string) => void = () => {},
 ): Promise<Set<string>> {
   const found = new Set<string>();
@@ -35,6 +35,7 @@ export async function detectPlayable(
   await Promise.all(
     people.map(async (p) => {
       try {
+        if (deps.mayHaveArt?.(p.slug) === false) return;
         const json = await deps.fetchJson(manifestUrl(p.slug));
         if (json === null || json === undefined) return;
         parseManifest(json);
