@@ -1,0 +1,107 @@
+{
+  "A2 Chrome reads the manifest with no errors": {
+    "pass": true,
+    "url": "http://127.0.0.1:4391/manifest.webmanifest",
+    "errors": [],
+    "name": "Compass: Cardinal Clash",
+    "short_name": "Cardinal Clash",
+    "display": "fullscreen",
+    "display_override": [
+      "fullscreen",
+      "standalone"
+    ],
+    "orientation": "landscape",
+    "start_url": "./",
+    "icons": [
+      {
+        "src": "icons/icon-192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "icons/icon-512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "icons/icon-maskable-512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "maskable"
+      }
+    ]
+  },
+  "A2 no installability errors": {
+    "pass": true,
+    "installabilityErrors": []
+  },
+  "A2 the favicon and every icon URL answer 200": {
+    "pass": true,
+    "answers": [
+      {
+        "url": "http://127.0.0.1:4391/icons/favicon-32.png",
+        "status": 200,
+        "type": "image/png"
+      },
+      {
+        "url": "http://127.0.0.1:4391/icons/favicon-16.png",
+        "status": 200,
+        "type": "image/png"
+      },
+      {
+        "url": "http://127.0.0.1:4391/icons/apple-touch-icon.png",
+        "status": 200,
+        "type": "image/png"
+      },
+      {
+        "url": "http://127.0.0.1:4391/manifest.webmanifest",
+        "status": 200,
+        "type": "application/manifest+json"
+      },
+      {
+        "url": "http://127.0.0.1:4391/icons/icon-192.png",
+        "status": 200,
+        "type": "image/png"
+      },
+      {
+        "url": "http://127.0.0.1:4391/icons/icon-512.png",
+        "status": 200,
+        "type": "image/png"
+      },
+      {
+        "url": "http://127.0.0.1:4391/icons/icon-maskable-512.png",
+        "status": 200,
+        "type": "image/png"
+      },
+      {
+        "url": "http://127.0.0.1:4391/favicon.ico",
+        "status": 200,
+        "type": "image/x-icon"
+      },
+      {
+        "url": "http://127.0.0.1:4391/share.png",
+        "status": 200,
+        "type": "image/png"
+      }
+    ]
+  },
+  "A3 the served page has the description, theme color and share tags": {
+    "pass": true,
+    "meta": {
+      "description": "A pixel-art fighting game in your browser: pick a Compass colleague and battle a friend or the CPU, best of three rounds.",
+      "theme-color": "#0b0a1f",
+      "og:title": "Compass: Cardinal Clash",
+      "og:description": "A pixel-art fighting game in your browser: pick a Compass colleague and battle a friend or the CPU, best of three rounds.",
+      "og:image": "https://datamon-game.julienh15.workers.dev/share.png",
+      "twitter:card": "summary_large_image"
+    }
+  },
+  "A8 no console errors and no 404s on the production title screen": {
+    "pass": true,
+    "errors": [],
+    "bad": [],
+    "screenshot": "specs/evidence/014/a2-01-production-title.png"
+  }
+}

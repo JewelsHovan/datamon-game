@@ -1,0 +1,287 @@
+{
+  "A5 canvas is an image labelled with the title screen": {
+    "pass": true,
+    "ax": {
+      "canvas": {
+        "role": "image",
+        "name": "Compass: Cardinal Clash, title screen"
+      },
+      "live": {
+        "role": "status",
+        "text": "Title screen."
+      }
+    },
+    "screenshot": "specs/evidence/014/a5-01-title.png"
+  },
+  "A5 live region is polite (role status)": {
+    "pass": true,
+    "live": {
+      "role": "status",
+      "text": "Title screen."
+    }
+  },
+  "A5 canvas label changes on select": {
+    "pass": true,
+    "ax": {
+      "canvas": {
+        "role": "image",
+        "name": "Compass: Cardinal Clash, VS player character select"
+      },
+      "live": {
+        "role": "status",
+        "text": "VS player: character select."
+      }
+    },
+    "screenshot": "specs/evidence/014/a5-02-select.png"
+  },
+  "A5 canvas label changes on fight": {
+    "pass": true,
+    "ax": {
+      "canvas": {
+        "role": "image",
+        "name": "Compass: Cardinal Clash, fight: Julien H. versus Felicia G."
+      },
+      "live": {
+        "role": "status",
+        "text": "Fight!"
+      }
+    },
+    "phase": "fight"
+  },
+  "round 1 K.O.": {
+    "pass": true,
+    "round": {
+      "phase": "ko",
+      "phaseFrame": 1,
+      "number": 1,
+      "wins": [
+        1,
+        0
+      ],
+      "timer": 4746,
+      "winner": 0,
+      "reason": "ko",
+      "training": false
+    }
+  },
+  "A7 blurring the window mid-fight opens the pause screen": {
+    "pass": true,
+    "hasFocusWhileOtherTab": false,
+    "scene": "pause"
+  },
+  "A7 the pause screen shows the mute key": {
+    "pass": true,
+    "menu": {
+      "index": 0,
+      "item": "RESUME",
+      "items": [
+        "RESUME",
+        "CONTROLS",
+        "FULLSCREEN",
+        "QUIT TO SELECT"
+      ],
+      "hint": "ESC: RESUME   M: MUTE"
+    },
+    "screenshot": "specs/evidence/014/a7-01-blur-paused.png"
+  },
+  "A7 the mute key's line follows the mute state": {
+    "pass": true,
+    "hint": "ESC: RESUME   M: UNMUTE",
+    "screenshot": "specs/evidence/014/a7-02-muted.png"
+  },
+  "A5 live region during the match says Round 1, Fight and K.O.": {
+    "pass": true,
+    "liveTexts": [
+      "VS player: character select.",
+      "Julien H. versus Felicia G.",
+      "Round 1.",
+      "Fight!",
+      "K.O.!",
+      "Julien H. wins round 1.",
+      "Round 2.",
+      "Fight!",
+      "Paused.",
+      "Resumed.",
+      "K.O.!",
+      "Julien H. wins round 2.",
+      "Julien H. wins the match, 2 to 0!",
+      "Results: player 1, Julien H., wins 2 to 0."
+    ]
+  },
+  "A5 live region announces pause, resume and the winner": {
+    "pass": true,
+    "round2": {
+      "phase": "ko",
+      "phaseFrame": 1,
+      "number": 2,
+      "wins": [
+        2,
+        0
+      ],
+      "timer": 4722,
+      "winner": 0,
+      "reason": "ko",
+      "training": false
+    },
+    "results": {
+      "canvas": {
+        "role": "image",
+        "name": "Compass: Cardinal Clash, results: player 1, Julien H., wins 2 to 0"
+      },
+      "live": {
+        "role": "status",
+        "text": "Results: player 1, Julien H., wins 2 to 0."
+      }
+    },
+    "screenshot": "specs/evidence/014/a5-03-results.png"
+  },
+  "A8 no console errors on title, select, versus, fight, pause, results, controls": {
+    "pass": true,
+    "errors": []
+  },
+  "A8 no 404s (or other 4xx/5xx) on any screen": {
+    "pass": true,
+    "bad": [],
+    "requests": 128,
+    "icons": [
+      {
+        "status": 200,
+        "url": "http://127.0.0.1:5177/manifest.webmanifest"
+      },
+      {
+        "status": 200,
+        "url": "http://127.0.0.1:5177/icons/favicon-32.png"
+      },
+      {
+        "status": 200,
+        "url": "http://127.0.0.1:5177/icons/icon-192.png"
+      },
+      {
+        "status": 200,
+        "url": "http://127.0.0.1:5177/icons/apple-touch-icon.png"
+      }
+    ]
+  },
+  "A4 FULLSCREEN on the title menu enters fullscreen": {
+    "pass": true,
+    "fullscreenEnabled": true,
+    "fullscreenElement": "HTML",
+    "menu": {
+      "index": 4,
+      "item": "FULLSCREEN",
+      "items": [
+        "VS CPU",
+        "VS PLAYER",
+        "TRAINING",
+        "CONTROLS",
+        "FULLSCREEN"
+      ]
+    },
+    "screenshot": "specs/evidence/014/a4-01-title-fullscreen.png"
+  },
+  "A4 the pause menu's FULLSCREEN leaves fullscreen": {
+    "pass": true,
+    "beforeItem": "HTML",
+    "after": null,
+    "menu": {
+      "index": 2,
+      "item": "FULLSCREEN",
+      "items": [
+        "RESUME",
+        "CONTROLS",
+        "FULLSCREEN",
+        "QUIT TO SELECT"
+      ],
+      "hint": "ESC: RESUME   M: MUTE"
+    },
+    "screenshot": "specs/evidence/014/a4-02-pause-fullscreen-item.png"
+  },
+  "A4 double-clicking the canvas toggles fullscreen": {
+    "pass": true,
+    "dblIn": "HTML",
+    "dblOut": null
+  },
+  "A4 FULLSCREEN is hidden when document.fullscreenEnabled is false": {
+    "pass": true,
+    "fullscreenEnabled": false,
+    "title": [
+      "VS CPU",
+      "VS PLAYER",
+      "TRAINING",
+      "CONTROLS"
+    ],
+    "pause": [
+      "RESUME",
+      "CONTROLS",
+      "QUIT TO SELECT"
+    ],
+    "screenshot": "specs/evidence/014/a4-03-no-fullscreen-api-pause.png"
+  },
+  "A6 blocking a fighter's atlas shows the failure screen with Reload": {
+    "pass": true,
+    "blocked": [
+      "http://127.0.0.1:5177/fighters/julien-hovan/atlas.png",
+      "http://127.0.0.1:5177/fighters/felicia-gorgacheva/atlas.png"
+    ],
+    "detail": "Julien H.'s fighter art did not load. Check your connection, then reload.",
+    "title": "The game could not start.",
+    "focused": "failure-reload",
+    "button": "RELOAD",
+    "canvasHidden": "true",
+    "axText": "Julien H. versus Felicia G. | COMPASS | CARDINAL CLASH | The game could not start. | Julien H.'s fighter art did not load. Check your connection, then reload. | RELOAD",
+    "screenshot": "specs/evidence/014/a6-01-atlas-blocked.png"
+  },
+  "A6 Reload (Enter on the focused button) brings the game back": {
+    "pass": true,
+    "scene": "fight"
+  },
+  "A6 blocking the effects atlas shows the failure screen": {
+    "pass": true,
+    "blocked": [
+      "http://127.0.0.1:5177/effects/atlas.png"
+    ],
+    "detail": "The effects did not load. Check your connection, then reload.",
+    "title": "The game could not start.",
+    "focused": "failure-reload",
+    "button": "RELOAD",
+    "canvasHidden": "true",
+    "axText": "Julien H. versus Felicia G. | COMPASS | CARDINAL CLASH | The game could not start. | The effects did not load. Check your connection, then reload. | RELOAD",
+    "screenshot": "specs/evidence/014/a6-02-effects-blocked.png"
+  },
+  "A6 blocking the pixel font shows the failure screen": {
+    "pass": true,
+    "blocked": [
+      "https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+    ],
+    "detail": "The pixel font did not load. Check your connection, then reload.",
+    "title": "The game could not start.",
+    "focused": "failure-reload",
+    "button": "RELOAD",
+    "canvasHidden": "true",
+    "axText": "COMPASS | CARDINAL CLASH | The game could not start. | The pixel font did not load. Check your connection, then reload. | RELOAD",
+    "screenshot": "specs/evidence/014/a6-03-font-blocked.png"
+  },
+  "A6 a game script that fails to load shows the failure screen (inline handler)": {
+    "pass": true,
+    "blocked": [
+      "http://127.0.0.1:5177/src/main.ts?t=1794530648801"
+    ],
+    "detail": "Something it needs did not load. Check your connection, then reload.",
+    "title": "The game could not start.",
+    "focused": "failure-reload",
+    "button": "RELOAD",
+    "canvasHidden": null,
+    "axText": "COMPASS | CARDINAL CLASH | The game could not start. | Something it needs did not load. Check your connection, then reload. | RELOAD",
+    "screenshot": "specs/evidence/014/a6-04-script-blocked.png"
+  },
+  "A6 a preview atlas failing on the select screen shows the failure screen, without retrying": {
+    "pass": true,
+    "blockedRequests": 2,
+    "detail": "Julien H.'s fighter art did not load. Check your connection, then reload."
+  },
+  "A6 with JavaScript disabled the noscript message shows": {
+    "pass": true,
+    "axText": "COMPASS | CARDINAL CLASH | This game needs JavaScript. | Turn JavaScript on for this site, then reload the page to play.",
+    "screenshot": "specs/evidence/014/a6-05-noscript.png"
+  }
+}
