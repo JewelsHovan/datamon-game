@@ -1,6 +1,8 @@
 // Who can be picked, and what the select screen says about them.
 // Playable = the fighter has generated clips (public/fighters/<slug>/manifest.json),
-// detected at runtime so new fighters appear as soon as their art lands.
+// detected at runtime so new fighters appear as soon as their art lands. In the
+// browser only roster fighters (src/data/fighters.ts) are asked for a manifest
+// (ClipLoaderDeps.mayHaveArt), so the other people cost no 404s (spec 014, A8).
 // Archetype and special names come from the fighter table (src/data/fighters.ts,
 // spec 006) when it exists; until then a small fallback covers Julien.
 import type { Person } from "../data/catalog";
@@ -11,16 +13,17 @@ export interface FighterInfo {
   special: string | null;
 }
 
-/** Fetches every person's manifest; resolves with the slugs whose manifest parses. */
+/** Fetches every person's manifest (those deps.mayHaveArt allows); resolves with the slugs whose manifest parses. */
 export async function detectPlayable(
   people: readonly Person[],
-  deps: Pick<ClipLoaderDeps, "fetchJson">,
+  deps: Pick<ClipLoaderDeps, "fetchJson" | "mayHaveArt">,
   onFound: (slug: string) => void = () => {},
 ): Promise<Set<string>> {
   const found = new Set<string>();
   await Promise.all(
     people.map(async (p) => {
       try {
+        if (deps.mayHaveArt?.(p.slug) === false) return;
         const json = await deps.fetchJson(manifestUrl(p.slug));
         if (json === null || json === undefined) return;
         parseManifest(json);

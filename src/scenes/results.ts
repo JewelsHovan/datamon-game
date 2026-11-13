@@ -56,4 +56,12 @@ export class ResultsScene implements Scene {
   debug(): Record<string, unknown> {
     return { winner: this.winner, index: this.menu.index, item: this.menu.selected };
   }
+
+  describe(): string {
+    const match = this.fight.match;
+    const person = this.winner === 0 ? match.p1 : match.p2;
+    const who = this.fight.cpu[this.winner] ? `the CPU, ${person.shortName},` : `player ${this.winner + 1}, ${person.shortName},`;
+    const [a, b] = this.fight.state.round.wins;
+    return `${who} wins ${Math.max(a, b)} to ${Math.min(a, b)}`;
+  }
 }

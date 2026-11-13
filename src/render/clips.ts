@@ -2,6 +2,7 @@
 // A fighter's clips come from public/fighters/<slug>/manifest.json + atlas.png
 // when they exist; otherwise placeholder clips are built from the walk sheet.
 import { STANDING_WALK_FRAME, WALK_ROWS, type Person } from "../data/catalog";
+import { FIGHTERS } from "../data/fighters";
 
 export interface ClipFrame {
   /** Rectangle in the atlas. */
@@ -260,6 +261,12 @@ export interface ClipLoaderDeps {
   loadImage(url: string): Promise<AtlasImage>;
   createCanvas(width: number, height: number): Canvas2DLike & AtlasImage;
   warn(message: string): void;
+  /**
+   * False when the person cannot have generated art yet (not on the roster in
+   * src/data/fighters.ts): the loader skips the manifest request instead of
+   * letting it 404 (spec 014, A8). Missing: every person is probed.
+   */
+  mayHaveArt?(slug: string): boolean;
 }
 
 export function manifestUrl(slug: string): string {
@@ -292,7 +299,7 @@ export async function buildPlaceholderClipSet(person: Person, deps: ClipLoaderDe
 export async function loadClipSetUncached(person: Person, deps: ClipLoaderDeps): Promise<ClipSet> {
   let json: unknown = null;
   try {
-    json = await deps.fetchJson(manifestUrl(person.slug));
+    if (deps.mayHaveArt?.(person.slug) !== false) json = await deps.fetchJson(manifestUrl(person.slug));
   } catch {
     json = null;
   }
@@ -315,6 +322,9 @@ export async function loadClipSetUncached(person: Person, deps: ClipLoaderDeps):
         clips: manifest.clips,
       };
     } catch (err) {
+      // A manifest naming art that does not load is a failed load (spec 014 shows the failure
+      // screen), not a fighter without art: only an unusable manifest falls back to placeholders.
+      if (!(err instanceof ManifestError)) throw err;
       deps.warn(`${person.slug}: unusable manifest, using placeholder clips (${String(err)})`);
     }
   }
@@ -367,6 +377,8 @@ export function browserClipDeps(): ClipLoaderDeps {
     warn(message) {
       console.warn(message);
     },
+    // Only the roster (src/data/fighters.ts) has generated art; nobody else's manifest is asked for.
+    mayHaveArt: (slug) => Object.hasOwn(FIGHTERS, slug),
   };
 }
 
