@@ -1,7 +1,11 @@
 // Cloudflare deploy config: a static-assets-only Worker serving the Vite build.
 // Deploy with `./dm deploy` (runs the gates first), not raw `wrangler deploy`.
+// account_id pins the account that owns datamon-game.julienh15.workers.dev. Without it,
+// wrangler deploys to whichever account is logged in (or cached in node_modules/.cache).
+// A login to another account now fails the deploy instead of shipping elsewhere.
 {
   "name": "datamon-game",
+  "account_id": "465b4165237ea1225de7bbb09eddbf38",
   "compatibility_date": "2026-11-01",
   "assets": {
     "directory": "./dist"
