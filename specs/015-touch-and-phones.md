@@ -79,5 +79,9 @@ Browser checks run against `./dm dev` (port 5341) in a private headless Chrome 1
 - Not tried on real phones: iOS Safari (pinch through `gesturestart`, safe areas, the home indicator) and Android Chrome (pull-to-refresh, the landscape lock on fullscreen) are covered only through Chrome's device emulation.
 - Spec 014 adds FULLSCREEN to the title and pause menus; the landscape lock here listens for `fullscreenchange`, so it needs no wiring there, but a check that enters fullscreen through that menu item on a phone would confirm the two together.
 
+### Lead session, after merging 013, 014 and 015 (2026-11-12)
+- Spec 014's double-click-for-fullscreen fired on a synthesized double tap, so the R3 landscape-lock check saw the page already fullscreen and no lock request. Double-click now toggles fullscreen only for a mouse (two quick taps on a phone must not flip it mid-fight); `touch-check.mjs` passes again (EXIT=0), with the lock requested once.
+- On a fatal load failure the touch controls stop listening (`dispose`); the failure screen (z-index 100) sits above them and the rotate screen.
+
 ## Review
 (filled by spec-review)

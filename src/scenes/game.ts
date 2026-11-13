@@ -271,7 +271,9 @@ export async function startGame(options: GameOptions): Promise<GameHandle> {
   manager = m;
   // A startup failure rejects startGame (main.ts shows the failure screen) with the keyboard released.
   try {
-    if ((await font) === "failed") throw new AssetLoadError("the pixel font");
+    // A font that cannot load is not worth stopping the game for (a network that blocks Google
+    // Fonts would lock players out): the menus and HUD draw in the fallback monospace font.
+    if ((await font) === "failed") console.warn("The pixel font did not load; drawing with the fallback font.");
     if (direct) m.toVersus(direct, false);
     else m.toTitle();
   } catch (err) {
@@ -285,8 +287,18 @@ export async function startGame(options: GameOptions): Promise<GameHandle> {
   });
   // Spec 014: losing focus mid-fight pauses (held keys are already released on blur by the keyboard).
   listen("blur", () => m.blur());
-  const onDoubleClick = () => void fullscreen.toggle();
+  // Double-click toggles fullscreen with a mouse only: on a phone two quick taps on the
+  // canvas mid-fight (a missed button) must not flip fullscreen (spec 015).
+  let lastPointer = "mouse";
+  const onPointerDown = (e: PointerEvent) => {
+    lastPointer = e.pointerType;
+  };
+  const onDoubleClick = () => {
+    if (lastPointer === "mouse") void fullscreen.toggle();
+  };
+  options.canvas.addEventListener("pointerdown", onPointerDown);
   options.canvas.addEventListener("dblclick", onDoubleClick);
+  cleanups.push(() => options.canvas.removeEventListener("pointerdown", onPointerDown));
   cleanups.push(() => options.canvas.removeEventListener("dblclick", onDoubleClick));
 
   const overlay = createDebugOverlay(options.overlay, win);

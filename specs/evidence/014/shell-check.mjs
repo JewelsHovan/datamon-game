@@ -284,7 +284,18 @@ try {
   record("A6 Reload (Enter on the focused button) brings the game back", recovered && (await p.evaluate(isHidden)), { scene: await p.evaluate("window.__game?.scene") });
 
   await failureCase("A6 blocking the effects atlas shows the failure screen", "*/effects/atlas*", `${BASE}?p1=julien-hovan&p2=felicia-gorgacheva`, /effects did not load/, "a6-02-effects-blocked");
-  await failureCase("A6 blocking the pixel font shows the failure screen", "*fonts.googleapis.com*", BASE, /pixel font did not load/, "a6-03-font-blocked");
+  // The pixel font is not fatal (lead session, after the 013-015 merge): with it blocked the
+  // game still starts, in the fallback font, and the failure screen stays hidden.
+  await p.cmd("Network.setCacheDisabled", { cacheDisabled: true });
+  await p.cmd("Fetch.enable", { patterns: [{ urlPattern: "*fonts.googleapis.com*" }] });
+  await p.navigate(BASE);
+  const fontlessTitle = await waitScene(p, "title", 15000);
+  record("A6 blocking the pixel font: the game still starts in the fallback font, no failure screen", fontlessTitle && (await p.evaluate(isHidden)), {
+    scene: await p.evaluate("window.__game?.scene"),
+    screenshot: await p.shot(OUT, "a6-03-font-blocked-fallback"),
+  });
+  await p.cmd("Fetch.disable");
+  await p.cmd("Network.setCacheDisabled", { cacheDisabled: false });
   await failureCase("A6 a game script that fails to load shows the failure screen (inline handler)", "*/src/main.ts*", BASE, /did not load/, "a6-04-script-blocked");
   // Starting from the select screen: the preview of a fighter whose atlas is blocked stops the game too (no endless retries).
   blocked = [];

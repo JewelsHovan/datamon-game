@@ -250,8 +250,8 @@ const pathOf = (url) => url.replace(/[?#].*$/, "");
 const ART = /^\/(fighters|effects|stages|datamon)\//;
 const pngArt = (entries) => entries.filter((e) => ART.test(e.url) && /\.png$/i.test(pathOf(e.url))).map((e) => e.url);
 const walkSheets = (entries) => entries.filter((e) => pathOf(e.url).includes("/datamon/walk/")).map((e) => e.url);
-// The favicon is spec 014's (R1); until it lands, its 404 is known and reported on its own.
-const KNOWN_404 = new Set(["/favicon.ico"]);
+// Spec 014 ships the favicon, so no 404 is expected anywhere (the set stays for future exceptions).
+const KNOWN_404 = new Set();
 const failedRequests = (entries) => entries.filter((e) => e.status >= 400 && !KNOWN_404.has(pathOf(e.url))).map((e) => `${e.status} ${e.url}`);
 
 async function untilTrue(expr, timeoutMs = 30000) {

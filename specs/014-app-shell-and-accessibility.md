@@ -15,7 +15,7 @@ Release readiness, part 2 of 3 (part 1: spec 013, speed and memory; part 3: spec
 - R3. Sharing: a description, `theme-color`, Open Graph and Twitter card tags, and a 1200x630 share image composed from the title art and the four launch fighters by the same script as R1.
 - R4. Fullscreen: a FULLSCREEN item on the title menu and the pause menu, and double-clicking the canvas, toggle fullscreen through the Fullscreen API; nothing breaks where the API is missing (the item is hidden).
 - R5. Screen readers: the canvas has `role="img"` and an `aria-label` naming the game and the current screen; a visually hidden polite live region announces screen changes and fight moments (round number, FIGHT, K.O., the round and match winner, pause and resume), throttled so it never floods.
-- R6. Failure screen: if the game cannot load what it needs (a fighter's atlas, the effects, the font) or throws during startup, the page shows a readable message in the game's style with a Reload button instead of a black or half-drawn canvas; a `<noscript>` message says JavaScript is needed.
+- R6. Failure screen: if the game cannot load what it needs (a fighter's atlas, the effects) or throws during startup, the page shows a readable message in the game's style with a Reload button instead of a black or half-drawn canvas; a `<noscript>` message says JavaScript is needed.
 - R7. Keyboard and focus: every menu item is reachable with the keyboard (already true; keep it), the pause menu lists the mute key, and the game pauses itself when the window loses focus during a fight (stuck keys are already cleared on blur).
 
 ## Acceptance criteria
@@ -81,6 +81,11 @@ Follow-ups (not in this spec):
 - An exception thrown inside the running loop (after startup) still freezes the canvas; only load failures and startup throws reach the failure screen.
 - Stage layers that fail to load still degrade to the floor color (not listed in R6; `src/render/stage.ts` is being reworked by spec 013).
 - Spec 015's landscape lock on fullscreen belongs in `src/shell/fullscreen.ts` `toggle()`.
+
+### Lead session, after merging 013, 014 and 015 (2026-11-12)
+- R6 amended: the pixel font is no longer fatal. It comes from Google Fonts, so a network that blocks Google would have locked players out on the failure screen; the game now logs a warning and draws in the fallback monospace font. `specs/evidence/014/shell-check.mjs` checks that with the font blocked the title screen still comes up and the failure screen stays hidden (EXIT=0). Self-hosting the font (it is under the SIL Open Font License) remains a follow-up.
+- Double-click toggles fullscreen with a mouse only (`src/scenes/game.ts` tracks the last pointer type on the canvas): with spec 015's touch play, two quick taps on the canvas mid-fight flipped fullscreen, which also made the 015 landscape-lock check fail after the merge. Both checks pass now.
+- The merge kept the fighter index (spec 013) as the source of truth for who has art; `ClipLoaderDeps.mayHaveArt` stays as an optional narrowing hook (tests use it), and the browser no longer hard-codes the roster from `src/data/fighters.ts`, so a new fighter is playable as soon as the pipeline packs it.
 
 ## Review
 (filled by spec-review)
