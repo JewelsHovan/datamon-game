@@ -1,6 +1,6 @@
 # 014: App shell and accessibility
 
-Status: ready
+Status: in-progress
 Created: 2026-11-12
 
 ## Goal
@@ -42,7 +42,7 @@ Release readiness, part 2 of 3 (part 1: spec 013, speed and memory; part 3: spec
 - None.
 
 ## Tasks
-- [ ] T1. Icon and share-image script (`art/pipeline/app_icons.py` or similar) writing to `public/icons/` and `public/share.png`; pytest.
+- [x] T1. Icon and share-image script (`art/pipeline/app_icons.py` or similar) writing to `public/icons/` and `public/share.png`; pytest.
 - [ ] T2. `public/manifest.webmanifest` and the `index.html` head (icons, manifest, description, theme-color, Open Graph and Twitter tags, noscript).
 - [ ] T3. Fullscreen item on the title and pause menus, double-click on the canvas (`src/scenes/title.ts`, `src/scenes/pause.ts`, `src/scenes/game.ts`).
 - [ ] T4. Screen reader layer: canvas label and live region fed by scene changes and sim events (a small module, e.g. `src/a11y/announcer.ts`, hooked in `src/main.ts` or `src/scenes/game.ts`); vitest for the message mapping and throttling.
