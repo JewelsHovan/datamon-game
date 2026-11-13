@@ -11,11 +11,11 @@ Round 3 interview, after the user played the MVP (`docs/game-design.md`, "Round 
 
 ## Requirements
 - R1. Button scheme Punch / Kick / Special (reuse the existing light/heavy/special bits as punch/kick/special): Punch = light_punch, forward+Punch = heavy_punch; Kick = light_kick, forward+Kick = heavy_kick; down+Punch or down+Kick = crouch_attack; Punch or Kick in the air = air_attack; Punch+Kick within the chord window = throw; Special = special. Cancels: light_punch into heavy_punch, heavy_kick or special; light_kick into heavy_kick or special; heavy_punch into special. Rename user-facing names everywhere (HUD, controls hints, docs in code comments).
-- R2. Default keys from the design doc: P1 W A S D, F punch, G kick, H special; P2 arrows, L punch, ; kick, ' special. Enter starts or confirms, Esc pauses. Game keys never trigger browser shortcuts (preventDefault on bound keys, including Quote and Slash, which open quick find in Firefox).
+- R2. Default keys from the design doc: P1 W A S D, F punch, G kick, H special; P2 arrows, L punch, ; kick, ' special. Enter starts or confirms, Esc pauses. (Defaults changed after this spec was built, see "Later changes": P1 W A S D + F Q E, start R; P2 I J K L + H U O, start P.) Game keys never trigger browser shortcuts (preventDefault on bound keys, including Quote and Slash, which open quick find in Firefox).
 - R3. Controls screen (from the title and the pause menu): both players' bindings side by side; select an action and press a key to rebind it; binding a key that is already used swaps the two; "restore defaults"; bindings saved in localStorage (reads and writes guarded, the game works without storage). A live key test shows every bound action lighting up per player while held, with a line explaining that a key that does not light up while others are held means the keyboard cannot register that combination, so rebind it.
 - R4. Gamepads: the first button press on an unassigned pad assigns it to the first player without one (P1, then P2) and shows a "P1 controller" / "P2 controller" toast. A: punch, B: kick, X or Y: special, Start: start/pause, d-pad or left stick: move. Keyboard keeps working for its player. Unplugging frees the slot.
 - R5. Scenes and flow: title (game name, "press start", controls) → character select → versus splash (about 2 seconds) → fight → results (winner, "Rematch" / "Character select") → back to select or rematch. Pause (Esc or Start) during a fight: resume, controls, quit to select. A scene manager owns the flow; the sim and the fight stay as they are apart from R1.
-- R6. Character select: a grid of all 37 people. Playable fighters (with a manifest) are lit; the rest are dimmed and marked "coming soon" and cannot be picked. Each player has their own colored cursor (P1 blue, P2 red), moves with their directions, confirms with Punch, cancels with Kick, and gets a large preview of the fighter under the cursor playing its idle clip with the name and archetype. A random tile picks among playable fighters. Picking the same fighter gives P2 the alternate palette. The fight starts when both have confirmed.
+- R6. Character select: a grid of all 37 people. Playable fighters (with a manifest) are lit; the rest are dimmed and marked "coming soon" and cannot be picked (since specs 016 and 017 all 37 have a manifest, so no tile is dimmed). Each player has their own colored cursor (P1 blue, P2 red), moves with their directions, confirms with Punch, cancels with Kick, and gets a large preview of the fighter under the cursor playing its idle clip with the name and archetype. A random tile picks among playable fighters. Picking the same fighter gives P2 the alternate palette. The fight starts when both have confirmed.
 - R7. In fights, each player's key legend (their actual bindings) shows under their health bar during the round 1 intro and while paused.
 - R8. Tests: unit tests for the R1 mapping (each input picks the right move, including cancels and the throw chord), keymap rebinding with swap and persistence through a fake storage, gamepad assignment order, and the scene flow driven by fake inputs (title → select → versus → fight → results → select and rematch). Existing tests keep passing (update the ones whose button names changed).
 
@@ -35,7 +35,7 @@ Round 3 interview, after the user played the MVP (`docs/game-design.md`, "Round 
 ## Decisions
 - Button bits stay the same (light → punch, heavy → kick) so saved inputs and tests keep working; only names and the mapping change.
 - The match settings (best of 3, 99 s) are unchanged and not exposed in menus yet.
-- localStorage key `datamon.controls.v1`.
+- localStorage key `datamon.controls.v1` (`datamon.controls.v2` since the new defaults in `1985208`).
 
 ## Open questions
 - None.
@@ -93,6 +93,11 @@ Same fields as before (`simFrame`, `snapshot()`, `hashState()`, `info()`, `event
 - The versus splash shows the same portrait for a mirror match (portraits have no alternate palette).
 - Physical gamepad check by the user (join toast, A/B/X/Y, unplug).
 - Once spec 006 lands, confirm `src/data/fighters.ts` field names match what `roster.ts` reads (a unit test there covers the expected shapes).
+
+### Later changes (after this spec was built)
+- **New default keys (`1985208`, live).** P1 W A S D + F punch, Q kick, E special, R start. P2 I J K L + H punch, U kick, O special, P start. Each player's keys sit under one hand and no arrows or punctuation are used. `src/input/keymap.ts` holds the table; the saved-bindings key moved to `datamon.controls.v2` (stored `version: 2`), so bindings saved under v1 are ignored and returning players start on the new defaults. Enter and NumpadEnter are no longer bound by default but stay in `ALWAYS_BLOCKED_KEYS`. Unit tests (`bindings`, `gamepad`, `touch`, `flow`) were moved to the new keys; `./dm check` passes.
+- **Full roster (specs 016 and 017, live).** All 37 people have a manifest, so every select tile is lit and the "coming soon" path is no longer reachable in the shipped build (the code still handles it).
+- **Evidence scripts still use the old keys.** `specs/evidence/005/flow-check.mjs`, `specs/evidence/003/fight-check.mjs`, `specs/evidence/001/browser-check.mjs`, `specs/evidence/008/cpu-check.mjs` and `specs/evidence/012/moves-check.mjs` press arrows, L, ; and ' (and G, H) for the old layout. They need the new keys before they are re-run for a review; the recorded evidence above stays as it was.
 
 ## Review
 (filled by spec-review)

@@ -363,6 +363,38 @@ describe("controls screen (A3, R3)", () => {
     expect(f.services.bindings.keyFor(0, "up")).toBe("KeyW");
   });
 
+  it("navigates rows/columns and rebinds with unbound Arrow keys and Enter without lighting unbound rows", () => {
+    const f = fakes();
+    const d = new Driver(f);
+    // Navigate Title -> CONTROLS using unbound ArrowDown + Enter
+    for (let i = 0; i < 3; i++) {
+      expect(d.m.key("ArrowDown")).toBe(true);
+      d.idle(2);
+    }
+    expect(d.m.key("Enter")).toBe(true);
+    d.idle(2);
+    expect(d.scene).toBe("controls");
+    const c = () => d.m.scene as ControlsScene;
+    // Holding ArrowRight moves to PLAYER 2 column without lighting any bound action row
+    f.heldKeys.add("ArrowRight");
+    d.idle(1);
+    expect(c().debug()).toMatchObject({ row: 0, col: 1 });
+    expect(c().litActions()).toEqual([[], []]);
+    f.heldKeys.delete("ArrowRight");
+    d.idle(1);
+    // Pressing Enter starts capturing; pressing Enter again binds Enter cleanly without re-triggering
+    expect(d.m.key("Enter")).toBe(true);
+    d.idle(1);
+    expect(c().capturing).toEqual({ player: 1, action: "up" });
+    f.heldKeys.add("Enter");
+    expect(d.m.key("Enter")).toBe(true);
+    expect(f.services.bindings.keyFor(1, "up")).toBe("Enter");
+    expect(c().capturing).toBeNull();
+    d.idle(1);
+    expect(c().capturing).toBeNull();
+    f.heldKeys.delete("Enter");
+  });
+
   it("restore defaults, and the key test lights every held action per player", () => {
     const f = fakes();
     f.services.bindings.rebind(0, "punch", "KeyL");
@@ -577,7 +609,7 @@ describe("app shell (spec 014)", () => {
     const d = new Driver({ ...f, services: { ...f.services, touchControls: () => touch, soundMuted: () => false, toggleSound: () => false } });
     expect(d.m.scene.debug?.()).toMatchObject({ hints: ["MOVE: D-PAD   CONFIRM: PUNCH   BACK: KICK"] });
     touch = false;
-    expect((d.m.scene.debug?.() as { hints: string[] }).hints[0]).toMatch(/^MOVE: WASD OR IJKL {3}CONFIRM: R, F OR H/);
+    expect((d.m.scene.debug?.() as { hints: string[] }).hints[0]).toMatch(/^MOVE: ARROWS, WASD OR IJKL {3}CONFIRM: ENTER, F OR H/);
     touch = true;
 
     // Controls: no keyboard to test or bind on touch, Kick leaves

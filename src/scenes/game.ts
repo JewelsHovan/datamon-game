@@ -288,7 +288,10 @@ export async function startGame(options: GameOptions): Promise<GameHandle> {
 
   listen("keydown", (e) => {
     if (e.repeat) return;
-    if (m.key(e.code)) e.preventDefault();
+    if (m.key(e.code)) {
+      touch?.otherInput?.(1);
+      e.preventDefault();
+    }
   });
   // Spec 014: losing focus mid-fight pauses (held keys are already released on blur by the keyboard).
   listen("blur", () => m.blur());

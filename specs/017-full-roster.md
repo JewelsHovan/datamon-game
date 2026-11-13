@@ -61,5 +61,10 @@ Spec 016 expanded the roster from 4 to 12 playable fighters and introduced dual 
   - `uv run --with pytest --with pillow --with numpy --with scipy pytest art/pipeline/tests -q`: `92 passed` (`2.89s`, exit `0`).
   - `./dm check`: `PASS typecheck` (`0.4s`), `PASS test` (`31` test files, `510 / 510` tests passed, `1.7s`), `PASS build` (`dist/assets/index-*.js` `157.23 kB` gzip, `0.5s`), exit `0`.
 
+### Later changes (after this spec was built)
+- **Mirror-match colors (`872724c`, merge with the release QA fixes).** The per-fighter `palette-alt.json` hue shift named in R1 and above is gone. Every one of the 37 fighters now has `art/fighters/<slug>/alt.json`, a `head-mask.png` and an offline-recolored `atlas-alt.webp` (QA F1, `art/pipeline/palette_alt.py`, see "Animation clip format" in `docs/game-design.md`), so a mirror match changes one or two garments and never a face or hair.
+- **Live.** Deployed with the new default keys (`1985208`). The live `fighters/index.json` lists all 37 fighters.
+- **Checks on `1985208`:** `./dm check` exit 0 (522 tests in 31 files); `uv run --with pytest --with pillow --with numpy --with scipy pytest art/pipeline/tests -q` exit 0, 352 passed.
+
 ## Review
 (filled by spec-review)

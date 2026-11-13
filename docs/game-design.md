@@ -27,7 +27,7 @@ The spike generated a pose grid and a 6-frame punch for Julien with `gpt-image-2
 |---|---|---|
 | Animation | Image-generated frames | Every fighter animation is a strip of key frames made with image generation and cleaned up by our pipeline. Code adds the feel on top: holds, hit-stop, shake, flashes, smears, particles. |
 | Fighter size | 640x360, fighters about 140px | Internal resolution 640x360, fighting stance about 140px tall. Faces stay readable, and the art snaps to a clean pixel grid. |
-| Roster | 4 launch fighters, full sets | Julien H., Felicia G., Pentcho T. and Alex A. get complete animation sets first (picked for visual variety; swap on the HQ page). The other 33 follow in batches once the pipeline is proven. |
+| Roster | 4 launch fighters, full sets | Julien H., Felicia G., Pentcho T. and Alex A. get complete animation sets first (picked for visual variety; swap on the HQ page). The other 33 follow in batches once the pipeline is proven. Done: specs 016 and 017 (see "Full roster" below). |
 | Animation set | Core set, 17 clips | Listed under "Core animation set" below. |
 | Stages and effects | Generated | Painted pixel stages split into parallax layers, and effect animations (hit and block sparks, dust, slash trails, super flash). |
 
@@ -37,7 +37,7 @@ The spike generated a pose grid and a 6-frame punch for Julien with `gpt-image-2
 |---|---|---|
 | Buttons | Punch / Kick / Special | Punch = jab, forward+Punch = heavy punch; Kick = snap kick, forward+Kick = roundhouse (knockdown); down+either = low sweep; in the air either = air kick; Punch+Kick = throw; Special = the fighter's signature special. Replaces Light / Heavy / Special. |
 | Keyboard layout | Single-hand ergonomic clusters | P1 W A S D + F (punch) Q (kick) E (special) R (start). P2 I J K L + H (punch) U (kick) O (special) P (start). An in-game controls screen rebinds keys and shows which keys register at once, so two players can check their keyboard. |
-| Roster | 4 fighters with their own specials | Felicia, Pentcho and Alex get full animation sets. Each launch fighter gets an archetype and a signature special with its own animation and effect. The other 33 appear on the select screen as "coming soon". |
+| Roster | 4 fighters with their own specials | Felicia, Pentcho and Alex get full animation sets. Each launch fighter gets an archetype and a signature special with its own animation and effect. The other 33 appear on the select screen as "coming soon". Superseded by "Full roster" below: all 37 are playable, so no tile is "coming soon". |
 | Polish | Smoother moves, more moves and reactions, sound and music, living stage and menus | Clip set v2 (more frames per attack, new reaction clips), chiptune audio, a painted stage with parallax and walkers, an animated select screen and a versus splash. |
 
 ### Launch fighters (proposed; change on the HQ page)
@@ -49,7 +49,19 @@ The spike generated a pose grid and a 6-frame punch for Julien with `gpt-image-2
 | Pentcho T. | Bruiser | Hotfix Charge: armored shoulder charge that absorbs one hit and knocks down | charge_streaks |
 | Alex A. | Rusher | Rapid Deploy: dashing three-punch flurry ending in an uppercut | rush_streaks |
 
-Stats per archetype (health, walk speed, damage scale) live in one data table; the all-rounder is the baseline.
+Stats per archetype (health, walk speed, damage scale) live in one data table; the all-rounder is the baseline. Since spec 016 the four also have a second special on Forward+Special.
+
+### Full roster (2026-11-12, specs 016 and 017, live)
+
+| Topic | Choice | What it means |
+|---|---|---|
+| Roster | All 37 playable, each with their own kit | Built in two batches through the 26-clip v2 pipeline: 8 people in spec 016 (12 playable), the last 25 in spec 017 (37 of 37). Character select has no "coming soon" tiles left. |
+| Archetypes | 8 all-rounders, 8 rushers, 7 bruisers, 7 zoners, 7 tricksters | Assigned in `src/data/fighters.ts` by specs 016 and 017. The HQ page still asks whether to keep this assignment ("Archetype assignment"). |
+| Specials | Two per fighter, 74 in all | Special = the fighter's primary special, Forward+Special = a second one (mirrors Forward+Punch and Forward+Kick, no motion inputs). Down+Special stays the taunt. New sim mechanics: projectile kinds (orb, fast packet, lingering mine, low shockwave, angled arc burst), parry counters, unblockable grounded command grabs and anti-air invulnerability. |
+| Fighter feel | Per-fighter tuning | Integer physics (walk, dash, jump, gravity), throw range and damage, pushback, chip resistance, cancel chain, a passive trait, an SFX pitch and a friendly win quote for each fighter. |
+| Battlemons | One companion per fighter, all 35 used | Every fighter is mapped to a battlemon; the summon itself is spec 007 (Battlemon supers). |
+| Mirror matches | Offline alternate atlas for everyone | All 37 fighters ship `atlas-alt.webp` (QA F1), so P2 in a mirror match changes garments, never a face or hair. |
+| Stage walkers | Filtered at runtime | The office strip has 9 coworkers; whoever is fighting is hidden from the background of their own match (`src/render/stage.ts`). |
 
 ### Game title (2026-11-12, HQ page)
 
@@ -67,7 +79,7 @@ Stats per archetype (health, walk speed, damage scale) live in one data table; t
   | P1 | W A S D | F | Q | E | R |
   | P2 | I J K L | H | U | O | P |
 
-  (Updated to single-hand ergonomic letter clusters; was P1 WASD+FGH / P2 Arrows+L;'.) Gamepads through the Gamepad API (d-pad or left stick; A punch, B kick, X or Y special, Start start/pause), assigned to a player on their first button press. Esc pauses. All keys are rebindable on the controls screen.
+  (Updated to single-hand ergonomic letter clusters in `1985208`; was P1 WASD+FGH, start Enter / P2 arrows+L;', start NumpadEnter. Saved bindings moved to `datamon.controls.v2`, so returning players start on these defaults. Arrow keys and Enter also navigate and confirm all non-fight menus alongside WASD / IJKL.) Gamepads through the Gamepad API (d-pad or left stick; A punch, B kick, X or Y special, Start start/pause), assigned to a player on their first button press. Esc pauses. All keys are rebindable on the controls screen.
 - **Super:** heavy + special together with a full meter (open on the HQ page).
 - **Match rules:** best of 3 rounds, 99-second rounds (open on the HQ page), 1000 health. On time-out, more health wins the round.
 - **Image model:** OpenAI `gpt-image-2.5-sunburst` with reference images and transparent backgrounds, called through the image-compass plugin's `generate_openai.py`. Gemini is out for now (its prepaid credits ran out during the spike).
@@ -167,7 +179,7 @@ Spike evidence: raw images in `.claude-images/2026-11-12/`, the cut-and-anchor p
 | Zoner | Keeps distance, weak up close | Fast projectile, slow projectile, trap |
 | Trickster | Mobility and mix-ups | Teleport, feint, crossup dive |
 
-How the 37 people get archetypes is open on the HQ page.
+Specs 016 and 017 assigned all 37 people (8 all-rounders, 8 rushers, 7 bruisers, 7 zoners, 7 tricksters, in `src/data/fighters.ts`); whether to keep that assignment is open on the HQ page.
 
 ## Battlemon domains (super behavior)
 
@@ -190,13 +202,16 @@ Generation is billed per image. Estimate: 17 clips plus retries is about 20 to 2
 
 ## Roadmap
 
-Each line is one spec, roughly one session. Done or in review: 001 engine, 002 animation pipeline, 003 combat, 004 effects.
+Each line is one spec, roughly one session. `./dm specs` has each spec's status. Not built yet: 7 (Battlemon supers) and the arcade ladder from step 8.
 
-5. **Controls and match flow** (`specs/005-controls-and-match-flow.md`): Punch / Kick / Special, the home-row layout, a controls screen with rebinding and a key test, gamepad join, title, character select (4 playable, 33 coming soon), versus splash, results, rematch, pause.
+5. **Controls and match flow** (`specs/005-controls-and-match-flow.md`): Punch / Kick / Special, the two-player keyboard layout (now the single-hand clusters under "Defaults"), a controls screen with rebinding and a key test, gamepad join, title, character select (built with 4 playable and 33 "coming soon"; all 37 playable since specs 016 and 017), versus splash, results, rematch, pause.
 6. **Launch roster and signature specials** (`specs/006-launch-roster.md`): Felicia, Pentcho and Alex animated with clip set v2; archetype stats; the four signature specials with their effects.
 7. **Battlemon supers:** super meter rules and the five domain summons.
 8. **CPU opponent and arcade ladder.**
 9. **Living stage and menus** (`specs/009-living-stage.md`): a generated Compass stage split into parallax layers, coworkers walking in the background, an animated select screen and versus splash.
 10. **Audio** (`specs/010-audio.md`): WebAudio chiptune sound effects, stingers and a music loop.
-11. **Roster batches:** the other 33 people, in batches through the proven pipeline.
+11. **Roster batches** (`specs/016-character-expansion.md`, `specs/017-full-roster.md`): the other 33 people through the proven pipeline, done in two specs (8, then 25), with two specials and their own tuning for every fighter (see "Full roster").
 12. **Animation v2** (`specs/012-animation-v2.md`): smoother attacks (more frames) and new moves and reactions (dashes, crouching and air hurt, wall bounce, intro, taunt, get-up roll, block push) for all four launch fighters.
+13. **Load speed and memory** (`specs/013-load-speed-and-memory.md`): lossless WebP art, small walker sprites, cache headers and speed budgets on a production build.
+14. **App shell and accessibility** (`specs/014-app-shell-and-accessibility.md`): icons, installable app, share card, fullscreen, a failure screen and screen reader announcements.
+15. **Touch controls and phones** (`specs/015-touch-and-phones.md`): on-screen controls for P1, a phone landscape layout and a rotate screen.

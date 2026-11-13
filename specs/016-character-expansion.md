@@ -71,5 +71,8 @@ Specs 006 and 012 established the 26-clip v2 animation pipeline and the first fo
   - `uv run --with pytest --with pillow --with numpy --with scipy pytest art/pipeline/tests -q`: `67 passed` (exit `0`).
   - `./dm check`: `PASS typecheck` (`0.3s`), `PASS test` (`31` test files, `447` tests passed, `1.1s`), `PASS build` (`dist/assets/index-*.js` `322.62 kB` / `90.55 kB` gzip, `0.4s`), exit `0`.
 
+### Later changes (after this spec was built)
+- Spec 017 made the other 25 people playable (37 of 37) and replaced the static walker exclusion with runtime filtering. `872724c` replaced the `palette-alt.json` hue shift with offline `atlas-alt.webp` mirror atlases for all 37 fighters (see spec 017, "Later changes").
+
 ## Review
 (filled by spec-review)

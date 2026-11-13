@@ -1,9 +1,23 @@
 // Default bindings, one data table per device (docs/game-design.md, "Controls").
 // Keys are KeyboardEvent.code values, so they follow physical positions on any layout.
 // Players can rebind keys on the controls screen (src/input/bindings.ts).
-import type { ButtonName } from "./bits";
+import { BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_START, BUTTON_UP, type ButtonName } from "./bits";
 
 export type KeyBindings = Readonly<Record<ButtonName, readonly string[]>>;
+
+/**
+ * Universal menu navigation keys (Arrow keys + Enter). Active on non-fight screens
+ * whenever a key is not already bound to a player's action, so menus feel natural
+ * alongside WASD and IJKL.
+ */
+export const MENU_KEY_BITS: Readonly<Record<string, number>> = Object.freeze({
+  ArrowUp: BUTTON_UP,
+  ArrowDown: BUTTON_DOWN,
+  ArrowLeft: BUTTON_LEFT,
+  ArrowRight: BUTTON_RIGHT,
+  Enter: BUTTON_START,
+  NumpadEnter: BUTTON_START,
+});
 
 /** Keyboard defaults for P1 (left cluster: WASD + F/Q/E/R) and P2 (right cluster: IJKL + H/U/O/P). */
 export const KEYBOARD_BINDINGS: readonly [KeyBindings, KeyBindings] = [

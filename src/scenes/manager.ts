@@ -8,6 +8,7 @@ import type { CpuController, CpuLevel } from "../ai/cpu";
 import type { Person } from "../data/catalog";
 import type { ControlBindings } from "../input/bindings";
 import { BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_UP } from "../input/bits";
+import { MENU_KEY_BITS } from "../input/keymap";
 import type { ClipSet } from "../render/clips";
 import type { EffectAtlas } from "../render/effects";
 import { text } from "../render/hud";
@@ -148,11 +149,13 @@ export class SceneManager {
     [0, 0, 0, 0],
   ];
   private escape = false;
+  private readonly menuTapped = new Set<string>();
   private mode: GameMode | null = null;
 
   constructor(readonly services: GameServices) {}
 
   go(scene: Scene): void {
+    this.menuTapped.clear();
     this.scene = scene;
     this.services.hooks.scene?.(scene.name, this.mode, scene.describe?.());
   }
@@ -178,16 +181,27 @@ export class SceneManager {
 
   /** Runs one 60 Hz step with the sampled input. */
   step(held: InputPair): void {
-    const pressed: [number, number] = [held[0] & ~this.prev[0], held[1] & ~this.prev[1]];
+    let menuBits = 0;
+    if (this.scene.name !== "fight") {
+      const heldCodes = this.services.heldKeys();
+      for (const [code, bit] of Object.entries(MENU_KEY_BITS)) {
+        if ((heldCodes.has(code) || this.menuTapped.has(code)) && !this.services.bindings.owner(code)) {
+          menuBits |= bit;
+        }
+      }
+    }
+    this.menuTapped.clear();
+    const menuHeld: InputPair = [held[0] | menuBits, held[1]];
+    const pressed: [number, number] = [menuHeld[0] & ~this.prev[0], menuHeld[1] & ~this.prev[1]];
     const nav: [number, number] = [pressed[0], pressed[1]];
     for (const p of [0, 1] as const) {
       DIRS.forEach((bit, k) => {
-        const t = (held[p] & bit) !== 0 ? this.heldFor[p]![k]! + 1 : 0;
+        const t = (menuHeld[p] & bit) !== 0 ? this.heldFor[p]![k]! + 1 : 0;
         this.heldFor[p]![k] = t;
         if (t > REPEAT_DELAY && (t - REPEAT_DELAY) % REPEAT_EVERY === 0) nav[p] |= bit;
       });
     }
-    this.prev = [held[0], held[1]];
+    this.prev = [menuHeld[0], menuHeld[1]];
     const input: MenuInput = { held, pressed, nav, escape: this.escape };
     this.escape = false;
     this.scene.step(input);
@@ -199,7 +213,14 @@ export class SceneManager {
   /** A raw key press from the page. Returns true when the game consumed it. */
   key(code: string): boolean {
     if (this.scene.key?.(code)) return true;
-    if (code === "Escape") this.escape = true;
+    if (code === "Escape") {
+      this.escape = true;
+      return true;
+    }
+    if (this.scene.name !== "fight" && code in MENU_KEY_BITS && !this.services.bindings.owner(code)) {
+      this.menuTapped.add(code);
+      return true;
+    }
     return false;
   }
 

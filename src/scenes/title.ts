@@ -50,9 +50,14 @@ export class TitleScene implements Scene {
     if (this.m.touchHints) return [TOUCH_TITLE_HINT];
     const b = this.m.services.bindings;
     const [k1, k2] = b.current;
-    const confirm = `${keyLabel(b.keyFor(0, "start"))}, ${keyLabel(b.keyFor(0, "punch"))} OR ${keyLabel(b.keyFor(1, "punch"))}`;
+    const m1 = moveLabel(k1);
+    const m2 = moveLabel(k2);
+    const moves = m1 === "ARROWS" || m2 === "ARROWS" ? `${m1} OR ${m2}` : `ARROWS, ${m1} OR ${m2}`;
+    const p1 = keyLabel(b.keyFor(0, "punch"));
+    const p2 = keyLabel(b.keyFor(1, "punch"));
+    const confirm = p1 === "ENTER" || p2 === "ENTER" ? `${p1} OR ${p2}` : `ENTER, ${p1} OR ${p2}`;
     const back = `${keyLabel(b.keyFor(0, "kick"))} OR ${keyLabel(b.keyFor(1, "kick"))}`;
-    return [`MOVE: ${moveLabel(k1)} OR ${moveLabel(k2)}   CONFIRM: ${confirm}   BACK: ${back}`, "GAMEPADS: PRESS ANY BUTTON TO JOIN"];
+    return [`MOVE: ${moves}   CONFIRM: ${confirm}   BACK: ${back}`, "GAMEPADS: PRESS ANY BUTTON TO JOIN"];
   }
 
   debug(): Record<string, unknown> {

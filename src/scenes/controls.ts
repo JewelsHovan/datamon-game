@@ -156,7 +156,8 @@ export class ControlsScene implements Scene {
     if (this.capturing) return `PRESS A KEY FOR P${this.capturing.player + 1} ${ACTION_LABELS[this.capturing.action]}   ESC: CANCEL`;
     if (this.m.touchHints) return TOUCH_CONTROLS_HINT;
     const start = keyLabel(this.m.services.bindings.keyFor(0, "start"));
-    return `MOVE: DIRECTIONS   ${start} OR START: REBIND   ESC: BACK`;
+    const rebind = start === "ENTER" ? "ENTER OR START" : `ENTER OR ${start}`;
+    return `MOVE: ARROWS / DIRECTIONS   ${rebind}: REBIND   ESC: BACK`;
   }
 
   debug(): Record<string, unknown> {
