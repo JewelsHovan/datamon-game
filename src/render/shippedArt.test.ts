@@ -4,7 +4,8 @@
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { beforeEach, describe, expect, it } from "vitest";
-import { getPerson, type Person } from "../data/catalog";
+import { getPeople, getPerson, type Person } from "../data/catalog";
+import { detectPlayable } from "../scenes/roster";
 import { clearClipCache, loadAltClipSet, loadClipSet, type AtlasImage, type ClipLoaderDeps } from "./clips";
 import { loadEffects } from "./effects";
 import { loadStageArt, parseStageManifest } from "./stage";
@@ -94,6 +95,20 @@ describe("a fight loads only WebP art named by the manifests (spec 013)", () => 
       expect(c.frames).toHaveLength(4);
     }
     expect(stage!.walkers!.stand).toBe(2);
+  });
+
+  it("the shipped fighter index lists exactly the fighters with a manifest, so nobody else is probed", async () => {
+    const { deps, requests } = publicDeps();
+    const playable = await detectPlayable(getPeople(), deps);
+    const withManifest = getPeople().filter((p) => existsSync(resolve(PUBLIC, "fighters", p.slug, "manifest.json"))).map((p) => p.slug);
+    expect([...playable].sort()).toEqual(withManifest.sort());
+    expect(withManifest).toHaveLength(4);
+    expect(requests).toEqual(["./fighters/index.json"]);
+    // A coworker without art loads straight from the walk sheet: no manifest request.
+    requests.length = 0;
+    const jewoo = person("jewoo-lee");
+    await loadClipSet(jewoo, deps);
+    expect(requests).toEqual([jewoo.sheetUrl]);
   });
 
   it("a stage manifest without a usable walkers block still loads its layers", () => {

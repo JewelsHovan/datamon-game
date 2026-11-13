@@ -81,6 +81,15 @@ def test_stage_layers_and_walkers_are_webp_and_match_their_masters():
     assert_shipped(STAGE / m["walkers"]["file"], stage.master_path("office", "walkers"))
 
 
+def test_fighter_index_lists_every_manifest_with_its_atlas():
+    index = manifest(common.PUBLIC_FIGHTERS / "index.json")["fighters"]
+    assert sorted(index) == FIGHTERS and len(FIGHTERS) == 4
+    for slug, entry in index.items():
+        m = manifest(common.PUBLIC_FIGHTERS / slug / entry["manifest"])
+        assert (entry["atlas"], entry["version"]) == (m["atlas"], m["version"]), slug
+        assert (common.PUBLIC_FIGHTERS / slug / entry["atlas"]).exists(), slug
+
+
 def test_no_png_art_ships():
     shipped = [p for d in ("fighters", "effects", "stages") for p in (PUBLIC / d).rglob("*.png")]
     assert shipped == []

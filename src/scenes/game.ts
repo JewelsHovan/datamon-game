@@ -132,21 +132,37 @@ export async function startGame(options: GameOptions): Promise<GameHandle> {
   });
   const sampler = createInputSampler(keyboard, pads);
 
+  async function loadFightAssets(p1: Person, p2: Person): Promise<FightAssets> {
+    effects ??= loadEffects();
+    const mirror = p1.slug === p2.slug;
+    const [s1, s2, fx, i1, i2] = await Promise.all([
+      loadClipSet(p1),
+      mirror ? loadAltClipSet(p2) : loadClipSet(p2),
+      effects,
+      loadImage(p1.portraitUrl),
+      loadImage(p2.portraitUrl),
+    ]);
+    return { clipSets: [s1, s2], effects: fx, portraits: [i1, i2] };
+  }
+  // A fight from the URL starts loading its art at once, while the font loads (spec 013 R3).
+  const direct = pick.direct ? matchFromPick(pick) : null;
+  let early: { p1: string; p2: string; assets: Promise<FightAssets> } | null = null;
+  if (direct) {
+    early = { p1: direct.p1.slug, p2: direct.p2.slug, assets: loadFightAssets(direct.p1, direct.p2) };
+    early.assets.catch(() => {}); // the versus scene reports a failure when it takes the promise
+  }
+
   const services: GameServices = {
     people,
     bindings,
     playable: () => playable,
-    async loadFight(p1, p2): Promise<FightAssets> {
-      effects ??= loadEffects();
-      const mirror = p1.slug === p2.slug;
-      const [s1, s2, fx, i1, i2] = await Promise.all([
-        loadClipSet(p1),
-        mirror ? loadAltClipSet(p2) : loadClipSet(p2),
-        effects,
-        loadImage(p1.portraitUrl),
-        loadImage(p2.portraitUrl),
-      ]);
-      return { clipSets: [s1, s2], effects: fx, portraits: [i1, i2] };
+    loadFight(p1, p2): Promise<FightAssets> {
+      if (early && early.p1 === p1.slug && early.p2 === p2.slug) {
+        const { assets } = early;
+        early = null;
+        return assets;
+      }
+      return loadFightAssets(p1, p2);
     },
     hasPad: (player) => pads.has(player),
     heldKeys: () => keyboard.held(),
@@ -162,7 +178,7 @@ export async function startGame(options: GameOptions): Promise<GameHandle> {
   manager = m;
   await fontReady(win);
 
-  if (pick.direct) m.toVersus(matchFromPick(pick), false);
+  if (direct) m.toVersus(direct, false);
   else m.toTitle();
 
   win.addEventListener("keydown", (e) => {

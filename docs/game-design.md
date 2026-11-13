@@ -95,11 +95,12 @@ Stats per archetype (health, walk speed, damage scale) live in one data table; t
 
 ### Animation clip format (binding for specs 001 and 002)
 
-Each fighter ships `public/fighters/<slug>/atlas.png` and `public/fighters/<slug>/manifest.json`:
+Each fighter ships `public/fighters/<slug>/manifest.json` and the atlas it names, `public/fighters/<slug>/atlas.webp` (lossless WebP since spec 013; the PNG master stays at `art/fighters/<slug>/atlas.png` for review). `public/fighters/index.json` lists every fighter with a manifest; the game reads it once to know who is playable instead of probing a manifest per person.
 
 ```json
 {
   "fighter": "julien-hovan",
+  "atlas": "atlas.webp",
   "version": 1,
   "scale": 0.27,
   "facing": "right",
@@ -115,6 +116,7 @@ Each fighter ships `public/fighters/<slug>/atlas.png` and `public/fighters/<slug
 }
 ```
 
+- `atlas`: the atlas file next to the manifest. The game requests it as `atlas.webp?v=<version>`, so a new manifest never pairs with an older cached atlas (art is cached for up to an hour, `public/_headers`). The effects atlas (`public/effects/`) and the stage (`public/stages/<id>/manifest.json`: layer files and the background walkers' strip, cast and frames) follow the same rule.
 - `x, y, w, h`: the frame's rectangle in the atlas. `ax, ay`: the anchor inside that rectangle, the point that sits on the fighter's position: the body center on the floor, matching the pushbox. The pipeline anchors frames on the back foot (stable across poses) and the packer shifts every anchor by the idle stance's body-center offset (`originX`). `hold`: default ticks at 60 Hz; move frame data may override holds.
 - Art faces right. Facing left is drawn mirrored around the anchor.
 - `scale` records the factor applied to the generated art, for provenance only; the game draws atlas pixels 1:1 at 640x360.

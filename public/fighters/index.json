@@ -1,0 +1,24 @@
+{
+ "fighters": {
+  "alex-andrianavalontsalama": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 2
+  },
+  "felicia-gorgacheva": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 2
+  },
+  "julien-hovan": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 4
+  },
+  "pentcho-tchomakov": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 2
+  }
+ }
+}

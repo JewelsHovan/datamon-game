@@ -51,8 +51,10 @@ The download is dominated by the fighter atlases (PNG, about 1.1 MB each) and th
 - [x] T1. Pipeline: `art/pipeline/pack.py`, `effects.py` and `stage.py` write lossless WebP next to the masters; manifests name the files; regenerate the shipped assets; pytest for A1.
 - [x] T2. Loaders: `src/render/clips.ts` (atlas file from the manifest), `src/render/effects.ts`, `src/render/stage.ts` (layer files from the manifest); vitest.
 - [x] T3. Walker strips: a pipeline step that cuts each cast member's right-facing walk frames at walker scale into `public/stages/office/walkers.webp` with a manifest; `src/render/stage.ts` draws from it.
-- [ ] T4. `public/_headers` and its test.
+- [x] T4. `public/_headers` and its test.
 - [ ] T5. Budgets in `specs/evidence/013/perf-check.mjs` (load, runtime, page-held images and canvases, request log); run it on a production build; evidence and notes.
+- [x] T6. (Added during tackle: QA 2026-11-12 finding F3, 40 manifest 404s per load.) The pipeline writes `public/fighters/index.json` (every fighter with a manifest); `detectPlayable` (`src/scenes/roster.ts`) and `loadClipSetUncached` (`src/render/clips.ts`) read it once instead of probing a manifest per person; perf-check fails on any 404 in the title, select and fight loads; vitest and pytest.
+- [x] T7. (Added during tackle: with T1 to T6 the fight from the URL measured 1.14 to 1.31 s against the 1.2 s budget.) A fight from the URL starts loading its art at boot, during the font wait, instead of after it (`src/scenes/game.ts`).
 
 ## Implementation notes
 (filled by spec-tackle)

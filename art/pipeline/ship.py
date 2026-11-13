@@ -2,7 +2,8 @@
 
 Usage:  uv run --with pillow --with numpy python -I art/pipeline/ship.py
 
-- Fighters: art/fighters/SLUG/atlas.png -> public/fighters/SLUG/atlas.webp, and the manifest names it.
+- Fighters: art/fighters/SLUG/atlas.png -> public/fighters/SLUG/atlas.webp, and the manifest names it;
+  public/fighters/index.json lists every fighter with a manifest (the game's playable roster).
 - Effects: art/effects/atlas.png -> public/effects/atlas.webp, and the manifest names it.
 - Stages: every layer master and the walker strip (stage.py manifest).
 Fighter and effect manifest versions are kept (the pixels the game sees do not change); the stage
@@ -50,6 +51,7 @@ def main() -> int:
         public_dir = common.PUBLIC_FIGHTERS / fdir.name
         if master.exists() and (public_dir / "manifest.json").exists():
             ship_atlas(master, public_dir)
+    print(common.write_fighter_index().relative_to(common.ROOT))
     if (common.EFFECTS / common.MASTER_ATLAS).exists():
         ship_atlas(common.EFFECTS / common.MASTER_ATLAS, common.PUBLIC_EFFECTS)
     for sid in stage.load()["stages"]:

@@ -93,6 +93,18 @@ def load_json(path: Path, default):
     return json.loads(path.read_text()) if path.exists() else default
 
 
+def write_fighter_index() -> Path:
+    """public/fighters/index.json: every fighter with a packed manifest, with its atlas and version.
+    The game reads it once instead of probing a manifest per person (a 404 for everyone without art)."""
+    fighters = {}
+    for mp in sorted(PUBLIC_FIGHTERS.glob("*/manifest.json")):
+        m = json.loads(mp.read_text())
+        fighters[mp.parent.name] = {"manifest": mp.name, "atlas": m.get("atlas", ATLAS_FILE), "version": m["version"]}
+    out = PUBLIC_FIGHTERS / "index.json"
+    out.write_text(json.dumps({"fighters": fighters}, indent=1) + "\n")
+    return out
+
+
 def save_master_and_webp(img: Image.Image, master: Path, shipped: Path) -> None:
     """Writes the PNG master (review copy under art/) and the lossless WebP the game loads."""
     master.parent.mkdir(parents=True, exist_ok=True)

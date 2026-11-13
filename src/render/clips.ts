@@ -308,11 +308,36 @@ export async function buildPlaceholderClipSet(person: Person, deps: ClipLoaderDe
   return { slug: person.slug, source: "placeholder", atlas: canvas, artFacing: 1, clips: layout.clips };
 }
 
+/** The art pipeline's list of fighters with packed art (art/pipeline/common.py write_fighter_index). */
+export const FIGHTER_INDEX_URL = "./fighters/index.json";
+
+/** Slugs listed in a fighter index, or null when the data is not one. */
+export function parseFighterIndex(data: unknown): ReadonlySet<string> | null {
+  if (!isRecord(data) || !isRecord(data.fighters)) return null;
+  return new Set(Object.keys(data.fighters));
+}
+
+const indexCache = new WeakMap<object, Promise<ReadonlySet<string> | null>>();
+
+/**
+ * Which fighters have a manifest, fetched once per loader. Lets the game skip manifest requests for
+ * everyone else (each would be a 404). Null when there is no index: callers then probe manifests.
+ */
+export function loadFighterIndex(deps: Pick<ClipLoaderDeps, "fetchJson">): Promise<ReadonlySet<string> | null> {
+  let pending = indexCache.get(deps);
+  if (!pending) {
+    pending = deps.fetchJson(FIGHTER_INDEX_URL).then(parseFighterIndex, () => null);
+    indexCache.set(deps, pending);
+  }
+  return pending;
+}
+
 /** Loads a fighter's manifest clips, falling back to walk-sheet placeholders. */
 export async function loadClipSetUncached(person: Person, deps: ClipLoaderDeps): Promise<ClipSet> {
   let json: unknown = null;
+  const index = await loadFighterIndex(deps);
   try {
-    json = await deps.fetchJson(manifestUrl(person.slug));
+    if (index === null || index.has(person.slug)) json = await deps.fetchJson(manifestUrl(person.slug));
   } catch {
     json = null;
   }
@@ -358,8 +383,11 @@ export function clearClipCache(): void {
   cache.clear();
 }
 
+let browserDeps: ClipLoaderDeps | null = null;
+
+/** The browser's loader (one shared object, so the fighter index is fetched once per page). */
 export function browserClipDeps(): ClipLoaderDeps {
-  return {
+  browserDeps ??= {
     async fetchJson(url) {
       const res = await fetch(url, { headers: { Accept: "application/json" } });
       if (!res.ok) return null;
@@ -388,6 +416,7 @@ export function browserClipDeps(): ClipLoaderDeps {
       console.warn(message);
     },
   };
+  return browserDeps;
 }
 
 /** URL of a fighter's alternate palette ({"#from": "#to"}), used for P2 in mirror matches. */

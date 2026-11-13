@@ -94,6 +94,7 @@ def main() -> int:
     common.save_master_and_webp(atlas, fdir / common.MASTER_ATLAS, out / common.ATLAS_FILE)
     (out / "atlas.png").unlink(missing_ok=True)  # only the WebP ships
     manifest_path.write_text(json.dumps(manifest, indent=1) + "\n")
+    common.write_fighter_index()
     print(f"{args.slug}: {len(clips)} clips, {len(entries)} frames, atlas {ATLAS_W}x{height} -> {out.relative_to(common.ROOT)}")
     return 0
 
