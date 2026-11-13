@@ -6,7 +6,7 @@
 // Punch, Kick and Special do nothing here except light up, so all six attack
 // keys can be held at once for the test.
 import { ACTION_LABELS, BINDABLE_ACTIONS } from "../input/bindings";
-import { BUTTON_BITS, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_START, BUTTON_UP, type ButtonName } from "../input/bits";
+import { BUTTON_BITS, BUTTON_DOWN, BUTTON_KICK, BUTTON_LEFT, BUTTON_PUNCH, BUTTON_RIGHT, BUTTON_START, BUTTON_UP, type ButtonName } from "../input/bits";
 import { keyLabel } from "../input/keymap";
 import { text } from "../render/hud";
 import { VIEW_HEIGHT, VIEW_WIDTH } from "../render/screen";
@@ -19,6 +19,8 @@ const COL_W = 230;
 const COL_X = [VIEW_WIDTH / 2 - 16 - COL_W, VIEW_WIDTH / 2 + 16] as const;
 const RESTORE_ROW = BINDABLE_ACTIONS.length;
 const BACK_ROW = RESTORE_ROW + 1;
+/** The footer on touch (QA 2026-11-12 F3): rebinding and the key test are for keyboards. */
+export const TOUCH_CONTROLS_HINT = "REBINDING NEEDS A KEYBOARD   KICK: BACK";
 
 export class ControlsScene implements Scene {
   readonly name = "controls" as const;
@@ -44,7 +46,10 @@ export class ControlsScene implements Scene {
     }
     if (this.capturing) return;
     const hooks = this.m.services.hooks;
-    if (input.escape) {
+    // On touch (no keyboard to test or bind) Kick leaves and Punch picks RESTORE DEFAULTS or BACK:
+    // the touch controls have no Esc, and Start (Pause) shows only in a fight.
+    const touch = this.m.touchHints;
+    if (input.escape || (touch && pressed(input, BUTTON_KICK, [0]))) {
       hooks.ui?.("back");
       this.m.go(this.back);
       return;
@@ -55,7 +60,8 @@ export class ControlsScene implements Scene {
       this.col = this.col === 0 ? 1 : 0;
       hooks.ui?.("move");
     }
-    if (!pressed(input, BUTTON_START)) return;
+    const confirm = pressed(input, BUTTON_START) || (touch && this.row >= RESTORE_ROW && pressed(input, BUTTON_PUNCH, [0]));
+    if (!confirm) return;
     hooks.ui?.("confirm");
     if (this.row === BACK_ROW) {
       this.m.go(this.back);
@@ -133,15 +139,24 @@ export class ControlsScene implements Scene {
       text(ctx, on ? `> ${item} <` : item, VIEW_WIDTH / 2, ROW_Y + BINDABLE_ACTIONS.length * ROW_H + 8 + k * 16, 8, on ? GOLD : DIM, "center");
     });
     if (this.status) text(ctx, this.status, VIEW_WIDTH / 2, 240, 8, GOLD, "center");
-    const lines = [
-      "KEY TEST: HOLD KEYS AND THEIR ACTIONS LIGHT UP.",
-      "IF A KEY DOES NOT LIGHT UP WHILE OTHERS ARE HELD, THIS KEYBOARD",
-      "CANNOT REGISTER THAT COMBINATION: REBIND IT.",
-    ];
+    // The key test explains keyboards; on touch it has nothing to say.
+    const lines = this.m.touchHints
+      ? []
+      : [
+          "KEY TEST: HOLD KEYS AND THEIR ACTIONS LIGHT UP.",
+          "IF A KEY DOES NOT LIGHT UP WHILE OTHERS ARE HELD, THIS KEYBOARD",
+          "CANNOT REGISTER THAT COMBINATION: REBIND IT.",
+        ];
     lines.forEach((l, k) => text(ctx, l, VIEW_WIDTH / 2, 262 + k * 13, 8, "#aeaadc", "center"));
-    const start = keyLabel(bindings.keyFor(0, "start"));
-    const footer = this.capturing ? `PRESS A KEY FOR P${this.capturing.player + 1} ${ACTION_LABELS[this.capturing.action]}   ESC: CANCEL` : `MOVE: DIRECTIONS   ${start} OR START: REBIND   ESC: BACK`;
-    text(ctx, footer, VIEW_WIDTH / 2, VIEW_HEIGHT - 18, 8, INK, "center");
+    text(ctx, this.footer(), VIEW_WIDTH / 2, VIEW_HEIGHT - 18, 8, INK, "center");
+  }
+
+  /** The bottom line: the keys, or on touch what works without a keyboard. */
+  footer(): string {
+    if (this.capturing) return `PRESS A KEY FOR P${this.capturing.player + 1} ${ACTION_LABELS[this.capturing.action]}   ESC: CANCEL`;
+    if (this.m.touchHints) return TOUCH_CONTROLS_HINT;
+    const start = keyLabel(this.m.services.bindings.keyFor(0, "start"));
+    return `MOVE: DIRECTIONS   ${start} OR START: REBIND   ESC: BACK`;
   }
 
   debug(): Record<string, unknown> {
@@ -150,6 +165,7 @@ export class ControlsScene implements Scene {
       row: this.row,
       capturing: this.capturing,
       status: this.status,
+      footer: this.footer(),
       lit: this.litActions(),
       bindings: this.m.services.bindings.current,
     };

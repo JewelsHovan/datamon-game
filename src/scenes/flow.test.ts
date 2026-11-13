@@ -127,6 +127,7 @@ describe("scene flow (A5, R5)", () => {
   it("title -> select -> versus -> fight -> results -> rematch -> pause -> quit to select", async () => {
     const d = new Driver(fakes());
     expect(d.scene).toBe("title");
+    d.m.toTitle(); // a fresh title menu (the one we came back to still points at CONTROLS)
     d.titlePick(1); // VS PLAYER
     expect(d.select.mode).toBe("versus");
 
@@ -470,6 +471,73 @@ describe("app shell (spec 014)", () => {
     d.press(0, BUTTON_DOWN);
     d.press(0, P); // QUIT TO SELECT
     expect(d.select.mode).toBe("versus");
+  });
+
+  it("the pause menu's SOUND item mutes and unmutes for everyone, and reads what the sound is (QA F3)", async () => {
+    const { f } = withFullscreen(true);
+    let muted = false;
+    const d = new Driver({ ...f, services: { ...f.services, soundMuted: () => muted, toggleSound: () => (muted = !muted) } });
+    d.titlePick(1);
+    d.press(0, P);
+    d.press(1, P);
+    await d.throughVersus();
+    d.escape();
+    expect(d.m.scene.debug?.()).toMatchObject({ items: ["RESUME", "CONTROLS", "SOUND ON", "FULLSCREEN", "QUIT TO SELECT"] });
+    d.press(0, BUTTON_DOWN);
+    d.press(0, BUTTON_DOWN);
+    expect(d.m.scene.debug?.()).toMatchObject({ item: "SOUND ON" });
+    d.press(0, P);
+    expect(muted).toBe(true);
+    expect(d.scene).toBe("pause"); // stays on the menu
+    expect(d.m.scene.debug?.()).toMatchObject({ item: "SOUND OFF", items: ["RESUME", "CONTROLS", "SOUND OFF", "FULLSCREEN", "QUIT TO SELECT"], hint: "ESC: RESUME   M: UNMUTE" });
+    d.press(1, P); // either human player can drive the menu
+    expect(muted).toBe(false);
+    expect(d.m.scene.debug?.()).toMatchObject({ item: "SOUND ON" });
+    // M from the keyboard and the item share one state: the label follows it
+    muted = true;
+    expect(d.m.scene.debug?.()).toMatchObject({ item: "SOUND OFF" });
+  });
+
+  it("on touch every screen names the touch buttons; a keyboard brings the keys back (QA F3)", async () => {
+    let touch = true;
+    const f = fakes();
+    const d = new Driver({ ...f, services: { ...f.services, touchControls: () => touch, soundMuted: () => false, toggleSound: () => false } });
+    expect(d.m.scene.debug?.()).toMatchObject({ hints: ["MOVE: D-PAD   CONFIRM: PUNCH   BACK: KICK"] });
+    touch = false;
+    expect((d.m.scene.debug?.() as { hints: string[] }).hints[0]).toMatch(/^MOVE: WASD OR ARROWS {3}CONFIRM: ENTER, F OR L/);
+    touch = true;
+
+    // Controls: no keyboard to test or bind on touch, Kick leaves
+    d.titlePick(3);
+    expect(d.scene).toBe("controls");
+    expect(d.m.scene.debug?.()).toMatchObject({ footer: "REBINDING NEEDS A KEYBOARD   KICK: BACK" });
+    touch = false;
+    expect((d.m.scene.debug?.() as { footer: string }).footer).toMatch(/ESC: BACK$/);
+    d.press(0, K); // with a keyboard Kick only lights up its row (key test)
+    expect(d.scene).toBe("controls");
+    touch = true;
+    d.press(0, K);
+    expect(d.scene).toBe("title");
+
+    d.m.toTitle(); // a fresh title menu (the one we came back to still points at CONTROLS)
+    d.titlePick(1); // VS PLAYER
+    expect(d.select.hint()).toBe("PICK: PUNCH   CANCEL: KICK");
+    touch = false;
+    expect(d.select.hint()).toBe("PICK: PUNCH OR START   CANCEL: KICK   ESC: TITLE");
+    touch = true;
+    d.press(0, P);
+    d.press(1, P);
+    await d.throughVersus();
+    // P1 by touch gets no key legend (the buttons are labelled); P2 on the keyboard keeps theirs
+    const [l1, l2] = d.fight.legends();
+    expect(l1).toBeNull();
+    expect(l2?.[0]).toMatch(/^L PUNCH/);
+    d.escape();
+    expect(d.m.scene.debug?.()).toMatchObject({ hint: "PUNCH: SELECT   KICK: RESUME" });
+    touch = false;
+    expect(d.m.scene.debug?.()).toMatchObject({ hint: "ESC: RESUME   M: MUTE" });
+    d.escape();
+    expect(d.fight.legends()[0]?.[0]).toMatch(/^F PUNCH/);
   });
 
   it("losing window focus pauses a fight, and only a fight (R7)", async () => {

@@ -94,6 +94,16 @@ export interface GameServices {
   fatal?(err: unknown): void;
   /** Whether sound is muted, for the mute key on the pause screen. */
   soundMuted?(): boolean;
+  /**
+   * Mutes or unmutes the sound for everyone (the pause menu's SOUND item, so a phone can mute
+   * without a keyboard); returns whether it is now muted. Missing: the pause menu has no SOUND item.
+   */
+  toggleSound?(): boolean;
+  /**
+   * P1 is playing with the on-screen touch controls right now (spec 015: they show on touch and
+   * hide when a keyboard or gamepad takes over). Hints then name the touch buttons, not keys.
+   */
+  touchControls?(): boolean;
 }
 
 export interface MenuInput {
@@ -155,6 +165,11 @@ export class SceneManager {
   /** Whether the menus offer FULLSCREEN. */
   get canFullscreen(): boolean {
     return this.services.fullscreen?.enabled === true;
+  }
+
+  /** Hints name the touch buttons (P1 plays by touch) rather than keys; read every frame, so they follow the device. */
+  get touchHints(): boolean {
+    return this.services.touchControls?.() === true;
   }
 
   toggleFullscreen(): void {

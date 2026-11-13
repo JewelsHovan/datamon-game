@@ -52,6 +52,8 @@ try {
       showFailure(document, err);
     },
     soundMuted: () => audio.muted,
+    // The pause menu's SOUND item mutes for everyone, like M (a phone has no M key).
+    toggleSound: () => audio.toggleMute(),
   }).catch(fail);
 } catch (err) {
   fail(err);
