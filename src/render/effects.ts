@@ -8,19 +8,21 @@ import { SUBPX } from "../sim/fixed";
 import type { SimEvent, SimState } from "../sim/types";
 import type { Camera } from "./camera";
 import type { AtlasImage, Clip, ClipLoaderDeps } from "./clips";
-import { browserClipDeps, clipFrameIndex, parseManifest } from "./clips";
+import { artUrl, browserClipDeps, clipFrameIndex, parseManifest } from "./clips";
 
 export interface EffectAtlas {
   atlas: AtlasImage;
   clips: Record<string, Clip>;
 }
 
+const EFFECTS_DIR = "./effects";
+
 export async function loadEffects(deps: ClipLoaderDeps = browserClipDeps()): Promise<EffectAtlas | null> {
-  const json = await deps.fetchJson("./effects/manifest.json");
+  const json = await deps.fetchJson(`${EFFECTS_DIR}/manifest.json`);
   if (!json) return null;
   try {
     const m = parseManifest(json);
-    return { atlas: await deps.loadImage("./effects/atlas.png"), clips: m.clips };
+    return { atlas: await deps.loadImage(artUrl(EFFECTS_DIR, m.atlas, m.version)), clips: m.clips };
   } catch (err) {
     deps.warn(`effects unusable: ${String(err)}`);
     return null;

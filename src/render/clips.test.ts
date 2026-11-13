@@ -42,7 +42,7 @@ function fakeDeps(manifestFor: string | null) {
     },
     async loadImage(url) {
       images.push(url);
-      return { width: url.endsWith("atlas.png") ? 384 : 440, height: 960 } as unknown as AtlasImage;
+      return { width: url.includes("/atlas.") ? 384 : 440, height: 960 } as unknown as AtlasImage;
     },
     createCanvas(width, height) {
       const data = new Uint8ClampedArray(width * height * 4).fill(100);
@@ -134,6 +134,16 @@ describe("clip manifest format", () => {
       },
       /ax/,
     ],
+    [
+      "an atlas outside the fighter's folder",
+      {
+        fighter: "a",
+        atlas: "../other/atlas.webp",
+        version: 1,
+        clips: { idle: { loop: true, frames: [{ x: 0, y: 0, w: 1, h: 1, ax: 0, ay: 0, hold: 1 }] } },
+      },
+      /atlas/,
+    ],
   ])("rejects %s", (_label, data, message) => {
     expect(() => parseManifest(data)).toThrow(ManifestError);
     expect(() => parseManifest(data)).toThrow(message);
@@ -200,12 +210,13 @@ describe("placeholder clips from the walk sheet", () => {
 describe("clip loader", () => {
   beforeEach(() => clearClipCache());
 
-  it("loads manifest.json and atlas.png when the fighter has them", async () => {
+  it("loads manifest.json and the atlas it names when the fighter has them", async () => {
     const f = fakeDeps("julien-hovan");
     const set = await loadClipSet(person("julien-hovan"), f.deps);
     expect(set.source).toBe("manifest");
     expect(f.fetched).toEqual(["./fighters/julien-hovan/manifest.json"]);
-    expect(f.images).toEqual([atlasUrl("julien-hovan")]);
+    expect(f.images).toEqual([atlasUrl("julien-hovan", parseManifest(fixtureJson()))]);
+    expect(f.images).toEqual(["./fighters/julien-hovan/atlas.webp?v=1"]);
     expect(set.clips).toEqual(parseManifest(fixtureJson()).clips);
     expect(set.artFacing).toBe(1);
     expect(f.warnings).toEqual([]);

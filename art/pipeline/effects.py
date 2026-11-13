@@ -33,9 +33,9 @@ import pack as packer  # noqa: E402
 import process  # noqa: E402
 
 DEFS = common.ART / "effects.json"
-OUT = common.ART / "effects"
+OUT = common.EFFECTS
 RAW = common.RAW / "effects"
-PUBLIC = common.ROOT / "public" / "effects"
+PUBLIC = common.PUBLIC_EFFECTS
 
 
 def load() -> dict:
@@ -188,9 +188,11 @@ def cmd_pack() -> int:
     PUBLIC.mkdir(parents=True, exist_ok=True)
     mp = PUBLIC / "manifest.json"
     prev = json.loads(mp.read_text()) if mp.exists() else {}
-    atlas.save(PUBLIC / "atlas.png", optimize=True)
-    mp.write_text(json.dumps({"fighter": "effects", "version": int(prev.get("version", 0)) + 1, "scale": 1,
-                              "facing": "right", "clips": clips}, indent=1) + "\n")
+    # PNG master for review under art/effects/, lossless WebP for the game (spec 013, R1).
+    common.save_master_and_webp(atlas, OUT / common.MASTER_ATLAS, PUBLIC / common.ATLAS_FILE)
+    (PUBLIC / "atlas.png").unlink(missing_ok=True)
+    mp.write_text(json.dumps({"fighter": "effects", "atlas": common.ATLAS_FILE, "version": int(prev.get("version", 0)) + 1,
+                              "scale": 1, "facing": "right", "clips": clips}, indent=1) + "\n")
     print(f"effects: {len(clips)} clips, {len(entries)} frames, atlas {packer.ATLAS_W}x{height}")
     return 0
 

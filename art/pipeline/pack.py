@@ -1,9 +1,11 @@
-"""Pack a fighter's approved clips into public/fighters/SLUG/atlas.png + manifest.json (spec 002, R4).
+"""Pack a fighter's approved clips into an atlas and manifest (spec 002, R4).
 
 Usage:  uv run --with pillow python -I art/pipeline/pack.py SLUG [--all]
 
 Only clips whose status is "approved" are packed, unless --all (for previewing work in progress).
-The manifest follows the "Animation clip format" in docs/game-design.md.
+The manifest follows the "Animation clip format" in docs/game-design.md. The PNG master goes to
+art/fighters/SLUG/atlas.png for review; the game loads the lossless WebP copy
+public/fighters/SLUG/atlas.webp, named by the manifest's "atlas" field (spec 013, R1).
 """
 
 from __future__ import annotations
@@ -87,9 +89,10 @@ def main() -> int:
     manifest_path = out / "manifest.json"
     prev = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
     idle_scale = clip_meta.get("idle", {}).get("scale")
-    manifest = {"fighter": args.slug, "version": int(prev.get("version", 0)) + 1, "scale": idle_scale,
-                "facing": "right", "originX": origin_x, "clips": clips}
-    atlas.save(out / "atlas.png", optimize=True)
+    manifest = {"fighter": args.slug, "atlas": common.ATLAS_FILE, "version": int(prev.get("version", 0)) + 1,
+                "scale": idle_scale, "facing": "right", "originX": origin_x, "clips": clips}
+    common.save_master_and_webp(atlas, fdir / common.MASTER_ATLAS, out / common.ATLAS_FILE)
+    (out / "atlas.png").unlink(missing_ok=True)  # only the WebP ships
     manifest_path.write_text(json.dumps(manifest, indent=1) + "\n")
     print(f"{args.slug}: {len(clips)} clips, {len(entries)} frames, atlas {ATLAS_W}x{height} -> {out.relative_to(common.ROOT)}")
     return 0

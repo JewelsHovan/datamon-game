@@ -99,7 +99,7 @@ def write_index() -> None:
 def compute(slug: str) -> dict:
     out_dir = common.PUBLIC_FIGHTERS / slug
     manifest = json.loads((out_dir / "manifest.json").read_text())
-    atlas = np.array(Image.open(out_dir / "atlas.png").convert("RGBA"))
+    atlas = np.array(Image.open(common.fighter_dir(slug) / common.MASTER_ATLAS).convert("RGBA"))
     overrides = common.load_json(common.fighter_dir(slug) / "boxes-overrides.json", {})
     clips = {}
     for cid, clip in manifest["clips"].items():
@@ -116,7 +116,7 @@ def compute(slug: str) -> dict:
 def overlay(slug: str, boxes: dict, out: Path, clips: list[str]) -> None:
     out_dir = common.PUBLIC_FIGHTERS / slug
     manifest = json.loads((out_dir / "manifest.json").read_text())
-    atlas = Image.open(out_dir / "atlas.png").convert("RGBA")
+    atlas = Image.open(common.fighter_dir(slug) / common.MASTER_ATLAS).convert("RGBA")
     zoom = 3
     for cid in clips:
         frames = manifest["clips"][cid]["frames"]

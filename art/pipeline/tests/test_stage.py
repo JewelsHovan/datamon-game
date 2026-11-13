@@ -44,15 +44,15 @@ def test_layer_size_matches_its_parallax_factor(lid):
 
 @pytest.mark.parametrize("lid", ["far", "mid"])
 def test_layer_palette_limit(lid):
-    img = np.array(Image.open(OFFICE / f"{lid}.png").convert("RGBA"))
+    img = np.array(Image.open(stage.master_path("office", lid)).convert("RGBA"))
     opaque = img[img[..., 3] > 0][:, :3]
     colors = {tuple(c) for c in opaque.reshape(-1, 3)}
     assert len(colors) <= DEFS[lid]["colors"]
 
 
 def test_far_is_opaque_and_mid_is_cut_out():
-    far = np.array(Image.open(OFFICE / "far.png").convert("RGBA"))
-    mid = np.array(Image.open(OFFICE / "mid.png").convert("RGBA"))
+    far = np.array(Image.open(stage.master_path("office", "far")).convert("RGBA"))
+    mid = np.array(Image.open(stage.master_path("office", "mid")).convert("RGBA"))
     assert (far[..., 3] == 255).all()
     transparent = (mid[..., 3] == 0).mean()
     assert 0.2 < transparent < 0.95  # furniture over a see-through background

@@ -18,6 +18,18 @@ CATALOG = ROOT / "src" / "data" / "datamonCatalog.js"
 WALK = ROOT / "public" / "datamon" / "walk"
 PUBLIC_FIGHTERS = ROOT / "public" / "fighters"
 
+STAGES = ART / "stages"
+PUBLIC_STAGES = ROOT / "public" / "stages"
+EFFECTS = ART / "effects"
+PUBLIC_EFFECTS = ROOT / "public" / "effects"
+
+# Shipped art (spec 013, R1): PNG masters stay under art/ for review; the game loads lossless WebP.
+# exact=False lets the encoder change the color of fully transparent pixels only, so every visible
+# pixel (alpha > 0) and the whole alpha channel stay identical to the master.
+ATLAS_FILE = "atlas.webp"
+MASTER_ATLAS = "atlas.png"
+WEBP = {"lossless": True, "quality": 100, "method": 6, "exact": False}
+
 STANCE_PX = 140  # fighting-stance height in game pixels at 640x360
 ALPHA_CUT = 128
 PALETTE_SIZE = 48
@@ -79,3 +91,29 @@ def save_status(slug: str, status: dict) -> None:
 
 def load_json(path: Path, default):
     return json.loads(path.read_text()) if path.exists() else default
+
+
+def save_master_and_webp(img: Image.Image, master: Path, shipped: Path) -> None:
+    """Writes the PNG master (review copy under art/) and the lossless WebP the game loads."""
+    master.parent.mkdir(parents=True, exist_ok=True)
+    shipped.parent.mkdir(parents=True, exist_ok=True)
+    img.save(master, optimize=True)
+    save_webp(img, shipped)
+
+
+def save_webp(img: Image.Image, path: Path) -> None:
+    img.convert("RGBA").save(path, "WEBP", **WEBP)
+
+
+def visible_mismatch(shipped: Image.Image, master: Image.Image) -> int:
+    """Pixels where the shipped image differs from the master: any alpha difference, or a color
+    difference where the master is visible (alpha > 0). 0 means pixel-identical to the eye."""
+    import numpy as np
+
+    a = np.array(shipped.convert("RGBA"))
+    b = np.array(master.convert("RGBA"))
+    if a.shape != b.shape:
+        return max(a.size, b.size)
+    alpha_diff = a[..., 3] != b[..., 3]
+    color_diff = (a[..., :3] != b[..., :3]).any(axis=2) & (b[..., 3] > 0)
+    return int((alpha_diff | color_diff).sum())
