@@ -38,6 +38,11 @@ export interface FighterManifest {
   fighter: string;
   /** Atlas file name next to the manifest. */
   atlas: string;
+  /**
+   * The same atlas with P2's alternate colors for mirror matches (QA 2026-11-12 F1): recolored
+   * offline by art/pipeline/palette_alt.py, which keeps every head untouched. Same size and frames.
+   */
+  atlasAlt?: string;
   version: number;
   scale: number;
   facing: "right" | "left";
@@ -54,6 +59,8 @@ export interface ClipSet {
   /** Direction the art faces: 1 right, -1 left. Frames are mirrored when the fighter faces the other way. */
   artFacing: 1 | -1;
   clips: Record<string, Clip>;
+  /** URL of the alternate-color atlas the manifest names, if any (mirror matches). */
+  altAtlasUrl?: string;
 }
 
 export class ManifestError extends Error {
@@ -104,6 +111,10 @@ export function parseManifest(data: unknown): FighterManifest {
   if (typeof atlas !== "string" || !/^[\w.-]+$/.test(atlas)) {
     throw new ManifestError("manifest.atlas must be a file name next to the manifest");
   }
+  const atlasAlt = data.atlasAlt;
+  if (atlasAlt !== undefined && (typeof atlasAlt !== "string" || !/^[\w.-]+$/.test(atlasAlt))) {
+    throw new ManifestError("manifest.atlasAlt must be a file name next to the manifest");
+  }
   const scale = data.scale === undefined ? 1 : num(data, "scale", "manifest");
   const facing = data.facing === undefined ? "right" : data.facing;
   if (facing !== "right" && facing !== "left") {
@@ -124,7 +135,9 @@ export function parseManifest(data: unknown): FighterManifest {
     };
   }
   if (Object.keys(clips).length === 0) throw new ManifestError("manifest.clips is empty");
-  return { fighter: data.fighter, atlas, version, scale, facing, clips };
+  const manifest: FighterManifest = { fighter: data.fighter, atlas, version, scale, facing, clips };
+  if (atlasAlt !== undefined) manifest.atlasAlt = atlasAlt;
+  return manifest;
 }
 
 /** Frames whose rectangle falls outside the atlas, as "clip[index]" labels. */
@@ -359,13 +372,17 @@ export async function loadClipSetUncached(person: Person, deps: ClipLoaderDeps):
       if (outside.length > 0) {
         deps.warn(`${person.slug}: frames outside the atlas: ${outside.join(", ")}`);
       }
-      return {
+      const set: ClipSet = {
         slug: person.slug,
         source: "manifest",
         atlas,
         artFacing: manifest.facing === "left" ? -1 : 1,
         clips: manifest.clips,
       };
+      if (manifest.atlasAlt !== undefined) {
+        set.altAtlasUrl = artUrl(`./fighters/${person.slug}`, manifest.atlasAlt, manifest.version);
+      }
+      return set;
     } catch (err) {
       // A manifest naming art that does not load is a failed load (spec 014 shows the failure
       // screen), not a fighter without art: only an unusable manifest falls back to placeholders.
@@ -391,6 +408,7 @@ export function loadClipSet(person: Person, deps: ClipLoaderDeps = browserClipDe
 
 export function clearClipCache(): void {
   cache.clear();
+  altCache.clear();
 }
 
 let browserDeps: ClipLoaderDeps | null = null;
@@ -429,54 +447,27 @@ export function browserClipDeps(): ClipLoaderDeps {
   return browserDeps;
 }
 
-/** URL of a fighter's alternate palette ({"#from": "#to"}), used for P2 in mirror matches. */
-export function altPaletteUrl(slug: string): string {
-  return `./fighters/${slug}/palette-alt.json`;
-}
-
-/** Exact-color remap of RGBA pixels; unmapped colors and transparent pixels are left alone. */
-export function remapColors(rgba: Uint8ClampedArray, mapping: Readonly<Record<string, string>>): number {
-  const table = new Map<number, number>();
-  for (const [from, to] of Object.entries(mapping)) {
-    if (from === to) continue;
-    table.set(parseInt(from.slice(1), 16), parseInt(to.slice(1), 16));
-  }
-  let changed = 0;
-  for (let i = 0; i < rgba.length; i += 4) {
-    if (rgba[i + 3] === 0) continue;
-    const key = (rgba[i]! << 16) | (rgba[i + 1]! << 8) | rgba[i + 2]!;
-    const to = table.get(key);
-    if (to === undefined) continue;
-    rgba[i] = (to >> 16) & 255;
-    rgba[i + 1] = (to >> 8) & 255;
-    rgba[i + 2] = to & 255;
-    changed++;
-  }
-  return changed;
-}
-
 const altCache = new Map<string, Promise<ClipSet>>();
 
 /**
- * The fighter's clips recolored with their alternate palette (mirror matches).
- * Fighters without generated art or without an alternate palette get their normal clips.
+ * The fighter's clips drawn from their alternate-color atlas (P2 in a mirror match). The recolor
+ * happens offline in the art pipeline, per pixel, so the game only loads a second atlas: no
+ * readback, and what the pipeline's tests check is exactly what is drawn. Fighters whose manifest
+ * names no alternate atlas (or placeholders) get their normal clips. Like the main atlas, a named
+ * alternate atlas that does not load is a failed load (spec 014).
  */
 export function loadAltClipSet(person: Person, deps: ClipLoaderDeps = browserClipDeps()): Promise<ClipSet> {
   let pending = altCache.get(person.slug);
   if (!pending) {
     pending = (async () => {
       const base = await loadClipSet(person, deps);
-      if (base.source !== "manifest") return base;
-      const mapping = await deps.fetchJson(altPaletteUrl(person.slug));
-      if (!isRecord(mapping)) return base;
-      const canvas = deps.createCanvas(base.atlas.width, base.atlas.height);
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return base;
-      ctx.drawImage(base.atlas, 0, 0);
-      const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      remapColors(pixels.data, mapping as Record<string, string>);
-      ctx.putImageData(pixels, 0, 0);
-      return { ...base, atlas: canvas };
+      if (base.source !== "manifest" || base.altAtlasUrl === undefined) return base;
+      const atlas = await deps.loadImage(base.altAtlasUrl);
+      if (atlas.width !== base.atlas.width || atlas.height !== base.atlas.height) {
+        deps.warn(`${person.slug}: alternate atlas is ${atlas.width}x${atlas.height}, not ${base.atlas.width}x${base.atlas.height}; using the normal colors`);
+        return base;
+      }
+      return { ...base, atlas };
     })();
     altCache.set(person.slug, pending);
     pending.catch(() => altCache.delete(person.slug));

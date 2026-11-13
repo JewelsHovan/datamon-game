@@ -78,17 +78,20 @@ def verify(slug: str) -> list[str]:
     manifest_path = pub / "manifest.json"
     master_atlas = fdir / common.MASTER_ATLAS
     shipped_atlas = pub / common.ATLAS_FILE
-    alt_pub = pub / "palette-alt.json"
+    alt_cfg = fdir / "alt.json"
+    alt_shipped = pub / "atlas-alt.webp"
     if not manifest_path.exists():
         errors.append("missing public manifest.json")
         return errors
     if not master_atlas.exists() or not shipped_atlas.exists():
         errors.append("missing master or shipped atlas")
         return errors
-    if not alt_pub.exists():
-        errors.append("missing public palette-alt.json")
+    if not alt_cfg.exists() or not alt_shipped.exists():
+        errors.append("missing alt.json or public atlas-alt.webp")
 
     m = json.loads(manifest_path.read_text())
+    if m.get("atlasAlt") != "atlas-alt.webp":
+        errors.append(f"manifest atlasAlt={m.get('atlasAlt')!r} (expected 'atlas-alt.webp')")
     if set(m["clips"]) != set(core_clips):
         missing = sorted(set(core_clips) - set(m["clips"]))
         errors.append(f"manifest missing clips: {missing}")

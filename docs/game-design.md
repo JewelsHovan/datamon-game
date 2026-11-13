@@ -117,6 +117,7 @@ Each fighter ships `public/fighters/<slug>/manifest.json` and the atlas it names
 ```
 
 - `atlas`: the atlas file next to the manifest. The game requests it as `atlas.webp?v=<version>`, so a new manifest never pairs with an older cached atlas (art is cached for up to an hour, `public/_headers`). The effects atlas (`public/effects/`) and the stage (`public/stages/<id>/manifest.json`: layer files and the background walkers' strip, cast and frames) follow the same rule.
+- `atlasAlt` (optional): the same atlas in P2's alternate colors for mirror matches, `atlas-alt.webp`, same size and frames. `art/pipeline/palette_alt.py` recolors it offline, per pixel, from `art/fighters/<slug>/alt.json`: one or two garments change completely, and no pixel of a face, hair, beard or skin ever does (each frame's head is found by shape, `art/pipeline/heads.py`). New alternate pixels bump `version`. Without it, a mirror match draws P2 in the normal colors.
 - `x, y, w, h`: the frame's rectangle in the atlas. `ax, ay`: the anchor inside that rectangle, the point that sits on the fighter's position: the body center on the floor, matching the pushbox. The pipeline anchors frames on the back foot (stable across poses) and the packer shifts every anchor by the idle stance's body-center offset (`originX`). `hold`: default ticks at 60 Hz; move frame data may override holds.
 - Art faces right. Facing left is drawn mirrored around the anchor.
 - `scale` records the factor applied to the generated art, for provenance only; the game draws atlas pixels 1:1 at 640x360.

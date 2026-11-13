@@ -1,6 +1,7 @@
 {
  "fighter": "jerry-zhu",
  "atlas": "atlas.webp",
+ "atlasAlt": "atlas-alt.webp",
  "version": 1,
  "scale": 0.16647,
  "facing": "right",

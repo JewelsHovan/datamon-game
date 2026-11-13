@@ -1,6 +1,7 @@
 {
  "fighter": "tabarek-al-khalidi",
  "atlas": "atlas.webp",
+ "atlasAlt": "atlas-alt.webp",
  "version": 2,
  "scale": 0.16413,
  "facing": "right",

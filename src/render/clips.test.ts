@@ -12,6 +12,7 @@ import {
   clipFrameIndex,
   framesOutsideAtlas,
   hardenAlpha,
+  loadAltClipSet,
   loadClipSet,
   manifestUrl,
   parseFighterIndex,
@@ -270,6 +271,75 @@ describe("clip loader", () => {
     const [a, b] = await Promise.all([loadClipSet(p, f.deps), loadClipSet(p, f.deps)]);
     expect(a).toBe(b);
     expect(f.fetched).toEqual([FIGHTER_INDEX_URL, manifestUrl(p.slug)]);
+  });
+});
+
+describe("mirror match alternate atlas (QA 2026-11-12 F1)", () => {
+  beforeEach(() => clearClipCache());
+
+  /** fakeDeps whose manifest names `atlasAlt`; images are `size` (or 384x960) and remember their URL. */
+  function withAlt(atlasAlt: unknown, size?: (url: string) => [number, number]) {
+    const f = fakeDeps("julien-hovan");
+    const fetchJson = f.deps.fetchJson;
+    f.deps.fetchJson = async (url) => {
+      const json = await fetchJson(url);
+      return json === null ? null : { ...(json as object), atlasAlt };
+    };
+    f.deps.loadImage = async (url) => {
+      f.images.push(url);
+      const [width, height] = size?.(url) ?? [384, 960];
+      return { width, height, url } as unknown as AtlasImage;
+    };
+    return f;
+  }
+
+  it("draws P2 from the recolored atlas the manifest names: one more image, no recolor at load", async () => {
+    const f = withAlt("atlas-alt.webp");
+    const julien = person("julien-hovan");
+    const base = await loadClipSet(julien, f.deps);
+    const alt = await loadAltClipSet(julien, f.deps);
+    expect(base.altAtlasUrl).toBe("./fighters/julien-hovan/atlas-alt.webp?v=1");
+    expect(f.images).toEqual(["./fighters/julien-hovan/atlas.webp?v=1", "./fighters/julien-hovan/atlas-alt.webp?v=1"]);
+    expect((alt.atlas as unknown as { url: string }).url).toBe("./fighters/julien-hovan/atlas-alt.webp?v=1");
+    expect(alt.clips).toBe(base.clips);
+    expect(alt.source).toBe("manifest");
+    expect(f.draws).toEqual([]); // no canvas, no getImageData readback
+    expect(f.fetched.some((u) => u.includes("palette-alt"))).toBe(false);
+    expect(await loadAltClipSet(julien, f.deps)).toBe(alt); // cached
+  });
+
+  it("uses the normal clips when the manifest names no alternate atlas, without a request", async () => {
+    const f = fakeDeps("julien-hovan");
+    const julien = person("julien-hovan");
+    const alt = await loadAltClipSet(julien, f.deps);
+    expect(alt).toBe(await loadClipSet(julien, f.deps));
+    expect(f.images).toEqual(["./fighters/julien-hovan/atlas.webp?v=1"]);
+  });
+
+  it("ignores an alternate atlas of another size (stale art) with a warning", async () => {
+    const f = withAlt("atlas-alt.webp", (url) => (url.includes("atlas-alt") ? [384, 900] : [384, 960]));
+    const julien = person("julien-hovan");
+    const alt = await loadAltClipSet(julien, f.deps);
+    expect(alt).toBe(await loadClipSet(julien, f.deps));
+    expect(f.warnings.some((w) => w.includes("alternate atlas"))).toBe(true);
+  });
+
+  it("rejects when the named alternate atlas does not load (failure screen, like the main atlas)", async () => {
+    const f = withAlt("atlas-alt.webp");
+    const loadImage = f.deps.loadImage;
+    f.deps.loadImage = async (url) => {
+      if (url.includes("atlas-alt")) throw new Error("the alternate atlas request was blocked");
+      return loadImage(url);
+    };
+    await expect(loadAltClipSet(person("julien-hovan"), f.deps)).rejects.toThrow("blocked");
+  });
+
+  it("accepts only a file name next to the manifest", () => {
+    expect(parseManifest({ ...(fixtureJson() as object), atlasAlt: "atlas-alt.webp" }).atlasAlt).toBe("atlas-alt.webp");
+    expect(parseManifest(fixtureJson()).atlasAlt).toBeUndefined();
+    for (const bad of ["../x.webp", "a/b.webp", 3, ""]) {
+      expect(() => parseManifest({ ...(fixtureJson() as object), atlasAlt: bad })).toThrow(ManifestError);
+    }
   });
 });
 

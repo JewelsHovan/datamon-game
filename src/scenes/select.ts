@@ -227,16 +227,11 @@ export class SelectScene implements Scene {
     this.drawGrid(ctx, frame);
     for (const c of [0, 1] as const) this.drawPanelFor(ctx, c, frame);
     if (this.mode === "cpu") this.drawLevel(ctx, frame);
-    let hint = "PICK: PUNCH OR START   CANCEL: KICK   ESC: TITLE";
-    if (this.mode === "cpu") {
-      hint =
-        this.stage === "pick" ? "PICK YOUR FIGHTER" : this.stage === "cpu" ? "PICK THE CPU'S FIGHTER (KICK: BACK)" : this.stage === "level" ? "PICK THE CPU LEVEL: LEFT / RIGHT, PUNCH" : "";
-    }
     if (this.stage === "ready") {
       const flash = Math.floor(frame / 6) % 2 === 0;
       text(ctx, "GET READY!", VIEW_WIDTH / 2, 318, 16, flash ? GOLD : INK, "center");
     } else {
-      text(ctx, hint, VIEW_WIDTH / 2, 324, 8, "#aeaadc", "center");
+      text(ctx, this.hint(), VIEW_WIDTH / 2, 324, 8, "#aeaadc", "center");
     }
     text(ctx, "DIMMED: COMING SOON", VIEW_WIDTH / 2, VIEW_HEIGHT - 16, 8, DIM, "center");
   }
@@ -370,11 +365,20 @@ export class SelectScene implements Scene {
     });
   }
 
+  /** The line under the grid. VS CPU's steps name buttons every device has; the two-player hint names keys, or on touch the touch buttons. */
+  hint(): string {
+    if (this.mode === "cpu") {
+      return this.stage === "pick" ? "PICK YOUR FIGHTER" : this.stage === "cpu" ? "PICK THE CPU'S FIGHTER (KICK: BACK)" : this.stage === "level" ? "PICK THE CPU LEVEL: LEFT / RIGHT, PUNCH" : "";
+    }
+    return this.m.touchHints ? "PICK: PUNCH   CANCEL: KICK" : "PICK: PUNCH OR START   CANCEL: KICK   ESC: TITLE";
+  }
+
   debug(): Record<string, unknown> {
     const slug = (t: Tile | null | undefined) => (t === "random" ? "random" : (t?.slug ?? null));
     return {
       mode: this.mode,
       stage: this.stage,
+      hint: this.stage === "ready" ? "" : this.hint(),
       cursors: [...this.cursor],
       under: this.cursor.map((i) => slug(this.tiles[i])),
       locked: this.locked.map((p) => p?.slug ?? null),

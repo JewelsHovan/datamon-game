@@ -1,6 +1,7 @@
 {
  "fighter": "saransh-padhy",
  "atlas": "atlas.webp",
+ "atlasAlt": "atlas-alt.webp",
  "version": 1,
  "scale": 0.16393,
  "facing": "right",

@@ -78,6 +78,8 @@ export interface GameOptions {
   onFatal?(err: unknown): void;
   /** Whether sound is muted (the pause screen shows the mute key). */
   soundMuted?(): boolean;
+  /** Mutes or unmutes the sound (the pause menu's SOUND item); returns whether it is now muted. */
+  toggleSound?(): boolean;
 }
 
 function loadImage(src: string): Promise<HTMLImageElement | null> {
@@ -266,6 +268,9 @@ export async function startGame(options: GameOptions): Promise<GameHandle> {
     fullscreen,
     fatal,
     soundMuted: options.soundMuted,
+    toggleSound: options.toggleSound,
+    // Hints follow the controls: on screen means P1 plays by touch; a key or pad press hides them.
+    touchControls: () => touch?.visible === true,
   };
   const m = new SceneManager(services);
   manager = m;

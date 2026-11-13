@@ -208,13 +208,25 @@ export class FightScene implements Scene {
       ctx.fillStyle = `rgba(255,255,255,${(effects.screenFlash / 6) * 0.7})`;
       ctx.fillRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT);
     }
-    const { bindings } = this.m.services;
-    for (const i of [0, 1] as const) {
-      const cpu = this.cpu[i];
-      hud.legends[i] = cpu ? [`CPU ${cpu.level.toUpperCase()}`] : legendLines(bindings.current[i], this.m.services.hasPad(i));
-    }
+    hud.legends = this.legends();
     const r = state.round;
     hud.draw(ctx, state, paused || r.training || (r.phase === "intro" && r.number === 1));
+  }
+
+  /**
+   * Each player's legend under their bar: the CPU's level, the pad buttons, or their keys. P1
+   * playing by touch gets none (QA 2026-11-12 F3): the on-screen buttons carry their own labels.
+   */
+  legends(): [readonly string[] | null, readonly string[] | null] {
+    const { bindings } = this.m.services;
+    const touchP1 = this.m.touchHints;
+    const one = (i: 0 | 1): readonly string[] | null => {
+      const cpu = this.cpu[i];
+      if (cpu) return [`CPU ${cpu.level.toUpperCase()}`];
+      if (i === 0 && touchP1) return null;
+      return legendLines(bindings.current[i], this.m.services.hasPad(i));
+    };
+    return [one(0), one(1)];
   }
 
   describe(): string {
@@ -230,7 +242,7 @@ export class FightScene implements Scene {
       phase: r.phase,
       round: r.number,
       wins: [...r.wins],
-      legends: this.hud.legends,
+      legends: this.legends(),
     };
   }
 }

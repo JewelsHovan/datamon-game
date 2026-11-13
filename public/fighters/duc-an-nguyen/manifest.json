@@ -1,6 +1,7 @@
 {
  "fighter": "duc-an-nguyen",
  "atlas": "atlas.webp",
+ "atlasAlt": "atlas-alt.webp",
  "version": 1,
  "scale": 0.15801,
  "facing": "right",

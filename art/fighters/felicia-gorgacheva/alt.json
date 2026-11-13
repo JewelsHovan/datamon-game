@@ -1,0 +1,24 @@
+{
+ "note": "P2 in a mirror match wears a navy top and light blue jeans (greys tinted to hue 215). Her hair colors appear in no map. headFree: no head has these greys, so a sleeve inside a generous head mask is recolored too, except the greys her eyes and ears also use (inHead), which stay as they are inside every head.",
+ "skin": ["#fbdabc", "#f0be9a"],
+ "garments": [
+  {
+   "name": "top and jeans",
+   "headFree": true,
+   "map": {
+    "#909395": "#5b89c9", "#959292": "#5b89c9", "#8f9193": "#5987c6", "#8d8f91": "#5885c4", "#8a8a8d": "#5681be",
+    "#88888b": "#547fbc", "#7e8083": "#5078b1", "#76787b": "#4b71a6", "#747476": "#486c9f", "#717375": "#476b9e",
+    "#6e7174": "#466a9d", "#6d7072": "#45699a", "#6c6d70": "#446797", "#67696c": "#426392", "#5f6063": "#3c5b86",
+    "#505152": "#324b6f", "#474848": "#2c4261", "#444646": "#2b405f", "#414141": "#273c58", "#383838": "#22334c",
+    "#333333": "#203047", "#2f2f2f": "#203047", "#2a2828": "#203047", "#1e1d1e": "#203047"
+   },
+   "shared": [],
+   "inHead": ["#747476", "#383838", "#2f2f2f", "#1e1d1e"]
+  }
+ ],
+ "head": {
+  "frame": "idle:0",
+  "polygon": [[9, 0], [56, 0], [56, 22], [51, 30], [44, 32], [38, 30], [33, 32], [22, 32], [9, 30]],
+  "overrides": {}
+ }
+}

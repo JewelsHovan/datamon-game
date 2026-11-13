@@ -98,6 +98,8 @@ def main() -> int:
     if not args.skip_index:
         common.write_fighter_index()
     print(f"{args.slug}: {len(clips)} clips, {len(entries)} frames, atlas {ATLAS_W}x{height} -> {out.relative_to(common.ROOT)}")
+    if (fdir / "alt.json").exists():  # the new manifest names no alternate atlas until it is rebuilt
+        print(f"now re-run palette_alt.py {args.slug} (mirror-match colors), then review its sheet")
     return 0
 
 

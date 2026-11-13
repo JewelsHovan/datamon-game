@@ -1,6 +1,7 @@
 {
  "fighter": "felicia-gorgacheva",
  "atlas": "atlas.webp",
+ "atlasAlt": "atlas-alt.webp",
  "version": 2,
  "scale": 0.1697,
  "facing": "right",

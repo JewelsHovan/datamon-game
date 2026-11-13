@@ -1,6 +1,7 @@
 {
  "fighter": "logan-labossiere",
  "atlas": "atlas.webp",
+ "atlasAlt": "atlas-alt.webp",
  "version": 1,
  "scale": 0.15713,
  "facing": "right",

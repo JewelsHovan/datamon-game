@@ -1,6 +1,7 @@
 {
  "fighter": "aurelien-bouffanais",
  "atlas": "atlas.webp",
+ "atlasAlt": "atlas-alt.webp",
  "version": 1,
  "scale": 0.16787,
  "facing": "right",

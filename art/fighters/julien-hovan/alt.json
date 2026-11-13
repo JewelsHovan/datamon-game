@@ -1,0 +1,36 @@
+{
+ "note": "P2 in a mirror match wears a maroon sweater and green trousers (one hue rotation of 225 degrees for both). Trouser shades that the shirt collar and sweater shadows also use are shared, so they follow their neighbors: the collar stays charcoal and no trouser pixel turns red. The sweater greens his eyes also use are inHead: they stay green inside every head.",
+ "skin": ["#fad3ad", "#f9cda6", "#f4c19a", "#dfaa87", "#c0896a", "#89654e"],
+ "garments": [
+  {
+   "name": "sweater",
+   "headFree": true,
+   "map": {
+    "#4d5243": "#5e435c", "#475340": "#5f3c52", "#464c3e": "#573e53", "#414e40": "#5a4048", "#3a4b3b": "#56373d",
+    "#3a4737": "#523441", "#3a4236": "#4c3643", "#353f36": "#483639", "#2d3d2e": "#46292e", "#29382c": "#402526",
+    "#28322b": "#392827", "#212e25": "#351e1d", "#1c2b22": "#311a16"
+   },
+   "shared": [],
+   "inHead": ["#475340", "#414e40", "#3a4b3b", "#212e25"]
+  },
+  {
+   "name": "trousers",
+   "headFree": true,
+   "map": {
+    "#3b3e49": "#46543a", "#393b46": "#425039", "#353741": "#3e4b35", "#33353f": "#3c4832", "#30333d": "#3a462e",
+    "#2e303b": "#36442c", "#292b35": "#303d27", "#272a34": "#2f3c24", "#2a272c": "#29332d", "#1e2427": "#2b2d1c",
+    "#1e1f27": "#222d1c", "#171c1e": "#222216"
+   },
+   "shared": ["#3b3e49", "#2a272c", "#1e2427", "#1e1f27", "#171c1e"]
+  }
+ ],
+ "head": {
+  "frame": "idle:0",
+  "polygon": [[20, 0], [58, 0], [58, 14], [55, 24], [52, 31], [46, 33], [38, 32], [33, 29], [27, 28], [20, 26]],
+  "overrides": {
+   "block:1": {"polygons": [[[26, 4], [34, 0], [52, 0], [56, 6], [56, 14], [54, 24], [50, 32], [44, 33], [37, 30], [33, 22], [27, 18]]]},
+   "jump:1": {"polygons": [[[31, 24], [40, 20], [56, 22], [66, 28], [69, 38], [67, 50], [62, 55], [54, 55], [48, 48], [38, 44], [31, 36]]]},
+   "getup_roll:1": {"polygons": [[[12, 52], [18, 45], [30, 44], [44, 46], [46, 56], [44, 72], [36, 80], [22, 80], [13, 70]]]}
+  }
+ }
+}

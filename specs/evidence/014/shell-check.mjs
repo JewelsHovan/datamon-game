@@ -25,7 +25,7 @@ async function waitScene(p, name, timeoutMs = 15000) {
 async function menu(p) {
   return p.evaluate("window.__game.menu()");
 }
-/** Moves the menu cursor down (or up) until `item` is selected. */
+/** Moves the menu cursor down (or up) until `item` is selected: by name, so new items (the pause menu's SOUND, QA F3) do not move it. */
 async function menuTo(p, item, key = "KeyS") {
   for (let i = 0; i < 8; i++) {
     if ((await menu(p))?.item === item) return true;

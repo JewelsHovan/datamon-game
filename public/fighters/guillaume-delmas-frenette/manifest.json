@@ -1,6 +1,7 @@
 {
  "fighter": "guillaume-delmas-frenette",
  "atlas": "atlas.webp",
+ "atlasAlt": "atlas-alt.webp",
  "version": 1,
  "scale": 0.15625,
  "facing": "right",

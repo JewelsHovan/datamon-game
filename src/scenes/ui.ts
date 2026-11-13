@@ -31,6 +31,8 @@ export function nav(input: MenuInput, bits: number, players: Players = BOTH): bo
 /** A vertical list menu. step() returns the confirmed item index, "back", or null. */
 export class Menu {
   index = 0;
+  /** What an item reads on screen (an item whose words follow a setting, such as SOUND ON / SOUND OFF). */
+  labelOf: (item: string) => string = (item) => item;
 
   constructor(
     readonly items: readonly string[],
@@ -39,6 +41,11 @@ export class Menu {
 
   get selected(): string {
     return this.items[this.index]!;
+  }
+
+  /** The items as they read on screen. */
+  get labels(): string[] {
+    return this.items.map((item) => this.labelOf(item));
   }
 
   step(input: MenuInput, players: Players = BOTH): number | "back" | null {
@@ -61,7 +68,7 @@ export class Menu {
   }
 
   draw(ctx: CanvasRenderingContext2D, cx: number, y: number, frame: number, size = 16, gap = 26): void {
-    this.items.forEach((item, i) => {
+    this.labels.forEach((item, i) => {
       const on = i === this.index;
       const yy = y + i * gap;
       text(ctx, item, cx, yy, size, on ? GOLD : DIM, "center");
