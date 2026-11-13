@@ -1,0 +1,587 @@
+[
+ {
+  "phase": "title",
+  "url": "/",
+  "type": "Document",
+  "status": 200,
+  "kb": 1,
+  "startMs": 0,
+  "endMs": 43
+ },
+ {
+  "phase": "title",
+  "url": "/assets/index-CTjrOpJF.js",
+  "type": "Script",
+  "status": 200,
+  "kb": 57.8,
+  "startMs": 47,
+  "endMs": 220
+ },
+ {
+  "phase": "title",
+  "url": "https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap",
+  "type": "Stylesheet",
+  "status": 200,
+  "kb": 1,
+  "startMs": 48,
+  "endMs": 193
+ },
+ {
+  "phase": "title",
+  "url": "/fighters/index.json",
+  "type": "Fetch",
+  "status": 200,
+  "kb": 0.7,
+  "startMs": 230,
+  "endMs": 278
+ },
+ {
+  "phase": "title",
+  "url": "https://fonts.gstatic.com/s/pressstart2p/v16/e3t4euO8T-267oIAQAu6jDQyK3nVivNm4I81.woff2",
+  "type": "Font",
+  "status": 200,
+  "kb": 5.1,
+  "startMs": 230,
+  "endMs": 282
+ },
+ {
+  "phase": "title",
+  "url": "/favicon.ico",
+  "type": "Other",
+  "status": 404,
+  "kb": 0.2,
+  "startMs": 284,
+  "endMs": 329
+ },
+ {
+  "phase": "select",
+  "url": "/favicon.ico",
+  "type": "Other",
+  "status": 404,
+  "kb": 0.2,
+  "startMs": 0,
+  "endMs": 50
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/julien-hovan.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 1.9,
+  "startMs": 9,
+  "endMs": 58
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/pentcho-tchomakov.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 2.1,
+  "startMs": 9,
+  "endMs": 59
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/alex-andrianavalontsalama.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 1.8,
+  "startMs": 9,
+  "endMs": 60
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/andrea-vreugdenhil.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 2.1,
+  "startMs": 9,
+  "endMs": 62
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/antonia-nistor.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 2,
+  "startMs": 9,
+  "endMs": 63
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/aurelien-bouffanais.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 1.8,
+  "startMs": 9,
+  "endMs": 105
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/dana-domanko.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 2,
+  "startMs": 9,
+  "endMs": 108
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/duc-an-nguyen.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 1.9,
+  "startMs": 9,
+  "endMs": 109
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/elina-gu.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 2,
+  "startMs": 9,
+  "endMs": 110
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/emile-moffatt.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 1.9,
+  "startMs": 9,
+  "endMs": 146
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/ethan-pirso.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 1.8,
+  "startMs": 9,
+  "endMs": 148
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/felicia-gorgacheva.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 2.6,
+  "startMs": 9,
+  "endMs": 149
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/francesco-finn.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 1.9,
+  "startMs": 9,
+  "endMs": 154
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/guillaume-delmas-frenette.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 1.7,
+  "startMs": 9,
+  "endMs": 155
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/guillaume-pregent.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 1.9,
+  "startMs": 9,
+  "endMs": 156
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/jerry-zhu.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 1.9,
+  "startMs": 9,
+  "endMs": 194
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/jewoo-lee.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 1.6,
+  "startMs": 9,
+  "endMs": 195
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/jonah-lee.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 1.8,
+  "startMs": 9,
+  "endMs": 196
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/jonathan-kim.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 2.3,
+  "startMs": 9,
+  "endMs": 201
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/logan-labossiere.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 1.8,
+  "startMs": 9,
+  "endMs": 202
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/megane-darnaud.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 2,
+  "startMs": 9,
+  "endMs": 203
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/milen-thomas.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 2.3,
+  "startMs": 9,
+  "endMs": 251
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/minh-ngoc-do.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 2,
+  "startMs": 9,
+  "endMs": 253
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/oyku-cildir.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 2.4,
+  "startMs": 9,
+  "endMs": 254
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/philippe-miranda-jean.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 1.9,
+  "startMs": 9,
+  "endMs": 255
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/richard-el-chaar.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 1.9,
+  "startMs": 9,
+  "endMs": 256
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/sarah-kotb.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 2.2,
+  "startMs": 9,
+  "endMs": 257
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/saransh-padhy.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 1.8,
+  "startMs": 10,
+  "endMs": 309
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/scott-carr.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 1.9,
+  "startMs": 10,
+  "endMs": 310
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/stephanie-fontaine.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 2.1,
+  "startMs": 10,
+  "endMs": 311
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/tabarek-al-khalidi.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 2.4,
+  "startMs": 10,
+  "endMs": 312
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/tyler-nagano.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 1.9,
+  "startMs": 10,
+  "endMs": 313
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/veronica-marallag.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 2.2,
+  "startMs": 10,
+  "endMs": 314
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/victor-desautels.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 1.8,
+  "startMs": 10,
+  "endMs": 365
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/vincent-anctil.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 1.7,
+  "startMs": 10,
+  "endMs": 366
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/wild-guevera.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 2,
+  "startMs": 10,
+  "endMs": 367
+ },
+ {
+  "phase": "select",
+  "url": "/datamon/portraits/william-chan.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 2.2,
+  "startMs": 10,
+  "endMs": 368
+ },
+ {
+  "phase": "select",
+  "url": "/fighters/julien-hovan/manifest.json",
+  "type": "Fetch",
+  "status": 200,
+  "kb": 2.5,
+  "startMs": 10,
+  "endMs": 96
+ },
+ {
+  "phase": "select",
+  "url": "/fighters/felicia-gorgacheva/manifest.json",
+  "type": "Fetch",
+  "status": 200,
+  "kb": 2.6,
+  "startMs": 10,
+  "endMs": 102
+ },
+ {
+  "phase": "select",
+  "url": "/fighters/julien-hovan/atlas.webp?v=4",
+  "type": "Image",
+  "status": 200,
+  "kb": 318,
+  "startMs": 96,
+  "endMs": 873
+ },
+ {
+  "phase": "select",
+  "url": "/fighters/felicia-gorgacheva/atlas.webp?v=2",
+  "type": "Image",
+  "status": 200,
+  "kb": 311.3,
+  "startMs": 103,
+  "endMs": 868
+ },
+ {
+  "phase": "fight",
+  "url": "/?cpu=hard&p1=julien-hovan&p2=pentcho-tchomakov",
+  "type": "Document",
+  "status": 200,
+  "kb": 1,
+  "startMs": 0,
+  "endMs": 49
+ },
+ {
+  "phase": "fight",
+  "url": "/assets/index-CTjrOpJF.js",
+  "type": "Script",
+  "status": 200,
+  "kb": 57.8,
+  "startMs": 51,
+  "endMs": 147
+ },
+ {
+  "phase": "fight",
+  "url": "https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap",
+  "type": "Stylesheet",
+  "status": 200,
+  "kb": 0.6,
+  "startMs": 52,
+  "endMs": 222
+ },
+ {
+  "phase": "fight",
+  "url": "/fighters/index.json",
+  "type": "Fetch",
+  "status": 200,
+  "kb": 0.7,
+  "startMs": 149,
+  "endMs": 194
+ },
+ {
+  "phase": "fight",
+  "url": "/effects/manifest.json",
+  "type": "Fetch",
+  "status": 200,
+  "kb": 1.3,
+  "startMs": 149,
+  "endMs": 195
+ },
+ {
+  "phase": "fight",
+  "url": "/datamon/portraits/julien-hovan.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 1.9,
+  "startMs": 149,
+  "endMs": 198
+ },
+ {
+  "phase": "fight",
+  "url": "/datamon/portraits/pentcho-tchomakov.webp",
+  "type": "Image",
+  "status": 200,
+  "kb": 2.1,
+  "startMs": 149,
+  "endMs": 199
+ },
+ {
+  "phase": "fight",
+  "url": "/fighters/julien-hovan/manifest.json",
+  "type": "Fetch",
+  "status": 200,
+  "kb": 2.5,
+  "startMs": 194,
+  "endMs": 247
+ },
+ {
+  "phase": "fight",
+  "url": "/fighters/pentcho-tchomakov/manifest.json",
+  "type": "Fetch",
+  "status": 200,
+  "kb": 2.5,
+  "startMs": 194,
+  "endMs": 245
+ },
+ {
+  "phase": "fight",
+  "url": "/effects/atlas.webp?v=4",
+  "type": "Image",
+  "status": 200,
+  "kb": 223.8,
+  "startMs": 195,
+  "endMs": 699
+ },
+ {
+  "phase": "fight",
+  "url": "https://fonts.gstatic.com/s/pressstart2p/v16/e3t4euO8T-267oIAQAu6jDQyK3nVivNm4I81.woff2",
+  "type": "Font",
+  "status": 200,
+  "kb": 4.6,
+  "startMs": 222,
+  "endMs": 271
+ },
+ {
+  "phase": "fight",
+  "url": "/fighters/pentcho-tchomakov/atlas.webp?v=2",
+  "type": "Image",
+  "status": 200,
+  "kb": 330.5,
+  "startMs": 245,
+  "endMs": 933
+ },
+ {
+  "phase": "fight",
+  "url": "/fighters/julien-hovan/atlas.webp?v=4",
+  "type": "Image",
+  "status": 200,
+  "kb": 318,
+  "startMs": 248,
+  "endMs": 925
+ },
+ {
+  "phase": "fight",
+  "url": "/stages/office/manifest.json",
+  "type": "Fetch",
+  "status": 200,
+  "kb": 1,
+  "startMs": 942,
+  "endMs": 993
+ },
+ {
+  "phase": "fight",
+  "url": "/stages/office/far.webp?v=1",
+  "type": "Image",
+  "status": 200,
+  "kb": 85.6,
+  "startMs": 994,
+  "endMs": 1196
+ },
+ {
+  "phase": "fight",
+  "url": "/stages/office/mid.webp?v=1",
+  "type": "Image",
+  "status": 200,
+  "kb": 42.3,
+  "startMs": 994,
+  "endMs": 1141
+ },
+ {
+  "phase": "fight",
+  "url": "/stages/office/walkers.webp?v=1",
+  "type": "Image",
+  "status": 200,
+  "kb": 68,
+  "startMs": 994,
+  "endMs": 1183
+ }
+]

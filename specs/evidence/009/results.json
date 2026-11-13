@@ -56,22 +56,22 @@
     "pass": true,
     "walkers": [
       {
-        "screenX": -43,
+        "screenX": -40,
         "onScreen": false,
         "watching": false
       },
       {
-        "screenX": -456,
+        "screenX": -459,
         "onScreen": false,
         "watching": false
       },
       {
-        "screenX": 13,
+        "screenX": 16,
         "onScreen": true,
         "watching": false
       },
       {
-        "screenX": 247,
+        "screenX": 243,
         "onScreen": true,
         "watching": false
       }
@@ -109,7 +109,7 @@
   "A4 render fps": {
     "pass": true,
     "samples": 74,
-    "min": 59.9,
+    "min": 59.8,
     "avg": 60
   },
   "no console errors": {

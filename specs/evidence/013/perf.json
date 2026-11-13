@@ -1,0 +1,350 @@
+{
+  "budget": {
+    "titleMs": 1000,
+    "fightFirstSimFrameMs": 1200,
+    "fightSettledKB": 1600,
+    "mainThreadBusyPct": 10,
+    "frameP95Ms": 17.5,
+    "framesOver20Pct": 1,
+    "jsHeapMB": 10,
+    "pageHeldMB": 24,
+    "heapGrowthMB": 1
+  },
+  "title": {
+    "ms": 307,
+    "settledKB": 66,
+    "requests": 6
+  },
+  "select": {
+    "addedKB": 708,
+    "requests": 42,
+    "rss": {
+      "renderer": 849,
+      "gpu": 140
+    },
+    "heap": {
+      "mainThreadBusyPct": 4,
+      "scriptPct": 2.2,
+      "jsHeapMB": 1.8,
+      "jsHeapTotalMB": 5.5
+    },
+    "held": {
+      "totalMB": 14.4,
+      "canvasMB": 0.9,
+      "imageMB": 13.5,
+      "canvases": {
+        "in the page: #game": {
+          "n": 1,
+          "mb": 0.88,
+          "sizes": [
+            "640x360"
+          ]
+        }
+      },
+      "images": {
+        "datamon/portraits/julien-hovan.webp": {
+          "n": 1,
+          "mb": 0.04,
+          "size": "103x96"
+        },
+        "datamon/portraits/pentcho-tchomakov.webp": {
+          "n": 1,
+          "mb": 0.03,
+          "size": "93x96"
+        },
+        "datamon/portraits/alex-andrianavalontsalama.webp": {
+          "n": 1,
+          "mb": 0.04,
+          "size": "98x96"
+        },
+        "datamon/portraits/andrea-vreugdenhil.webp": {
+          "n": 1,
+          "mb": 0.03,
+          "size": "78x96"
+        },
+        "datamon/portraits/antonia-nistor.webp": {
+          "n": 1,
+          "mb": 0.03,
+          "size": "85x96"
+        },
+        "datamon/portraits/aurelien-bouffanais.webp": {
+          "n": 1,
+          "mb": 0.04,
+          "size": "98x96"
+        },
+        "datamon/portraits/dana-domanko.webp": {
+          "n": 1,
+          "mb": 0.03,
+          "size": "90x96"
+        },
+        "datamon/portraits/duc-an-nguyen.webp": {
+          "n": 1,
+          "mb": 0.04,
+          "size": "98x96"
+        },
+        "datamon/portraits/elina-gu.webp": {
+          "n": 1,
+          "mb": 0.03,
+          "size": "91x96"
+        },
+        "datamon/portraits/emile-moffatt.webp": {
+          "n": 1,
+          "mb": 0.04,
+          "size": "99x96"
+        },
+        "datamon/portraits/ethan-pirso.webp": {
+          "n": 1,
+          "mb": 0.04,
+          "size": "100x96"
+        },
+        "datamon/portraits/felicia-gorgacheva.webp": {
+          "n": 1,
+          "mb": 0.03,
+          "size": "94x96"
+        },
+        "datamon/portraits/francesco-finn.webp": {
+          "n": 1,
+          "mb": 0.04,
+          "size": "100x96"
+        },
+        "datamon/portraits/guillaume-delmas-frenette.webp": {
+          "n": 1,
+          "mb": 0.03,
+          "size": "90x96"
+        },
+        "datamon/portraits/guillaume-pregent.webp": {
+          "n": 1,
+          "mb": 0.04,
+          "size": "98x96"
+        },
+        "datamon/portraits/jerry-zhu.webp": {
+          "n": 1,
+          "mb": 0.04,
+          "size": "96x96"
+        },
+        "datamon/portraits/jewoo-lee.webp": {
+          "n": 1,
+          "mb": 0.04,
+          "size": "98x96"
+        },
+        "datamon/portraits/jonah-lee.webp": {
+          "n": 1,
+          "mb": 0.03,
+          "size": "91x96"
+        },
+        "datamon/portraits/jonathan-kim.webp": {
+          "n": 1,
+          "mb": 0.04,
+          "size": "100x96"
+        },
+        "datamon/portraits/logan-labossiere.webp": {
+          "n": 1,
+          "mb": 0.04,
+          "size": "96x96"
+        },
+        "datamon/portraits/megane-darnaud.webp": {
+          "n": 1,
+          "mb": 0.03,
+          "size": "90x96"
+        },
+        "datamon/portraits/milen-thomas.webp": {
+          "n": 1,
+          "mb": 0.04,
+          "size": "98x96"
+        },
+        "datamon/portraits/minh-ngoc-do.webp": {
+          "n": 1,
+          "mb": 0.03,
+          "size": "88x96"
+        },
+        "datamon/portraits/oyku-cildir.webp": {
+          "n": 1,
+          "mb": 0.04,
+          "size": "96x96"
+        },
+        "datamon/portraits/philippe-miranda-jean.webp": {
+          "n": 1,
+          "mb": 0.04,
+          "size": "98x96"
+        },
+        "datamon/portraits/richard-el-chaar.webp": {
+          "n": 1,
+          "mb": 0.03,
+          "size": "93x96"
+        },
+        "datamon/portraits/sarah-kotb.webp": {
+          "n": 1,
+          "mb": 0.03,
+          "size": "81x96"
+        },
+        "datamon/portraits/saransh-padhy.webp": {
+          "n": 1,
+          "mb": 0.04,
+          "size": "97x96"
+        },
+        "datamon/portraits/scott-carr.webp": {
+          "n": 1,
+          "mb": 0.04,
+          "size": "100x96"
+        },
+        "datamon/portraits/stephanie-fontaine.webp": {
+          "n": 1,
+          "mb": 0.03,
+          "size": "93x96"
+        },
+        "datamon/portraits/tabarek-al-khalidi.webp": {
+          "n": 1,
+          "mb": 0.03,
+          "size": "92x96"
+        },
+        "datamon/portraits/tyler-nagano.webp": {
+          "n": 1,
+          "mb": 0.04,
+          "size": "100x96"
+        },
+        "datamon/portraits/veronica-marallag.webp": {
+          "n": 1,
+          "mb": 0.03,
+          "size": "89x96"
+        },
+        "datamon/portraits/victor-desautels.webp": {
+          "n": 1,
+          "mb": 0.04,
+          "size": "96x96"
+        },
+        "datamon/portraits/vincent-anctil.webp": {
+          "n": 1,
+          "mb": 0.04,
+          "size": "100x96"
+        },
+        "datamon/portraits/wild-guevera.webp": {
+          "n": 1,
+          "mb": 0.04,
+          "size": "98x96"
+        },
+        "datamon/portraits/william-chan.webp": {
+          "n": 1,
+          "mb": 0.04,
+          "size": "97x96"
+        },
+        "fighters/julien-hovan/atlas.webp": {
+          "n": 1,
+          "mb": 6.27,
+          "size": "1024x1604"
+        },
+        "fighters/felicia-gorgacheva/atlas.webp": {
+          "n": 1,
+          "mb": 5.99,
+          "size": "1024x1533"
+        }
+      }
+    }
+  },
+  "fightLoad": {
+    "msToFirstSimFrame": 983,
+    "settledKB": 1144,
+    "requests": 17,
+    "stageLoadedAfterMs": 232
+  },
+  "fight": {
+    "mainThreadBusyPct": 2.2,
+    "scriptPct": 1.1,
+    "jsHeapMB": 3.7,
+    "jsHeapTotalMB": 4.8,
+    "frames": {
+      "n": 1200,
+      "p50": 16.7,
+      "p95": 16.8,
+      "p99": 16.8,
+      "over20": 0
+    },
+    "framesOver20Pct": 0,
+    "fps": 59.988002396660214,
+    "rss": {
+      "renderer": 787,
+      "gpu": 130
+    },
+    "held": {
+      "totalMB": 19,
+      "canvasMB": 1.3,
+      "imageMB": 17.7,
+      "canvases": {
+        "at cr (index-CTjrOpJF.js:2:14203) < at lr (index-CTjrOpJF.js:2:14623)": {
+          "n": 1,
+          "mb": 0.33,
+          "sizes": [
+            "988x87"
+          ]
+        },
+        "at da (index-CTjrOpJF.js:2:83032) < at la (index-CTjrOpJF.js:2:82731)": {
+          "n": 1,
+          "mb": 0.06,
+          "sizes": [
+            "121x130"
+          ]
+        },
+        "in the page: #game": {
+          "n": 1,
+          "mb": 0.88,
+          "sizes": [
+            "640x360"
+          ]
+        }
+      },
+      "images": {
+        "datamon/portraits/julien-hovan.webp": {
+          "n": 1,
+          "mb": 0.04,
+          "size": "103x96"
+        },
+        "datamon/portraits/pentcho-tchomakov.webp": {
+          "n": 1,
+          "mb": 0.03,
+          "size": "93x96"
+        },
+        "effects/atlas.webp": {
+          "n": 1,
+          "mb": 2.05,
+          "size": "1024x526"
+        },
+        "fighters/pentcho-tchomakov/atlas.webp": {
+          "n": 1,
+          "mb": 6.33,
+          "size": "1024x1621"
+        },
+        "fighters/julien-hovan/atlas.webp": {
+          "n": 1,
+          "mb": 6.27,
+          "size": "1024x1604"
+        },
+        "stages/office/far.webp": {
+          "n": 1,
+          "mb": 1.19,
+          "size": "864x360"
+        },
+        "stages/office/mid.webp": {
+          "n": 1,
+          "mb": 1.49,
+          "size": "1088x360"
+        },
+        "stages/office/walkers.webp": {
+          "n": 1,
+          "mb": 0.33,
+          "size": "988x87"
+        }
+      }
+    }
+  },
+  "later": {
+    "afterS": 63,
+    "retainedHeapStartMB": 2.6,
+    "retainedHeapEndMB": 2.99,
+    "growthMB": 0.39,
+    "jsHeapMB": 3.1,
+    "rss": {
+      "renderer": 437,
+      "gpu": 118
+    },
+    "mainThreadBusyPct": 2.3
+  }
+}
