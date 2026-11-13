@@ -35,6 +35,11 @@ export const MOVES_V2 = Object.freeze({
   dashBackTail: 150,
   /** Horizontal drift of a launched fighter while airborne (subpixels per frame); the ground slide is KNOCKDOWN.slideSpeed. */
   airDrift: 150,
+  /**
+   * Highest a launch, juggle or wall bounce may carry a fighter (subpixels above the floor): just over
+   * a jump's 116 px apex, so a launched body never leaves the top of the view or covers the HUD.
+   */
+  maxLaunchHeight: 12000,
   /** Hits an airborne knocked-down fighter can take before falling out of reach. */
   maxJuggle: 2,
   /** Pop of a juggle hit and of a wall bounce (subpixels per frame, upward). */

@@ -8,7 +8,7 @@ import { firstActiveTick, moveDuration, MOVES, type MoveId } from "../data/moves
 import { clipForFighter, isHidden } from "../render/fighterRenderer";
 import { applyHits, hurtRects, knockDown } from "./combat";
 import { hashState } from "./hash";
-import { BUTTON_DOWN, BUTTON_KICK, BUTTON_LEFT, BUTTON_PUNCH, BUTTON_RIGHT, BUTTON_SPECIAL } from "./inputBits";
+import { BUTTON_DOWN, BUTTON_KICK, BUTTON_LEFT, BUTTON_PUNCH, BUTTON_RIGHT, BUTTON_SPECIAL, BUTTON_UP } from "./inputBits";
 import { WALL_RIGHT } from "./physics";
 import { nextU32, seedRng } from "./rng";
 import { createMatchState } from "./state";
@@ -198,6 +198,29 @@ describe("juggles (spec 012 A4)", () => {
     expect(count(r, "knockdown", 1)).toBe(1);
     expect(r.state.fighters[1].juggle).toBe(0);
     expect(r.state.fighters[1].tumble).toBe(false);
+  });
+});
+
+describe("launch height (QA 2026-11-12 F1)", () => {
+  it("an anti-air Rapid Deploy on a rising jumper never carries them more than 120 px up", () => {
+    let launchedInAir = 0;
+    for (const delay of [9, 12, 15, 18, 21]) {
+      const inputs: InputPair[] = [[BUTTON_UP | R, 0], ...frames(delay - 1), [0, S], ...frames(90)];
+      const r = run(duel(PENTCHO, ALEX, 160), inputs);
+      const peak = Math.max(...r.states.map((s) => 32000 - s.fighters[0].y));
+      if (r.states.some((s) => s.fighters[0].state === "knockdown" && s.fighters[0].y < 32000 - 3000)) launchedInAir++;
+      expect(peak, `rush ${delay} frames after the jump`).toBeLessThanOrEqual(12000 + 300); // 120 px, just over a jump
+    }
+    expect(launchedInAir).toBeGreaterThan(0); // the path that used to reach 210 px is exercised
+  });
+
+  it("a wall bounce from high up is capped too", () => {
+    const s = duel(JULIEN, JULIEN, 60, WALL_RIGHT - 4000);
+    s.fighters[1].y = 32000 - 10000;
+    knockDown(s.fighters[1], 1, s, 300);
+    const r = until(s, (st) => st.fighters[1].state === "idle");
+    expect(count(r, "wall_bounce", 1)).toBe(1);
+    expect(Math.max(...r.states.map((st) => 32000 - st.fighters[1].y))).toBeLessThanOrEqual(12000 + 300); // 120 px, just over a jump
   });
 });
 

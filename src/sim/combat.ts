@@ -305,7 +305,7 @@ export function knockDown(f: FighterState, player: PlayerIndex, state: SimState,
   f.vx = 0;
   f.slideDir = (-f.facing) as -1 | 1;
   f.rollFrom = -1;
-  if (launch > 0) f.vy = -launch;
+  if (launch > 0) f.vy = capRise(f, -launch);
   else if (f.y < MOVEMENT.floorY && f.vy < 0) f.vy = 0;
   if (f.health <= 0 && !state.round.training) {
     f.state = "ko";
@@ -314,6 +314,29 @@ export function knockDown(f: FighterState, player: PlayerIndex, state: SimState,
     f.state = "knockdown";
   }
   f.stateFrame = 0;
+}
+
+/** Integer square root (floor), without Math.sqrt (the sim stays free of float math). */
+function isqrt(n: number): number {
+  if (n < 2) return Math.max(0, n);
+  let x = n;
+  let y = Math.floor((x + 1) / 2);
+  while (y < x) {
+    x = y;
+    y = Math.floor((x + Math.floor(n / x)) / 2);
+  }
+  return x;
+}
+
+/**
+ * Caps an upward speed so the fighter peaks at most MOVES_V2.maxLaunchHeight above the floor.
+ * A speed v rises about v*v / (2g) more, so v is kept within sqrt(2g * room left).
+ */
+function capRise(f: FighterState, vy: number): number {
+  if (vy >= 0) return vy;
+  const room = MOVES_V2.maxLaunchHeight - (MOVEMENT.floorY - f.y);
+  if (room <= 0) return 0;
+  return Math.max(vy, -isqrt(2 * MOVEMENT.gravity * room));
 }
 
 function getUp(f: FighterState, state: SimState): void {
@@ -347,7 +370,7 @@ export function advanceDowned(f: FighterState, player: PlayerIndex, state: SimSt
       f.wallBounced = true;
       f.tumble = true;
       f.slideDir = (-f.slideDir) as -1 | 1;
-      f.vy = Math.min(f.vy, -MOVES_V2.wallBouncePop);
+      f.vy = capRise(f, Math.min(f.vy, -MOVES_V2.wallBouncePop));
       f.hitstop = 6;
       state.events.push({ type: "wall_bounce", player, x: f.x, y: f.y - 6000 });
     }

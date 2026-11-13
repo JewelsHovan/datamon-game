@@ -122,5 +122,11 @@ The rest of the game is planned in the Roadmap section of `docs/game-design.md` 
 - Fix: `MOVEMENT.screenMargin` 4000 -> 8000 (80 px). The walls move to 80..1200 px and the max separation to 480 px (was 560); the camera code is unchanged (it already clamps to the stage and centers on the midpoint, so 80 px from a wall or from the separation limit is 80 px from the view edge). A fighter that faces the edge it is pressed against (only possible if crossed up mid-knockdown) can still lose up to about 13 px of a forward-reaching frame; noted, not handled.
 - A12: `src/render/camera.test.ts` (each launch fighter's frames all have a backward reach within 80 px; both centers at least 80 px inside the view at either wall, at max separation against either wall and mid-stage). `src/sim/movement.test.ts` and `src/render/screen.test.ts` updated for the new numbers. `npx vitest run` EXIT=0, 301 tests. Browser: `specs/evidence/012/08-wall-bounce.png` from `specs/evidence/012/moves-check.mjs` (EXIT=0) shows Julien whole at the right wall; the 001, 003, 005 and 008 browser checks still pass (EXIT=0 each).
 
+### QA follow-ups (2026-11-12, `.qa/2026-11-12-1857-post-fixes/report.md`)
+- F1 [minor], R8's top edge: an anti-air Rapid Deploy on a rising jumper relaunched them about 210 px up, past the top of the view and over the HUD (3/10 timings for Pentcho and for Julien). Every launch, juggle pop and wall bounce now goes through `capRise` (`src/sim/combat.ts`), which caps the upward speed so the peak stays within `MOVES_V2.maxLaunchHeight` (120 px, just over a jump's 116 px apex). It uses an integer square root, so the sim stays free of float math. Tests in `src/sim/mechanics.test.ts` ("launch height"): the QA timings (rush 9 to 21 frames after the jump) and a high wall bounce stay at or under 123 px; with the cap disabled they fail at 207 and 138 px, so the tests catch the bug.
+- F2 [polish], R7: the F1 debug overlay covered P1's portrait and health bar. It is anchored bottom-left now (`index.html`), over the floor or the letterbox; 001 browser-check A11 passes (`a11-overlay-on.png` looked at: overlay clear of the HUD).
+- F3 (40 manifest 404s per load) is handled under spec 013.
+- Checks: `./dm check` EXIT=0 (303 tests); 001 browser-check, 003 fight-check and 012 moves-check EXIT=0.
+
 ## Review
 (filled by spec-review)
