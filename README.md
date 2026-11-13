@@ -1,21 +1,21 @@
 # Compass: Cardinal Clash
 
-A 2D pixel-art 1v1 fighting game starring Compass colleagues, built in one day by a handful of Claude Code sessions working in parallel. The human made the decisions; the agents wrote the specs, generated and processed the art, built the engine and verified each other's work.
+A 2D pixel-art 1v1 fighting game starring all 37 Compass colleagues, built in one day across **Claude Code** and **Compass** sessions working in parallel. The human made the decisions; the agents wrote the specs, generated and processed the art, built the engine, expanded the full 37-fighter roster and verified each other's work.
 
 **Play it:** https://datamon-game.julienh15.workers.dev
 
 ![Two fighters squaring off in the office stage](docs/screenshot.png)
 
-This repo is also a working example for AI onboarding: everything an agent needs to build, test, verify and ship the game lives in the repo. The [agent setup](#how-the-repo-is-set-up-for-agents) section explains each piece.
+This repo is also a working example for AI onboarding: everything an agent needs to build, test, verify and ship the game lives in the repo. Start with [how the repo is set up for agents](#how-the-repo-is-set-up-for-agents) and [prompt analytics](#prompt-analytics-what-the-human-actually-typed) (with every prompt typed across Claude Code and Compass in [`docs/prompt-analytics.md`](docs/prompt-analytics.md)).
 
 ## Controls
 
 | | Move | Punch | Kick | Special | Start |
 |---|---|---|---|---|---|
-| Player 1 | WASD | F | G | H | Enter |
-| Player 2 | Arrows | L | ; | ' | Numpad Enter |
+| Player 1 | WASD | F | Q | E | R |
+| Player 2 | IJKL | H | U | O | P |
 
-Forward plus Punch or Kick gives the heavy version, down plus either sweeps low, and Punch+Kick throws. Keys can be rebound on the controls screen, and gamepads work too. You can also fight the CPU.
+Forward plus Punch or Kick gives the heavy version, down plus either sweeps low, Forward+Special fires each fighter's second signature special, Down+Special taunts, and Punch+Kick throws. Arrow keys and Enter also navigate and confirm all menus alongside WASD and IJKL. Keys can be rebound on the controls screen, mobile devices get on-screen touch controls, and gamepads work too. You can also fight the CPU.
 
 ## Run it locally
 
@@ -59,7 +59,7 @@ npx wrangler@4 login   # once
 
 ## How the repo is set up for agents
 
-The game was built by several Claude Code sessions at once: one building the game, one writing the QA agent, one setting up daily research, and short-lived builder agents in git worktrees. These pieces kept that from turning into chaos.
+The game was built across two harnesses — four parallel **Claude Code** sessions (one building the core game, one writing the QA agent, one setting up daily research, and one managing sibling sessions, the `dm` CLI and deployment) followed by a **Compass** orchestrator session that fanned out 41 background subagents in a git worktree to ship the remaining 33 fighters and controls polish. These pieces kept that from turning into chaos.
 
 ### 1. `CLAUDE.md`: the map
 
@@ -121,14 +121,39 @@ claude -p "Run the game-research skill in --daily mode ..." \
 
 Fighter animations are image-generated, one clip per image, then processed by deterministic Python in [`art/pipeline/`](art/pipeline): cut the strip into frames, normalize scale, lock colors to the fighter's palette, anchor the feet, derive hit and hurt boxes from the silhouettes, and pack an atlas. Every generation call is logged to `art/generation-log.jsonl`. The human approves or rejects each clip in the HQ's Animation lab before it is packed. Generation itself calls a local image plugin that isn't in this repo; every step after it re-runs from the committed frames.
 
-### 8. Many sessions, one checkout
+### 8. Many sessions, two harnesses, one checkout
 
-How the parallel sessions stayed out of each other's way:
+How the parallel Claude Code and Compass sessions stayed out of each other's way:
 
 - **Each session owns its files** and commits only those, staged by path, never `git add -A`. Shared files (like `CLAUDE.md`) go through one owner.
-- **Builder agents work in git worktrees** (`.claude/worktrees/`, ignored) and the lead session merges their branches.
+- **Builder agents work in git worktrees** (`.claude/worktrees/` or sibling worktrees) and the lead session merges their branches after re-running checks.
+- **Cross-harness delegation when a tool belongs to one harness.** When Compass landed the 37-fighter expansion and new controls, it spawned an interactive Claude Code worker in `tmux` (`agent-tmux`) so Claude could update the private Claude.ai Project HQ artifact database while keeping repo writers serialized.
 - **"Done" is never taken on trust.** The lead reads the worker's diff and re-runs the gates itself before merging.
 - **Checks are judged by exit code,** never by grepping output for "error". The `dm` CLI is built around that.
+
+## Prompt analytics: what the human actually typed
+
+New hires often assume agentic projects require multi-page "mega-prompts". Across the entire 10.5-hour build of *Compass: Cardinal Clash*, the human typed **25 prompts totaling 623 words** (about two-thirds of a single page of prose, **19 words median**) plus **8 structured multiple-choice Q&A cards**.
+
+Full session-by-session analytics and all 25 verbatim prompts live in [`docs/prompt-analytics.md`](docs/prompt-analytics.md).
+
+| Metric | Value | Detail |
+|---|---|---|
+| **Human prompts typed** | **25 prompts (623 words)** | `17` in **Claude Code** (`439` words) + `8` in **Compass** (`184` words) |
+| **Prompt length** | **19 words median** | `24.9` words mean · shortest `3` words · longest `85` words |
+| **Structured decision cards** | **8 cards (22 picks)** | Triggered by asking the agent to *"interview me on certian decisions"* |
+| **Delegated workers spawned** | **71 runs** | `22` Claude subagents + `8` peer/headless/`tmux` Claude runs + `41` Compass breadth subagents |
+| **Agent tool calls** | **4,390** | `3,046` in Claude Code + `1,344` in Compass (**~176 tool calls per prompt**) |
+| **Shipped output** | **23,348 LOC + 875 tests** | `20,192` LOC TypeScript, `3,156` LOC Python, `15` specs, `1,034` AI art runs, **37/37 fighters** |
+
+### Why short prompts worked (onboarding takeaways)
+
+1. **Prompt the harness before the feature.** Four of the earliest prompts built `/spec-create`, `/spec-tackle`, `/spec-review`, the write-guarded `game-qa` playtester, the scheduled `game-research` loop, and the `./dm` CLI. Once those rails existed, 4-to-10-word prompts (`"deploy it for me"`, `"can we keep going with the rest of the characters?"`) ran safely.
+2. **Ask to be interviewed instead of writing a wall of requirements.** Prompt #2 ended with *"interview me on certian decisions -> lets follow with the spec workflow"*. Rather than guessing 20 tradeoffs in prose, the human clicked through structured Q&A cards backed by live Safari/Preview comparisons.
+3. **Stay at the architecture, taste, and gate boundary.** Zero prompts named TypeScript types, pixel coordinates, or CSS rules. Every prompt did one of four things: set an invariant (`"strong logic on the game loop"`, `"work in a worktree branch"`), steered taste (`"Compass: Cardinal Clash i liek"`, `"[screenshot] ... make it like arrow keys and enter works"`), scaled breadth, or approved a merge/deploy gate.
+4. **Match the harness to the shape of the work.** **Claude Code** handled the initial spec-driven engine build, adversarial browser QA, daily research skill, and Claude artifact HQ; **Compass** took over for high-breadth fan-out across 41 parallel subagents to take the roster from 4 to all 37 colleagues (74 specials, 37 mirror-match alt atlases) and delegated artifact updates back to Claude Code in `tmux`.
+
+See [`docs/prompt-analytics.md`](docs/prompt-analytics.md) for the architecture diagram, intent breakdown, and every verbatim prompt and Q&A choice in chronological order.
 
 ## Repo layout
 
@@ -140,7 +165,7 @@ How the parallel sessions stayed out of each other's way:
 | `public/` | Datamon portraits and walk sheets, packed fighter atlases, effects, stage layers |
 | `art/` | The animation pipeline, per-fighter frames, overrides and the generation log |
 | `specs/` | Specs, their index and screenshot evidence |
-| `docs/` | Game design doc and daily research |
+| `docs/` | Game design doc, [prompt analytics](docs/prompt-analytics.md) and daily research |
 | `.claude/` | Project skills, the `game-qa` agent and its hook |
 | `hq/` | Source of the HQ page |
 | `scripts/dm.mjs`, `dm` | The agent CLI |
