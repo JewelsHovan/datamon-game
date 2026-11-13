@@ -21,6 +21,9 @@ import {
   HUD_BARS,
   layoutTouch,
   overlaps,
+  PAUSE_GAP,
+  PAUSE_MIN,
+  pauseSizeIn,
   TOUCH_BUTTON_BITS,
   TOUCH_BUTTONS,
   TouchState,
@@ -232,5 +235,68 @@ describe("touch layout (R1)", () => {
     expect(l.dpad.x + l.dpad.w).toBeLessThan(844 / 2);
     expect(l.dpad.y + l.dpad.h).toBeGreaterThan(390 * 0.9);
     for (const name of ["punch", "kick", "special", "throw"] as const) expect(l[name].x).toBeGreaterThan(844 / 2);
+  });
+});
+
+describe("Pause in a letterbox (R1, QA 2026-11-12 F2)", () => {
+  /** Where Pause sits: "side" (right letterbox), "top" (top letterbox) or "stage" (over the canvas). */
+  function where(w: number, h: number, insets: Insets = NO_INSETS) {
+    const fit = fitScreen(w, h, { fractional: true, insets });
+    const pause = layoutTouch(w, h, fit, insets).pause;
+    const right = fit.left + fit.cssWidth;
+    const spot = pause.x >= right ? "side" : pause.y + pause.h <= fit.top ? "top" : "stage";
+    return { spot, pause, fit };
+  }
+
+  it("1024x768 tablet: the 96 px top letterbox holds a full-size Pause (it missed by 2 px before)", () => {
+    const { spot, pause, fit } = where(1024, 768);
+    expect(fit.top).toBe(96);
+    expect(spot).toBe("top");
+    expect(pause.w).toBe(52);
+    expect(pause.y).toBeGreaterThanOrEqual(PAUSE_GAP);
+    expect(fit.top - (pause.y + pause.h)).toBeGreaterThanOrEqual(PAUSE_GAP);
+    expect(pause.x + pause.w / 2).toBeCloseTo(fit.left + fit.cssWidth / 2, 0); // centered over the timer
+  });
+
+  it("1180x820 tablet: the 78 px top letterbox holds it too", () => {
+    const { spot, pause, fit } = where(1180, 820);
+    expect(spot).toBe("top");
+    expect(pause.w).toBeGreaterThanOrEqual(PAUSE_MIN);
+    expect(pause.y + pause.h).toBeLessThanOrEqual(fit.top - PAUSE_GAP);
+  });
+
+  it("phones keep Pause in the side letterbox at its usual size", () => {
+    for (const [w, h] of [[844, 390], [932, 430]] as const) {
+      const { spot, pause } = where(w, h);
+      expect(spot, `${w}x${h}`).toBe("side");
+      expect(pause.w).toBe(Math.round(Math.min(52, Math.max(36, Math.min(w, h) * 0.1))));
+    }
+    // With a notch the 47 px left beside the canvas is too thin for its 39 px Pause plus gaps, and
+    // the inset itself is off limits: Pause stays under the timer, as before (and off the bars).
+    expect(where(844, 390, { top: 0, right: 47, bottom: 21, left: 47 }).spot).toBe("stage");
+  });
+
+  it("shrinks Pause to fit a tight letterbox, down to the minimum touch size, then falls back to the stage", () => {
+    // pauseSizeIn: usual size with the usual margin; else the room minus a gap each side; never under PAUSE_MIN
+    expect(pauseSizeIn(98, 52, 23)).toBe(52);
+    expect(pauseSizeIn(96, 52, 23)).toBe(52);
+    expect(pauseSizeIn(60, 52, 23)).toBe(60 - 2 * PAUSE_GAP);
+    expect(pauseSizeIn(PAUSE_MIN + 2 * PAUSE_GAP, 52, 23)).toBe(PAUSE_MIN);
+    expect(pauseSizeIn(PAUSE_MIN + 2 * PAUSE_GAP - 1, 52, 23)).toBeNull();
+    expect(pauseSizeIn(0, 52, 23)).toBeNull();
+    // a small usual Pause (phone) is never grown, and fits as long as its own size does
+    expect(pauseSizeIn(40 + 2 * PAUSE_GAP, 37, 11)).toBe(37);
+    // 667x375 has no letterbox at all: Pause goes under the timer, below the health bars
+    const { spot, pause, fit } = where(667, 375);
+    expect(spot).toBe("stage");
+    for (const bar of HUD_BARS.map((r) => canvasRectToCss(r, fit))) expect(overlaps(pause, bar)).toBe(false);
+  });
+
+  it("a top letterbox just too thin for the minimum size falls back to the stage", () => {
+    // 16:9 canvas of width 1000 is 562.5 tall; a height of 562.5 + 2 * (PAUSE_MIN + 2 * PAUSE_GAP - 1) leaves 55 px rows
+    const h = Math.round(562.5 + 2 * (PAUSE_MIN + 2 * PAUSE_GAP - 1));
+    const { spot, fit } = where(1000, h);
+    expect(fit.top).toBeLessThan(PAUSE_MIN + 2 * PAUSE_GAP);
+    expect(spot).toBe("stage");
   });
 });

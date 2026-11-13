@@ -133,13 +133,32 @@ export const HUD_BARS: readonly Rect[] = [
 ];
 /** Canvas y under the health bars where Pause may sit (between the bars there is no room). */
 const BELOW_BARS_Y = 50;
+/**
+ * Smallest Pause (CSS px) that still goes in a letterbox rather than over the stage: Apple's
+ * minimum touch target. Phones whose usual Pause is smaller keep their usual size.
+ */
+export const PAUSE_MIN = 44;
+/** Room Pause keeps from the canvas and the screen edge when a letterbox is tight (CSS px). */
+export const PAUSE_GAP = 6;
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 
 /**
+ * Pause's size in a letterbox `room` CSS px deep: the usual `p` when it fits with the usual
+ * margin, else as big as fits with PAUSE_GAP on both sides, down to PAUSE_MIN (QA 2026-11-12 F2:
+ * the 96 px top letterbox of a 1024x768 tablet missed p + 2 margins by 2 px). Null: it does not fit.
+ */
+export function pauseSizeIn(room: number, p: number, margin: number): number | null {
+  if (room >= p + 2 * margin) return p;
+  const s = Math.min(p, Math.floor(room - 2 * PAUSE_GAP));
+  return s >= Math.min(p, PAUSE_MIN) ? s : null;
+}
+
+/**
  * Lays out the controls for a view of `width` x `height` CSS pixels: the d-pad in
  * the bottom-left corner, the buttons in the bottom-right corner (both over the
- * letterbox and the canvas corners), Pause in a letterbox if there is room,
+ * letterbox and the canvas corners), Pause in a letterbox if there is room (shrunk a little, never
+ * under PAUSE_MIN, to fit a tight one),
  * else under the timer. Everything stays inside the safe area.
  */
 export function layoutTouch(width: number, height: number, canvas: ScreenFit, insets: Insets): TouchLayout {
@@ -166,10 +185,14 @@ export function layoutTouch(width: number, height: number, canvas: ScreenFit, in
   let pause: Rect;
   const sideRoom = width - insets.right - (canvas.left + canvas.cssWidth);
   const topRoom = canvas.top - insets.top;
-  if (sideRoom >= p + 2 * margin) {
-    pause = { x: width - insets.right - margin - p, y: insets.top + margin, w: p, h: p };
-  } else if (topRoom >= p + 2 * margin) {
-    pause = { x: Math.round(canvas.left + canvas.cssWidth / 2 - p / 2), y: Math.round(insets.top + (topRoom - p) / 2), w: p, h: p };
+  const side = pauseSizeIn(sideRoom, p, margin);
+  const top = pauseSizeIn(topRoom, p, margin);
+  if (side !== null) {
+    // the right letterbox's top corner (centered across it when it is tight)
+    const x = side === p && sideRoom >= p + 2 * margin ? width - insets.right - margin - p : Math.round(canvas.left + canvas.cssWidth + (sideRoom - side) / 2);
+    pause = { x, y: insets.top + margin, w: side, h: side };
+  } else if (top !== null) {
+    pause = { x: Math.round(canvas.left + canvas.cssWidth / 2 - top / 2), y: Math.round(insets.top + (topRoom - top) / 2), w: top, h: top };
   } else {
     pause = {
       x: Math.round(canvas.left + canvas.cssWidth / 2 - p / 2),
