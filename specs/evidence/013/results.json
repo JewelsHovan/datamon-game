@@ -1,0 +1,131 @@
+{
+  "R3 title screen (ms)": {
+    "pass": true,
+    "value": 307,
+    "budget": 1000,
+    "ms": 307,
+    "settledKB": 66,
+    "requests": 6
+  },
+  "select screen": {
+    "pass": true,
+    "addedKB": 708,
+    "heldMB": 14.4
+  },
+  "R3 fight: first sim frame (ms)": {
+    "pass": true,
+    "value": 983,
+    "budget": 1200,
+    "msToFirstSimFrame": 983,
+    "settledKB": 1144,
+    "requests": 17,
+    "stageLoadedAfterMs": 232
+  },
+  "R3 fight: settled download (KB)": {
+    "pass": true,
+    "value": 1144,
+    "budget": 1600
+  },
+  "R4 fight: main thread busy (%)": {
+    "pass": true,
+    "value": 2.2,
+    "budget": 10
+  },
+  "R4 fight: frame p95 (ms)": {
+    "pass": true,
+    "value": 16.8,
+    "budget": 17.5,
+    "frames": {
+      "n": 1200,
+      "p50": 16.7,
+      "p95": 16.8,
+      "p99": 16.8,
+      "over20": 0
+    }
+  },
+  "R4 fight: frames over 20 ms (%)": {
+    "pass": true,
+    "value": 0,
+    "budget": 1
+  },
+  "R4 fight: JS heap (MB)": {
+    "pass": true,
+    "value": 3.7,
+    "budget": 10
+  },
+  "R4 fight: page-held images and canvases (MB)": {
+    "pass": true,
+    "value": 19,
+    "budget": 24,
+    "canvasMB": 1.3,
+    "imageMB": 17.7
+  },
+  "R4 fight: JS heap growth over 60 s (MB)": {
+    "pass": true,
+    "value": 0.39,
+    "budget": 1,
+    "from": 2.6,
+    "to": 2.99
+  },
+  "A2 fight requests no .png art": {
+    "pass": true,
+    "requests": 17,
+    "png": []
+  },
+  "A2 fight requests no datamon/walk sheet": {
+    "pass": true,
+    "walk": []
+  },
+  "A2 walkers draw in the fight": {
+    "pass": true,
+    "walkers": [
+      {
+        "screenX": 1088,
+        "onScreen": false,
+        "watching": false
+      },
+      {
+        "screenX": 498,
+        "onScreen": true,
+        "watching": false
+      },
+      {
+        "screenX": -8,
+        "onScreen": true,
+        "watching": false
+      },
+      {
+        "screenX": 858,
+        "onScreen": false,
+        "watching": false
+      }
+    ],
+    "screenshot": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/agent-a01818568ff56366e/specs/evidence/013/fight-walkers.png"
+  },
+  "no 404s: title": {
+    "pass": true,
+    "requests": 6,
+    "failed": [],
+    "knownSpec014": [
+      "404 /favicon.ico"
+    ]
+  },
+  "no 404s: select": {
+    "pass": true,
+    "requests": 42,
+    "failed": [],
+    "knownSpec014": [
+      "404 /favicon.ico"
+    ]
+  },
+  "no 404s: fight": {
+    "pass": true,
+    "requests": 17,
+    "failed": [],
+    "knownSpec014": []
+  },
+  "no console errors": {
+    "pass": true,
+    "errors": []
+  }
+}

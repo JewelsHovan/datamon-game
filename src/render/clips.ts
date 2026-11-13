@@ -1,7 +1,20 @@
 // Animation clips (docs/game-design.md, "Animation clip format").
-// A fighter's clips come from public/fighters/<slug>/manifest.json + atlas.png
-// when they exist; otherwise placeholder clips are built from the walk sheet.
+// A fighter's clips come from public/fighters/<slug>/manifest.json and the atlas
+// it names (lossless WebP, spec 013) when they exist; otherwise placeholder clips
+// are built from the walk sheet.
 import { STANDING_WALK_FRAME, WALK_ROWS, type Person } from "../data/catalog";
+
+/** Atlas file when a manifest does not name one (the art pipeline always does). */
+export const ATLAS_FILE = "atlas.webp";
+
+/**
+ * URL of a file the art pipeline shipped next to a manifest. The manifest's version is the
+ * cache key: art is cached for up to an hour (public/_headers), and a new manifest must never
+ * be paired with an old cached atlas.
+ */
+export function artUrl(dir: string, file: string, version: number): string {
+  return `${dir}/${file}?v=${version}`;
+}
 
 export interface ClipFrame {
   /** Rectangle in the atlas. */
@@ -23,6 +36,8 @@ export interface Clip {
 
 export interface FighterManifest {
   fighter: string;
+  /** Atlas file name next to the manifest. */
+  atlas: string;
   version: number;
   scale: number;
   facing: "right" | "left";
@@ -85,6 +100,10 @@ export function parseManifest(data: unknown): FighterManifest {
     throw new ManifestError("manifest.fighter must be a non-empty string");
   }
   const version = num(data, "version", "manifest");
+  const atlas = data.atlas === undefined ? ATLAS_FILE : data.atlas;
+  if (typeof atlas !== "string" || !/^[\w.-]+$/.test(atlas)) {
+    throw new ManifestError("manifest.atlas must be a file name next to the manifest");
+  }
   const scale = data.scale === undefined ? 1 : num(data, "scale", "manifest");
   const facing = data.facing === undefined ? "right" : data.facing;
   if (facing !== "right" && facing !== "left") {
@@ -105,7 +124,7 @@ export function parseManifest(data: unknown): FighterManifest {
     };
   }
   if (Object.keys(clips).length === 0) throw new ManifestError("manifest.clips is empty");
-  return { fighter: data.fighter, version, scale, facing, clips };
+  return { fighter: data.fighter, atlas, version, scale, facing, clips };
 }
 
 /** Frames whose rectangle falls outside the atlas, as "clip[index]" labels. */
@@ -266,8 +285,9 @@ export function manifestUrl(slug: string): string {
   return `./fighters/${slug}/manifest.json`;
 }
 
-export function atlasUrl(slug: string): string {
-  return `./fighters/${slug}/atlas.png`;
+/** The atlas the manifest names, next to it. */
+export function atlasUrl(slug: string, manifest: Pick<FighterManifest, "atlas" | "version">): string {
+  return artUrl(`./fighters/${slug}`, manifest.atlas, manifest.version);
 }
 
 /** Draws the placeholder atlas once: smooth downscale, then hard alpha. */
@@ -288,11 +308,36 @@ export async function buildPlaceholderClipSet(person: Person, deps: ClipLoaderDe
   return { slug: person.slug, source: "placeholder", atlas: canvas, artFacing: 1, clips: layout.clips };
 }
 
+/** The art pipeline's list of fighters with packed art (art/pipeline/common.py write_fighter_index). */
+export const FIGHTER_INDEX_URL = "./fighters/index.json";
+
+/** Slugs listed in a fighter index, or null when the data is not one. */
+export function parseFighterIndex(data: unknown): ReadonlySet<string> | null {
+  if (!isRecord(data) || !isRecord(data.fighters)) return null;
+  return new Set(Object.keys(data.fighters));
+}
+
+const indexCache = new WeakMap<object, Promise<ReadonlySet<string> | null>>();
+
+/**
+ * Which fighters have a manifest, fetched once per loader. Lets the game skip manifest requests for
+ * everyone else (each would be a 404). Null when there is no index: callers then probe manifests.
+ */
+export function loadFighterIndex(deps: Pick<ClipLoaderDeps, "fetchJson">): Promise<ReadonlySet<string> | null> {
+  let pending = indexCache.get(deps);
+  if (!pending) {
+    pending = deps.fetchJson(FIGHTER_INDEX_URL).then(parseFighterIndex, () => null);
+    indexCache.set(deps, pending);
+  }
+  return pending;
+}
+
 /** Loads a fighter's manifest clips, falling back to walk-sheet placeholders. */
 export async function loadClipSetUncached(person: Person, deps: ClipLoaderDeps): Promise<ClipSet> {
   let json: unknown = null;
+  const index = await loadFighterIndex(deps);
   try {
-    json = await deps.fetchJson(manifestUrl(person.slug));
+    if (index === null || index.has(person.slug)) json = await deps.fetchJson(manifestUrl(person.slug));
   } catch {
     json = null;
   }
@@ -302,7 +347,7 @@ export async function loadClipSetUncached(person: Person, deps: ClipLoaderDeps):
       if (manifest.fighter !== person.slug) {
         deps.warn(`manifest for ${person.slug} names fighter "${manifest.fighter}"`);
       }
-      const atlas = await deps.loadImage(atlasUrl(person.slug));
+      const atlas = await deps.loadImage(atlasUrl(person.slug, manifest));
       const outside = framesOutsideAtlas(manifest.clips, atlas.width, atlas.height);
       if (outside.length > 0) {
         deps.warn(`${person.slug}: frames outside the atlas: ${outside.join(", ")}`);
@@ -338,8 +383,11 @@ export function clearClipCache(): void {
   cache.clear();
 }
 
+let browserDeps: ClipLoaderDeps | null = null;
+
+/** The browser's loader (one shared object, so the fighter index is fetched once per page). */
 export function browserClipDeps(): ClipLoaderDeps {
-  return {
+  browserDeps ??= {
     async fetchJson(url) {
       const res = await fetch(url, { headers: { Accept: "application/json" } });
       if (!res.ok) return null;
@@ -368,6 +416,7 @@ export function browserClipDeps(): ClipLoaderDeps {
       console.warn(message);
     },
   };
+  return browserDeps;
 }
 
 /** URL of a fighter's alternate palette ({"#from": "#to"}), used for P2 in mirror matches. */

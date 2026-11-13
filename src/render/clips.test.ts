@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 import { beforeEach, describe, expect, it } from "vitest";
 import { getPerson, type Person } from "../data/catalog";
 import {
+  FIGHTER_INDEX_URL,
   ManifestError,
   PLACEHOLDER_SCALE,
   PLACEHOLDER_WALK_HOLD,
@@ -13,6 +14,7 @@ import {
   hardenAlpha,
   loadClipSet,
   manifestUrl,
+  parseFighterIndex,
   parseManifest,
   placeholderLayout,
   type AtlasImage,
@@ -42,7 +44,7 @@ function fakeDeps(manifestFor: string | null) {
     },
     async loadImage(url) {
       images.push(url);
-      return { width: url.endsWith("atlas.png") ? 384 : 440, height: 960 } as unknown as AtlasImage;
+      return { width: url.includes("/atlas.") ? 384 : 440, height: 960 } as unknown as AtlasImage;
     },
     createCanvas(width, height) {
       const data = new Uint8ClampedArray(width * height * 4).fill(100);
@@ -134,6 +136,16 @@ describe("clip manifest format", () => {
       },
       /ax/,
     ],
+    [
+      "an atlas outside the fighter's folder",
+      {
+        fighter: "a",
+        atlas: "../other/atlas.webp",
+        version: 1,
+        clips: { idle: { loop: true, frames: [{ x: 0, y: 0, w: 1, h: 1, ax: 0, ay: 0, hold: 1 }] } },
+      },
+      /atlas/,
+    ],
   ])("rejects %s", (_label, data, message) => {
     expect(() => parseManifest(data)).toThrow(ManifestError);
     expect(() => parseManifest(data)).toThrow(message);
@@ -200,12 +212,14 @@ describe("placeholder clips from the walk sheet", () => {
 describe("clip loader", () => {
   beforeEach(() => clearClipCache());
 
-  it("loads manifest.json and atlas.png when the fighter has them", async () => {
+  it("loads manifest.json and the atlas it names when the fighter has them", async () => {
     const f = fakeDeps("julien-hovan");
     const set = await loadClipSet(person("julien-hovan"), f.deps);
     expect(set.source).toBe("manifest");
-    expect(f.fetched).toEqual(["./fighters/julien-hovan/manifest.json"]);
-    expect(f.images).toEqual([atlasUrl("julien-hovan")]);
+    // No fighter index in this fake, so the loader probes the manifest (older builds).
+    expect(f.fetched).toEqual([FIGHTER_INDEX_URL, "./fighters/julien-hovan/manifest.json"]);
+    expect(f.images).toEqual([atlasUrl("julien-hovan", parseManifest(fixtureJson()))]);
+    expect(f.images).toEqual(["./fighters/julien-hovan/atlas.webp?v=1"]);
     expect(set.clips).toEqual(parseManifest(fixtureJson()).clips);
     expect(set.artFacing).toBe(1);
     expect(f.warnings).toEqual([]);
@@ -235,6 +249,46 @@ describe("clip loader", () => {
     const p = person("jewoo-lee");
     const [a, b] = await Promise.all([loadClipSet(p, f.deps), loadClipSet(p, f.deps)]);
     expect(a).toBe(b);
-    expect(f.fetched).toHaveLength(1);
+    expect(f.fetched).toEqual([FIGHTER_INDEX_URL, manifestUrl(p.slug)]);
+  });
+});
+
+describe("fighter index (spec 013)", () => {
+  beforeEach(() => clearClipCache());
+
+  /** fakeDeps serving an index that lists `listed`, plus the fixture manifest for Julien. */
+  function indexed(listed: string[]) {
+    const f = fakeDeps("julien-hovan");
+    const fetchJson = f.deps.fetchJson;
+    f.deps.fetchJson = async (url) => {
+      if (url !== FIGHTER_INDEX_URL) return fetchJson(url);
+      f.fetched.push(url);
+      return { fighters: Object.fromEntries(listed.map((s) => [s, { manifest: "manifest.json", atlas: "atlas.webp", version: 1 }])) };
+    };
+    return f;
+  }
+
+  it("skips the manifest request for anyone the index does not list (no 404s)", async () => {
+    const f = indexed(["julien-hovan"]);
+    const jewoo = person("jewoo-lee");
+    const set = await loadClipSet(jewoo, f.deps);
+    expect(set.source).toBe("placeholder");
+    expect(f.fetched).toEqual([FIGHTER_INDEX_URL]);
+    expect(f.images).toEqual([jewoo.sheetUrl]);
+  });
+
+  it("loads the manifest for a listed fighter, and fetches the index once per loader", async () => {
+    const f = indexed(["julien-hovan"]);
+    const [a] = await Promise.all([loadClipSet(person("julien-hovan"), f.deps), loadClipSet(person("jewoo-lee"), f.deps)]);
+    expect(a.source).toBe("manifest");
+    expect(f.fetched.filter((u) => u === FIGHTER_INDEX_URL)).toHaveLength(1);
+    expect(f.fetched).toContain(manifestUrl("julien-hovan"));
+    expect(f.fetched).not.toContain(manifestUrl("jewoo-lee"));
+  });
+
+  it("parses only index-shaped data", () => {
+    expect([...parseFighterIndex({ fighters: { a: {}, b: {} } })!]).toEqual(["a", "b"]);
+    expect(parseFighterIndex(null)).toBeNull();
+    expect(parseFighterIndex({ fighters: ["a"] })).toBeNull();
   });
 });

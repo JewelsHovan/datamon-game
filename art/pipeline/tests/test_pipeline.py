@@ -106,7 +106,7 @@ def test_julien_frames_use_palette_and_idle_height():
 
 # A5 (runs once the atlas is packed) -----------------------------------------------------------
 def validate_manifest(m: dict, atlas: Image.Image, anchor_inside: bool = True) -> None:
-    assert set(m) >= {"fighter", "version", "scale", "facing", "clips"}
+    assert set(m) >= {"fighter", "atlas", "version", "scale", "facing", "clips"}
     assert m["facing"] == "right" and isinstance(m["version"], int)
     assert atlas.width <= 2048 and atlas.height <= 2048
     for cid, c in m["clips"].items():
@@ -122,7 +122,7 @@ def validate_manifest(m: dict, atlas: Image.Image, anchor_inside: bool = True) -
 @pytest.mark.skipif(not MANIFEST.exists(), reason="Julien's atlas not packed yet")
 def test_julien_manifest_valid():
     m = json.loads(MANIFEST.read_text())
-    validate_manifest(m, Image.open(MANIFEST.parent / "atlas.png"))
+    validate_manifest(m, Image.open(MANIFEST.parent / m["atlas"]))
     status = common.load_status("julien-hovan")
     if all(status.get(c, {}).get("state") == "approved" for c in CORE):
         assert set(m["clips"]) == set(CORE)
@@ -155,7 +155,7 @@ FX_MANIFEST = common.ROOT / "public" / "effects" / "manifest.json"
 @pytest.mark.skipif(not FX_MANIFEST.exists(), reason="effects not packed yet")
 def test_effects_manifest():
     m = json.loads(FX_MANIFEST.read_text())
-    validate_manifest(m, Image.open(FX_MANIFEST.parent / "atlas.png"), anchor_inside=False)  # centered effects may anchor outside a small frame
+    validate_manifest(m, Image.open(FX_MANIFEST.parent / m["atlas"]), anchor_inside=False)  # centered effects may anchor outside a small frame
     defs = json.loads((common.ART / "effects.json").read_text())["effects"]
     assert set(m["clips"]) == set(defs)
     for eid, c in m["clips"].items():

@@ -5,6 +5,11 @@
       "name": "Open-plan office at dusk",
       "setting": "A modern open-plan tech office on a high floor at dusk.",
       "floorColor": "#4a3b3f",
+      "walkers": {
+        "note": "Coworkers walking past in the background (spec 009 R3, spec 013 R2): every fifth person who is not a launch fighter, at most seven, cut at 60% of a standing person's 150 px.",
+        "exclude": ["julien-hovan", "felicia-gorgacheva", "pentcho-tchomakov", "alex-andrianavalontsalama"],
+        "every": 5, "count": 7, "scale": 0.6
+      },
       "layers": {
         "far": {
           "factor": 0.35, "height": 360, "y": 0, "gen_size": "3072x1280", "colors": 64,

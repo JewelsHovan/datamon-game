@@ -1,17 +1,19 @@
 // Performance check for spec 013 over the Chrome DevTools
 // Protocol, with a private headless Chrome (no shared browser, no extra deps).
 //
-// Usage (dev server running, e.g. `npx vite --port 5199 --strictPort`):
-//   node specs/evidence/001/browser-check.mjs http://127.0.0.1:5199/ specs/evidence/001
-// Writes screenshots and results.json into the output directory and exits 0
-// only when every check passes.
+// Usage, against a production build (never the dev server):
+//   npx vite build --outDir <tmp>/dist --emptyOutDir
+//   npx vite preview --outDir <tmp>/dist --host 127.0.0.1 --port <port> --strictPort
+//   node specs/evidence/013/perf-check.mjs http://127.0.0.1:<port>/ specs/evidence/013
+// Writes perf.json, requests.json, results.json and a screenshot into the output
+// directory and exits 0 only when every budget (spec 013 R3, R4, R6) is met.
 import { spawn } from "node:child_process";
-import { mkdtempSync, readFileSync, rmSync, writeFileSync, existsSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync, existsSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
 const BASE = process.argv[2] ?? "http://127.0.0.1:5199/";
-const OUT = process.argv[3] ?? "specs/evidence/001";
+const OUT = process.argv[3] ?? "specs/evidence/013";
 const CHROME =
   process.env.CHROME_PATH ?? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 
@@ -185,19 +187,73 @@ async function approach(maxGap = 62) {
 // Spec 013: load size and time, CPU and memory, measured against a production
 // build (`vite build` then `vite preview`), never the dev server.
 //   node specs/evidence/013/perf-check.mjs http://127.0.0.1:<port>/ <out-dir>
-// Writes <out-dir>/perf.json. Network is throttled to 10 Mbit/s down, 40 ms RTT
-// with the cache disabled, so byte savings show up as time.
+// Network is throttled to 10 Mbit/s down, 40 ms RTT with the cache disabled, so
+// byte savings show up as time. Times run from the navigation request.
 import { execFileSync } from "node:child_process";
 
+/** Spec 013 budgets (R3 load, R4 runtime). A miss fails the run (R6). */
+const BUDGET = Object.freeze({
+  titleMs: 1000,
+  fightFirstSimFrameMs: 1200,
+  fightSettledKB: 1600, // 1.6 MB, 1 KB = 1024 bytes
+  mainThreadBusyPct: 10,
+  frameP95Ms: 17.5,
+  framesOver20Pct: 1,
+  jsHeapMB: 10,
+  pageHeldMB: 24, // decoded images + canvases the page holds, fight started from the URL
+  heapGrowthMB: 1, // over 60 s of fighting, after a forced GC at both ends
+});
+function budget(id, value, max, detail = {}) {
+  record(id, Number.isFinite(value) && value >= 0 && value <= max, { value, budget: max, ...detail });
+}
+
+mkdirSync(OUT, { recursive: true });
 const metrics = async () => Object.fromEntries((await page("Performance.getMetrics")).metrics.map((m) => [m.name, m.value]));
+
+// Request log: every request with its phase, URL (same-origin ones as paths), type, HTTP status,
+// encoded size and start/end in ms from the phase's navigation (a waterfall).
+const ORIGIN = new URL(BASE).origin + "/";
+let phase = "boot";
+let phaseStart = 0; // CDP monotonic seconds of the phase's first request
 let bytes = 0;
 let requests = 0;
+const log = [];
+const byId = new Map();
 listeners.push((evt) => {
-  if (evt.sessionId === sessionId && evt.method === "Network.loadingFinished") {
-    bytes += evt.params.encodedDataLength;
+  if (evt.sessionId !== sessionId) return;
+  const p = evt.params;
+  if (evt.method === "Network.requestWillBeSent") {
+    if (!phaseStart) phaseStart = p.timestamp;
+    const entry = { phase, url: p.request.url.replace(ORIGIN, "/"), type: p.type ?? "", status: 0, kb: 0, startMs: Math.round((p.timestamp - phaseStart) * 1000), endMs: -1 };
+    byId.set(p.requestId, entry);
+    log.push(entry);
+  } else if (evt.method === "Network.responseReceived") {
+    const entry = byId.get(p.requestId);
+    if (entry) entry.status = p.response.status;
+  } else if (evt.method === "Network.loadingFinished") {
+    bytes += p.encodedDataLength;
     requests += 1;
+    const entry = byId.get(p.requestId);
+    if (entry) Object.assign(entry, { kb: +(p.encodedDataLength / 1024).toFixed(1), endMs: Math.round((p.timestamp - phaseStart) * 1000) });
+  } else if (evt.method === "Network.loadingFailed") {
+    const entry = byId.get(p.requestId);
+    if (entry) entry.failed = p.errorText;
   }
 });
+function startPhase(name) {
+  phase = name;
+  phaseStart = 0;
+  bytes = 0;
+  requests = 0;
+}
+const pathOf = (url) => url.replace(/[?#].*$/, "");
+const ART = /^\/(fighters|effects|stages|datamon)\//;
+const pngArt = (entries) => entries.filter((e) => ART.test(e.url) && /\.png$/i.test(pathOf(e.url))).map((e) => e.url);
+const walkSheets = (entries) => entries.filter((e) => pathOf(e.url).includes("/datamon/walk/")).map((e) => e.url);
+// The favicon is spec 014's (R1); until it lands, its 404 is known and reported on its own.
+const KNOWN_404 = new Set(["/favicon.ico"]);
+const failedRequests = (entries) => entries.filter((e) => e.status >= 400 && !KNOWN_404.has(pathOf(e.url))).map((e) => `${e.status} ${e.url}`);
+
 async function untilTrue(expr, timeoutMs = 30000) {
   const t0 = Date.now();
   while (Date.now() - t0 < timeoutMs) {
@@ -206,7 +262,14 @@ async function untilTrue(expr, timeoutMs = 30000) {
   }
   return -1;
 }
-/** Resident memory (MB) of this Chrome's renderer and GPU processes. */
+/** Navigates and returns ms from the navigation request until `expr` holds (-1 on timeout). */
+async function navigateUntil(url, expr, timeoutMs = 30000) {
+  const t0 = Date.now();
+  await page("Page.navigate", { url });
+  const waited = await untilTrue(expr, timeoutMs);
+  return waited < 0 ? -1 : Date.now() - t0;
+}
+/** Resident memory (MB) of this Chrome's renderer and GPU processes: recorded, not budgeted (spec 013 Decisions). */
 function chromeRss() {
   const out = execFileSync("ps", ["-axo", "pid=,ppid=,rss=,command="], { encoding: "utf8" });
   const rows = out.split("\n").map((l) => l.trim().match(/^(\d+)\s+(\d+)\s+(\d+)\s+(.*)$/)).filter(Boolean);
@@ -231,8 +294,45 @@ async function busy(ms) {
     jsHeapTotalMB: +(b.JSHeapTotalSize / 1048576).toFixed(1),
   };
 }
+/** JS heap in use after a full garbage collection (what the page retains). */
+async function retainedHeapMB() {
+  await page("HeapProfiler.collectGarbage");
+  await sleep(200);
+  return +((await metrics()).JSHeapUsedSize / 1048576).toFixed(2);
+}
 
-const perf = {};
+// Page-held images and canvases: wrap Image and document.createElement before the page's own
+// scripts run, then sum decoded sizes (width x height x 4) of everything still alive and sized.
+const inventoryProbe = `
+window.__inv = { canvases: [], images: [] };
+const ce = Document.prototype.createElement;
+Document.prototype.createElement = function (tag, ...rest) {
+  const el = ce.call(this, tag, ...rest);
+  const t = String(tag).toLowerCase();
+  if (t === 'canvas') __inv.canvases.push({ el, stack: (new Error().stack || '').split('\\n').slice(2, 4).map((s) => s.trim()).join(' < ') });
+  if (t === 'img') __inv.images.push(el);
+  return el;
+};
+const RealImage = window.Image;
+window.Image = function (...a) { const img = new RealImage(...a); __inv.images.push(img); return img; };
+window.Image.prototype = RealImage.prototype;
+`;
+const inventory = `(() => {
+  const groups = {};
+  const seen = new Set();
+  let canvasMB = 0;
+  const addCanvas = (el, key) => { if (seen.has(el)) return; seen.add(el); const mb = el.width * el.height * 4 / 1048576; canvasMB += mb; const k = key.replace(/https?:[^ )]*\\//g, '').slice(0, 120); const g = groups[k] = groups[k] || { n: 0, mb: 0, sizes: [] }; g.n++; g.mb += mb; if (g.sizes.length < 4) g.sizes.push(el.width + 'x' + el.height); };
+  for (const c of __inv.canvases) addCanvas(c.el, c.stack);
+  for (const el of document.querySelectorAll('canvas')) addCanvas(el, 'in the page: #' + el.id);
+  const imgs = {};
+  let imageMB = 0;
+  for (const i of __inv.images) { if (!i.naturalWidth) continue; const mb = i.naturalWidth * i.naturalHeight * 4 / 1048576; imageMB += mb; const k = (i.currentSrc || i.src).replace(/^.*?\\/\\/[^/]+\\//, '').replace(/\\?.*$/, ''); const g = imgs[k] = imgs[k] || { n: 0, mb: 0, size: i.naturalWidth + 'x' + i.naturalHeight }; g.n++; g.mb += mb; }
+  for (const g of Object.values(groups)) g.mb = +g.mb.toFixed(2);
+  for (const g of Object.values(imgs)) g.mb = +g.mb.toFixed(2);
+  return { totalMB: +(canvasMB + imageMB).toFixed(1), canvasMB: +canvasMB.toFixed(1), imageMB: +imageMB.toFixed(1), canvases: groups, images: imgs };
+})()`;
+
+const perf = { budget: BUDGET };
 try {
   await viewport(1280, 720);
   await page("Network.enable");
@@ -240,48 +340,73 @@ try {
   await page("Network.setCacheDisabled", { cacheDisabled: true });
   await page("Network.emulateNetworkConditions", { offline: false, latency: 40, downloadThroughput: (10 * 1024 * 1024) / 8, uploadThroughput: (5 * 1024 * 1024) / 8 });
   await page("Page.addScriptToEvaluateOnNewDocument", { source: frameProbe });
+  await page("Page.addScriptToEvaluateOnNewDocument", { source: inventoryProbe });
 
   // 1. Cold load to the title screen.
-  bytes = 0; requests = 0;
-  let t0 = Date.now();
-  await page("Page.navigate", { url: BASE });
-  const titleMs = await untilTrue("window.__game?.scene === 'title'");
+  startPhase("title");
+  const titleMs = await navigateUntil(BASE, "window.__game?.scene === 'title'");
   await sleep(1500); // the playable-fighter probe and menu art finish loading
   perf.title = { ms: titleMs, settledKB: Math.round(bytes / 1024), requests };
-  record("title loads", titleMs > 0, perf.title);
+  budget("R3 title screen (ms)", titleMs, BUDGET.titleMs, perf.title);
 
-  // 2. Select screen with the four fighters' previews.
-  bytes = 0; requests = 0;
+  // 2. Select screen with the four fighters' previews (recorded, not budgeted).
+  startPhase("select");
   await tap("KeyS"); // VS PLAYER
   await tap("KeyF");
   await untilTrue("window.__game?.scene === 'select'");
   await sleep(3000);
-  perf.select = { addedKB: Math.round(bytes / 1024), requests, rss: chromeRss(), heap: await busy(1000) };
-  record("select screen", true, perf.select);
+  perf.select = { addedKB: Math.round(bytes / 1024), requests, rss: chromeRss(), heap: await busy(1000), held: await evaluate(inventory) };
+  record("select screen", true, { addedKB: perf.select.addedKB, heldMB: perf.select.held.totalMB });
 
-  // 3. Cold load straight into a CPU fight.
-  bytes = 0; requests = 0;
-  t0 = Date.now();
-  await page("Page.navigate", { url: BASE + "?cpu=hard&p1=julien-hovan&p2=pentcho-tchomakov" });
-  const fightMs = await untilTrue("(window.__game?.simFrame ?? 0) > 2");
-  await untilTrue("window.__game.info().stage.loaded", 30000);
+  // 3. Cold load straight into a Hard CPU fight.
+  startPhase("fight");
+  const fightMs = await navigateUntil(BASE + "?cpu=hard&p1=julien-hovan&p2=pentcho-tchomakov", "(window.__game?.simFrame ?? 0) > 2");
+  const stageMs = await untilTrue("window.__game.info().stage.loaded", 30000);
   await sleep(2000);
-  perf.fightLoad = { msToFirstSimFrame: fightMs, settledKB: Math.round(bytes / 1024), requests };
-  record("fight loads", fightMs > 0, perf.fightLoad);
+  perf.fightLoad = { msToFirstSimFrame: fightMs, settledKB: Math.round(bytes / 1024), requests, stageLoadedAfterMs: stageMs };
+  budget("R3 fight: first sim frame (ms)", fightMs, BUDGET.fightFirstSimFrameMs, perf.fightLoad);
+  budget("R3 fight: settled download (KB)", perf.fightLoad.settledKB, BUDGET.fightSettledKB);
 
   // 4. Steady state: 20 s of the Hard CPU fighting an idle P1 (round flow, effects, walkers).
+  const heapStart = await retainedHeapMB();
+  const t60 = Date.now();
   await evaluate("__perf.frames.length = 0");
   perf.fight = await busy(20000);
   perf.fight.frames = await framesSummary();
+  perf.fight.framesOver20Pct = +((100 * perf.fight.frames.over20) / Math.max(1, perf.fight.frames.n)).toFixed(2);
   perf.fight.fps = (await evaluate("window.__game.info().stats.fps")) ?? null;
   perf.fight.rss = chromeRss();
-  record("fight steady state", true, perf.fight);
+  perf.fight.held = await evaluate(inventory);
+  budget("R4 fight: main thread busy (%)", perf.fight.mainThreadBusyPct, BUDGET.mainThreadBusyPct);
+  budget("R4 fight: frame p95 (ms)", perf.fight.frames.p95, BUDGET.frameP95Ms, { frames: perf.fight.frames });
+  budget("R4 fight: frames over 20 ms (%)", perf.fight.framesOver20Pct, BUDGET.framesOver20Pct);
+  budget("R4 fight: JS heap (MB)", perf.fight.jsHeapMB, BUDGET.jsHeapMB);
+  budget("R4 fight: page-held images and canvases (MB)", perf.fight.held.totalMB, BUDGET.pageHeldMB, { canvasMB: perf.fight.held.canvasMB, imageMB: perf.fight.held.imageMB });
 
-  // 5. A minute later: memory growth (leak check). Rematches keep the fight going.
-  await sleep(40000);
-  const later = await busy(5000);
-  perf.later = { jsHeapMB: later.jsHeapMB, rss: chromeRss(), mainThreadBusyPct: later.mainThreadBusyPct };
-  record("one minute later", true, perf.later);
+  // 5. Sixty seconds into the fight: retained heap growth (leak check). Rematches keep it going.
+  await sleep(Math.max(0, 60000 - (Date.now() - t60)));
+  const heapEnd = await retainedHeapMB();
+  const later = await busy(3000);
+  perf.later = { afterS: Math.round((Date.now() - t60) / 1000), retainedHeapStartMB: heapStart, retainedHeapEndMB: heapEnd, growthMB: +(heapEnd - heapStart).toFixed(2), jsHeapMB: later.jsHeapMB, rss: chromeRss(), mainThreadBusyPct: later.mainThreadBusyPct };
+  budget("R4 fight: JS heap growth over 60 s (MB)", perf.later.growthMB, BUDGET.heapGrowthMB, { from: heapStart, to: heapEnd });
+
+  // A2: the fight loaded no .png art and no walk sheet, and the walkers still draw.
+  const fightRequests = log.filter((e) => e.phase === "fight");
+  record("A2 fight requests no .png art", fightRequests.length > 0 && pngArt(fightRequests).length === 0, { requests: fightRequests.length, png: pngArt(fightRequests) });
+  record("A2 fight requests no datamon/walk sheet", walkSheets(fightRequests).length === 0, { walk: walkSheets(fightRequests) });
+  const walking = await untilTrue("window.__game.info().stage.walkers.some((w) => !w.watching && w.screenX > 80 && w.screenX < 560)", 30000);
+  const walkers = await evaluate("window.__game.info().stage.walkers");
+  const { data } = await page("Page.captureScreenshot", { format: "png" });
+  const screenshot = join(OUT, "fight-walkers.png");
+  writeFileSync(screenshot, Buffer.from(data, "base64"));
+  record("A2 walkers draw in the fight", walking >= 0, { walkers, screenshot });
+
+  // QA 2026-11-12 F3: no request answers 404 (or any error) on the title, select or fight loads.
+  for (const ph of ["title", "select", "fight"]) {
+    const entries = log.filter((e) => e.phase === ph);
+    const known = entries.filter((e) => e.status >= 400 && KNOWN_404.has(pathOf(e.url))).map((e) => `${e.status} ${e.url}`);
+    record(`no 404s: ${ph}`, entries.length > 0 && failedRequests(entries).length === 0, { requests: entries.length, failed: failedRequests(entries), knownSpec014: known });
+  }
 
   const errors = consoleMessages.filter((m) => m.type === "error");
   record("no console errors", errors.length === 0, { errors });
@@ -289,6 +414,7 @@ try {
   record("script", false, { error: String(err) });
 } finally {
   writeFileSync(join(OUT, "perf.json"), JSON.stringify(perf, null, 2));
+  writeFileSync(join(OUT, "requests.json"), JSON.stringify(log, null, 1));
   writeFileSync(join(OUT, "results.json"), JSON.stringify(results, null, 2));
   ws.close();
   chrome.kill();

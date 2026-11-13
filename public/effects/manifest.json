@@ -1,5 +1,6 @@
 {
  "fighter": "effects",
+ "atlas": "atlas.webp",
  "version": 4,
  "scale": 1,
  "facing": "right",

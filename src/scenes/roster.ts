@@ -1,23 +1,37 @@
 // Who can be picked, and what the select screen says about them.
 // Playable = the fighter has generated clips (public/fighters/<slug>/manifest.json),
-// detected at runtime so new fighters appear as soon as their art lands.
+// detected at runtime so new fighters appear as soon as their art lands: the art pipeline
+// lists them in public/fighters/index.json (spec 013), read once instead of probing a
+// manifest per person (a 404 for everyone without art).
 // Archetype and special names come from the fighter table (src/data/fighters.ts,
 // spec 006) when it exists; until then a small fallback covers Julien.
 import type { Person } from "../data/catalog";
-import { manifestUrl, parseManifest, type ClipLoaderDeps } from "../render/clips";
+import { loadFighterIndex, manifestUrl, parseManifest, type ClipLoaderDeps } from "../render/clips";
 
 export interface FighterInfo {
   archetype: string | null;
   special: string | null;
 }
 
-/** Fetches every person's manifest; resolves with the slugs whose manifest parses. */
+/**
+ * The people the fighter index lists. Without an index (an older build), fetches every
+ * person's manifest and keeps the slugs whose manifest parses.
+ */
 export async function detectPlayable(
   people: readonly Person[],
   deps: Pick<ClipLoaderDeps, "fetchJson">,
   onFound: (slug: string) => void = () => {},
 ): Promise<Set<string>> {
   const found = new Set<string>();
+  const index = await loadFighterIndex(deps);
+  if (index !== null) {
+    for (const p of people) {
+      if (!index.has(p.slug)) continue;
+      found.add(p.slug);
+      onFound(p.slug);
+    }
+    return found;
+  }
   await Promise.all(
     people.map(async (p) => {
       try {

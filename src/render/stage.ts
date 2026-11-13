@@ -1,39 +1,59 @@
 // The stage (spec 009): painted parallax layers generated through the art pipeline
 // (public/stages/<id>/), coworkers walking past in front of the furniture (darkened, behind the fighters), a dimming
 // pass that keeps fighters readable, and a code-drawn floor on the sim's floor line.
+// Everything it draws is named by public/stages/<id>/manifest.json (spec 013): the layer files
+// and the walker strip, whose cast and frames the art pipeline chose (art/pipeline/stage.py).
 // Falls back to the original gradient until the stage has loaded. drawStage keeps its
 // spec 001 signature; call stageReact("ko", x) on a K.O. so the walkers stop and watch.
-import { getPeople } from "../data/catalog";
 import { MOVEMENT } from "../data/movement";
 import { SUBPX } from "../sim/fixed";
 import { STAGE_WIDTH_PX, type Camera } from "./camera";
-import { loadClipSet, type ClipSet } from "./clips";
+import { artUrl, browserClipDeps, type AtlasImage, type ClipLoaderDeps } from "./clips";
 import { createWalkers, stepWalkers, type WalkerState } from "./stageWalkers";
 import { VIEW_HEIGHT, VIEW_WIDTH } from "./screen";
 
 export const FLOOR_Y_PX = MOVEMENT.floorY / SUBPX;
 const MARKER_SPACING = 80;
-const STAGE_ID = "office";
-/** Fighters are never background walkers. */
-const LAUNCH_FIGHTERS = new Set(["julien-hovan", "felicia-gorgacheva", "pentcho-tchomakov", "alex-andrianavalontsalama"]);
+export const STAGE_ID = "office";
 const WALKER_COUNT = 4;
-const WALKER_SCALE = 0.6;
 /** Feet of the walkers in mid-layer pixels (just behind the desks' floor line). */
 const WALKER_FLOOR = 308;
 
+/** A frame in the walker strip, already at walker scale; (ax, ay) is the feet center on the floor. */
+export interface WalkerFrame {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  ax: number;
+  ay: number;
+}
+
+export interface StageManifest {
+  version: number;
+  floorColor: string;
+  layers: { id: string; file: string; w: number; factor: number; y: number }[];
+  /** The walker strip: one entry per cast member, four right-facing walk frames each; `stand` is the standing frame. */
+  walkers: { file: string; stand: number; cast: { slug: string; frames: WalkerFrame[] }[] } | null;
+}
+
 interface Layer {
-  img: HTMLImageElement;
+  img: AtlasImage;
   factor: number;
   y: number;
 }
 
-interface Stage {
+export interface StageArt {
   layers: Layer[];
   floorColor: string;
-  cast: ClipSet[];
-  dimmed: Map<string, HTMLCanvasElement>;
-  walkers: WalkerState | null;
   midWidth: number;
+  walkers: { strip: AtlasImage; stand: number; cast: { slug: string; frames: WalkerFrame[] }[] } | null;
+}
+
+interface Stage extends StageArt {
+  /** The walker strip darkened once, so background people sit behind the fighters in depth. */
+  dimmed: HTMLCanvasElement | null;
+  walkerState: WalkerState | null;
 }
 
 let stage: Stage | null = null;
@@ -58,32 +78,73 @@ export function stageInfo(): StageInfo {
   return { ...lastInfo, layerOffsets: [...lastInfo.layerOffsets], walkers: lastInfo.walkers.map((w) => ({ ...w })) };
 }
 
-function loadImage(src: string): Promise<HTMLImageElement> {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = () => resolve(img);
-    img.onerror = () => reject(new Error(`stage image failed: ${src}`));
-    img.src = src;
-  });
+function isRecord(v: unknown): v is Record<string, unknown> {
+  return typeof v === "object" && v !== null && !Array.isArray(v);
+}
+
+const isNum = (v: unknown): v is number => typeof v === "number" && Number.isFinite(v);
+const isFile = (v: unknown): v is string => typeof v === "string" && /^[\w.-]+$/.test(v);
+
+function parseWalkerFrame(f: unknown): WalkerFrame | null {
+  if (!isRecord(f)) return null;
+  const { x, y, w, h, ax, ay } = f;
+  if (![x, y, w, h, ax, ay].every(isNum) || (w as number) <= 0 || (h as number) <= 0) return null;
+  return { x, y, w, h, ax, ay } as WalkerFrame;
+}
+
+/** Validates the stage manifest the art pipeline writes; null when it is unusable. A bad walkers block only drops the walkers. */
+export function parseStageManifest(data: unknown): StageManifest | null {
+  if (!isRecord(data) || !Array.isArray(data.layers) || typeof data.floorColor !== "string") return null;
+  const layers: StageManifest["layers"] = [];
+  for (const l of data.layers) {
+    if (!isRecord(l) || typeof l.id !== "string" || !isFile(l.file) || !isNum(l.w) || !isNum(l.factor) || !isNum(l.y)) return null;
+    layers.push({ id: l.id, file: l.file, w: l.w, factor: l.factor, y: l.y });
+  }
+  if (layers.length === 0) return null;
+  let walkers: StageManifest["walkers"] = null;
+  const wk = data.walkers;
+  if (isRecord(wk) && isFile(wk.file) && Array.isArray(wk.cast)) {
+    const cast: { slug: string; frames: WalkerFrame[] }[] = [];
+    for (const c of wk.cast) {
+      if (!isRecord(c) || typeof c.slug !== "string" || !Array.isArray(c.frames)) continue;
+      const frames = c.frames.map(parseWalkerFrame);
+      if (frames.length > 0 && frames.every((f) => f !== null)) cast.push({ slug: c.slug, frames: frames as WalkerFrame[] });
+    }
+    if (cast.length > 0) walkers = { file: wk.file, stand: isNum(wk.stand) ? wk.stand : 0, cast };
+  }
+  return { version: isNum(data.version) ? data.version : 0, floorColor: data.floorColor, layers, walkers };
+}
+
+/** Loads the stage's layers and walker strip, every file named by the stage manifest. */
+export async function loadStageArt(
+  deps: Pick<ClipLoaderDeps, "fetchJson" | "loadImage"> = browserClipDeps(),
+  id = STAGE_ID,
+): Promise<StageArt | null> {
+  const dir = `./stages/${id}`;
+  const m = parseStageManifest(await deps.fetchJson(`${dir}/manifest.json`));
+  if (!m) return null;
+  const url = (file: string) => artUrl(dir, file, m.version);
+  const [layers, strip] = await Promise.all([
+    Promise.all(m.layers.map(async (l) => ({ img: await deps.loadImage(url(l.file)), factor: l.factor, y: l.y }))),
+    m.walkers ? deps.loadImage(url(m.walkers.file)).catch(() => null) : Promise.resolve(null),
+  ]);
+  const mid = m.layers.find((l) => l.factor > 0.5) ?? m.layers[m.layers.length - 1]!;
+  return {
+    layers,
+    floorColor: m.floorColor,
+    midWidth: mid.w,
+    walkers: m.walkers && strip ? { strip, stand: m.walkers.stand, cast: m.walkers.cast } : null,
+  };
 }
 
 async function load(): Promise<void> {
-  const res = await fetch(`./stages/${STAGE_ID}/manifest.json`, { headers: { Accept: "application/json" } });
-  if (!res.ok || !(res.headers.get("content-type") ?? "").includes("json")) return;
-  const m = (await res.json()) as { floorColor: string; layers: { file: string; factor: number; y: number; w: number }[] };
-  const layers = await Promise.all(m.layers.map(async (l) => ({ img: await loadImage(`./stages/${STAGE_ID}/${l.file}`), factor: l.factor, y: l.y })));
-  const mid = m.layers.find((l) => l.factor > 0.5) ?? m.layers[m.layers.length - 1]!;
-  const people = getPeople().filter((p) => !LAUNCH_FIGHTERS.has(p.slug));
-  // A fixed, varied cast: every fifth coworker.
-  const picks = people.filter((_, i) => i % 5 === 0).slice(0, 7);
-  const cast = (await Promise.all(picks.map((p) => loadClipSet(p).catch(() => null)))).filter((c): c is ClipSet => c !== null);
+  const art = await loadStageArt();
+  if (!art) return;
+  const castSize = art.walkers?.cast.length ?? 0;
   stage = {
-    layers,
-    floorColor: m.floorColor,
-    cast,
-    dimmed: new Map(),
-    walkers: cast.length ? createWalkers(20261112, WALKER_COUNT, mid.w, cast.length) : null,
-    midWidth: mid.w,
+    ...art,
+    dimmed: null,
+    walkerState: castSize ? createWalkers(20261112, WALKER_COUNT, art.midWidth, castSize) : null,
   };
 }
 
@@ -92,51 +153,46 @@ export function stageReact(kind: "ko", xSubpx: number): void {
   if (kind === "ko") pendingKo = xSubpx;
 }
 
-/** A darkened copy of a walker's atlas, so background people sit behind the fighters in depth. */
-function dimmedAtlas(set: ClipSet): HTMLCanvasElement {
-  const s = stage!;
-  let c = s.dimmed.get(set.slug);
-  if (!c) {
-    c = document.createElement("canvas");
-    c.width = set.atlas.width;
-    c.height = set.atlas.height;
+/** The walker strip darkened once (made on first draw), so background people sit behind the fighters in depth. */
+function dimmedStrip(s: Stage, strip: AtlasImage): HTMLCanvasElement {
+  if (!s.dimmed) {
+    const c = document.createElement("canvas");
+    c.width = strip.width;
+    c.height = strip.height;
     const g = c.getContext("2d")!;
-    g.drawImage(set.atlas, 0, 0);
+    g.drawImage(strip, 0, 0);
     g.globalCompositeOperation = "source-atop";
     g.fillStyle = "rgba(24, 18, 48, 0.5)";
     g.fillRect(0, 0, c.width, c.height);
-    s.dimmed.set(set.slug, c);
+    s.dimmed = c;
   }
-  return c;
+  return s.dimmed;
 }
 
 function drawWalkers(ctx: CanvasRenderingContext2D, camera: Camera, mid: Layer): void {
   const s = stage!;
-  if (!s.walkers || !s.cast.length) return;
-  const ko = pendingKo === null ? null : (pendingKo / SUBPX) * mid.factor + 0;
+  const art = s.walkers;
+  if (!s.walkerState || !art) return;
+  const ko = pendingKo === null ? null : (pendingKo / SUBPX) * mid.factor;
   pendingKo = null;
-  stepWalkers(s.walkers, s.cast.length, ko);
+  stepWalkers(s.walkerState, art.cast.length, ko);
   const offset = Math.round(camera.x * mid.factor);
+  const sheet = dimmedStrip(s, art.strip);
   lastInfo.walkers = [];
-  for (const w of s.walkers.walkers) {
+  for (const w of s.walkerState.walkers) {
     if (w.wait > 0) continue;
     const feetX = Math.round(w.x) - offset;
     lastInfo.walkers.push({ screenX: feetX, onScreen: feetX > -20 && feetX < VIEW_WIDTH + 20, watching: w.watching > 0 });
-    const set = s.cast[w.who % s.cast.length]!;
+    const frames = art.cast[w.who % art.cast.length]!.frames;
     const walking = w.watching === 0;
-    const clip = set.clips[walking ? "walk" : "idle"] ?? set.clips.idle ?? Object.values(set.clips)[0]!;
-    const fr = clip.frames[walking ? Math.floor(w.steps / 9) % clip.frames.length : 0]!;
+    // Walking cycles the four frames; watching a K.O. shows the standing frame.
+    const fr = frames[walking ? Math.floor(w.steps / 9) % frames.length : Math.min(art.stand, frames.length - 1)]!;
     const faceRight = (walking ? w.dir : w.watchDir) === 1;
-    const sx = Math.round(w.x) - offset;
     const sy = WALKER_FLOOR + mid.y - camera.y;
-    const dw = Math.round(fr.w * WALKER_SCALE);
-    const dh = Math.round(fr.h * WALKER_SCALE);
-    const ax = Math.round(fr.ax * WALKER_SCALE);
-    const ay = Math.round(fr.ay * WALKER_SCALE);
     ctx.save();
-    ctx.translate(sx, sy);
-    if (faceRight !== (set.artFacing === 1)) ctx.scale(-1, 1);
-    ctx.drawImage(dimmedAtlas(set), fr.x, fr.y, fr.w, fr.h, -ax, -ay, dw, dh);
+    ctx.translate(feetX, sy);
+    if (!faceRight) ctx.scale(-1, 1); // the strip's frames face right
+    ctx.drawImage(sheet, fr.x, fr.y, fr.w, fr.h, -fr.ax, -fr.ay, fr.w, fr.h);
     ctx.restore();
   }
 }

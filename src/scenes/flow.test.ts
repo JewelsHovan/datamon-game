@@ -390,6 +390,19 @@ describe("roster", () => {
     expect([...found]).toEqual(["julien-hovan"]);
   });
 
+  it("reads the fighter index once instead of probing a manifest per person (spec 013)", async () => {
+    const fetched: string[] = [];
+    const listed = { manifest: "manifest.json", atlas: "atlas.webp", version: 1 };
+    const found = await detectPlayable(getPeople(), {
+      fetchJson: async (url) => {
+        fetched.push(url);
+        return url === "./fighters/index.json" ? { fighters: { "julien-hovan": listed, "pentcho-tchomakov": listed } } : null;
+      },
+    });
+    expect([...found].sort()).toEqual(["julien-hovan", "pentcho-tchomakov"]);
+    expect(fetched).toEqual(["./fighters/index.json"]);
+  });
+
   it("reads archetype and special from a fighter table when one exists, else the fallback", () => {
     expect(fighterInfo("julien-hovan", [])).toEqual({ archetype: "All-rounder", special: "Data Orb" });
     expect(fighterInfo("felicia-gorgacheva", [])).toEqual({ archetype: null, special: null });
