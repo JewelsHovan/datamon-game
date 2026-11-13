@@ -5,7 +5,7 @@ import type { ButtonName } from "./bits";
 
 export type KeyBindings = Readonly<Record<ButtonName, readonly string[]>>;
 
-/** Keyboard defaults for P1 (index 0) and P2 (index 1): the home-row split. */
+/** Keyboard defaults for P1 (left cluster: WASD + F/Q/E/R) and P2 (right cluster: IJKL + H/U/O/P). */
 export const KEYBOARD_BINDINGS: readonly [KeyBindings, KeyBindings] = [
   {
     up: ["KeyW"],
@@ -13,19 +13,19 @@ export const KEYBOARD_BINDINGS: readonly [KeyBindings, KeyBindings] = [
     left: ["KeyA"],
     right: ["KeyD"],
     punch: ["KeyF"],
-    kick: ["KeyG"],
-    special: ["KeyH"],
-    start: ["Enter"],
+    kick: ["KeyQ"],
+    special: ["KeyE"],
+    start: ["KeyR"],
   },
   {
-    up: ["ArrowUp"],
-    down: ["ArrowDown"],
-    left: ["ArrowLeft"],
-    right: ["ArrowRight"],
-    punch: ["KeyL"],
-    kick: ["Semicolon"],
-    special: ["Quote"],
-    start: ["NumpadEnter"],
+    up: ["KeyI"],
+    down: ["KeyK"],
+    left: ["KeyJ"],
+    right: ["KeyL"],
+    punch: ["KeyH"],
+    kick: ["KeyU"],
+    special: ["KeyO"],
+    start: ["KeyP"],
   },
 ];
 

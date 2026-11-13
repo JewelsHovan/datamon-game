@@ -33,30 +33,36 @@ describe("control bindings (R3)", () => {
     const b = new ControlBindings(new FakeStorage());
     expect(b.current).toEqual(KEYBOARD_BINDINGS);
     expect(b.keyFor(0, "punch")).toBe("KeyF");
-    expect(b.keyFor(1, "special")).toBe("Quote");
+    expect(b.keyFor(0, "kick")).toBe("KeyQ");
+    expect(b.keyFor(0, "special")).toBe("KeyE");
+    expect(b.keyFor(0, "start")).toBe("KeyR");
+    expect(b.keyFor(1, "punch")).toBe("KeyH");
+    expect(b.keyFor(1, "kick")).toBe("KeyU");
+    expect(b.keyFor(1, "special")).toBe("KeyO");
+    expect(b.keyFor(1, "start")).toBe("KeyP");
   });
 
   it("rebinding to a free key just moves the action", () => {
     const b = new ControlBindings(new FakeStorage());
-    expect(b.rebind(0, "punch", "KeyJ")).toEqual({ ok: true, swapped: null });
-    expect(b.keyFor(0, "punch")).toBe("KeyJ");
+    expect(b.rebind(0, "punch", "KeyG")).toEqual({ ok: true, swapped: null });
+    expect(b.keyFor(0, "punch")).toBe("KeyG");
     expect(b.owner("KeyF")).toBeNull();
   });
 
   it("rebinding P1 Punch to a key P2 uses swaps the two (A3)", () => {
     const b = new ControlBindings(new FakeStorage());
-    const r = b.rebind(0, "punch", "KeyL");
+    const r = b.rebind(0, "punch", "KeyH");
     expect(r).toEqual({ ok: true, swapped: { player: 1, action: "punch" } });
-    expect(b.keyFor(0, "punch")).toBe("KeyL");
+    expect(b.keyFor(0, "punch")).toBe("KeyH");
     expect(b.keyFor(1, "punch")).toBe("KeyF");
-    expect(b.owner("KeyL")).toEqual({ player: 0, action: "punch" });
+    expect(b.owner("KeyH")).toEqual({ player: 0, action: "punch" });
     expect(b.owner("KeyF")).toEqual({ player: 1, action: "punch" });
   });
 
   it("rebinding to a key the same player uses swaps within that player", () => {
     const b = new ControlBindings(new FakeStorage());
-    b.rebind(0, "punch", "KeyG");
-    expect(b.keyFor(0, "punch")).toBe("KeyG");
+    b.rebind(0, "punch", "KeyQ");
+    expect(b.keyFor(0, "punch")).toBe("KeyQ");
     expect(b.keyFor(0, "kick")).toBe("KeyF");
   });
 
@@ -82,11 +88,11 @@ describe("control bindings (R3)", () => {
   it("persist through storage: a new instance (a reload) reads them back (A3)", () => {
     const store = new FakeStorage();
     const a = new ControlBindings(store);
-    a.rebind(0, "punch", "KeyL");
+    a.rebind(0, "punch", "KeyH");
     a.rebind(1, "special", "Slash");
     expect(store.data.has(CONTROLS_STORAGE_KEY)).toBe(true);
     const reloaded = new ControlBindings(store);
-    expect(reloaded.keyFor(0, "punch")).toBe("KeyL");
+    expect(reloaded.keyFor(0, "punch")).toBe("KeyH");
     expect(reloaded.keyFor(1, "punch")).toBe("KeyF");
     expect(reloaded.keyFor(1, "special")).toBe("Slash");
     expect(reloaded.current).toEqual(a.current);
@@ -95,7 +101,7 @@ describe("control bindings (R3)", () => {
   it("restore defaults resets and saves (A3)", () => {
     const store = new FakeStorage();
     const a = new ControlBindings(store);
-    a.rebind(0, "punch", "KeyL");
+    a.rebind(0, "punch", "KeyH");
     a.restoreDefaults();
     expect(a.current).toEqual(KEYBOARD_BINDINGS);
     expect(new ControlBindings(store).current).toEqual(KEYBOARD_BINDINGS);
@@ -131,11 +137,11 @@ describe("key labels and legends (R7)", () => {
 
   it("legends follow each player's actual bindings, or the pad", () => {
     const b = new ControlBindings(null);
-    expect(legendLines(b.current[0])).toEqual(["F PUNCH  G KICK  H SPECIAL", "WASD MOVE  F+G THROW"]);
-    expect(legendLines(b.current[1])).toEqual(["L PUNCH  ; KICK  ' SPECIAL", "ARROWS MOVE  L+; THROW"]);
-    b.rebind(0, "punch", "KeyJ");
-    b.rebind(0, "up", "ArrowUp"); // swaps with P2 up
-    expect(legendLines(b.current[0])).toEqual(["J PUNCH  G KICK  H SPECIAL", "UP A S D MOVE  J+G THROW"]);
+    expect(legendLines(b.current[0])).toEqual(["F PUNCH  Q KICK  E SPECIAL", "WASD MOVE  F+Q THROW"]);
+    expect(legendLines(b.current[1])).toEqual(["H PUNCH  U KICK  O SPECIAL", "IJKL MOVE  H+U THROW"]);
+    b.rebind(0, "punch", "KeyG");
+    b.rebind(0, "up", "ArrowUp");
+    expect(legendLines(b.current[0])).toEqual(["G PUNCH  Q KICK  E SPECIAL", "UP A S D MOVE  G+Q THROW"]);
     expect(legendLines(b.current[1], true)).toEqual(["A PUNCH  B KICK  X/Y SPECIAL", "D-PAD MOVE  A+B THROW"]);
   });
 });
@@ -164,9 +170,9 @@ describe("keyboard source (R2)", () => {
   it("stops the browser default for bound keys and for ' and / even when unbound", () => {
     const { target, fire } = fakeTarget();
     createKeyboard(target, KEYBOARD_BINDINGS);
-    expect(fire("keydown", "KeyL")).toBe(true);
-    expect(fire("keydown", "Semicolon")).toBe(true);
-    expect(fire("keydown", "Quote")).toBe(true);
+    expect(fire("keydown", "KeyH")).toBe(true);
+    expect(fire("keydown", "KeyU")).toBe(true);
+    expect(fire("keydown", "Quote")).toBe(true); // unbound by default, still blocked (quick find)
     expect(fire("keydown", "Slash")).toBe(true); // unbound by default, still blocked (quick find)
     expect(fire("keydown", "KeyZ")).toBe(false); // not a game key
     expect(fire("keydown", "KeyF", { metaKey: true })).toBe(false); // Cmd+F stays the browser's
@@ -183,9 +189,9 @@ describe("keyboard source (R2)", () => {
     fire("keyup", "KeyM");
     kb.endSample();
     expect(kb.bits(1)).toBe(0);
-    fire("keydown", "Semicolon");
+    fire("keydown", "KeyU");
     expect(kb.bits(1)).toBe(BUTTON_KICK);
-    expect(kb.held().has("Semicolon")).toBe(true);
+    expect(kb.held().has("KeyU")).toBe(true);
   });
 
   it("latches taps shorter than a sample", () => {

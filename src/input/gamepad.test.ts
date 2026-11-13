@@ -136,16 +136,16 @@ describe("gamepad join and assignment (spec 005 A4)", () => {
 });
 
 describe("keyboard bindings", () => {
-  it("follow the design table: P1 WASD + F G H, P2 arrows + L ; '", () => {
-    const p1 = keysToBits(new Set(["KeyW", "KeyD", "KeyF", "KeyG", "KeyH", "Enter"]), KEYBOARD_BINDINGS[0]);
+  it("follow the ergonomic clusters: P1 WASD + F Q E R, P2 IJKL + H U O P", () => {
+    const p1 = keysToBits(new Set(["KeyW", "KeyD", "KeyF", "KeyQ", "KeyE", "KeyR"]), KEYBOARD_BINDINGS[0]);
     expect(p1).toBe(BUTTON_UP | BUTTON_RIGHT | BUTTON_PUNCH | BUTTON_KICK | BUTTON_SPECIAL | BUTTON_START);
     const p2 = keysToBits(
-      new Set(["ArrowDown", "ArrowLeft", "KeyL", "Semicolon", "Quote"]),
+      new Set(["KeyK", "KeyJ", "KeyH", "KeyU", "KeyO", "KeyP"]),
       KEYBOARD_BINDINGS[1],
     );
-    expect(p2).toBe(BUTTON_DOWN | BUTTON_LEFT | BUTTON_PUNCH | BUTTON_KICK | BUTTON_SPECIAL);
+    expect(p2).toBe(BUTTON_DOWN | BUTTON_LEFT | BUTTON_PUNCH | BUTTON_KICK | BUTTON_SPECIAL | BUTTON_START);
     // P1 keys do nothing for P2 and the other way round.
-    expect(keysToBits(new Set(["KeyW", "KeyA", "KeyF"]), KEYBOARD_BINDINGS[1])).toBe(0);
-    expect(keysToBits(new Set(["ArrowUp", "KeyL"]), KEYBOARD_BINDINGS[0])).toBe(0);
+    expect(keysToBits(new Set(["KeyW", "KeyA", "KeyF", "KeyQ", "KeyE", "KeyR"]), KEYBOARD_BINDINGS[1])).toBe(0);
+    expect(keysToBits(new Set(["KeyI", "KeyJ", "KeyK", "KeyL", "KeyH", "KeyU", "KeyO", "KeyP"]), KEYBOARD_BINDINGS[0])).toBe(0);
   });
 });

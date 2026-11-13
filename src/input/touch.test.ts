@@ -157,12 +157,12 @@ describe("touch through the sampler (A1)", () => {
     const pads: GamepadSource = { read: () => [BUTTON_SPECIAL, 0], has: (p) => p === 0 };
     const sampler = createInputSampler(createKeyboard(target, KEYBOARD_BINDINGS), pads, touch);
     fire("keydown", "KeyA"); // P1 left
-    fire("keydown", "ArrowRight"); // P2 right
+    fire("keydown", "KeyL"); // P2 right
     touch.set(1, TOUCH_BUTTON_BITS.kick);
     expect(sampler.sample()).toEqual([BUTTON_LEFT | BUTTON_KICK | BUTTON_SPECIAL, BUTTON_RIGHT]);
     touch.set(1, TOUCH_BUTTON_BITS.throw);
     fire("keyup", "KeyA");
-    fire("keyup", "ArrowRight");
+    fire("keyup", "KeyL");
     expect(sampler.sample()).toEqual([BUTTON_PUNCH | BUTTON_KICK | BUTTON_SPECIAL, 0]);
   });
 
@@ -173,9 +173,9 @@ describe("touch through the sampler (A1)", () => {
     const { target, fire } = fakeKeyTarget();
     let pads: [number, number] = [0, BUTTON_KICK];
     const sampler = createInputSampler(createKeyboard(target, KEYBOARD_BINDINGS), { read: () => pads, has: () => true }, source);
-    fire("keydown", "ArrowLeft"); // P2's keyboard
+    fire("keydown", "KeyJ"); // P2's keyboard
     sampler.sample();
-    fire("keyup", "ArrowLeft");
+    fire("keyup", "KeyJ");
     fire("keydown", "KeyD"); // P1's keyboard
     sampler.sample();
     fire("keyup", "KeyD");

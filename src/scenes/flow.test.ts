@@ -336,17 +336,17 @@ describe("controls screen (A3, R3)", () => {
     expect(c().debug()).toMatchObject({ row: 4, col: 0 });
     d.press(0, P); // Punch does not start a rebind (it is part of the key test)
     expect(c().capturing).toBeNull();
-    d.press(0, BUTTON_START); // Enter
+    d.press(0, BUTTON_START);
     expect(c().capturing).toEqual({ player: 0, action: "punch" });
-    f.heldKeys.add("KeyL");
-    expect(d.m.key("KeyL")).toBe(true);
-    expect(f.services.bindings.keyFor(0, "punch")).toBe("KeyL");
+    f.heldKeys.add("KeyH");
+    expect(d.m.key("KeyH")).toBe(true);
+    expect(f.services.bindings.keyFor(0, "punch")).toBe("KeyH");
     expect(f.services.bindings.keyFor(1, "punch")).toBe("KeyF");
-    expect(c().status).toBe("P1 PUNCH = L  (SWAPPED WITH P2 PUNCH)");
+    expect(c().status).toBe("P1 PUNCH = H  (SWAPPED WITH P2 PUNCH)");
     // While the captured key is held, nothing else happens.
     d.press(0, BUTTON_START);
     expect(c().capturing).toBeNull();
-    f.heldKeys.delete("KeyL");
+    f.heldKeys.delete("KeyH");
     d.escape();
     expect(d.scene).toBe("title");
   });
@@ -577,7 +577,7 @@ describe("app shell (spec 014)", () => {
     const d = new Driver({ ...f, services: { ...f.services, touchControls: () => touch, soundMuted: () => false, toggleSound: () => false } });
     expect(d.m.scene.debug?.()).toMatchObject({ hints: ["MOVE: D-PAD   CONFIRM: PUNCH   BACK: KICK"] });
     touch = false;
-    expect((d.m.scene.debug?.() as { hints: string[] }).hints[0]).toMatch(/^MOVE: WASD OR ARROWS {3}CONFIRM: ENTER, F OR L/);
+    expect((d.m.scene.debug?.() as { hints: string[] }).hints[0]).toMatch(/^MOVE: WASD OR IJKL {3}CONFIRM: R, F OR H/);
     touch = true;
 
     // Controls: no keyboard to test or bind on touch, Kick leaves
@@ -604,7 +604,7 @@ describe("app shell (spec 014)", () => {
     // P1 by touch gets no key legend (the buttons are labelled); P2 on the keyboard keeps theirs
     const [l1, l2] = d.fight.legends();
     expect(l1).toBeNull();
-    expect(l2?.[0]).toMatch(/^L PUNCH/);
+    expect(l2?.[0]).toMatch(/^H PUNCH/);
     d.escape();
     expect(d.m.scene.debug?.()).toMatchObject({ hint: "PUNCH: SELECT   KICK: RESUME" });
     touch = false;

@@ -36,7 +36,7 @@ The spike generated a pose grid and a 6-frame punch for Julien with `gpt-image-2
 | Topic | Choice | What it means |
 |---|---|---|
 | Buttons | Punch / Kick / Special | Punch = jab, forward+Punch = heavy punch; Kick = snap kick, forward+Kick = roundhouse (knockdown); down+either = low sweep; in the air either = air kick; Punch+Kick = throw; Special = the fighter's signature special. Replaces Light / Heavy / Special. |
-| Keyboard layout | Home row split | P1 W A S D + F (punch) G (kick) H (special). P2 arrows + L (punch) ; (kick) ' (special). An in-game controls screen rebinds keys and shows which keys register at once, so two players can check their keyboard. |
+| Keyboard layout | Single-hand ergonomic clusters | P1 W A S D + F (punch) Q (kick) E (special) R (start). P2 I J K L + H (punch) U (kick) O (special) P (start). An in-game controls screen rebinds keys and shows which keys register at once, so two players can check their keyboard. |
 | Roster | 4 fighters with their own specials | Felicia, Pentcho and Alex get full animation sets. Each launch fighter gets an archetype and a signature special with its own animation and effect. The other 33 appear on the select screen as "coming soon". |
 | Polish | Smoother moves, more moves and reactions, sound and music, living stage and menus | Clip set v2 (more frames per attack, new reaction clips), chiptune audio, a painted stage with parallax and walkers, an animated select screen and a versus splash. |
 
@@ -62,12 +62,12 @@ Stats per archetype (health, walk speed, damage scale) live in one data table; t
 - **Stack:** Vite + TypeScript + Canvas 2D, no game engine. Vitest for game tests, pytest (through uv) for the Python art pipeline. npm.
 - **Controls (one data table, easy to change):**
 
-  | | Move | Punch | Kick | Special |
-  |---|---|---|---|---|
-  | P1 | W A S D | F | G | H |
-  | P2 | Arrow keys | L | ; | ' |
+  | | Move | Punch | Kick | Special | Start |
+  |---|---|---|---|---|---|
+  | P1 | W A S D | F | Q | E | R |
+  | P2 | I J K L | H | U | O | P |
 
-  (Round 3; was Light/Heavy with P2 on , . /.) Gamepads through the Gamepad API (d-pad or left stick; A punch, B kick, X or Y special), assigned to a player on their first button press. Enter confirms or starts, Esc pauses. All keys are rebindable on the controls screen.
+  (Updated to single-hand ergonomic letter clusters; was P1 WASD+FGH / P2 Arrows+L;'.) Gamepads through the Gamepad API (d-pad or left stick; A punch, B kick, X or Y special, Start start/pause), assigned to a player on their first button press. Esc pauses. All keys are rebindable on the controls screen.
 - **Super:** heavy + special together with a full meter (open on the HQ page).
 - **Match rules:** best of 3 rounds, 99-second rounds (open on the HQ page), 1000 health. On time-out, more health wins the round.
 - **Image model:** OpenAI `gpt-image-2.5-sunburst` with reference images and transparent backgrounds, called through the image-compass plugin's `generate_openai.py`. Gemini is out for now (its prepaid credits ran out during the spike).

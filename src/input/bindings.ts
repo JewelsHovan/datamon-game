@@ -6,7 +6,7 @@
 import { BUTTON_NAMES, type ButtonName } from "./bits";
 import { KEYBOARD_BINDINGS, type KeyBindings } from "./keymap";
 
-export const CONTROLS_STORAGE_KEY = "datamon.controls.v1";
+export const CONTROLS_STORAGE_KEY = "datamon.controls.v2";
 
 /** Actions shown on the controls screen, in order. */
 export const BINDABLE_ACTIONS: readonly ButtonName[] = BUTTON_NAMES;
@@ -158,7 +158,7 @@ export class ControlBindings {
   private changed(): void {
     this.version += 1;
     try {
-      this.storage?.setItem(CONTROLS_STORAGE_KEY, JSON.stringify({ version: 1, players: this.players }));
+      this.storage?.setItem(CONTROLS_STORAGE_KEY, JSON.stringify({ version: 2, players: this.players }));
     } catch {
       // Storage full or blocked: the bindings still apply for this session.
     }
