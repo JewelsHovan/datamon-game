@@ -7,6 +7,8 @@
 //       special, throw (d-pad held with one finger while another taps), pause, resume
 //   A4  portrait shows the rotate screen and freezes the match; landscape continues it
 //   R3  entering fullscreen asks for a landscape lock
+//   F3  (QA 2026-11-12) touch hints on the title and pause screens, none on P1's legend, the key
+//       hints back once the keyboard takes over, and SOUND ON / OFF in the pause menu by touch
 //
 // Usage (dev server running, e.g. `./dm dev`):
 //   node specs/evidence/015/touch-check.mjs http://127.0.0.1:5173/ specs/evidence/015
@@ -128,6 +130,9 @@ try {
     after: afterTouch.touch,
     screenshot: await shot("a3-02-after-first-touch"),
   });
+  // QA 2026-11-12 F3: with the controls showing, the title names the touch buttons, not keys.
+  const touchHints = (await menu()).hints;
+  record("F3 touch: the title names the touch buttons", JSON.stringify(touchHints) === JSON.stringify(["MOVE: D-PAD   CONFIRM: PUNCH   BACK: KICK"]), { hints: touchHints });
   // P2's keys leave them alone (P2 on a keyboard beside a touch P1); P1's keys hide them.
   await p.key("keyDown", "ArrowLeft", "ArrowLeft");
   await sleep(60);
@@ -142,6 +147,11 @@ try {
   record("A3 P2's key leaves them, P1's key press hides them again", afterP2Key.touch.visible && !afterKey.touch.visible && (await display("#touch-controls")) === "none", {
     afterP2Key: afterP2Key.touch,
     afterP1Key: afterKey.touch,
+  });
+  const keyHints = (await menu()).hints;
+  record("F3 the keyboard takes over: the key hints come back", /^MOVE: WASD OR ARROWS/.test(keyHints?.[0] ?? "") && keyHints.length === 2, {
+    hints: keyHints,
+    screenshot: await shot("f3-01-title-keys-again"),
   });
   await p.page("Emulation.setTouchEmulationEnabled", { enabled: false });
 
@@ -334,6 +344,36 @@ try {
   await sleep(200);
   const f3 = await evaluate("window.__game.simFrame");
   record("A2 pause and resume by touch", paused === "pause" && f1 === f2 && resumed === "fight" && f3 > f2, { frames: [f1, f2, f3], screenshot: pauseShot });
+
+  // QA 2026-11-12 F3: the pause menu names the touch buttons and mutes by touch (SOUND ON / OFF).
+  const fightLegends = (await menu()).legends;
+  await press("pause");
+  await waitScene("pause", 2000);
+  const touchPause = await menu();
+  const muteSteps = [];
+  for (let i = 0; i < 6 && (await menu()).item !== "SOUND ON"; i++) await padTap("down");
+  muteSteps.push((await menu()).item);
+  await press("punch");
+  const offMenu = await menu();
+  const soundShot = await shot("f3-02-pause-sound-off");
+  await press("punch");
+  const onAgain = (await menu()).item;
+  for (let i = 0; i < 6 && (await menu()).item !== "RESUME"; i++) await padTap("up");
+  await press("punch");
+  const backInFight = await waitScene("fight", 2000);
+  record(
+    "F3 touch: no key legend for P1, the pause hint names the touch buttons, SOUND mutes and unmutes by touch",
+    fightLegends?.[0] === null &&
+      touchPause.hint === "PUNCH: SELECT   KICK: RESUME" &&
+      JSON.stringify(touchPause.items.slice(0, 3)) === JSON.stringify(["RESUME", "CONTROLS", "SOUND ON"]) &&
+      touchPause.items.at(-1) === "QUIT TO SELECT" &&
+      muteSteps[0] === "SOUND ON" &&
+      offMenu.item === "SOUND OFF" &&
+      offMenu.items.includes("SOUND OFF") &&
+      onAgain === "SOUND ON" &&
+      backInFight === "fight",
+    { fightLegends, pause: touchPause, afterFirstPunch: offMenu, afterSecondPunch: onAgain, screenshot: soundShot },
+  );
 
   // Finish the match: forward + Kick until the results.
   const t0 = Date.now();

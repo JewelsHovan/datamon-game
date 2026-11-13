@@ -70,7 +70,7 @@ function canvasOk(m, kind) {
   return { pass: inside && ratio && scaleOk && crisp, inside, ratio, scaleOk, crisp, scale: k };
 }
 
-/** `inFight`: the d-pad, four buttons and Pause (6); on menus Pause is hidden (5). */
+/** `inFight`: the d-pad, four buttons and Pause (6); on menus Pause is hidden (5). Tablets also check Pause sits in the top letterbox (QA 2026-11-12 F2). */
 function controlsOk(m, kind, inFight) {
   if (kind === "desktop") return { pass: !m.controlsShown, shown: m.controlsShown };
   if (kind === "portrait phone") return { pass: m.rotateShown, rotateShown: m.rotateShown };
@@ -121,6 +121,13 @@ try {
       titleControls: ctlTitle,
       screenshots: [titleShot, underShot, fightShot].filter(Boolean),
     });
+    if (fight && kind === "tablet") {
+      // QA 2026-11-12 F2: a tablet's top letterbox holds Pause (at 1024x768 it used to miss by 2 px
+      // and fall back over the stage, where a jumping fighter's head passes).
+      const pause = fight.controls.find((c) => c.name === "pause")?.box ?? null;
+      const inTop = !!pause && pause.y >= 0 && pause.y + pause.h <= fight.canvas.y + 0.5 && pause.w >= 44;
+      record(`F2 ${w}x${h}: Pause sits in the top letterbox`, inTop, { pause, canvasTop: fight.canvas.y });
+    }
   }
 
   // Crisp edges at fractional scales: zoomed crops of the title lettering.

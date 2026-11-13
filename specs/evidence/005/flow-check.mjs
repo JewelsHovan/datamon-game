@@ -322,7 +322,7 @@ try {
   await waitScene("pause");
   await waitFrames(5);
   record("A5 pause (legends showing)", (await scene()) === "pause", { menu: await menu(), screenshot: await shot("a5-08-pause") });
-  // Spec 014 put FULLSCREEN before QUIT TO SELECT where the page can go fullscreen: walk to the item by name.
+  // Spec 014 put FULLSCREEN, and QA 2026-11-12 F3 SOUND ON / OFF, before QUIT TO SELECT: walk to the item by name.
   for (let i = 0; i < 6 && (await menu()).item !== "QUIT TO SELECT"; i++) await tap("KeyS");
   await tap("KeyF"); // QUIT TO SELECT
   await waitScene("select");
