@@ -1,6 +1,7 @@
 {
  "fighter": "pentcho-tchomakov",
  "atlas": "atlas.webp",
+ "atlasAlt": "atlas-alt.webp",
  "version": 2,
  "scale": 0.15677,
  "facing": "right",

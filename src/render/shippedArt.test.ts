@@ -1,5 +1,5 @@
 // Spec 013 A2: a fight's art comes from the shipped manifests. Loading everything a fight draws
-// (both fighters, a mirror match's recolor, the effects, the stage and its walkers) requests only
+// (both fighters, a mirror match's recolored atlas, the effects, the stage and its walkers) requests only
 // files the manifests name: lossless WebP, never .png art, never a datamon/walk/* sheet.
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -67,7 +67,9 @@ describe("a fight loads only WebP art named by the manifests (spec 013)", () => 
     expect(fx).not.toBeNull();
     expect(stage?.walkers?.cast).toHaveLength(7);
     const art = images(requests);
-    expect(art.length).toBeGreaterThanOrEqual(6);
+    expect(art.length).toBeGreaterThanOrEqual(7);
+    expect(alt.atlas).not.toBe(a.atlas);
+    expect(requests.filter((u) => u.includes("palette-alt"))).toEqual([]);
     for (const url of art) expect(url).toMatch(/\.webp\?v=\d+$/);
     expect(requests.filter((u) => u.includes(".png"))).toEqual([]);
     expect(requests.filter((u) => u.includes("datamon/walk/"))).toEqual([]);
@@ -75,6 +77,8 @@ describe("a fight loads only WebP art named by the manifests (spec 013)", () => 
       expect.arrayContaining([
         expect.stringMatching(/^\.\/fighters\/julien-hovan\/atlas\.webp\?v=\d+$/),
         expect.stringMatching(/^\.\/fighters\/pentcho-tchomakov\/atlas\.webp\?v=\d+$/),
+        // a mirror match draws P2 from the recolored atlas the manifest names (QA 2026-11-12 F1)
+        expect.stringMatching(/^\.\/fighters\/julien-hovan\/atlas-alt\.webp\?v=\d+$/),
         expect.stringMatching(/^\.\/effects\/atlas\.webp\?v=\d+$/),
         expect.stringMatching(/^\.\/stages\/office\/far\.webp\?v=\d+$/),
         expect.stringMatching(/^\.\/stages\/office\/mid\.webp\?v=\d+$/),

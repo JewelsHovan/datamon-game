@@ -1,6 +1,7 @@
 {
  "fighter": "julien-hovan",
  "atlas": "atlas.webp",
+ "atlasAlt": "atlas-alt.webp",
  "version": 4,
  "scale": 0.16393,
  "facing": "right",

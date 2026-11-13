@@ -1,6 +1,7 @@
 {
  "fighter": "alex-andrianavalontsalama",
  "atlas": "atlas.webp",
+ "atlasAlt": "atlas-alt.webp",
  "version": 2,
  "scale": 0.16929,
  "facing": "right",
