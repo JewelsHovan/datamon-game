@@ -1,0 +1,40 @@
+{
+ "clip": "hurt",
+ "loop": false,
+ "scale": 0.16336,
+ "raw": "art/raw/emile-moffatt/hurt/20261112-222220-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 100,
+   "h": 134,
+   "ax": 18,
+   "ay": 133,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 94,
+   "h": 133,
+   "ax": 25,
+   "ay": 132,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 75,
+   "h": 118,
+   "ax": 0,
+   "ay": 117,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 79,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

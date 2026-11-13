@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.18792,
+ "raw": "art/raw/duc-an-nguyen/air_hurt/20261112-222233-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 118,
+   "h": 124,
+   "ax": 23,
+   "ay": 123,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 138,
+   "h": 93,
+   "ax": 32,
+   "ay": 92,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 91,
+   "h": 128,
+   "ax": 12,
+   "ay": 127,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 129,
+   "h": 37,
+   "ax": 28,
+   "ay": 36,
+   "hold": 8
+  }
+ ]
+}

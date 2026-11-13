@@ -1,0 +1,132 @@
+{
+  "air_attack": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/air_attack/20261112-222900-0.png",
+    "state": "approved"
+  },
+  "air_hurt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/air_hurt/20261112-223142-0.png",
+    "state": "approved"
+  },
+  "block": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/block/20261112-222950-0.png",
+    "state": "approved"
+  },
+  "block_push": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/block_push/20261112-223019-0.png",
+    "state": "approved"
+  },
+  "crouch": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/crouch/20261112-222608-0.png",
+    "state": "approved"
+  },
+  "crouch_attack": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/crouch_attack/20261112-222834-0.png",
+    "state": "approved"
+  },
+  "crouch_hurt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/crouch_hurt/20261112-223119-0.png",
+    "state": "approved"
+  },
+  "dash_back": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/dash_back/20261112-222545-0.png",
+    "state": "approved"
+  },
+  "dash_forward": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/dash_forward/20261112-222523-0.png",
+    "state": "approved"
+  },
+  "getup_roll": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/getup_roll/20261112-223228-0.png",
+    "state": "approved"
+  },
+  "heavy_kick": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/heavy_kick/20261112-222812-0.png",
+    "state": "approved"
+  },
+  "heavy_punch": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/heavy_punch/20261112-222723-0.png",
+    "state": "approved"
+  },
+  "hurt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/hurt/20261112-223042-0.png",
+    "state": "approved"
+  },
+  "idle": {
+    "note": "",
+    "raw": "art/raw/guillaume-pregent/idle/20261112-222359-0.png",
+    "state": "approved"
+  },
+  "intro": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/intro/20261112-223255-0.png",
+    "state": "approved"
+  },
+  "jump": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/jump/20261112-222630-0.png",
+    "state": "approved"
+  },
+  "knockdown": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/knockdown/20261112-223206-0.png",
+    "state": "approved"
+  },
+  "light_kick": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/light_kick/20261112-222749-0.png",
+    "state": "approved"
+  },
+  "light_punch": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/light_punch/20261112-222653-0.png",
+    "state": "approved"
+  },
+  "special": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/special/20261112-223437-0.png",
+    "state": "approved"
+  },
+  "summon": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/summon/20261112-223412-0.png",
+    "state": "approved"
+  },
+  "taunt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/taunt/20261112-223327-0.png",
+    "state": "approved"
+  },
+  "throw": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/throw/20261112-222925-0.png",
+    "state": "approved"
+  },
+  "victory": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/victory/20261112-223350-0.png",
+    "state": "approved"
+  },
+  "walk": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/walk/20261112-222441-0.png",
+    "state": "approved"
+  },
+  "walk_back": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-pregent/walk_back/20261112-222502-0.png",
+    "state": "approved"
+  }
+}

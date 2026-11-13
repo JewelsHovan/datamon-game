@@ -1,0 +1,132 @@
+{
+  "air_attack": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/air_attack/20261112-211958-0.png",
+    "state": "approved"
+  },
+  "air_hurt": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/air_hurt/20261112-212108-0.png",
+    "state": "approved"
+  },
+  "block": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/block/20261112-212022-0.png",
+    "state": "approved"
+  },
+  "block_push": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/block_push/20261112-212042-0.png",
+    "state": "approved"
+  },
+  "crouch": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/crouch/20261112-211851-0.png",
+    "state": "approved"
+  },
+  "crouch_attack": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/crouch_attack/20261112-211955-0.png",
+    "state": "approved"
+  },
+  "crouch_hurt": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/crouch_hurt/20261112-212106-0.png",
+    "state": "approved"
+  },
+  "dash_back": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/dash_back/20261112-211829-0.png",
+    "state": "approved"
+  },
+  "dash_forward": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/dash_forward/20261112-211826-0.png",
+    "state": "approved"
+  },
+  "getup_roll": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/getup_roll/20261112-212130-0.png",
+    "state": "approved"
+  },
+  "heavy_kick": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/heavy_kick/20261112-211937-0.png",
+    "state": "approved"
+  },
+  "heavy_punch": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/heavy_punch/20261112-211913-0.png",
+    "state": "approved"
+  },
+  "hurt": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/hurt/20261112-212046-0.png",
+    "state": "approved"
+  },
+  "idle": {
+    "note": "calibrated idle",
+    "raw": "art/raw/saransh-padhy/idle/20261112-211720-1.png",
+    "state": "approved"
+  },
+  "intro": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/intro/20261112-212153-0.png",
+    "state": "approved"
+  },
+  "jump": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/jump/20261112-211850-0.png",
+    "state": "approved"
+  },
+  "knockdown": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/knockdown/20261112-212131-0.png",
+    "state": "approved"
+  },
+  "light_kick": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/light_kick/20261112-211934-0.png",
+    "state": "approved"
+  },
+  "light_punch": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/light_punch/20261112-211910-0.png",
+    "state": "approved"
+  },
+  "special": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/special/20261112-212242-0.png",
+    "state": "approved"
+  },
+  "summon": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/summon/20261112-212219-0.png",
+    "state": "approved"
+  },
+  "taunt": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/taunt/20261112-212155-0.png",
+    "state": "approved"
+  },
+  "throw": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/throw/20261112-212018-0.png",
+    "state": "approved"
+  },
+  "victory": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/victory/20261112-212218-0.png",
+    "state": "approved"
+  },
+  "walk": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/walk/20261112-211806-0.png",
+    "state": "approved"
+  },
+  "walk_back": {
+    "note": "verified",
+    "raw": "art/raw/saransh-padhy/walk_back/20261112-211805-0.png",
+    "state": "approved"
+  }
+}

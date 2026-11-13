@@ -50,7 +50,8 @@ export class ResultsScene implements Scene {
     text(ctx, `${wins[0]} - ${wins[1]}`, VIEW_WIDTH / 2, 262, 8, INK, "center");
     drawPanel(ctx, VIEW_WIDTH / 2 - 120, 278, 240, 64);
     this.menu.draw(ctx, VIEW_WIDTH / 2, 288, frame, 8, 22);
-    text(ctx, "MERGED TO MAIN.", VIEW_WIDTH / 2, VIEW_HEIGHT - 12, 8, "#aeaadc", "center");
+    const quote = this.m.services.info(person.slug).winQuote ?? "MERGED TO MAIN.";
+    text(ctx, quote, VIEW_WIDTH / 2, VIEW_HEIGHT - 12, 8, "#aeaadc", "center");
   }
 
   debug(): Record<string, unknown> {

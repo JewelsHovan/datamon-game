@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.17632,
+ "raw": "art/raw/aurelien-bouffanais/crouch_hurt/20261112-222738-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 74,
+   "h": 106,
+   "ax": 17,
+   "ay": 105,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 62,
+   "h": 99,
+   "ax": 7,
+   "ay": 98,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 64,
+   "h": 99,
+   "ax": 7,
+   "ay": 98,
+   "hold": 6
+  }
+ ]
+}

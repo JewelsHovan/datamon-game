@@ -1,0 +1,40 @@
+{
+ "clip": "idle",
+ "loop": true,
+ "scale": 0.16647,
+ "raw": "art/raw/antonia-nistor/idle/20261112-211732-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 81,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 8
+  },
+  {
+   "file": "01.png",
+   "w": 82,
+   "h": 141,
+   "ax": 0,
+   "ay": 140,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 81,
+   "h": 143,
+   "ax": 0,
+   "ay": 142,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 81,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 8
+  }
+ ]
+}

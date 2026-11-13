@@ -1,0 +1,32 @@
+{
+ "clip": "block_push",
+ "loop": false,
+ "scale": 0.17699,
+ "raw": "art/raw/milen-thomas/block_push/20261112-223148-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 81,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 4
+  },
+  {
+   "file": "01.png",
+   "w": 93,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 85,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

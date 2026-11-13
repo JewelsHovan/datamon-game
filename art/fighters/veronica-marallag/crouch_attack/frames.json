@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.21084,
+ "raw": "art/raw/veronica-marallag/crouch_attack/20261112-224205-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 62,
+   "h": 110,
+   "ax": 0,
+   "ay": 109,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 76,
+   "h": 98,
+   "ax": 4,
+   "ay": 97,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 110,
+   "h": 87,
+   "ax": 1,
+   "ay": 86,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 121,
+   "h": 78,
+   "ax": 9,
+   "ay": 77,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 76,
+   "h": 98,
+   "ax": 0,
+   "ay": 97,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 62,
+   "h": 110,
+   "ax": 0,
+   "ay": 109,
+   "hold": 6
+  }
+ ]
+}

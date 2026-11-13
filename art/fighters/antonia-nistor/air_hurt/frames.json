@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.18568,
+ "raw": "art/raw/antonia-nistor/air_hurt/20261112-212125-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 119,
+   "h": 122,
+   "ax": 12,
+   "ay": 121,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 132,
+   "h": 72,
+   "ax": 19,
+   "ay": 71,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 87,
+   "h": 131,
+   "ax": -2,
+   "ay": 130,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 126,
+   "h": 66,
+   "ax": 19,
+   "ay": 65,
+   "hold": 8
+  }
+ ]
+}

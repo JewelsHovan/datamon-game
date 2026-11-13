@@ -1,0 +1,132 @@
+{
+  "air_attack": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/air_attack/20261112-224226-0.png",
+    "state": "approved"
+  },
+  "air_hurt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/air_hurt/20261112-224457-0.png",
+    "state": "approved"
+  },
+  "block": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/block/20261112-224317-0.png",
+    "state": "approved"
+  },
+  "block_push": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/block_push/20261112-224344-0.png",
+    "state": "approved"
+  },
+  "crouch": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/crouch/20261112-223937-0.png",
+    "state": "approved"
+  },
+  "crouch_attack": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/crouch_attack/20261112-224205-0.png",
+    "state": "approved"
+  },
+  "crouch_hurt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/crouch_hurt/20261112-224434-0.png",
+    "state": "approved"
+  },
+  "dash_back": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/dash_back/20261112-223911-0.png",
+    "state": "approved"
+  },
+  "dash_forward": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/dash_forward/20261112-223849-0.png",
+    "state": "approved"
+  },
+  "getup_roll": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/getup_roll/20261112-224545-0.png",
+    "state": "approved"
+  },
+  "heavy_kick": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/heavy_kick/20261112-224138-0.png",
+    "state": "approved"
+  },
+  "heavy_punch": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/heavy_punch/20261112-224052-0.png",
+    "state": "approved"
+  },
+  "hurt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/hurt/20261112-224410-0.png",
+    "state": "approved"
+  },
+  "idle": {
+    "note": "",
+    "raw": "art/raw/veronica-marallag/idle/20261112-223713-1.png",
+    "state": "approved"
+  },
+  "intro": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/intro/20261112-224613-0.png",
+    "state": "approved"
+  },
+  "jump": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/jump/20261112-224004-0.png",
+    "state": "approved"
+  },
+  "knockdown": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/knockdown/20261112-224525-0.png",
+    "state": "approved"
+  },
+  "light_kick": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/light_kick/20261112-224114-0.png",
+    "state": "approved"
+  },
+  "light_punch": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/light_punch/20261112-224025-0.png",
+    "state": "approved"
+  },
+  "special": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/special/20261112-224744-0.png",
+    "state": "approved"
+  },
+  "summon": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/summon/20261112-224719-0.png",
+    "state": "approved"
+  },
+  "taunt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/taunt/20261112-224637-0.png",
+    "state": "approved"
+  },
+  "throw": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/throw/20261112-224251-0.png",
+    "state": "approved"
+  },
+  "victory": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/victory/20261112-224659-0.png",
+    "state": "approved"
+  },
+  "walk": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/walk/20261112-223802-0.png",
+    "state": "approved"
+  },
+  "walk_back": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/veronica-marallag/walk_back/20261112-223824-0.png",
+    "state": "approved"
+  }
+}

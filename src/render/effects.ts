@@ -2,7 +2,7 @@
 // point of contact of sim events, screen shake, a white flash on the defender,
 // a camera nudge toward big hits, and a reduced-effects switch. Effects only
 // read sim events and state; they keep their own render-time clocks.
-import { MOVES, type Segment } from "../data/moves";
+import { firstActiveTick, MOVES, type MoveId, type Segment } from "../data/moves";
 import { MOVEMENT } from "../data/movement";
 import { SUBPX } from "../sim/fixed";
 import type { SimEvent, SimState } from "../sim/types";
@@ -54,6 +54,56 @@ function segmentStart(segments: readonly Segment[], tick: number): { segment: Se
 /** Shake amplitude in pixels by hit strength. */
 export const SHAKE = Object.freeze({ light: 2, heavy: 4, special: 4, ko: 8, decayFrames: 10 });
 
+const CHARGE_STREAK_MOVES = new Set<MoveId>([
+  "charge",
+  "breaker_lariat",
+  "anvil_drop",
+  "granite_tackle",
+  "cobalt_crush",
+  "forge_breaker",
+  "dragon_merge",
+  "jade_palm",
+  "lotus_strike",
+]);
+const RUSH_STREAK_MOVES = new Set<MoveId>([
+  "rush",
+  "golden_rush",
+  "velvet_cross",
+  "canary_hop",
+  "crown_dive",
+  "cache_blink",
+  "vector_slash",
+  "crescent_feint",
+  "turbo_blitz",
+  "flash_knee",
+  "tempest_kick",
+  "spiral_dive",
+  "shadow_pivot",
+  "vortex_combo",
+  "starlight_hop",
+  "cascade_flurry",
+  "fountain_dive",
+  "blink_edge",
+  "gale_kick",
+  "wild_fang",
+]);
+const UPPERCUT_MOVES = new Set<MoveId>([
+  "rising_commit",
+  "skyline_upper",
+  "steel_counter",
+  "skyward_hook",
+  "mirror_step",
+  "comet_upper",
+  "null_counter",
+  "silk_parry",
+  "iron_guard",
+  "cedar_upper",
+  "cloud_rising",
+]);
+const SLAM_MOVES = new Set<MoveId>(["seismic_slam", "ground_fault", "tectonic_stomp", "oasis_wave", "frost_fault"]);
+const SLIDE_DUST_MOVES = new Set<MoveId>(["golden_rush", "jet_sweep", "lightning_slide"]);
+const COMMAND_GRAB_MOVES = new Set<MoveId>(["force_push", "titan_press", "vault_throw", "blue_shift_grab", "apex_pounce"]);
+
 export class EffectsLayer {
   private live: Live[] = [];
   private shakeAmp = 0;
@@ -92,10 +142,25 @@ export class EffectsLayer {
         case "hit": {
           const big = e.strength !== "light";
           const target = state.fighters[e.target];
-          if (e.move === "special") this.spawn("orb_burst", e.x, e.y, target.facing);
+          const moveDef = MOVES[e.move];
+          if (moveDef?.projectileTick !== undefined) {
+            if (moveDef.projectileSpec?.kind === "shockwave") {
+              this.spawn("dust", e.x, MOVEMENT.floorY, target.facing, false, 0.9);
+            }
+            this.spawn("orb_burst", e.x, e.y, target.facing);
+          }
           this.spawn(big ? "hit_heavy" : "hit_light", e.x, e.y, (-target.facing) as 1 | -1);
           this.shake(big ? SHAKE.heavy : SHAKE.light, big ? Math.sign(target.x - state.fighters[e.player].x) * 3 : 0);
           if (!this.reduced) this.flash[e.target] = 2;
+          break;
+        }
+        case "projectile": {
+          const facing = state.fighters[e.player].facing;
+          if (e.kind === "shockwave") {
+            this.spawn("dust", e.x, MOVEMENT.floorY, facing, false, 0.8);
+          } else {
+            this.spawn("hit_light", e.x, e.y, facing, true, 0.65);
+          }
           break;
         }
         case "block":
@@ -141,6 +206,14 @@ export class EffectsLayer {
           this.shake(SHAKE.light);
           if (!this.reduced) this.flash[e.player] = 3;
           break;
+        case "counter": {
+          const facing = state.fighters[e.player].facing;
+          this.spawn("block", e.x, e.y, facing);
+          this.spawn("hit_heavy", e.x, e.y, facing);
+          this.shake(SHAKE.heavy);
+          if (!this.reduced) this.flash[e.player] = 3;
+          break;
+        }
         case "block_push": {
           const toward = (state.fighters[e.target].x >= state.fighters[e.player].x ? 1 : -1) as 1 | -1;
           this.spawn("rush_streaks", e.x, e.y, toward, true, 0.6);
@@ -162,12 +235,23 @@ export class EffectsLayer {
 
   /**
    * Trails that follow a special while it runs, read from sim state every step:
-   * Hotfix Charge streaks, Rapid Deploy streaks and the uppercut arc.
+   * armored charge streaks, fast rush/blink/glide streaks, rising uppercut arcs, and slam/slide dust.
    */
   follow(state: SimState): void {
     state.fighters.forEach((f, i) => {
       const m = f.move;
-      if (!m || f.hitstop > 0 || (m.id !== "charge" && m.id !== "rush")) {
+      if (!m || f.hitstop > 0) {
+        this.trailKey[i] = "";
+        return;
+      }
+      const isTrailMove =
+        CHARGE_STREAK_MOVES.has(m.id) ||
+        RUSH_STREAK_MOVES.has(m.id) ||
+        UPPERCUT_MOVES.has(m.id) ||
+        SLAM_MOVES.has(m.id) ||
+        SLIDE_DUST_MOVES.has(m.id) ||
+        COMMAND_GRAB_MOVES.has(m.id);
+      if (!isTrailMove) {
         this.trailKey[i] = "";
         return;
       }
@@ -176,13 +260,33 @@ export class EffectsLayer {
       this.trailKey[i] = key;
       const def = MOVES[m.id];
       const { segment, start } = segmentStart(def.segments, m.tick);
-      if (segment.launch && m.tick === start) {
+      if (m.id === "rush" && segment.launch && m.tick === start) {
         this.spawn("uppercut_arc", f.x + f.facing * 2400, f.y - 10000, f.facing);
         return;
       }
+      if (UPPERCUT_MOVES.has(m.id) && segment.active && m.tick === firstActiveTick(def)) {
+        this.spawn("uppercut_arc", f.x + f.facing * 2400, f.y - 10000, f.facing);
+      }
+      if (
+        SLAM_MOVES.has(m.id) &&
+        ((segment.active && m.tick === start) ||
+          (firstActiveTick(def) === -1 && m.tick === def.projectileTick))
+      ) {
+        this.spawn("dust", f.x + f.facing * 2400, MOVEMENT.floorY, f.facing, false, 0.8);
+      }
+      if (COMMAND_GRAB_MOVES.has(m.id) && m.grabbed && m.tick === def.tossTick) {
+        this.spawn("dust", f.x + f.facing * 3200, MOVEMENT.floorY, f.facing, false, 0.9);
+      }
       if (!segment.vx) return;
-      if (m.id === "charge" && (m.tick - start) % 4 === 0) this.spawn("charge_streaks", f.x - f.facing * 3000, f.y - 6500, f.facing, true, 0.9);
-      if (m.id === "rush" && segment.vx >= 300 && (m.tick - start) % 3 === 0) this.spawn("rush_streaks", f.x - f.facing * 2600, f.y - 8500, f.facing, true, 0.8);
+      if (CHARGE_STREAK_MOVES.has(m.id) && (m.tick - start) % 4 === 0) {
+        this.spawn("charge_streaks", f.x - f.facing * 3000, f.y - 6500, f.facing, true, 0.9);
+      }
+      if (RUSH_STREAK_MOVES.has(m.id) && segment.vx >= 260 && (m.tick - start) % 3 === 0) {
+        this.spawn("rush_streaks", f.x - f.facing * 2600, f.y - 8500, f.facing, true, 0.8);
+      }
+      if (SLIDE_DUST_MOVES.has(m.id) && segment.vx >= 300 && (m.tick - start) % 3 === 0) {
+        this.spawn("dust", f.x - f.facing * 1200, MOVEMENT.floorY, f.facing, false, 0.65);
+      }
     });
   }
 
@@ -238,19 +342,106 @@ export class EffectsLayer {
 
   /** Projectiles, drawn from sim state (their animation follows the sim frame). */
   drawProjectiles(ctx: CanvasRenderingContext2D, state: SimState, camera: Camera): void {
-    const clip = this.fx?.clips.orb;
-    if (!this.fx || !clip) {
-      ctx.fillStyle = "#7ff";
-      for (const p of state.projectiles) ctx.fillRect(Math.round(p.x / SUBPX) - camera.x - 8, Math.round(p.y / SUBPX) - camera.y - 8, 16, 16);
+    const orbClip = this.fx?.clips.orb;
+    if (!this.fx || !orbClip) {
+      for (const p of state.projectiles) {
+        const sx = Math.round(p.x / SUBPX) - camera.x;
+        const sy = Math.round(p.y / SUBPX) - camera.y;
+        const kind = p.kind ?? "orb";
+        switch (kind) {
+          case "fast_packet":
+            ctx.fillStyle = "#7ff";
+            ctx.fillRect?.(sx - 12, sy - 4, 24, 8);
+            ctx.fillStyle = "#ffe680";
+            ctx.fillRect?.(sx - 6, sy - 2, 12, 4);
+            break;
+          case "slow_mine": {
+            const pulse = Math.abs((state.frame % 16) - 8) < 4 ? 10 : 8;
+            ctx.fillStyle = "#f9c";
+            ctx.fillRect?.(sx - pulse, sy - pulse, pulse * 2, pulse * 2);
+            break;
+          }
+          case "shockwave":
+            ctx.fillStyle = "#fb5";
+            ctx.fillRect?.(sx - 16, sy - 4, 32, 8);
+            break;
+          case "arc_burst":
+            ctx.fillStyle = "#8ef";
+            ctx.fillRect?.(sx - 7, sy - 11, 14, 22);
+            break;
+          default:
+            ctx.fillStyle = "#7ff";
+            ctx.fillRect?.(sx - 8, sy - 8, 16, 16);
+            break;
+        }
+      }
       return;
     }
-    const f = clip.frames[clipFrameIndex(clip, state.frame)]!;
+
+    const orbFrame = orbClip.frames[clipFrameIndex(orbClip, state.frame)];
+    if (!orbFrame) return;
     for (const p of state.projectiles) {
+      const sx = Math.round(p.x / SUBPX) - camera.x;
+      const sy = Math.round(p.y / SUBPX) - camera.y;
+      const kind = p.kind ?? "orb";
       ctx.save();
       ctx.globalCompositeOperation = "lighter";
-      ctx.translate(Math.round(p.x / SUBPX) - camera.x, Math.round(p.y / SUBPX) - camera.y);
+      ctx.translate(sx, sy);
       if (p.vx < 0) ctx.scale(-1, 1);
-      ctx.drawImage(this.fx.atlas, f.x, f.y, f.w, f.h, -f.ax, -f.ay, f.w, f.h);
+
+      switch (kind) {
+        case "fast_packet":
+          ctx.scale(1.45, 0.7);
+          ctx.drawImage(this.fx.atlas, orbFrame.x, orbFrame.y, orbFrame.w, orbFrame.h, -orbFrame.ax, -orbFrame.ay, orbFrame.w, orbFrame.h);
+          ctx.fillStyle = "#7ff";
+          ctx.fillRect?.(-12, -2, 24, 4);
+          ctx.fillStyle = "#ffe680";
+          ctx.fillRect?.(-6, -1, 14, 2);
+          break;
+        case "slow_mine": {
+          const pulse = 0.85 + 0.25 * (1 - Math.abs((state.frame % 16) - 8) / 8);
+          ctx.scale(pulse, pulse);
+          ctx.drawImage(this.fx.atlas, orbFrame.x, orbFrame.y, orbFrame.w, orbFrame.h, -orbFrame.ax, -orbFrame.ay, orbFrame.w, orbFrame.h);
+          ctx.fillStyle = "#f9c";
+          ctx.fillRect?.(-14, -2, 3, 4);
+          ctx.fillRect?.(11, -2, 3, 4);
+          ctx.fillRect?.(-2, -14, 4, 3);
+          ctx.fillRect?.(-2, 11, 4, 3);
+          break;
+        }
+        case "shockwave": {
+          const dustClip = this.fx.clips.dust;
+          const sc = dustClip ?? orbClip;
+          const f = sc.frames[clipFrameIndex(sc, state.frame)] ?? orbFrame;
+          if (dustClip) {
+            ctx.scale(1.0, 0.7);
+          } else {
+            ctx.scale(1.35, 0.55);
+          }
+          ctx.drawImage(this.fx.atlas, f.x, f.y, f.w, f.h, -f.ax, -f.ay, f.w, f.h);
+          ctx.fillStyle = "#fb5";
+          ctx.fillRect?.(-16, 2, 32, 4);
+          break;
+        }
+        case "arc_burst": {
+          const arcClip = this.fx.clips.uppercut_arc;
+          const f = arcClip?.frames[clipFrameIndex(arcClip, state.frame)];
+          if (f) {
+            ctx.scale(0.55, 0.55);
+            ctx.rotate?.(-0.35);
+            ctx.drawImage(this.fx.atlas, f.x, f.y, f.w, f.h, -f.ax, -f.ay, f.w, f.h);
+          } else {
+            ctx.rotate?.(-0.5);
+            ctx.scale(1.15, 0.85);
+            ctx.drawImage(this.fx.atlas, orbFrame.x, orbFrame.y, orbFrame.w, orbFrame.h, -orbFrame.ax, -orbFrame.ay, orbFrame.w, orbFrame.h);
+          }
+          break;
+        }
+        default:
+          ctx.drawImage(this.fx.atlas, orbFrame.x, orbFrame.y, orbFrame.w, orbFrame.h, -orbFrame.ax, -orbFrame.ay, orbFrame.w, orbFrame.h);
+          break;
+      }
+
       ctx.restore();
     }
   }

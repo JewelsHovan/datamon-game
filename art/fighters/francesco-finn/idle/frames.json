@@ -1,0 +1,40 @@
+{
+ "clip": "idle",
+ "loop": true,
+ "scale": 0.16336,
+ "raw": "art/raw/francesco-finn/idle/20261112-222005-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 75,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 8
+  },
+  {
+   "file": "01.png",
+   "w": 74,
+   "h": 142,
+   "ax": 0,
+   "ay": 141,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 75,
+   "h": 142,
+   "ax": 0,
+   "ay": 141,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 75,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 8
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.20927,
+ "raw": "art/raw/jonah-lee/air_hurt/20261112-222731-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 123,
+   "h": 134,
+   "ax": 18,
+   "ay": 133,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 150,
+   "h": 91,
+   "ax": 34,
+   "ay": 90,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 101,
+   "h": 149,
+   "ax": 10,
+   "ay": 148,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 159,
+   "h": 45,
+   "ax": 36,
+   "ay": 44,
+   "hold": 8
+  }
+ ]
+}

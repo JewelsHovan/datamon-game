@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.17263,
+ "raw": "art/raw/emile-moffatt/crouch_hurt/20261112-222221-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 73,
+   "h": 104,
+   "ax": 10,
+   "ay": 103,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 59,
+   "h": 94,
+   "ax": 2,
+   "ay": 93,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 62,
+   "h": 99,
+   "ax": 0,
+   "ay": 98,
+   "hold": 6
+  }
+ ]
+}

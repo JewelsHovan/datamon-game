@@ -88,11 +88,14 @@ export class VersusScene implements Scene {
         drawSmooth(ctx, img, cx - 72, 70, 144, 136);
         ctx.restore();
       }
-      text(ctx, person.shortName.toUpperCase(), cx, 222, 16, INK, "center");
+      text(ctx, person.shortName.toUpperCase(), cx, 216, 16, INK, "center");
       const info = this.m.services.info(person.slug);
       const tag = !left && mode === "cpu" ? `CPU ${(cpuLevel ?? "normal").toUpperCase()}` : `PLAYER ${i + 1}`;
-      text(ctx, tag, cx, 246, 8, PLAYER_COLORS[i], "center");
-      if (info.archetype) text(ctx, info.archetype.toUpperCase(), cx, 262, 8, "#aeaadc", "center");
+      text(ctx, tag, cx, 238, 8, PLAYER_COLORS[i], "center");
+      if (info.archetype) text(ctx, info.archetype.toUpperCase(), cx, 252, 8, GOLD, "center");
+      if (info.trait) text(ctx, info.trait.toUpperCase(), cx, 264, 8, INK, "center");
+      const specials = [info.special, info.altSpecial].filter((s): s is string => Boolean(s)).map((s) => s.toUpperCase()).join(" / ");
+      if (specials) text(ctx, specials, cx, 276, 8, "#aeaadc", "center");
     }
     const pop = this.frames < 24 ? 2 - this.frames / 24 : 1;
     text(ctx, "VS", VIEW_WIDTH / 2, 130 - Math.round(16 * pop), Math.round(32 * pop), GOLD, "center");

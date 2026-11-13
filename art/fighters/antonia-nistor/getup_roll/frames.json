@@ -1,0 +1,56 @@
+{
+ "clip": "getup_roll",
+ "loop": false,
+ "scale": 0.21374,
+ "raw": "art/raw/antonia-nistor/getup_roll/20261112-212149-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 127,
+   "h": 32,
+   "ax": 20,
+   "ay": 31,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 69,
+   "h": 79,
+   "ax": -2,
+   "ay": 78,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 61,
+   "h": 67,
+   "ax": -8,
+   "ay": 66,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 88,
+   "h": 87,
+   "ax": 11,
+   "ay": 86,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 80,
+   "h": 120,
+   "ax": 5,
+   "ay": 119,
+   "hold": 6
+  },
+  {
+   "file": "05.png",
+   "w": 82,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

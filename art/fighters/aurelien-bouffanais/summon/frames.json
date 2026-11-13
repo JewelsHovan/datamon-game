@@ -1,0 +1,40 @@
+{
+ "clip": "summon",
+ "loop": false,
+ "scale": 0.16847,
+ "raw": "art/raw/aurelien-bouffanais/summon/20261112-223023-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 75,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 4
+  },
+  {
+   "file": "01.png",
+   "w": 79,
+   "h": 163,
+   "ax": 0,
+   "ay": 162,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 98,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 99,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 14
+  }
+ ]
+}

@@ -1,0 +1,24 @@
+{
+ "clip": "block",
+ "loop": false,
+ "scale": 0.15234,
+ "raw": "art/raw/dana-domanko/block/20261112-222139-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 66,
+   "h": 139,
+   "ax": 2,
+   "ay": 138,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 70,
+   "h": 104,
+   "ax": 1,
+   "ay": 103,
+   "hold": 6
+  }
+ ]
+}

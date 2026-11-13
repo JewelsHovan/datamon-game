@@ -6,7 +6,7 @@ import { MOVES_V2 } from "../data/combat";
 import { fighterInfo } from "../data/fighters";
 import { MOVES, segmentAt } from "../data/moves";
 import { MOVEMENT } from "../data/movement";
-import { advanceDowned, dashInput, tickGroundMove, tryAirMove, tryBlockPush, tryGroundMove, tryTaunt } from "./combat";
+import { advanceDowned, dashInput, isGrabMove, tickGroundMove, tryAirMove, tryBlockPush, tryGroundMove, tryTaunt } from "./combat";
 import { DIR_BACK, DIR_DOWN, DIR_FORWARD, DIR_UP } from "./inputBits";
 import { inputAt, toFacingRelative } from "./inputHistory";
 import type { FighterState, FighterStateName, JumpDir, PlayerIndex, SimEvent, SimState } from "./types";
@@ -57,9 +57,10 @@ function groundedControl(f: FighterState, dirs: number): void {
 }
 
 function launch(f: FighterState, player: PlayerIndex, events: SimEvent[]): void {
+  const info = fighterInfo(f.slug);
   enter(f, "airborne");
-  f.vy = -MOVEMENT.jumpLaunchSpeed;
-  f.vx = f.jumpDir * f.facing * MOVEMENT.jumpHorizontalSpeed;
+  f.vy = -Math.floor((MOVEMENT.jumpLaunchSpeed * info.jumpVyPct) / 100);
+  f.vx = f.jumpDir * f.facing * Math.floor((MOVEMENT.jumpHorizontalSpeed * info.jumpVxPct) / 100);
   events.push({ type: "jump", player, dir: f.jumpDir });
 }
 
@@ -70,11 +71,15 @@ function groundVelocity(f: FighterState): number {
       return f.facing * Math.floor((MOVEMENT.walkForwardSpeed * fighterInfo(f.slug).walkPct) / 100);
     case "walk_back":
       return -f.facing * Math.floor((MOVEMENT.walkBackSpeed * fighterInfo(f.slug).walkPct) / 100);
-    case "dash_forward":
+    case "dash_forward": {
       // Fast for the first two thirds, then a short slowdown.
-      return f.facing * (f.stateFrame <= 10 ? MOVES_V2.dashForwardSpeed : MOVES_V2.dashForwardTail);
-    case "dash_back":
-      return -f.facing * (f.stateFrame <= 11 ? MOVES_V2.dashBackSpeed : MOVES_V2.dashBackTail);
+      const speed = f.stateFrame <= 10 ? MOVES_V2.dashForwardSpeed : MOVES_V2.dashForwardTail;
+      return f.facing * Math.floor((speed * fighterInfo(f.slug).dashSpeedPct) / 100);
+    }
+    case "dash_back": {
+      const speed = f.stateFrame <= 11 ? MOVES_V2.dashBackSpeed : MOVES_V2.dashBackTail;
+      return -f.facing * Math.floor((speed * fighterInfo(f.slug).dashSpeedPct) / 100);
+    }
     case "attack": {
       // Specials that travel (Hotfix Charge, Rapid Deploy) move with their segments.
       if (!f.move) return 0;
@@ -164,9 +169,10 @@ export function advanceFighter(f: FighterState, player: PlayerIndex, state: SimS
       }
       break;
     case "held": {
-      // Held only while the opponent is in a throw that grabbed; otherwise released at once.
+      // Held only while the opponent is in a grab move that grabbed; otherwise released at once.
       const thrower = state.fighters[player === 0 ? 1 : 0];
-      if (!(thrower.state === "attack" && thrower.move?.id === "throw" && thrower.move.grabbed) || f.stateFrame > 60) {
+      const grabbed = thrower.state === "attack" && thrower.move && isGrabMove(MOVES[thrower.move.id]) && thrower.move.grabbed;
+      if (!grabbed || f.stateFrame > 60) {
         enter(f, "idle");
       }
       break;

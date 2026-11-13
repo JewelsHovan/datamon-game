@@ -1,0 +1,40 @@
+{
+ "clip": "hurt",
+ "loop": false,
+ "scale": 0.15642,
+ "raw": "art/raw/veronica-marallag/hurt/20261112-224410-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 106,
+   "h": 133,
+   "ax": 26,
+   "ay": 132,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 103,
+   "h": 132,
+   "ax": 21,
+   "ay": 131,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 72,
+   "h": 125,
+   "ax": 0,
+   "ay": 124,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 69,
+   "h": 139,
+   "ax": 0,
+   "ay": 138,
+   "hold": 6
+  }
+ ]
+}

@@ -1,0 +1,132 @@
+{
+  "air_attack": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/air_attack/20261112-224314-0.png",
+    "state": "approved"
+  },
+  "air_hurt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/air_hurt/20261112-224545-0.png",
+    "state": "approved"
+  },
+  "block": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/block/20261112-224403-0.png",
+    "state": "approved"
+  },
+  "block_push": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/block_push/20261112-224428-0.png",
+    "state": "approved"
+  },
+  "crouch": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/crouch/20261112-224015-0.png",
+    "state": "approved"
+  },
+  "crouch_attack": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/crouch_attack/20261112-224252-0.png",
+    "state": "approved"
+  },
+  "crouch_hurt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/crouch_hurt/20261112-224521-0.png",
+    "state": "approved"
+  },
+  "dash_back": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/dash_back/20261112-223949-0.png",
+    "state": "approved"
+  },
+  "dash_forward": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/dash_forward/20261112-223920-0.png",
+    "state": "approved"
+  },
+  "getup_roll": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/getup_roll/20261112-224632-0.png",
+    "state": "approved"
+  },
+  "heavy_kick": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/heavy_kick/20261112-224224-0.png",
+    "state": "approved"
+  },
+  "heavy_punch": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/heavy_punch/20261112-224134-0.png",
+    "state": "approved"
+  },
+  "hurt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/hurt/20261112-224455-0.png",
+    "state": "approved"
+  },
+  "idle": {
+    "note": "",
+    "raw": "art/raw/wild-guevera/idle/20261112-223753-1.png",
+    "state": "approved"
+  },
+  "intro": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/intro/20261112-224701-0.png",
+    "state": "approved"
+  },
+  "jump": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/jump/20261112-224044-0.png",
+    "state": "approved"
+  },
+  "knockdown": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/knockdown/20261112-224610-0.png",
+    "state": "approved"
+  },
+  "light_kick": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/light_kick/20261112-224157-0.png",
+    "state": "approved"
+  },
+  "light_punch": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/light_punch/20261112-224108-0.png",
+    "state": "approved"
+  },
+  "special": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/special/20261112-224834-0.png",
+    "state": "approved"
+  },
+  "summon": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/summon/20261112-224807-0.png",
+    "state": "approved"
+  },
+  "taunt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/taunt/20261112-224724-0.png",
+    "state": "approved"
+  },
+  "throw": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/throw/20261112-224339-0.png",
+    "state": "approved"
+  },
+  "victory": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/victory/20261112-224746-0.png",
+    "state": "approved"
+  },
+  "walk": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/walk/20261112-223836-0.png",
+    "state": "approved"
+  },
+  "walk_back": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/wild-guevera/walk_back/20261112-223858-0.png",
+    "state": "approved"
+  }
+}

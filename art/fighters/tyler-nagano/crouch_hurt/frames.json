@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.17812,
+ "raw": "art/raw/tyler-nagano/crouch_hurt/20261112-212110-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 67,
+   "h": 111,
+   "ax": 7,
+   "ay": 110,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 63,
+   "h": 97,
+   "ax": 1,
+   "ay": 96,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 63,
+   "h": 97,
+   "ax": 0,
+   "ay": 96,
+   "hold": 6
+  }
+ ]
+}

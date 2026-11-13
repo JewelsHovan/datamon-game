@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.19691,
+ "raw": "art/raw/richard-el-chaar/air_hurt/20261112-223457-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 123,
+   "h": 133,
+   "ax": 17,
+   "ay": 132,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 143,
+   "h": 84,
+   "ax": 30,
+   "ay": 83,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 81,
+   "h": 127,
+   "ax": 9,
+   "ay": 126,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 157,
+   "h": 43,
+   "ax": 36,
+   "ay": 42,
+   "hold": 8
+  }
+ ]
+}

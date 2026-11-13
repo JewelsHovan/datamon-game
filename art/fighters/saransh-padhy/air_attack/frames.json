@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.19074,
+ "raw": "art/raw/saransh-padhy/air_attack/20261112-211958-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 58,
+   "h": 108,
+   "ax": -13,
+   "ay": 107,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 64,
+   "h": 130,
+   "ax": -9,
+   "ay": 129,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 125,
+   "h": 108,
+   "ax": 11,
+   "ay": 107,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 131,
+   "h": 112,
+   "ax": 13,
+   "ay": 111,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 60,
+   "h": 109,
+   "ax": -11,
+   "ay": 108,
+   "hold": 6
+  }
+ ]
+}

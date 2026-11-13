@@ -1,0 +1,24 @@
+{
+ "clip": "block",
+ "loop": false,
+ "scale": 0.14644,
+ "raw": "art/raw/guillaume-delmas-frenette/block/20261112-222558-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 74,
+   "h": 138,
+   "ax": 0,
+   "ay": 137,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 71,
+   "h": 86,
+   "ax": 2,
+   "ay": 85,
+   "hold": 6
+  }
+ ]
+}

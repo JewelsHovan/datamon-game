@@ -3,8 +3,9 @@
 // each SimEvent to the effect and stingers it plays. Pure data and pure
 // functions; the facade in index.ts does the scheduling.
 import type { Envelope, FilterSpec, Layer, NoiseLayer, Recipe, ToneLayer, Wave } from "./engine";
+import { fighterInfo } from "../data/fighters";
 import { MOVES, type HitStrength, type MoveId } from "../data/moves";
-import type { SimEvent } from "../sim/types";
+import type { PlayerIndex, SimEvent, SimState } from "../sim/types";
 import { midiToFreq } from "./engine";
 import { noteToMidi } from "./patterns";
 
@@ -141,6 +142,14 @@ export const SFX = {
     tone("square", 930, env(0.001, 0.12), 0.04, { filter: lp(3000) }),
     noise(env(0.001, 0.05), 0.25, bp(1800, 0.9)),
   ],
+  /** Counter / parry absorb: crisp metallic ring + punchy low impact sweep. */
+  counter: [
+    noise(env(0.001, 0.025), 0.28, hp(3600)),
+    tone("triangle", 1480, env(0.001, 0.24), 0.16),
+    tone("triangle", 2210, env(0.001, 0.18), 0.1, { delay: 0.01 }),
+    tone("sine", 190, env(0.001, 0.16), 0.42, { sweep: { to: 48, time: 0.15 } }),
+    tone("square", 260, env(0.001, 0.1), 0.12, { sweep: { to: 75, time: 0.09 }, filter: lp(1600) }),
+  ],
   /** Block push: a shove and a whoosh. */
   block_push: [noise(env(0.01, 0.14), 0.26, bp(500, 1, 1400, 0.12)), tone("sine", 160, env(0.001, 0.1), 0.3, { sweep: { to: 80, time: 0.1 } })],
   /** Get-up roll: a soft tumble. */
@@ -156,6 +165,18 @@ export const SFX = {
     tone("pulse25", 260, env(0.003, 0.2), 0.1, { sweep: { to: 1040, time: 0.12 }, filter: lp(3500) }),
     noise(env(0.01, 0.18), 0.18, bp(600, 1.5, 2600, 0.18)),
     tone("sawtooth", 130, env(0.005, 0.25), 0.08, { sweep: { to: 260, time: 0.2 }, drive: 2, filter: lp(1200) }),
+  ],
+  /** Mine set: short armed-beacon chirp. */
+  mine_set: [
+    tone("pulse25", 660, env(0.001, 0.05), 0.09, { sweep: { to: 990, time: 0.045 }, filter: lp(4000) }),
+    tone("pulse12", 1320, env(0.001, 0.08), 0.08, { delay: 0.055, filter: lp(4500) }),
+    noise(env(0.001, 0.02), 0.1, bp(2400, 1.5)),
+  ],
+  /** Shockwave: low resonant ground pulse. */
+  shockwave: [
+    tone("sine", 130, env(0.002, 0.24), 0.48, { sweep: { to: 36, time: 0.22 } }),
+    tone("sawtooth", 110, env(0.003, 0.22), 0.14, { sweep: { to: 45, time: 0.2 }, drive: 3, filter: lp(900, 220, 0.22) }),
+    noise(env(0.002, 0.18), 0.26, bp(380, 1.8, 120, 0.18)),
   ],
   clash: [
     noise(env(0.001, 0.12), 0.4, bp(2200, 0.7)),
@@ -320,23 +341,28 @@ export const KO_STING_DELAY = 0.45;
 const NONE: readonly StingerCue[] = [];
 
 function whooshFor(move: MoveId): SfxName {
-  if (move === "throw") return "whoosh_throw";
+  if (move === "throw" || MOVES[move]?.commandGrabTick !== undefined) return "whoosh_throw";
   const strength: HitStrength = MOVES[move]?.strength ?? "light";
   if (strength === "special") return "whoosh_special";
   return strength === "heavy" ? "whoosh_heavy" : "whoosh_light";
 }
 
+function fighterPitch(state: SimState | undefined, player: PlayerIndex): number {
+  const slug = state?.fighters[player]?.slug;
+  return slug ? fighterInfo(slug).sfxPitch : 1;
+}
+
 const route = (sfx: SfxName | null, extra: Partial<Route> = {}): Route => ({ sfx, pitch: 1, stingers: NONE, duck: null, ...extra });
 
 /** What a sim event sounds like. Pure. */
-export function routeEvent(e: SimEvent): Route {
+export function routeEvent(e: SimEvent, state?: SimState): Route {
   switch (e.type) {
     case "jump":
       return route("jump");
     case "land":
       return route("land");
     case "attack":
-      return route(whooshFor(e.move));
+      return route(whooshFor(e.move), { pitch: fighterPitch(state, e.player) });
     case "hit": {
       if (e.move === "throw") return route("toss");
       const pitch = 1 + 0.025 * Math.min(4, Math.max(0, e.combo - 1));
@@ -353,7 +379,15 @@ export function routeEvent(e: SimEvent): Route {
     case "knockdown":
       return route("knockdown");
     case "projectile":
-      return route("projectile");
+      return e.kind === "slow_mine"
+        ? route("mine_set")
+        : e.kind === "shockwave"
+          ? route("shockwave")
+          : e.kind === "fast_packet"
+            ? route("projectile", { pitch: 1.22 })
+            : e.kind === "arc_burst"
+              ? route("projectile", { pitch: 1.12 })
+              : route("projectile");
     case "clash":
       return route("clash");
     case "ko":
@@ -383,11 +417,13 @@ export function routeEvent(e: SimEvent): Route {
       return route("wall_bounce");
     case "armor":
       return route("armor");
+    case "counter":
+      return route("counter");
     case "block_push":
       return route("block_push");
     case "roll":
       return route("roll");
     case "taunt":
-      return route("taunt");
+      return route("taunt", { pitch: fighterPitch(state, e.player) });
   }
 }

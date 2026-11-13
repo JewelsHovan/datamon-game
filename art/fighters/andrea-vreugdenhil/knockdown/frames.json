@@ -1,0 +1,72 @@
+{
+ "clip": "knockdown",
+ "loop": false,
+ "scale": 0.22727,
+ "raw": "art/raw/andrea-vreugdenhil/knockdown/20261112-222231-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 104,
+   "h": 138,
+   "ax": 11,
+   "ay": 137,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 150,
+   "h": 68,
+   "ax": 23,
+   "ay": 67,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 124,
+   "h": 56,
+   "ax": 21,
+   "ay": 55,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 111,
+   "h": 78,
+   "ax": 10,
+   "ay": 77,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 131,
+   "h": 32,
+   "ax": 20,
+   "ay": 31,
+   "hold": 26
+  },
+  {
+   "file": "05.png",
+   "w": 82,
+   "h": 69,
+   "ax": 3,
+   "ay": 68,
+   "hold": 8
+  },
+  {
+   "file": "06.png",
+   "w": 75,
+   "h": 102,
+   "ax": 4,
+   "ay": 101,
+   "hold": 8
+  },
+  {
+   "file": "07.png",
+   "w": 76,
+   "h": 140,
+   "ax": -1,
+   "ay": 139,
+   "hold": 8
+  }
+ ]
+}

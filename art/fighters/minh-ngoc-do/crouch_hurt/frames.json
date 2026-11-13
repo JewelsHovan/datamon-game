@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.16827,
+ "raw": "art/raw/minh-ngoc-do/crouch_hurt/20261112-223759-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 64,
+   "h": 99,
+   "ax": 14,
+   "ay": 98,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 58,
+   "h": 94,
+   "ax": 5,
+   "ay": 93,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 59,
+   "h": 95,
+   "ax": 5,
+   "ay": 94,
+   "hold": 6
+  }
+ ]
+}

@@ -1,0 +1,48 @@
+{
+ "clip": "dash_back",
+ "loop": false,
+ "scale": 0.16393,
+ "raw": "art/raw/duc-an-nguyen/dash_back/20261112-222123-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 81,
+   "h": 135,
+   "ax": -3,
+   "ay": 134,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 52,
+   "h": 134,
+   "ax": -7,
+   "ay": 133,
+   "hold": 4
+  },
+  {
+   "file": "02.png",
+   "w": 52,
+   "h": 127,
+   "ax": -9,
+   "ay": 126,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 67,
+   "h": 135,
+   "ax": 3,
+   "ay": 134,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 71,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

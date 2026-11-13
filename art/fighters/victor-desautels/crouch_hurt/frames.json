@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.17199,
+ "raw": "art/raw/victor-desautels/crouch_hurt/20261112-223950-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 71,
+   "h": 107,
+   "ax": 17,
+   "ay": 106,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 58,
+   "h": 97,
+   "ax": 3,
+   "ay": 96,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 57,
+   "h": 97,
+   "ax": 3,
+   "ay": 96,
+   "hold": 6
+  }
+ ]
+}

@@ -1,0 +1,56 @@
+{
+ "clip": "getup_roll",
+ "loop": false,
+ "scale": 0.20468,
+ "raw": "art/raw/victor-desautels/getup_roll/20261112-223949-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 121,
+   "h": 32,
+   "ax": 24,
+   "ay": 31,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 64,
+   "h": 78,
+   "ax": -2,
+   "ay": 77,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 63,
+   "h": 56,
+   "ax": 0,
+   "ay": 55,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 82,
+   "h": 89,
+   "ax": 11,
+   "ay": 88,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 71,
+   "h": 119,
+   "ax": 6,
+   "ay": 118,
+   "hold": 6
+  },
+  {
+   "file": "05.png",
+   "w": 68,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

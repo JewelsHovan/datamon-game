@@ -1,7 +1,7 @@
 // Sim state: plain, JSON-serializable data. Every number is an integer.
 // Positions and velocities are in subpixels (100 per pixel); y grows downward
 // and the floor is MOVEMENT.floorY.
-import type { HitStrength, MoveId } from "../data/moves";
+import type { HitStrength, MoveId, ProjectileKind } from "../data/moves";
 
 export type PlayerIndex = 0 | 1;
 
@@ -106,6 +106,12 @@ export interface Projectile {
   x: number;
   y: number;
   vx: number;
+  vy?: number;
+  kind?: ProjectileKind;
+  move?: MoveId;
+  halfW?: number;
+  halfH?: number;
+  ttl?: number;
 }
 
 export type RoundPhase = "intro" | "fight" | "ko" | "matchover";
@@ -136,13 +142,14 @@ export type SimEvent =
   | { type: "throw"; player: PlayerIndex; target: PlayerIndex }
   | { type: "tech"; x: number; y: number }
   | { type: "knockdown"; player: PlayerIndex; x: number; y: number }
-  | { type: "projectile"; player: PlayerIndex; x: number; y: number }
+  | { type: "projectile"; player: PlayerIndex; x: number; y: number; kind?: ProjectileKind }
   | { type: "clash"; x: number; y: number }
   | { type: "ko"; player: PlayerIndex; x: number; y: number }
   | { type: "dash"; player: PlayerIndex; dir: 1 | -1; x: number }
   | { type: "teleport"; player: PlayerIndex; phase: "out" | "in"; x: number }
   | { type: "wall_bounce"; player: PlayerIndex; x: number; y: number }
   | { type: "armor"; player: PlayerIndex; x: number; y: number }
+  | { type: "counter"; player: PlayerIndex; target: PlayerIndex; x: number; y: number }
   | { type: "block_push"; player: PlayerIndex; target: PlayerIndex; x: number; y: number }
   | { type: "taunt"; player: PlayerIndex }
   | { type: "roll"; player: PlayerIndex }

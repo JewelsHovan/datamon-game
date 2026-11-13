@@ -1,0 +1,48 @@
+{
+ "clip": "dash_back",
+ "loop": false,
+ "scale": 0.19048,
+ "raw": "art/raw/philippe-miranda-jean/dash_back/20261112-223358-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 95,
+   "h": 136,
+   "ax": -3,
+   "ay": 135,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 56,
+   "h": 141,
+   "ax": -11,
+   "ay": 140,
+   "hold": 4
+  },
+  {
+   "file": "02.png",
+   "w": 56,
+   "h": 133,
+   "ax": -12,
+   "ay": 132,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 78,
+   "h": 138,
+   "ax": -1,
+   "ay": 137,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 78,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

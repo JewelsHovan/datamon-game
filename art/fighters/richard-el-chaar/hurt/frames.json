@@ -1,0 +1,40 @@
+{
+ "clip": "hurt",
+ "loop": false,
+ "scale": 0.16548,
+ "raw": "art/raw/richard-el-chaar/hurt/20261112-223457-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 102,
+   "h": 139,
+   "ax": 28,
+   "ay": 138,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 100,
+   "h": 136,
+   "ax": 31,
+   "ay": 135,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 83,
+   "h": 124,
+   "ax": 0,
+   "ay": 123,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 79,
+   "h": 139,
+   "ax": 0,
+   "ay": 138,
+   "hold": 6
+  }
+ ]
+}

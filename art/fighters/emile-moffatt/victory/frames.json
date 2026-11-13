@@ -1,0 +1,56 @@
+{
+ "clip": "victory",
+ "loop": true,
+ "scale": 0.17032,
+ "raw": "art/raw/emile-moffatt/victory/20261112-222250-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 59,
+   "h": 152,
+   "ax": 0,
+   "ay": 151,
+   "hold": 10
+  },
+  {
+   "file": "01.png",
+   "w": 59,
+   "h": 165,
+   "ax": 2,
+   "ay": 164,
+   "hold": 10
+  },
+  {
+   "file": "02.png",
+   "w": 65,
+   "h": 150,
+   "ax": 5,
+   "ay": 149,
+   "hold": 10
+  },
+  {
+   "file": "03.png",
+   "w": 72,
+   "h": 151,
+   "ax": 8,
+   "ay": 150,
+   "hold": 10
+  },
+  {
+   "file": "04.png",
+   "w": 61,
+   "h": 145,
+   "ax": 0,
+   "ay": 144,
+   "hold": 10
+  },
+  {
+   "file": "05.png",
+   "w": 59,
+   "h": 152,
+   "ax": 1,
+   "ay": 151,
+   "hold": 10
+  }
+ ]
+}

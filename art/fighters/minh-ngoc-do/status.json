@@ -1,0 +1,132 @@
+{
+  "air_attack": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/air_attack/20261112-223548-0.png",
+    "state": "approved"
+  },
+  "air_hurt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/air_hurt/20261112-223821-0.png",
+    "state": "approved"
+  },
+  "block": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/block/20261112-223639-0.png",
+    "state": "approved"
+  },
+  "block_push": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/block_push/20261112-223704-0.png",
+    "state": "approved"
+  },
+  "crouch": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/crouch/20261112-223240-0.png",
+    "state": "approved"
+  },
+  "crouch_attack": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/crouch_attack/20261112-223526-0.png",
+    "state": "approved"
+  },
+  "crouch_hurt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/crouch_hurt/20261112-223759-0.png",
+    "state": "approved"
+  },
+  "dash_back": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/dash_back/20261112-223215-0.png",
+    "state": "approved"
+  },
+  "dash_forward": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/dash_forward/20261112-223153-0.png",
+    "state": "approved"
+  },
+  "getup_roll": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/getup_roll/20261112-223912-0.png",
+    "state": "approved"
+  },
+  "heavy_kick": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/heavy_kick/20261112-223450-0.png",
+    "state": "approved"
+  },
+  "heavy_punch": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/heavy_punch/20261112-223358-0.png",
+    "state": "approved"
+  },
+  "hurt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/hurt/20261112-223732-0.png",
+    "state": "approved"
+  },
+  "idle": {
+    "note": "",
+    "raw": "art/raw/minh-ngoc-do/idle/20261112-223019-1.png",
+    "state": "approved"
+  },
+  "intro": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/intro/20261112-223938-0.png",
+    "state": "approved"
+  },
+  "jump": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/jump/20261112-223308-0.png",
+    "state": "approved"
+  },
+  "knockdown": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/knockdown/20261112-223848-0.png",
+    "state": "approved"
+  },
+  "light_kick": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/light_kick/20261112-223421-0.png",
+    "state": "approved"
+  },
+  "light_punch": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/light_punch/20261112-223331-0.png",
+    "state": "approved"
+  },
+  "special": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/special/20261112-224117-0.png",
+    "state": "approved"
+  },
+  "summon": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/summon/20261112-224049-0.png",
+    "state": "approved"
+  },
+  "taunt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/taunt/20261112-224002-0.png",
+    "state": "approved"
+  },
+  "throw": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/throw/20261112-223614-0.png",
+    "state": "approved"
+  },
+  "victory": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/victory/20261112-224025-0.png",
+    "state": "approved"
+  },
+  "walk": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/walk/20261112-223109-0.png",
+    "state": "approved"
+  },
+  "walk_back": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/minh-ngoc-do/walk_back/20261112-223131-0.png",
+    "state": "approved"
+  }
+}

@@ -1,0 +1,72 @@
+{
+ "clip": "knockdown",
+ "loop": false,
+ "scale": 0.25316,
+ "raw": "art/raw/aurelien-bouffanais/knockdown/20261112-222825-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 123,
+   "h": 125,
+   "ax": 20,
+   "ay": 124,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 132,
+   "h": 71,
+   "ax": 22,
+   "ay": 70,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 130,
+   "h": 52,
+   "ax": 21,
+   "ay": 51,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 114,
+   "h": 53,
+   "ax": 14,
+   "ay": 52,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 130,
+   "h": 37,
+   "ax": 23,
+   "ay": 36,
+   "hold": 26
+  },
+  {
+   "file": "05.png",
+   "w": 87,
+   "h": 74,
+   "ax": -2,
+   "ay": 73,
+   "hold": 8
+  },
+  {
+   "file": "06.png",
+   "w": 83,
+   "h": 99,
+   "ax": 4,
+   "ay": 98,
+   "hold": 8
+  },
+  {
+   "file": "07.png",
+   "w": 79,
+   "h": 140,
+   "ax": 1,
+   "ay": 139,
+   "hold": 8
+  }
+ ]
+}

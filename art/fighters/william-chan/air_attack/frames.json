@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.18919,
+ "raw": "art/raw/william-chan/air_attack/20261112-224436-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 59,
+   "h": 110,
+   "ax": -9,
+   "ay": 109,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 74,
+   "h": 140,
+   "ax": -2,
+   "ay": 139,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 124,
+   "h": 120,
+   "ax": 11,
+   "ay": 119,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 134,
+   "h": 105,
+   "ax": 13,
+   "ay": 104,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 59,
+   "h": 112,
+   "ax": -10,
+   "ay": 111,
+   "hold": 6
+  }
+ ]
+}

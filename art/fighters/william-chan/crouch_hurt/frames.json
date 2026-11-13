@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.1697,
+ "raw": "art/raw/william-chan/crouch_hurt/20261112-224646-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 72,
+   "h": 105,
+   "ax": 19,
+   "ay": 104,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 64,
+   "h": 97,
+   "ax": 8,
+   "ay": 96,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 61,
+   "h": 97,
+   "ax": 8,
+   "ay": 96,
+   "hold": 6
+  }
+ ]
+}

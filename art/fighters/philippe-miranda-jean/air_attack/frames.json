@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.18041,
+ "raw": "art/raw/philippe-miranda-jean/air_attack/20261112-223716-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 54,
+   "h": 101,
+   "ax": -12,
+   "ay": 100,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 53,
+   "h": 121,
+   "ax": -12,
+   "ay": 120,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 110,
+   "h": 107,
+   "ax": 10,
+   "ay": 106,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 111,
+   "h": 101,
+   "ax": 9,
+   "ay": 100,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 53,
+   "h": 106,
+   "ax": -13,
+   "ay": 105,
+   "hold": 6
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.19471,
+ "raw": "art/raw/tabarek-al-khalidi/air_hurt/20261112-223900-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 110,
+   "h": 124,
+   "ax": 8,
+   "ay": 123,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 143,
+   "h": 107,
+   "ax": 22,
+   "ay": 106,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 85,
+   "h": 136,
+   "ax": 1,
+   "ay": 135,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 147,
+   "h": 34,
+   "ax": 22,
+   "ay": 33,
+   "hold": 8
+  }
+ ]
+}

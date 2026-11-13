@@ -1,0 +1,24 @@
+{
+ "clip": "block",
+ "loop": false,
+ "scale": 0.1559,
+ "raw": "art/raw/guillaume-pregent/block/20261112-222950-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 74,
+   "h": 138,
+   "ax": 0,
+   "ay": 137,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 76,
+   "h": 98,
+   "ax": 5,
+   "ay": 97,
+   "hold": 6
+  }
+ ]
+}

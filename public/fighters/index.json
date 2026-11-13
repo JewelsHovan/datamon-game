@@ -5,20 +5,185 @@
    "atlas": "atlas.webp",
    "version": 2
   },
+  "andrea-vreugdenhil": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "antonia-nistor": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "aurelien-bouffanais": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "dana-domanko": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "duc-an-nguyen": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "elina-gu": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "emile-moffatt": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "ethan-pirso": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
   "felicia-gorgacheva": {
    "manifest": "manifest.json",
    "atlas": "atlas.webp",
    "version": 2
+  },
+  "francesco-finn": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "guillaume-delmas-frenette": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "guillaume-pregent": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "jerry-zhu": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "jewoo-lee": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "jonah-lee": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "jonathan-kim": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
   },
   "julien-hovan": {
    "manifest": "manifest.json",
    "atlas": "atlas.webp",
    "version": 4
   },
+  "logan-labossiere": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "megane-darnaud": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 2
+  },
+  "milen-thomas": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 2
+  },
+  "minh-ngoc-do": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "oyku-cildir": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
   "pentcho-tchomakov": {
    "manifest": "manifest.json",
    "atlas": "atlas.webp",
    "version": 2
+  },
+  "philippe-miranda-jean": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "richard-el-chaar": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "sarah-kotb": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "saransh-padhy": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "scott-carr": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "stephanie-fontaine": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "tabarek-al-khalidi": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 2
+  },
+  "tyler-nagano": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "veronica-marallag": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "victor-desautels": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "vincent-anctil": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "wild-guevera": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "william-chan": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
   }
  }
 }

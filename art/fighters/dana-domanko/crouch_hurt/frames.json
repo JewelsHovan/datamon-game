@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.1649,
+ "raw": "art/raw/dana-domanko/crouch_hurt/20261112-222212-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 57,
+   "h": 99,
+   "ax": 19,
+   "ay": 98,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 58,
+   "h": 93,
+   "ax": 16,
+   "ay": 92,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 54,
+   "h": 95,
+   "ax": 15,
+   "ay": 94,
+   "hold": 6
+  }
+ ]
+}

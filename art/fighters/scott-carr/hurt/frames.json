@@ -1,0 +1,40 @@
+{
+ "clip": "hurt",
+ "loop": false,
+ "scale": 0.15625,
+ "raw": "art/raw/scott-carr/hurt/20261112-212114-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 106,
+   "h": 134,
+   "ax": 25,
+   "ay": 133,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 101,
+   "h": 136,
+   "ax": 25,
+   "ay": 135,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 77,
+   "h": 118,
+   "ax": 0,
+   "ay": 117,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 79,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

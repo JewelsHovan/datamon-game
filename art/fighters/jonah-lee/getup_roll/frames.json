@@ -1,0 +1,56 @@
+{
+ "clip": "getup_roll",
+ "loop": false,
+ "scale": 0.22654,
+ "raw": "art/raw/jonah-lee/getup_roll/20261112-222728-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 123,
+   "h": 33,
+   "ax": 19,
+   "ay": 32,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 81,
+   "h": 77,
+   "ax": 4,
+   "ay": 76,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 72,
+   "h": 74,
+   "ax": -1,
+   "ay": 73,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 95,
+   "h": 89,
+   "ax": 14,
+   "ay": 88,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 82,
+   "h": 130,
+   "ax": 5,
+   "ay": 129,
+   "hold": 6
+  },
+  {
+   "file": "05.png",
+   "w": 80,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

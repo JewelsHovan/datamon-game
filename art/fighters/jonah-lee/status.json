@@ -1,0 +1,132 @@
+{
+  "air_attack": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/air_attack/20261112-222650-0.png",
+    "state": "approved"
+  },
+  "air_hurt": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/air_hurt/20261112-222731-0.png",
+    "state": "approved"
+  },
+  "block": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/block/20261112-222654-0.png",
+    "state": "approved"
+  },
+  "block_push": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/block_push/20261112-222657-0.png",
+    "state": "approved"
+  },
+  "crouch": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/crouch/20261112-222547-0.png",
+    "state": "approved"
+  },
+  "crouch_attack": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/crouch_attack/20261112-222651-0.png",
+    "state": "approved"
+  },
+  "crouch_hurt": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/crouch_hurt/20261112-222729-0.png",
+    "state": "approved"
+  },
+  "dash_back": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/dash_back/20261112-222545-0.png",
+    "state": "approved"
+  },
+  "dash_forward": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/dash_forward/20261112-222547-0.png",
+    "state": "approved"
+  },
+  "getup_roll": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/getup_roll/20261112-222728-0.png",
+    "state": "approved"
+  },
+  "heavy_kick": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/heavy_kick/20261112-222619-0.png",
+    "state": "approved"
+  },
+  "heavy_punch": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/heavy_punch/20261112-222620-0.png",
+    "state": "approved"
+  },
+  "hurt": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/hurt/20261112-222727-0.png",
+    "state": "approved"
+  },
+  "idle": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/idle/20261112-222501-1.png",
+    "state": "approved"
+  },
+  "intro": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/intro/20261112-222806-0.png",
+    "state": "approved"
+  },
+  "jump": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/jump/20261112-222615-0.png",
+    "state": "approved"
+  },
+  "knockdown": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/knockdown/20261112-222730-0.png",
+    "state": "approved"
+  },
+  "light_kick": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/light_kick/20261112-222616-0.png",
+    "state": "approved"
+  },
+  "light_punch": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/light_punch/20261112-222616-0.png",
+    "state": "approved"
+  },
+  "special": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/special/20261112-222806-0.png",
+    "state": "approved"
+  },
+  "summon": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/summon/20261112-222800-0.png",
+    "state": "approved"
+  },
+  "taunt": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/taunt/20261112-222804-0.png",
+    "state": "approved"
+  },
+  "throw": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/throw/20261112-222652-0.png",
+    "state": "approved"
+  },
+  "victory": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/victory/20261112-222803-0.png",
+    "state": "approved"
+  },
+  "walk": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/walk/20261112-222548-0.png",
+    "state": "approved"
+  },
+  "walk_back": {
+    "note": "",
+    "raw": "art/raw/jonah-lee/walk_back/20261112-222547-0.png",
+    "state": "approved"
+  }
+}

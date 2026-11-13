@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.17413,
+ "raw": "art/raw/milen-thomas/crouch_hurt/20261112-223223-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 76,
+   "h": 107,
+   "ax": 11,
+   "ay": 106,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 65,
+   "h": 97,
+   "ax": 1,
+   "ay": 96,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 66,
+   "h": 98,
+   "ax": 1,
+   "ay": 97,
+   "hold": 6
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.18088,
+ "raw": "art/raw/minh-ngoc-do/air_hurt/20261112-223821-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 111,
+   "h": 114,
+   "ax": 10,
+   "ay": 113,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 139,
+   "h": 84,
+   "ax": 22,
+   "ay": 83,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 77,
+   "h": 126,
+   "ax": -2,
+   "ay": 125,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 134,
+   "h": 45,
+   "ax": 30,
+   "ay": 44,
+   "hold": 8
+  }
+ ]
+}

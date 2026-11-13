@@ -1,0 +1,32 @@
+{
+ "clip": "block_push",
+ "loop": false,
+ "scale": 0.17241,
+ "raw": "art/raw/william-chan/block_push/20261112-224552-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 70,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 4
+  },
+  {
+   "file": "01.png",
+   "w": 93,
+   "h": 137,
+   "ax": 0,
+   "ay": 136,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 83,
+   "h": 138,
+   "ax": 0,
+   "ay": 137,
+   "hold": 6
+  }
+ ]
+}

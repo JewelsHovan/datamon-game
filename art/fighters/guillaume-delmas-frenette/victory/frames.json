@@ -1,0 +1,56 @@
+{
+ "clip": "victory",
+ "loop": true,
+ "scale": 0.17199,
+ "raw": "art/raw/guillaume-delmas-frenette/victory/20261112-222948-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 62,
+   "h": 157,
+   "ax": 3,
+   "ay": 156,
+   "hold": 10
+  },
+  {
+   "file": "01.png",
+   "w": 59,
+   "h": 165,
+   "ax": 2,
+   "ay": 164,
+   "hold": 10
+  },
+  {
+   "file": "02.png",
+   "w": 62,
+   "h": 155,
+   "ax": 3,
+   "ay": 154,
+   "hold": 10
+  },
+  {
+   "file": "03.png",
+   "w": 64,
+   "h": 152,
+   "ax": 5,
+   "ay": 151,
+   "hold": 10
+  },
+  {
+   "file": "04.png",
+   "w": 61,
+   "h": 158,
+   "ax": 3,
+   "ay": 157,
+   "hold": 10
+  },
+  {
+   "file": "05.png",
+   "w": 59,
+   "h": 155,
+   "ax": 2,
+   "ay": 154,
+   "hold": 10
+  }
+ ]
+}

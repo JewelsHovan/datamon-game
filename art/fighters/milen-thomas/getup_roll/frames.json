@@ -1,0 +1,56 @@
+{
+ "clip": "getup_roll",
+ "loop": false,
+ "scale": 0.21909,
+ "raw": "art/raw/milen-thomas/getup_roll/20261112-223220-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 138,
+   "h": 30,
+   "ax": 22,
+   "ay": 29,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 78,
+   "h": 80,
+   "ax": 0,
+   "ay": 79,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 70,
+   "h": 64,
+   "ax": -7,
+   "ay": 63,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 88,
+   "h": 88,
+   "ax": 6,
+   "ay": 87,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 74,
+   "h": 115,
+   "ax": -1,
+   "ay": 114,
+   "hold": 6
+  },
+  {
+   "file": "05.png",
+   "w": 83,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "clip": "hurt",
+ "loop": false,
+ "scale": 0.1573,
+ "raw": "art/raw/wild-guevera/hurt/20261112-224455-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 103,
+   "h": 138,
+   "ax": 25,
+   "ay": 137,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 98,
+   "h": 135,
+   "ax": 22,
+   "ay": 134,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 75,
+   "h": 112,
+   "ax": 0,
+   "ay": 111,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 79,
+   "h": 138,
+   "ax": 0,
+   "ay": 137,
+   "hold": 6
+  }
+ ]
+}

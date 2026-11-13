@@ -1,0 +1,40 @@
+{
+ "clip": "idle",
+ "loop": true,
+ "scale": 0.15766,
+ "raw": "art/raw/scott-carr/idle/20261112-211727-1.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 77,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 8
+  },
+  {
+   "file": "01.png",
+   "w": 77,
+   "h": 142,
+   "ax": 0,
+   "ay": 141,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 78,
+   "h": 144,
+   "ax": 0,
+   "ay": 143,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 78,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 8
+  }
+ ]
+}

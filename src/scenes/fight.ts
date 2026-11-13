@@ -194,7 +194,7 @@ export class FightScene implements Scene {
     const camera: Camera = { x: base.x + off.x, y: base.y + off.y };
     ctx.fillStyle = "#000";
     ctx.fillRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT);
-    drawStage(ctx, camera);
+    drawStage(ctx, camera, [state.fighters[0].slug, state.fighters[1].slug]);
     for (const f of state.fighters) drawShadow(ctx, f, camera);
     // The fighter being hit is drawn last, so impacts read on top.
     const order: (0 | 1)[] = state.fighters[0].state === "hitstun" || state.fighters[0].state === "knockdown" ? [1, 0] : [0, 1];

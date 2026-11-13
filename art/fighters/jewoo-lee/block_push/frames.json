@@ -1,0 +1,32 @@
+{
+ "clip": "block_push",
+ "loop": false,
+ "scale": 0.1722,
+ "raw": "art/raw/jewoo-lee/block_push/20261112-222633-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 77,
+   "h": 141,
+   "ax": 0,
+   "ay": 140,
+   "hold": 4
+  },
+  {
+   "file": "01.png",
+   "w": 87,
+   "h": 139,
+   "ax": 0,
+   "ay": 138,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 78,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

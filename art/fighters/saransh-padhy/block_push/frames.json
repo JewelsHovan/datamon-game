@@ -1,0 +1,32 @@
+{
+ "clip": "block_push",
+ "loop": false,
+ "scale": 0.17435,
+ "raw": "art/raw/saransh-padhy/block_push/20261112-212042-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 76,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 4
+  },
+  {
+   "file": "01.png",
+   "w": 92,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 88,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

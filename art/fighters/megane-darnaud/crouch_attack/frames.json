@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.21148,
+ "raw": "art/raw/megane-darnaud/crouch_attack/20261112-211958-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 73,
+   "h": 106,
+   "ax": 0,
+   "ay": 105,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 97,
+   "h": 92,
+   "ax": 0,
+   "ay": 91,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 117,
+   "h": 85,
+   "ax": 12,
+   "ay": 84,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 110,
+   "h": 78,
+   "ax": 9,
+   "ay": 77,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 79,
+   "h": 84,
+   "ax": 17,
+   "ay": 83,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 64,
+   "h": 105,
+   "ax": 0,
+   "ay": 104,
+   "hold": 6
+  }
+ ]
+}

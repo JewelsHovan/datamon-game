@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.18817,
+ "raw": "art/raw/veronica-marallag/air_hurt/20261112-224457-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 125,
+   "h": 130,
+   "ax": 22,
+   "ay": 129,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 157,
+   "h": 69,
+   "ax": 36,
+   "ay": 68,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 93,
+   "h": 125,
+   "ax": 8,
+   "ay": 124,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 148,
+   "h": 71,
+   "ax": 40,
+   "ay": 70,
+   "hold": 8
+  }
+ ]
+}

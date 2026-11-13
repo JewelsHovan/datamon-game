@@ -1,0 +1,56 @@
+{
+ "clip": "victory",
+ "loop": true,
+ "scale": 0.17789,
+ "raw": "art/raw/philippe-miranda-jean/victory/20261112-224155-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 66,
+   "h": 155,
+   "ax": 3,
+   "ay": 154,
+   "hold": 10
+  },
+  {
+   "file": "01.png",
+   "w": 65,
+   "h": 162,
+   "ax": 3,
+   "ay": 161,
+   "hold": 10
+  },
+  {
+   "file": "02.png",
+   "w": 66,
+   "h": 155,
+   "ax": 2,
+   "ay": 154,
+   "hold": 10
+  },
+  {
+   "file": "03.png",
+   "w": 68,
+   "h": 153,
+   "ax": 6,
+   "ay": 152,
+   "hold": 10
+  },
+  {
+   "file": "04.png",
+   "w": 67,
+   "h": 152,
+   "ax": 1,
+   "ay": 151,
+   "hold": 10
+  },
+  {
+   "file": "05.png",
+   "w": 64,
+   "h": 152,
+   "ax": 1,
+   "ay": 151,
+   "hold": 10
+  }
+ ]
+}

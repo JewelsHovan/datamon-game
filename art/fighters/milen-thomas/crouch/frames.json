@@ -1,0 +1,32 @@
+{
+ "clip": "crouch",
+ "loop": false,
+ "scale": 0.16888,
+ "raw": "art/raw/milen-thomas/crouch/20261112-223040-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 75,
+   "h": 129,
+   "ax": 1,
+   "ay": 128,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 71,
+   "h": 113,
+   "ax": 4,
+   "ay": 112,
+   "hold": 2
+  },
+  {
+   "file": "02.png",
+   "w": 63,
+   "h": 88,
+   "ax": 5,
+   "ay": 87,
+   "hold": 6
+  }
+ ]
+}

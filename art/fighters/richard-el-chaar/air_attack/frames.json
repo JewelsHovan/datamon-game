@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.18041,
+ "raw": "art/raw/richard-el-chaar/air_attack/20261112-223411-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 55,
+   "h": 108,
+   "ax": -9,
+   "ay": 107,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 66,
+   "h": 128,
+   "ax": -5,
+   "ay": 127,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 130,
+   "h": 114,
+   "ax": 16,
+   "ay": 113,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 135,
+   "h": 107,
+   "ax": 18,
+   "ay": 106,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 58,
+   "h": 115,
+   "ax": -9,
+   "ay": 114,
+   "hold": 6
+  }
+ ]
+}

@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.21944,
+ "raw": "art/raw/william-chan/crouch_attack/20261112-224414-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 72,
+   "h": 108,
+   "ax": 0,
+   "ay": 107,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 76,
+   "h": 99,
+   "ax": 5,
+   "ay": 98,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 125,
+   "h": 96,
+   "ax": 0,
+   "ay": 95,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 113,
+   "h": 86,
+   "ax": 0,
+   "ay": 85,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 72,
+   "h": 99,
+   "ax": 0,
+   "ay": 98,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 70,
+   "h": 108,
+   "ax": 0,
+   "ay": 107,
+   "hold": 6
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "clip": "hurt",
+ "loop": false,
+ "scale": 0.15608,
+ "raw": "art/raw/megane-darnaud/hurt/20261112-212052-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 89,
+   "h": 135,
+   "ax": 9,
+   "ay": 134,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 104,
+   "h": 136,
+   "ax": 23,
+   "ay": 135,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 71,
+   "h": 118,
+   "ax": 0,
+   "ay": 117,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 77,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

@@ -11,6 +11,9 @@ import { loadFighterIndex, manifestUrl, parseManifest, type ClipLoaderDeps } fro
 export interface FighterInfo {
   archetype: string | null;
   special: string | null;
+  altSpecial?: string | null;
+  trait?: string | null;
+  winQuote?: string | null;
 }
 
 /**
@@ -75,7 +78,7 @@ function entryInfo(entry: Record<string, unknown>): FighterInfo | null {
   if (!("archetype" in entry)) return null;
   const special = entry.special;
   const specialObj = typeof special === "object" && special !== null ? (special as Record<string, unknown>) : null;
-  return {
+  const info: FighterInfo = {
     archetype: prettyArchetype(entry.archetype),
     special:
       str(entry.specialName) ??
@@ -85,6 +88,13 @@ function entryInfo(entry: Record<string, unknown>): FighterInfo | null {
       str(specialObj?.displayName) ??
       null,
   };
+  const altSpecial = str(entry.altSpecialName) ?? str(entry.altSpecialDisplayName) ?? str(entry.altSpecialLabel);
+  const trait = str(entry.traitName);
+  const winQuote = str(entry.winQuote);
+  if (altSpecial) info.altSpecial = altSpecial;
+  if (trait) info.trait = trait;
+  if (winQuote) info.winQuote = winQuote;
+  return info;
 }
 
 /**

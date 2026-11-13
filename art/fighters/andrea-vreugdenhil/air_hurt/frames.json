@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.18592,
+ "raw": "art/raw/andrea-vreugdenhil/air_hurt/20261112-222227-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 120,
+   "h": 130,
+   "ax": 15,
+   "ay": 129,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 138,
+   "h": 87,
+   "ax": 22,
+   "ay": 86,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 79,
+   "h": 130,
+   "ax": -1,
+   "ay": 129,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 133,
+   "h": 74,
+   "ax": 29,
+   "ay": 73,
+   "hold": 8
+  }
+ ]
+}

@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.22222,
+ "raw": "art/raw/vincent-anctil/crouch_attack/20261112-211955-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 67,
+   "h": 99,
+   "ax": 1,
+   "ay": 98,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 94,
+   "h": 94,
+   "ax": 0,
+   "ay": 93,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 108,
+   "h": 92,
+   "ax": 0,
+   "ay": 91,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 130,
+   "h": 75,
+   "ax": 0,
+   "ay": 74,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 74,
+   "h": 93,
+   "ax": 0,
+   "ay": 92,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 67,
+   "h": 99,
+   "ax": 2,
+   "ay": 98,
+   "hold": 6
+  }
+ ]
+}

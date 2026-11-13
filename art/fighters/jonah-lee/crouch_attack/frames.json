@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.224,
+ "raw": "art/raw/jonah-lee/crouch_attack/20261112-222651-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 73,
+   "h": 112,
+   "ax": 0,
+   "ay": 111,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 85,
+   "h": 97,
+   "ax": 13,
+   "ay": 96,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 111,
+   "h": 96,
+   "ax": 0,
+   "ay": 95,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 115,
+   "h": 96,
+   "ax": 0,
+   "ay": 95,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 93,
+   "h": 102,
+   "ax": 0,
+   "ay": 101,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 64,
+   "h": 112,
+   "ax": 2,
+   "ay": 111,
+   "hold": 6
+  }
+ ]
+}

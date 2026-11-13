@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.18253,
+ "raw": "art/raw/minh-ngoc-do/air_attack/20261112-223548-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 57,
+   "h": 107,
+   "ax": -10,
+   "ay": 106,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 69,
+   "h": 137,
+   "ax": -3,
+   "ay": 136,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 112,
+   "h": 124,
+   "ax": 3,
+   "ay": 123,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 122,
+   "h": 113,
+   "ax": 6,
+   "ay": 112,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 61,
+   "h": 110,
+   "ax": -7,
+   "ay": 109,
+   "hold": 6
+  }
+ ]
+}

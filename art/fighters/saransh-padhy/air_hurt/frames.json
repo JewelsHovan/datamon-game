@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.19126,
+ "raw": "art/raw/saransh-padhy/air_hurt/20261112-212108-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 126,
+   "h": 126,
+   "ax": 15,
+   "ay": 125,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 149,
+   "h": 83,
+   "ax": 35,
+   "ay": 82,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 74,
+   "h": 131,
+   "ax": -6,
+   "ay": 130,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 148,
+   "h": 41,
+   "ax": 30,
+   "ay": 40,
+   "hold": 8
+  }
+ ]
+}

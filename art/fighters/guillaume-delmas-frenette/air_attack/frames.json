@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.17327,
+ "raw": "art/raw/guillaume-delmas-frenette/air_attack/20261112-222510-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 51,
+   "h": 99,
+   "ax": -9,
+   "ay": 98,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 58,
+   "h": 124,
+   "ax": -8,
+   "ay": 123,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 117,
+   "h": 111,
+   "ax": 14,
+   "ay": 110,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 128,
+   "h": 104,
+   "ax": 18,
+   "ay": 103,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 50,
+   "h": 101,
+   "ax": -9,
+   "ay": 100,
+   "hold": 6
+  }
+ ]
+}

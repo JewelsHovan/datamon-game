@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.18817,
+ "raw": "art/raw/ethan-pirso/air_attack/20261112-212026-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 58,
+   "h": 113,
+   "ax": -11,
+   "ay": 112,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 65,
+   "h": 136,
+   "ax": -7,
+   "ay": 135,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 121,
+   "h": 119,
+   "ax": 9,
+   "ay": 118,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 132,
+   "h": 114,
+   "ax": 18,
+   "ay": 113,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 62,
+   "h": 116,
+   "ax": -9,
+   "ay": 115,
+   "hold": 6
+  }
+ ]
+}

@@ -1,0 +1,56 @@
+{
+ "clip": "light_kick",
+ "loop": false,
+ "scale": 0.17995,
+ "raw": "art/raw/vincent-anctil/light_kick/20261112-211934-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 51,
+   "h": 140,
+   "ax": 6,
+   "ay": 139,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 53,
+   "h": 139,
+   "ax": 11,
+   "ay": 138,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 106,
+   "h": 140,
+   "ax": 11,
+   "ay": 139,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 52,
+   "h": 139,
+   "ax": 9,
+   "ay": 138,
+   "hold": 3
+  },
+  {
+   "file": "04.png",
+   "w": 59,
+   "h": 139,
+   "ax": 0,
+   "ay": 138,
+   "hold": 3
+  },
+  {
+   "file": "05.png",
+   "w": 71,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

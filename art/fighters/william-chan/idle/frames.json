@@ -1,0 +1,40 @@
+{
+ "clip": "idle",
+ "loop": true,
+ "scale": 0.1626,
+ "raw": "art/raw/william-chan/idle/20261112-223927-1.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 68,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 8
+  },
+  {
+   "file": "01.png",
+   "w": 69,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 68,
+   "h": 143,
+   "ax": 0,
+   "ay": 142,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 68,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 8
+  }
+ ]
+}

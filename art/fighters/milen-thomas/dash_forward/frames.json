@@ -1,0 +1,48 @@
+{
+ "clip": "dash_forward",
+ "loop": false,
+ "scale": 0.1847,
+ "raw": "art/raw/milen-thomas/dash_forward/20261112-223036-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 101,
+   "h": 135,
+   "ax": 15,
+   "ay": 134,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 95,
+   "h": 134,
+   "ax": 13,
+   "ay": 133,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 83,
+   "h": 135,
+   "ax": 1,
+   "ay": 134,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 84,
+   "h": 135,
+   "ax": 5,
+   "ay": 134,
+   "hold": 3
+  },
+  {
+   "file": "04.png",
+   "w": 83,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

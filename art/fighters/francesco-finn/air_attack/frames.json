@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.18182,
+ "raw": "art/raw/francesco-finn/air_attack/20261112-222517-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 57,
+   "h": 103,
+   "ax": -13,
+   "ay": 102,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 64,
+   "h": 130,
+   "ax": -10,
+   "ay": 129,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 122,
+   "h": 117,
+   "ax": 9,
+   "ay": 116,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 121,
+   "h": 113,
+   "ax": 4,
+   "ay": 112,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 57,
+   "h": 101,
+   "ax": -13,
+   "ay": 100,
+   "hold": 6
+  }
+ ]
+}

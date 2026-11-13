@@ -1,5 +1,6 @@
 // Movement, gravity, pushboxes, stage walls, the screen-width separation limit
 // and facing. Integer subpixels only.
+import { fighterInfo } from "../data/fighters";
 import { MOVEMENT } from "../data/movement";
 import { canTurn, isAirborne, landFighter } from "./fighter";
 import { clampInt } from "./fixed";
@@ -12,7 +13,6 @@ export const WALL_RIGHT = MOVEMENT.stageWidth - MOVEMENT.screenMargin;
 /** Largest allowed distance between the two fighters' centers. */
 export const MAX_SEPARATION = MOVEMENT.screenWidth - 2 * MOVEMENT.screenMargin;
 
-const HALF_GRAVITY = MOVEMENT.gravity >> 1;
 const HALF_PUSH = MOVEMENT.pushboxWidth >> 1;
 
 /**
@@ -22,8 +22,9 @@ const HALF_PUSH = MOVEMENT.pushboxWidth >> 1;
 export function applyMovement(f: FighterState, player: PlayerIndex, events: SimEvent[]): void {
   f.x += f.vx;
   if (!isAirborne(f)) return;
-  f.y += f.vy + HALF_GRAVITY;
-  f.vy += MOVEMENT.gravity;
+  const g = MOVEMENT.gravity + fighterInfo(f.slug).gravityOffset;
+  f.y += f.vy + (g >> 1);
+  f.vy += g;
   if (f.y >= MOVEMENT.floorY) landFighter(f, player, events);
 }
 

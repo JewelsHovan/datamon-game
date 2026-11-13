@@ -1,0 +1,48 @@
+{
+ "clip": "dash_back",
+ "loop": false,
+ "scale": 0.17305,
+ "raw": "art/raw/guillaume-delmas-frenette/dash_back/20261112-222158-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 83,
+   "h": 137,
+   "ax": -4,
+   "ay": 136,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 52,
+   "h": 134,
+   "ax": -14,
+   "ay": 133,
+   "hold": 4
+  },
+  {
+   "file": "02.png",
+   "w": 50,
+   "h": 131,
+   "ax": -15,
+   "ay": 130,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 67,
+   "h": 134,
+   "ax": -1,
+   "ay": 133,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 77,
+   "h": 139,
+   "ax": -1,
+   "ay": 138,
+   "hold": 3
+  }
+ ]
+}

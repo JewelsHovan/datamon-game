@@ -1,0 +1,132 @@
+{
+  "air_attack": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/air_attack/20261112-222510-0.png",
+    "state": "approved"
+  },
+  "air_hurt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/air_hurt/20261112-222742-0.png",
+    "state": "approved"
+  },
+  "block": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/block/20261112-222558-0.png",
+    "state": "approved"
+  },
+  "block_push": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/block_push/20261112-222625-0.png",
+    "state": "approved"
+  },
+  "crouch": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/crouch/20261112-222221-0.png",
+    "state": "approved"
+  },
+  "crouch_attack": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/crouch_attack/20261112-222449-0.png",
+    "state": "approved"
+  },
+  "crouch_hurt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/crouch_hurt/20261112-222720-0.png",
+    "state": "approved"
+  },
+  "dash_back": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/dash_back/20261112-222158-0.png",
+    "state": "approved"
+  },
+  "dash_forward": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/dash_forward/20261112-222136-0.png",
+    "state": "approved"
+  },
+  "getup_roll": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/getup_roll/20261112-222832-0.png",
+    "state": "approved"
+  },
+  "heavy_kick": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/heavy_kick/20261112-222421-0.png",
+    "state": "approved"
+  },
+  "heavy_punch": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/heavy_punch/20261112-222335-0.png",
+    "state": "approved"
+  },
+  "hurt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/hurt/20261112-222654-0.png",
+    "state": "approved"
+  },
+  "idle": {
+    "note": "",
+    "raw": "art/raw/guillaume-delmas-frenette/idle/20261112-221952-1.png",
+    "state": "approved"
+  },
+  "intro": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/intro/20261112-222859-0.png",
+    "state": "approved"
+  },
+  "jump": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/jump/20261112-222247-0.png",
+    "state": "approved"
+  },
+  "knockdown": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/knockdown/20261112-222811-0.png",
+    "state": "approved"
+  },
+  "light_kick": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/light_kick/20261112-222356-0.png",
+    "state": "approved"
+  },
+  "light_punch": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/light_punch/20261112-222310-0.png",
+    "state": "approved"
+  },
+  "special": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/special/20261112-223039-0.png",
+    "state": "approved"
+  },
+  "summon": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/summon/20261112-223013-0.png",
+    "state": "approved"
+  },
+  "taunt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/taunt/20261112-222923-0.png",
+    "state": "approved"
+  },
+  "throw": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/throw/20261112-222534-0.png",
+    "state": "approved"
+  },
+  "victory": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/victory/20261112-222948-0.png",
+    "state": "approved"
+  },
+  "walk": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/walk/20261112-222053-0.png",
+    "state": "approved"
+  },
+  "walk_back": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/guillaume-delmas-frenette/walk_back/20261112-222114-0.png",
+    "state": "approved"
+  }
+}

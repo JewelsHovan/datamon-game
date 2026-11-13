@@ -1,0 +1,56 @@
+{
+ "clip": "getup_roll",
+ "loop": false,
+ "scale": 0.2026,
+ "raw": "art/raw/vincent-anctil/getup_roll/20261112-212139-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 116,
+   "h": 28,
+   "ax": 19,
+   "ay": 27,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 72,
+   "h": 78,
+   "ax": 2,
+   "ay": 77,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 64,
+   "h": 63,
+   "ax": -3,
+   "ay": 62,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 79,
+   "h": 85,
+   "ax": 4,
+   "ay": 84,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 81,
+   "h": 114,
+   "ax": 4,
+   "ay": 113,
+   "hold": 6
+  },
+  {
+   "file": "05.png",
+   "w": 75,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

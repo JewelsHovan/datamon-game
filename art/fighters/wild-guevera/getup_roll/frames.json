@@ -1,0 +1,56 @@
+{
+ "clip": "getup_roll",
+ "loop": false,
+ "scale": 0.23649,
+ "raw": "art/raw/wild-guevera/getup_roll/20261112-224632-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 145,
+   "h": 34,
+   "ax": 29,
+   "ay": 33,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 77,
+   "h": 92,
+   "ax": 3,
+   "ay": 91,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 71,
+   "h": 71,
+   "ax": -3,
+   "ay": 70,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 94,
+   "h": 90,
+   "ax": 13,
+   "ay": 89,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 91,
+   "h": 120,
+   "ax": 12,
+   "ay": 119,
+   "hold": 6
+  },
+  {
+   "file": "05.png",
+   "w": 80,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

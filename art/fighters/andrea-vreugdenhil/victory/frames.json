@@ -1,0 +1,56 @@
+{
+ "clip": "victory",
+ "loop": true,
+ "scale": 0.1722,
+ "raw": "art/raw/andrea-vreugdenhil/victory/20261112-222301-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 60,
+   "h": 157,
+   "ax": 0,
+   "ay": 156,
+   "hold": 10
+  },
+  {
+   "file": "01.png",
+   "w": 61,
+   "h": 168,
+   "ax": 0,
+   "ay": 167,
+   "hold": 10
+  },
+  {
+   "file": "02.png",
+   "w": 66,
+   "h": 156,
+   "ax": 3,
+   "ay": 155,
+   "hold": 10
+  },
+  {
+   "file": "03.png",
+   "w": 67,
+   "h": 156,
+   "ax": 3,
+   "ay": 155,
+   "hold": 10
+  },
+  {
+   "file": "04.png",
+   "w": 66,
+   "h": 156,
+   "ax": 0,
+   "ay": 155,
+   "hold": 10
+  },
+  {
+   "file": "05.png",
+   "w": 59,
+   "h": 157,
+   "ax": 0,
+   "ay": 156,
+   "hold": 10
+  }
+ ]
+}

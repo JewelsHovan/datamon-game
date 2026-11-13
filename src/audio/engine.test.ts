@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import type { ProjectileKind } from "../data/moves";
+import type { FighterState, SimState } from "../sim/types";
 import {
   AudioEngine,
   driveCurve,
@@ -28,6 +30,43 @@ type RealContextFits = AudioContext extends AudioContextLike ? true : false;
 const realContextFits: RealContextFits = true;
 
 const LEVELS = { master: 1, music: 1, sfx: 1 };
+
+const fakeFighter = (slug: string): FighterState => ({
+  slug,
+  x: 0,
+  y: 0,
+  vx: 0,
+  vy: 0,
+  facing: 1,
+  state: "idle",
+  stateFrame: 0,
+  jumpDir: 0,
+  input: { frames: [0], head: 0 },
+  health: 1000,
+  move: null,
+  hitstop: 0,
+  stun: 0,
+  stunLow: false,
+  pushLeft: 0,
+  pushFrames: 0,
+  comboHits: 0,
+  consumedFrame: -1,
+  maxHealth: 1000,
+  juggle: 0,
+  wallBounced: false,
+  slideDir: 0,
+  rollFrom: -1,
+  tumble: false,
+});
+
+const fakeState = (p0Slug: string, p1Slug = "julien-hovan"): SimState => ({
+  frame: 0,
+  rng: 1,
+  fighters: [fakeFighter(p0Slug), fakeFighter(p1Slug)],
+  projectiles: [],
+  round: { phase: "fight", phaseFrame: 0, number: 1, wins: [0, 0], timer: 5940, winner: -1, reason: "", training: false },
+  events: [],
+});
 
 describe("engine graph (R1)", () => {
   it("routes both buses through one compressor into the master gain", () => {
@@ -208,6 +247,7 @@ describe("sound design table (R2, R3)", () => {
     expect(w({ type: "attack", player: 0, move: "crouch_attack" })).toBe("whoosh_heavy");
     expect(w({ type: "attack", player: 0, move: "special" })).toBe("whoosh_special");
     expect(w({ type: "attack", player: 0, move: "throw" })).toBe("whoosh_throw");
+    expect(w({ type: "attack", player: 0, move: "force_push" })).toBe("whoosh_throw");
   });
 
   it("hits, blocks and throws pick their recipes; combos climb in pitch", () => {
@@ -234,8 +274,47 @@ describe("sound design table (R2, R3)", () => {
       [{ type: "knockdown", player: 0, x: 0, y: 0 }, "knockdown"],
       [{ type: "projectile", player: 0, x: 0, y: 0 }, "projectile"],
       [{ type: "clash", x: 0, y: 0 }, "clash"],
+      [{ type: "counter", player: 0, target: 1, x: 0, y: 0 }, "counter"],
     ];
     for (const [ev, name] of simple) expect(routeEvent(ev).sfx).toBe(name);
+  });
+
+  it("routes all 5 ProjectileKind values to distinct recipes or pitches", () => {
+    const byKind = (kind: ProjectileKind) => routeEvent({ type: "projectile", player: 0, x: 0, y: 0, kind });
+    expect(byKind("orb")).toMatchObject({ sfx: "projectile", pitch: 1 });
+    expect(byKind("fast_packet")).toMatchObject({ sfx: "projectile", pitch: 1.22 });
+    expect(byKind("arc_burst")).toMatchObject({ sfx: "projectile", pitch: 1.12 });
+    expect(byKind("slow_mine")).toMatchObject({ sfx: "mine_set", pitch: 1 });
+    expect(byKind("shockwave")).toMatchObject({ sfx: "shockwave", pitch: 1 });
+  });
+
+  it("synthesizes clean non-zero audio for counter, mine_set, and shockwave", () => {
+    for (const name of ["counter", "mine_set", "shockwave"] as const) {
+      const ctx = new FakeAudioContext();
+      const engine = new AudioEngine(ctx, LEVELS, false);
+      const started = engine.play(SFX[name], 0);
+      expect(started, name).toBe(SFX[name].length);
+      expect(ctx.started.length, name).toBe(SFX[name].length);
+      for (const source of ctx.started) {
+        expect(source.stopTime!, name).toBeGreaterThan(source.startTime!);
+        if (source instanceof FakeOscillator) {
+          expect(source.startFrequency, name).toBeGreaterThan(0);
+        } else {
+          const data = (source as FakeBufferSource).buffer!.getChannelData(0);
+          expect(data.some((v) => v !== 0), name).toBe(true);
+        }
+      }
+    }
+  });
+
+  it("scales attack and taunt pitch by fighter sfxPitch when state is provided", () => {
+    const state = fakeState("scott-carr", "megane-darnaud");
+    expect(routeEvent({ type: "attack", player: 0, move: "light_punch" }, state).pitch).toBeCloseTo(0.88);
+    expect(routeEvent({ type: "attack", player: 1, move: "light_punch" }, state).pitch).toBeCloseTo(1.12);
+    expect(routeEvent({ type: "taunt", player: 0 }, state).pitch).toBeCloseTo(0.88);
+    expect(routeEvent({ type: "taunt", player: 1 }, state).pitch).toBeCloseTo(1.12);
+    expect(routeEvent({ type: "attack", player: 0, move: "light_punch" }).pitch).toBe(1);
+    expect(routeEvent({ type: "taunt", player: 0 }).pitch).toBe(1);
   });
 
   it("the K.O. is a long low hit with a falling tone", () => {

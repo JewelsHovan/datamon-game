@@ -142,13 +142,15 @@ def main() -> int:
     ap.add_argument("slug")
     ap.add_argument("--overlay", type=Path, help="write box overlay sheets for review into this directory")
     ap.add_argument("--clips", nargs="*", default=["heavy_punch", "heavy_kick", "crouch_attack", "air_attack", "light_punch"])
+    ap.add_argument("--skip-index", action="store_true", help="do not rewrite src/data/boxes/index.ts (for parallel builds)")
     args = ap.parse_args()
     boxes = compute(args.slug)
     # The sim reads boxes as bundled data (deterministic, no fetch), so they live in src/data/boxes/.
     path = SIM_BOXES / f"{args.slug}.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(boxes, separators=(",", ":")) + "\n")
-    write_index()
+    if not args.skip_index:
+        write_index()
     n_reach = sum(1 for rows in boxes["clips"].values() for r in rows if r["reach"])
     print(f"{args.slug}: boxes for {len(boxes['clips'])} clips, {n_reach} frames with reach -> {path.relative_to(common.ROOT)}")
     if args.overlay:

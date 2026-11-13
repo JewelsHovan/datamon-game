@@ -1,0 +1,56 @@
+{
+ "clip": "getup_roll",
+ "loop": false,
+ "scale": 0.20588,
+ "raw": "art/raw/oyku-cildir/getup_roll/20261112-224020-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 131,
+   "h": 32,
+   "ax": 21,
+   "ay": 31,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 77,
+   "h": 72,
+   "ax": 1,
+   "ay": 71,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 67,
+   "h": 59,
+   "ax": -7,
+   "ay": 58,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 84,
+   "h": 93,
+   "ax": 10,
+   "ay": 92,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 77,
+   "h": 126,
+   "ax": 2,
+   "ay": 125,
+   "hold": 6
+  },
+  {
+   "file": "05.png",
+   "w": 73,
+   "h": 140,
+   "ax": -1,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

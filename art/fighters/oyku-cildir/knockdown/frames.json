@@ -1,0 +1,72 @@
+{
+ "clip": "knockdown",
+ "loop": false,
+ "scale": 0.22801,
+ "raw": "art/raw/oyku-cildir/knockdown/20261112-223958-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 88,
+   "h": 131,
+   "ax": 8,
+   "ay": 130,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 133,
+   "h": 67,
+   "ax": 19,
+   "ay": 66,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 137,
+   "h": 42,
+   "ax": 32,
+   "ay": 41,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 95,
+   "h": 77,
+   "ax": 8,
+   "ay": 76,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 133,
+   "h": 29,
+   "ax": 26,
+   "ay": 28,
+   "hold": 26
+  },
+  {
+   "file": "05.png",
+   "w": 110,
+   "h": 63,
+   "ax": 2,
+   "ay": 62,
+   "hold": 8
+  },
+  {
+   "file": "06.png",
+   "w": 81,
+   "h": 92,
+   "ax": 6,
+   "ay": 91,
+   "hold": 8
+  },
+  {
+   "file": "07.png",
+   "w": 77,
+   "h": 142,
+   "ax": 0,
+   "ay": 141,
+   "hold": 8
+  }
+ ]
+}

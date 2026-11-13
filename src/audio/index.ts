@@ -8,7 +8,7 @@
 //   that never throws into the game.
 // - Presentation only (docs/game-design.md, loop rule 7): it reads events and
 //   the round clock and never writes back.
-import type { RoundState, SimEvent } from "../sim/types";
+import type { RoundState, SimEvent, SimState } from "../sim/types";
 import { AudioEngine, clamp01, makeRandom, type AudioContextLike } from "./engine";
 import { DEFAULT_TIMERS, MusicPlayer, type Timers } from "./music";
 import type { MusicTrack } from "./patterns";
@@ -55,8 +55,8 @@ export interface AudioStats {
 }
 
 export interface GameAudio {
-  /** Call after every sim step with that step's events (and the round, for the timer tick). */
-  onEvents(events: readonly SimEvent[], round?: RoundClock): void;
+  /** Call after every sim step with that step's events (and the round or sim state, for the timer tick and fighter pitch). */
+  onEvents(events: readonly SimEvent[], round?: RoundClock | SimState, state?: SimState): void;
   ui(kind: UiSound): void;
   /** Switches the music loop (null stops it). Remembered until the context exists. */
   music(track: MusicTrack | null): void;
@@ -144,6 +144,10 @@ function safe(fn: () => void): void {
   }
 }
 
+function isSimState(value: RoundClock | SimState): value is SimState {
+  return "fighters" in value;
+}
+
 export function createAudio(options: AudioOptions = {}): GameAudio {
   const createContext = options.createContext ?? browserContext;
   const storage = options.storage === undefined ? defaultStorage() : options.storage;
@@ -208,17 +212,19 @@ export function createAudio(options: AudioOptions = {}): GameAudio {
   }
 
   const audio: GameAudio = {
-    onEvents(events, round) {
+    onEvents(events, round, state) {
       safe(() => {
         const e = live();
-        if (round) timerTick(e, round);
+        const simState = state ?? (round && isSimState(round) ? round : undefined);
+        const clock = round ? (isSimState(round) ? round.round : round) : simState?.round;
+        if (clock) timerTick(e, clock);
         if (!e || events.length === 0) return;
         const now = e.now();
         // The K.O. recipe carries its own impact, so the finishing hit stays quiet.
         const ko = events.some((ev) => ev.type === "ko");
         for (const ev of events) {
           if (ko && ev.type === "hit") continue;
-          const r = routeEvent(ev);
+          const r = routeEvent(ev, simState);
           if (r.sfx) e.play(SFX[r.sfx], now, { pitch: r.pitch * (0.97 + random() * 0.06) });
           for (const cue of r.stingers) e.play(stingerRecipe(cue.name, cue.arg), now + cue.delay);
           if (r.duck) e.duck(now + r.duck.delay, r.duck.depth, r.duck.hold, r.duck.release);

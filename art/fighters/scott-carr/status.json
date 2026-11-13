@@ -1,0 +1,132 @@
+{
+  "air_attack": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/scott-carr/air_attack/20261112-212027-0.png",
+    "state": "approved"
+  },
+  "air_hurt": {
+    "note": "verified",
+    "raw": "art/raw/scott-carr/air_hurt/20261112-212135-0.png",
+    "state": "approved"
+  },
+  "block": {
+    "note": "verified",
+    "raw": "art/raw/scott-carr/block/20261112-212053-0.png",
+    "state": "approved"
+  },
+  "block_push": {
+    "note": "verified",
+    "raw": "art/raw/scott-carr/block_push/20261112-212107-0.png",
+    "state": "approved"
+  },
+  "crouch": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/scott-carr/crouch/20261112-211914-0.png",
+    "state": "approved"
+  },
+  "crouch_attack": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/scott-carr/crouch_attack/20261112-212016-0.png",
+    "state": "approved"
+  },
+  "crouch_hurt": {
+    "note": "verified",
+    "raw": "art/raw/scott-carr/crouch_hurt/20261112-212130-0.png",
+    "state": "approved"
+  },
+  "dash_back": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/scott-carr/dash_back/20261112-211854-0.png",
+    "state": "approved"
+  },
+  "dash_forward": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/scott-carr/dash_forward/20261112-211852-0.png",
+    "state": "approved"
+  },
+  "getup_roll": {
+    "note": "verified",
+    "raw": "art/raw/scott-carr/getup_roll/20261112-212158-0.png",
+    "state": "approved"
+  },
+  "heavy_kick": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/scott-carr/heavy_kick/20261112-212005-0.png",
+    "state": "approved"
+  },
+  "heavy_punch": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/scott-carr/heavy_punch/20261112-211940-0.png",
+    "state": "approved"
+  },
+  "hurt": {
+    "note": "verified",
+    "raw": "art/raw/scott-carr/hurt/20261112-212114-0.png",
+    "state": "approved"
+  },
+  "idle": {
+    "note": "calibrated idle",
+    "raw": "art/raw/scott-carr/idle/20261112-211727-1.png",
+    "state": "approved"
+  },
+  "intro": {
+    "note": "verified",
+    "raw": "art/raw/scott-carr/intro/20261112-212216-0.png",
+    "state": "approved"
+  },
+  "jump": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/scott-carr/jump/20261112-211916-0.png",
+    "state": "approved"
+  },
+  "knockdown": {
+    "note": "verified",
+    "raw": "art/raw/scott-carr/knockdown/20261112-212155-0.png",
+    "state": "approved"
+  },
+  "light_kick": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/scott-carr/light_kick/20261112-211956-0.png",
+    "state": "approved"
+  },
+  "light_punch": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/scott-carr/light_punch/20261112-211935-0.png",
+    "state": "approved"
+  },
+  "special": {
+    "note": "verified",
+    "raw": "art/raw/scott-carr/special/20261112-212302-0.png",
+    "state": "approved"
+  },
+  "summon": {
+    "note": "verified",
+    "raw": "art/raw/scott-carr/summon/20261112-212246-0.png",
+    "state": "approved"
+  },
+  "taunt": {
+    "note": "verified",
+    "raw": "art/raw/scott-carr/taunt/20261112-212223-0.png",
+    "state": "approved"
+  },
+  "throw": {
+    "note": "verified",
+    "raw": "art/raw/scott-carr/throw/20261112-212337-0.png",
+    "state": "approved"
+  },
+  "victory": {
+    "note": "verified",
+    "raw": "art/raw/scott-carr/victory/20261112-212238-0.png",
+    "state": "approved"
+  },
+  "walk": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/scott-carr/walk/20261112-211833-0.png",
+    "state": "approved"
+  },
+  "walk_back": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/scott-carr/walk_back/20261112-211829-0.png",
+    "state": "approved"
+  }
+}

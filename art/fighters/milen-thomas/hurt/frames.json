@@ -1,0 +1,40 @@
+{
+ "clip": "hurt",
+ "loop": false,
+ "scale": 0.15119,
+ "raw": "art/raw/milen-thomas/hurt/20261112-223219-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 88,
+   "h": 135,
+   "ax": 14,
+   "ay": 134,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 102,
+   "h": 134,
+   "ax": 21,
+   "ay": 133,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 72,
+   "h": 117,
+   "ax": 0,
+   "ay": 116,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 83,
+   "h": 138,
+   "ax": 0,
+   "ay": 137,
+   "hold": 6
+  }
+ ]
+}

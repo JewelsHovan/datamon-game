@@ -169,7 +169,24 @@ function dimmedStrip(s: Stage, strip: AtlasImage): HTMLCanvasElement {
   return s.dimmed;
 }
 
-function drawWalkers(ctx: CanvasRenderingContext2D, camera: Camera, mid: Layer): void {
+/** Resolves a walker's cast index, stepping past any slug in `activeFighters` so fighters never appear in the background; returns -1 if every cast member is excluded. */
+export function resolveWalkerCastIndex(
+  who: number,
+  cast: readonly { slug: string }[],
+  activeFighters?: readonly string[],
+): number {
+  const n = cast.length;
+  if (n === 0) return -1;
+  const base = ((who % n) + n) % n;
+  if (!activeFighters || activeFighters.length === 0) return base;
+  for (let offset = 0; offset < n; offset++) {
+    const idx = (base + offset) % n;
+    if (!activeFighters.includes(cast[idx]!.slug)) return idx;
+  }
+  return -1;
+}
+
+function drawWalkers(ctx: CanvasRenderingContext2D, camera: Camera, mid: Layer, activeFighters?: readonly string[]): void {
   const s = stage!;
   const art = s.walkers;
   if (!s.walkerState || !art) return;
@@ -181,9 +198,11 @@ function drawWalkers(ctx: CanvasRenderingContext2D, camera: Camera, mid: Layer):
   lastInfo.walkers = [];
   for (const w of s.walkerState.walkers) {
     if (w.wait > 0) continue;
+    const castIdx = resolveWalkerCastIndex(w.who, art.cast, activeFighters);
+    if (castIdx < 0) continue;
     const feetX = Math.round(w.x) - offset;
     lastInfo.walkers.push({ screenX: feetX, onScreen: feetX > -20 && feetX < VIEW_WIDTH + 20, watching: w.watching > 0 });
-    const frames = art.cast[w.who % art.cast.length]!.frames;
+    const frames = art.cast[castIdx]!.frames;
     const walking = w.watching === 0;
     // Walking cycles the four frames; watching a K.O. shows the standing frame.
     const fr = frames[walking ? Math.floor(w.steps / 9) % frames.length : Math.min(art.stand, frames.length - 1)]!;
@@ -250,7 +269,7 @@ function drawFallback(ctx: CanvasRenderingContext2D, camera: Camera): void {
   }
 }
 
-export function drawStage(ctx: CanvasRenderingContext2D, camera: Camera): void {
+export function drawStage(ctx: CanvasRenderingContext2D, camera: Camera, activeFighters?: readonly string[]): void {
   frame += 1;
   if (!stage) {
     if (!loading && typeof document !== "undefined") {
@@ -270,7 +289,7 @@ export function drawStage(ctx: CanvasRenderingContext2D, camera: Camera): void {
   if (mid) {
     for (const l of rest) ctx.drawImage(l.img, -Math.round(camera.x * l.factor), l.y - camera.y);
     // In front of the furniture (behind it they were hidden by desks and monitors), darkened and behind the fighters.
-    drawWalkers(ctx, camera, mid);
+    drawWalkers(ctx, camera, mid, activeFighters);
   }
   // Lower the background's contrast so fighters read first.
   ctx.fillStyle = "rgba(16, 12, 40, 0.24)";

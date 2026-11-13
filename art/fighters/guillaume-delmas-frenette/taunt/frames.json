@@ -1,0 +1,56 @@
+{
+ "clip": "taunt",
+ "loop": false,
+ "scale": 0.17178,
+ "raw": "art/raw/guillaume-delmas-frenette/taunt/20261112-222923-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 66,
+   "h": 141,
+   "ax": 0,
+   "ay": 140,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 63,
+   "h": 144,
+   "ax": 7,
+   "ay": 143,
+   "hold": 10
+  },
+  {
+   "file": "02.png",
+   "w": 43,
+   "h": 143,
+   "ax": 0,
+   "ay": 142,
+   "hold": 10
+  },
+  {
+   "file": "03.png",
+   "w": 48,
+   "h": 143,
+   "ax": 0,
+   "ay": 142,
+   "hold": 10
+  },
+  {
+   "file": "04.png",
+   "w": 85,
+   "h": 142,
+   "ax": 19,
+   "ay": 141,
+   "hold": 10
+  },
+  {
+   "file": "05.png",
+   "w": 69,
+   "h": 139,
+   "ax": 0,
+   "ay": 138,
+   "hold": 6
+  }
+ ]
+}

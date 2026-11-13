@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.20057,
+ "raw": "art/raw/elina-gu/air_hurt/20261112-222230-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 133,
+   "h": 125,
+   "ax": 17,
+   "ay": 124,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 141,
+   "h": 81,
+   "ax": 22,
+   "ay": 80,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 117,
+   "h": 130,
+   "ax": 10,
+   "ay": 129,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 150,
+   "h": 43,
+   "ax": 32,
+   "ay": 42,
+   "hold": 8
+  }
+ ]
+}

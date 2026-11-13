@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.21672,
+ "raw": "art/raw/logan-labossiere/crouch_attack/20261112-222711-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 67,
+   "h": 109,
+   "ax": 1,
+   "ay": 108,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 79,
+   "h": 98,
+   "ax": 0,
+   "ay": 97,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 108,
+   "h": 86,
+   "ax": 0,
+   "ay": 85,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 108,
+   "h": 85,
+   "ax": 0,
+   "ay": 84,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 99,
+   "h": 88,
+   "ax": 2,
+   "ay": 87,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 68,
+   "h": 109,
+   "ax": 1,
+   "ay": 108,
+   "hold": 6
+  }
+ ]
+}

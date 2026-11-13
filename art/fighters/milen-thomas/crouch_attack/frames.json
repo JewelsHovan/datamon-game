@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.22013,
+ "raw": "art/raw/milen-thomas/crouch_attack/20261112-223145-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 67,
+   "h": 106,
+   "ax": 0,
+   "ay": 105,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 76,
+   "h": 95,
+   "ax": 0,
+   "ay": 94,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 112,
+   "h": 94,
+   "ax": 0,
+   "ay": 93,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 116,
+   "h": 88,
+   "ax": 0,
+   "ay": 87,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 86,
+   "h": 94,
+   "ax": 1,
+   "ay": 93,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 67,
+   "h": 106,
+   "ax": 0,
+   "ay": 105,
+   "hold": 6
+  }
+ ]
+}

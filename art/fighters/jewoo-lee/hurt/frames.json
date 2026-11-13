@@ -1,0 +1,40 @@
+{
+ "clip": "hurt",
+ "loop": false,
+ "scale": 0.16949,
+ "raw": "art/raw/jewoo-lee/hurt/20261112-222706-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 100,
+   "h": 137,
+   "ax": 17,
+   "ay": 136,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 103,
+   "h": 140,
+   "ax": 27,
+   "ay": 139,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 78,
+   "h": 123,
+   "ax": 0,
+   "ay": 122,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 84,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

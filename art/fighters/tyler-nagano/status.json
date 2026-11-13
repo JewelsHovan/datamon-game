@@ -1,0 +1,132 @@
+{
+  "air_attack": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/air_attack/20261112-212000-0.png",
+    "state": "approved"
+  },
+  "air_hurt": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/air_hurt/20261112-212131-0.png",
+    "state": "approved"
+  },
+  "block": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/block/20261112-212046-0.png",
+    "state": "approved"
+  },
+  "block_push": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/block_push/20261112-212047-0.png",
+    "state": "approved"
+  },
+  "crouch": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/crouch/20261112-211850-0.png",
+    "state": "approved"
+  },
+  "crouch_attack": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/crouch_attack/20261112-211953-0.png",
+    "state": "approved"
+  },
+  "crouch_hurt": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/crouch_hurt/20261112-212110-0.png",
+    "state": "approved"
+  },
+  "dash_back": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/dash_back/20261112-211829-0.png",
+    "state": "approved"
+  },
+  "dash_forward": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/dash_forward/20261112-211827-0.png",
+    "state": "approved"
+  },
+  "getup_roll": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/getup_roll/20261112-212151-0.png",
+    "state": "approved"
+  },
+  "heavy_kick": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/heavy_kick/20261112-211938-0.png",
+    "state": "approved"
+  },
+  "heavy_punch": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/heavy_punch/20261112-211916-0.png",
+    "state": "approved"
+  },
+  "hurt": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/hurt/20261112-212110-0.png",
+    "state": "approved"
+  },
+  "idle": {
+    "note": "calibrated idle",
+    "raw": "art/raw/tyler-nagano/idle/20261112-211727-0.png",
+    "state": "approved"
+  },
+  "intro": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/intro/20261112-212158-0.png",
+    "state": "approved"
+  },
+  "jump": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/jump/20261112-211851-0.png",
+    "state": "approved"
+  },
+  "knockdown": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/knockdown/20261112-212133-0.png",
+    "state": "approved"
+  },
+  "light_kick": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/light_kick/20261112-211930-0.png",
+    "state": "approved"
+  },
+  "light_punch": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/light_punch/20261112-211911-0.png",
+    "state": "approved"
+  },
+  "special": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/special/20261112-212246-0.png",
+    "state": "approved"
+  },
+  "summon": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/summon/20261112-212235-0.png",
+    "state": "approved"
+  },
+  "taunt": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/taunt/20261112-212214-0.png",
+    "state": "approved"
+  },
+  "throw": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/throw/20261112-212017-0.png",
+    "state": "approved"
+  },
+  "victory": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/victory/20261112-212220-0.png",
+    "state": "approved"
+  },
+  "walk": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/walk/20261112-211807-0.png",
+    "state": "approved"
+  },
+  "walk_back": {
+    "note": "verified",
+    "raw": "art/raw/tyler-nagano/walk_back/20261112-211805-0.png",
+    "state": "approved"
+  }
+}

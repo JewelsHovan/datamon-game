@@ -1,0 +1,32 @@
+{
+ "clip": "block_push",
+ "loop": false,
+ "scale": 0.18717,
+ "raw": "art/raw/ethan-pirso/block_push/20261112-212053-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 79,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 4
+  },
+  {
+   "file": "01.png",
+   "w": 105,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 91,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.18253,
+ "raw": "art/raw/vincent-anctil/air_attack/20261112-212007-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 58,
+   "h": 104,
+   "ax": -10,
+   "ay": 103,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 73,
+   "h": 125,
+   "ax": -1,
+   "ay": 124,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 117,
+   "h": 116,
+   "ax": 7,
+   "ay": 115,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 124,
+   "h": 105,
+   "ax": 9,
+   "ay": 104,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 53,
+   "h": 115,
+   "ax": -13,
+   "ay": 114,
+   "hold": 6
+  }
+ ]
+}

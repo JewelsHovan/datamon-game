@@ -1,0 +1,32 @@
+{
+ "clip": "crouch",
+ "loop": false,
+ "scale": 0.17115,
+ "raw": "art/raw/elina-gu/crouch/20261112-222049-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 75,
+   "h": 128,
+   "ax": 0,
+   "ay": 127,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 72,
+   "h": 112,
+   "ax": 0,
+   "ay": 111,
+   "hold": 2
+  },
+  {
+   "file": "02.png",
+   "w": 67,
+   "h": 88,
+   "ax": 3,
+   "ay": 87,
+   "hold": 6
+  }
+ ]
+}

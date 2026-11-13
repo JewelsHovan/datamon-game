@@ -1,0 +1,72 @@
+{
+ "clip": "knockdown",
+ "loop": false,
+ "scale": 0.24867,
+ "raw": "art/raw/megane-darnaud/knockdown/20261112-212135-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 115,
+   "h": 129,
+   "ax": 15,
+   "ay": 128,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 145,
+   "h": 68,
+   "ax": 27,
+   "ay": 67,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 131,
+   "h": 60,
+   "ax": 28,
+   "ay": 59,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 107,
+   "h": 60,
+   "ax": 12,
+   "ay": 59,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 124,
+   "h": 30,
+   "ax": 23,
+   "ay": 29,
+   "hold": 26
+  },
+  {
+   "file": "05.png",
+   "w": 98,
+   "h": 69,
+   "ax": 3,
+   "ay": 68,
+   "hold": 8
+  },
+  {
+   "file": "06.png",
+   "w": 76,
+   "h": 99,
+   "ax": 4,
+   "ay": 98,
+   "hold": 8
+  },
+  {
+   "file": "07.png",
+   "w": 79,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 8
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.19204,
+ "raw": "art/raw/philippe-miranda-jean/air_hurt/20261112-223951-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 111,
+   "h": 131,
+   "ax": 11,
+   "ay": 130,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 152,
+   "h": 96,
+   "ax": 34,
+   "ay": 95,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 78,
+   "h": 133,
+   "ax": 1,
+   "ay": 132,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 135,
+   "h": 36,
+   "ax": 26,
+   "ay": 35,
+   "hold": 8
+  }
+ ]
+}

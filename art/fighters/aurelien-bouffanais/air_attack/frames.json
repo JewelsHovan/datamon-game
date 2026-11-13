@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.19284,
+ "raw": "art/raw/aurelien-bouffanais/air_attack/20261112-222528-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 56,
+   "h": 105,
+   "ax": -14,
+   "ay": 104,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 57,
+   "h": 135,
+   "ax": -14,
+   "ay": 134,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 127,
+   "h": 110,
+   "ax": 14,
+   "ay": 109,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 130,
+   "h": 98,
+   "ax": 16,
+   "ay": 97,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 56,
+   "h": 108,
+   "ax": -15,
+   "ay": 107,
+   "hold": 6
+  }
+ ]
+}

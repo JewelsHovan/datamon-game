@@ -1,0 +1,132 @@
+{
+  "air_attack": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/air_attack/20261112-223703-0.png",
+    "state": "approved"
+  },
+  "air_hurt": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/air_hurt/20261112-223737-0.png",
+    "state": "approved"
+  },
+  "block": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/block/20261112-223703-0.png",
+    "state": "approved"
+  },
+  "block_push": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/block_push/20261112-223704-0.png",
+    "state": "approved"
+  },
+  "crouch": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/crouch/20261112-223554-0.png",
+    "state": "approved"
+  },
+  "crouch_attack": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/crouch_attack/20261112-223705-0.png",
+    "state": "approved"
+  },
+  "crouch_hurt": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/crouch_hurt/20261112-223736-0.png",
+    "state": "approved"
+  },
+  "dash_back": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/dash_back/20261112-223552-0.png",
+    "state": "approved"
+  },
+  "dash_forward": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/dash_forward/20261112-223551-0.png",
+    "state": "approved"
+  },
+  "getup_roll": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/getup_roll/20261112-223737-0.png",
+    "state": "approved"
+  },
+  "heavy_kick": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/heavy_kick/20261112-223632-0.png",
+    "state": "approved"
+  },
+  "heavy_punch": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/heavy_punch/20261112-223632-0.png",
+    "state": "approved"
+  },
+  "hurt": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/hurt/20261112-223734-0.png",
+    "state": "approved"
+  },
+  "idle": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/idle/20261112-223505-0.png",
+    "state": "approved"
+  },
+  "intro": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/intro/20261112-223820-0.png",
+    "state": "approved"
+  },
+  "jump": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/jump/20261112-223629-0.png",
+    "state": "approved"
+  },
+  "knockdown": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/knockdown/20261112-223735-0.png",
+    "state": "approved"
+  },
+  "light_kick": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/light_kick/20261112-223630-0.png",
+    "state": "approved"
+  },
+  "light_punch": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/light_punch/20261112-223630-0.png",
+    "state": "approved"
+  },
+  "special": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/special/20261112-223825-0.png",
+    "state": "approved"
+  },
+  "summon": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/summon/20261112-223819-0.png",
+    "state": "approved"
+  },
+  "taunt": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/taunt/20261112-223820-0.png",
+    "state": "approved"
+  },
+  "throw": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/throw/20261112-223705-0.png",
+    "state": "approved"
+  },
+  "victory": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/victory/20261112-223820-0.png",
+    "state": "approved"
+  },
+  "walk": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/walk/20261112-223551-0.png",
+    "state": "approved"
+  },
+  "walk_back": {
+    "note": "",
+    "raw": "art/raw/stephanie-fontaine/walk_back/20261112-223549-0.png",
+    "state": "approved"
+  }
+}

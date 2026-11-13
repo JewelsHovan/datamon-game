@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.18253,
+ "raw": "art/raw/vincent-anctil/air_hurt/20261112-212118-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 109,
+   "h": 118,
+   "ax": 15,
+   "ay": 117,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 126,
+   "h": 82,
+   "ax": 23,
+   "ay": 81,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 75,
+   "h": 121,
+   "ax": -1,
+   "ay": 120,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 139,
+   "h": 37,
+   "ax": 29,
+   "ay": 36,
+   "hold": 8
+  }
+ ]
+}

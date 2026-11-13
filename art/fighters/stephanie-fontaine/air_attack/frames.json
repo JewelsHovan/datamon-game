@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.17544,
+ "raw": "art/raw/stephanie-fontaine/air_attack/20261112-223703-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 50,
+   "h": 101,
+   "ax": -13,
+   "ay": 100,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 69,
+   "h": 105,
+   "ax": -1,
+   "ay": 104,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 116,
+   "h": 111,
+   "ax": 8,
+   "ay": 110,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 118,
+   "h": 106,
+   "ax": 9,
+   "ay": 105,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 60,
+   "h": 100,
+   "ax": -7,
+   "ay": 99,
+   "hold": 6
+  }
+ ]
+}

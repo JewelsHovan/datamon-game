@@ -1,0 +1,40 @@
+{
+ "clip": "idle",
+ "loop": true,
+ "scale": 0.16847,
+ "raw": "art/raw/sarah-kotb/idle/20261112-223233-1.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 81,
+   "h": 140,
+   "ax": 1,
+   "ay": 139,
+   "hold": 8
+  },
+  {
+   "file": "01.png",
+   "w": 81,
+   "h": 143,
+   "ax": 1,
+   "ay": 142,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 81,
+   "h": 144,
+   "ax": 1,
+   "ay": 143,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 81,
+   "h": 140,
+   "ax": 1,
+   "ay": 139,
+   "hold": 8
+  }
+ ]
+}

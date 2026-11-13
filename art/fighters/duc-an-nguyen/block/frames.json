@@ -1,0 +1,24 @@
+{
+ "clip": "block",
+ "loop": false,
+ "scale": 0.15402,
+ "raw": "art/raw/duc-an-nguyen/block/20261112-222158-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 70,
+   "h": 138,
+   "ax": 0,
+   "ay": 137,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 63,
+   "h": 96,
+   "ax": 3,
+   "ay": 95,
+   "hold": 6
+  }
+ ]
+}

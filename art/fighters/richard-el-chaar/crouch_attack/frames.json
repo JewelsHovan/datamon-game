@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.21212,
+ "raw": "art/raw/richard-el-chaar/crouch_attack/20261112-223410-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 66,
+   "h": 106,
+   "ax": 0,
+   "ay": 105,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 91,
+   "h": 97,
+   "ax": 0,
+   "ay": 96,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 110,
+   "h": 91,
+   "ax": 0,
+   "ay": 90,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 108,
+   "h": 83,
+   "ax": 0,
+   "ay": 82,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 85,
+   "h": 94,
+   "ax": 0,
+   "ay": 93,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 65,
+   "h": 106,
+   "ax": 0,
+   "ay": 105,
+   "hold": 6
+  }
+ ]
+}

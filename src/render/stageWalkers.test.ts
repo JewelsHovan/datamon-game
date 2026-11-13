@@ -1,6 +1,7 @@
 // Spec 009 A3: the walker scheduler is deterministic for a seed, keeps walkers moving, and
 // stops everyone to watch on a K.O.
 import { describe, expect, it } from "vitest";
+import { resolveWalkerCastIndex } from "./stage";
 import { createWalkers, stepWalkers } from "./stageWalkers";
 
 function run(seed: number, frames: number, koAt = -1) {
@@ -39,5 +40,32 @@ describe("stage walkers", () => {
     const xs = s.walkers.map((w) => w.x);
     for (let t = 0; t < 50; t++) stepWalkers(s, 7);
     expect(s.walkers.map((w) => w.x)).toEqual(xs);
+  });
+});
+
+describe("resolveWalkerCastIndex", () => {
+  const cast = [{ slug: "alice" }, { slug: "bob" }, { slug: "carol" }, { slug: "dave" }];
+
+  it("keeps the walker's cast index when activeFighters is omitted or empty", () => {
+    expect(resolveWalkerCastIndex(1, cast)).toBe(1);
+    expect(resolveWalkerCastIndex(1, cast, [])).toBe(1);
+    expect(resolveWalkerCastIndex(5, cast)).toBe(1);
+  });
+
+  it("remaps past P1 or P2 when the cast member is fighting", () => {
+    expect(resolveWalkerCastIndex(0, cast, ["alice", "dave"])).toBe(1);
+    expect(resolveWalkerCastIndex(3, cast, ["alice", "dave"])).toBe(1);
+    expect(resolveWalkerCastIndex(2, cast, ["alice", "dave"])).toBe(2);
+  });
+
+  it("steps past two adjacent active fighters and wraps around", () => {
+    expect(resolveWalkerCastIndex(0, cast, ["alice", "bob"])).toBe(2);
+    expect(resolveWalkerCastIndex(2, cast, ["carol", "dave"])).toBe(0);
+    expect(resolveWalkerCastIndex(3, cast, ["dave", "alice"])).toBe(1);
+  });
+
+  it("returns -1 when cast is empty or every cast member is excluded", () => {
+    expect(resolveWalkerCastIndex(0, [], ["alice"])).toBe(-1);
+    expect(resolveWalkerCastIndex(0, cast, ["alice", "bob", "carol", "dave"])).toBe(-1);
   });
 });

@@ -1,0 +1,56 @@
+{
+ "clip": "walk",
+ "loop": true,
+ "scale": 0.17157,
+ "raw": "art/raw/guillaume-delmas-frenette/walk/20261112-222053-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 69,
+   "h": 140,
+   "ax": -2,
+   "ay": 139,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 74,
+   "h": 140,
+   "ax": 3,
+   "ay": 139,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 80,
+   "h": 140,
+   "ax": 4,
+   "ay": 139,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 64,
+   "h": 140,
+   "ax": -3,
+   "ay": 139,
+   "hold": 3
+  },
+  {
+   "file": "04.png",
+   "w": 48,
+   "h": 140,
+   "ax": -13,
+   "ay": 139,
+   "hold": 3
+  },
+  {
+   "file": "05.png",
+   "w": 71,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

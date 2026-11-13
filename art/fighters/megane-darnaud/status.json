@@ -1,0 +1,132 @@
+{
+  "air_attack": {
+    "note": "verified",
+    "raw": "art/raw/megane-darnaud/air_attack/20261112-212006-0.png",
+    "state": "approved"
+  },
+  "air_hurt": {
+    "note": "verified",
+    "raw": "art/raw/megane-darnaud/air_hurt/20261112-212112-0.png",
+    "state": "approved"
+  },
+  "block": {
+    "note": "verified",
+    "raw": "art/raw/megane-darnaud/block/20261112-212032-0.png",
+    "state": "approved"
+  },
+  "block_push": {
+    "note": "verified",
+    "raw": "art/raw/megane-darnaud/block_push/20261112-212052-0.png",
+    "state": "approved"
+  },
+  "crouch": {
+    "note": "verified",
+    "raw": "art/raw/megane-darnaud/crouch/20261112-211853-0.png",
+    "state": "approved"
+  },
+  "crouch_attack": {
+    "note": "verified",
+    "raw": "art/raw/megane-darnaud/crouch_attack/20261112-211958-0.png",
+    "state": "approved"
+  },
+  "crouch_hurt": {
+    "note": "verified",
+    "raw": "art/raw/megane-darnaud/crouch_hurt/20261112-212115-0.png",
+    "state": "approved"
+  },
+  "dash_back": {
+    "note": "verified",
+    "raw": "art/raw/megane-darnaud/dash_back/20261112-211831-0.png",
+    "state": "approved"
+  },
+  "dash_forward": {
+    "note": "verified",
+    "raw": "art/raw/megane-darnaud/dash_forward/20261112-211828-0.png",
+    "state": "approved"
+  },
+  "getup_roll": {
+    "note": "verified",
+    "raw": "art/raw/megane-darnaud/getup_roll/20261112-212137-0.png",
+    "state": "approved"
+  },
+  "heavy_kick": {
+    "note": "",
+    "raw": "art/raw/megane-darnaud/heavy_kick/20261112-211945-0.png",
+    "state": "approved"
+  },
+  "heavy_punch": {
+    "note": "verified",
+    "raw": "art/raw/megane-darnaud/heavy_punch/20261112-211922-0.png",
+    "state": "approved"
+  },
+  "hurt": {
+    "note": "verified",
+    "raw": "art/raw/megane-darnaud/hurt/20261112-212052-0.png",
+    "state": "approved"
+  },
+  "idle": {
+    "note": "calibrated idle",
+    "raw": "art/raw/megane-darnaud/idle/20261112-211720-1.png",
+    "state": "approved"
+  },
+  "intro": {
+    "note": "verified",
+    "raw": "art/raw/megane-darnaud/intro/20261112-212156-0.png",
+    "state": "approved"
+  },
+  "jump": {
+    "note": "verified",
+    "raw": "art/raw/megane-darnaud/jump/20261112-211855-0.png",
+    "state": "approved"
+  },
+  "knockdown": {
+    "note": "verified",
+    "raw": "art/raw/megane-darnaud/knockdown/20261112-212135-0.png",
+    "state": "approved"
+  },
+  "light_kick": {
+    "note": "verified",
+    "raw": "art/raw/megane-darnaud/light_kick/20261112-211935-0.png",
+    "state": "approved"
+  },
+  "light_punch": {
+    "note": "verified",
+    "raw": "art/raw/megane-darnaud/light_punch/20261112-211913-0.png",
+    "state": "approved"
+  },
+  "special": {
+    "note": "verified",
+    "raw": "art/raw/megane-darnaud/special/20261112-212241-0.png",
+    "state": "approved"
+  },
+  "summon": {
+    "note": "verified",
+    "raw": "art/raw/megane-darnaud/summon/20261112-212221-0.png",
+    "state": "approved"
+  },
+  "taunt": {
+    "note": "verified",
+    "raw": "art/raw/megane-darnaud/taunt/20261112-212158-0.png",
+    "state": "approved"
+  },
+  "throw": {
+    "note": "verified",
+    "raw": "art/raw/megane-darnaud/throw/20261112-212025-0.png",
+    "state": "approved"
+  },
+  "victory": {
+    "note": "verified",
+    "raw": "art/raw/megane-darnaud/victory/20261112-212217-0.png",
+    "state": "approved"
+  },
+  "walk": {
+    "note": "verified",
+    "raw": "art/raw/megane-darnaud/walk/20261112-211808-0.png",
+    "state": "approved"
+  },
+  "walk_back": {
+    "note": "verified",
+    "raw": "art/raw/megane-darnaud/walk_back/20261112-211805-0.png",
+    "state": "approved"
+  }
+}

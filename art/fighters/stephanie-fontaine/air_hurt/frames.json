@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.19022,
+ "raw": "art/raw/stephanie-fontaine/air_hurt/20261112-223737-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 106,
+   "h": 126,
+   "ax": 8,
+   "ay": 125,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 145,
+   "h": 71,
+   "ax": 27,
+   "ay": 70,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 98,
+   "h": 126,
+   "ax": 9,
+   "ay": 125,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 132,
+   "h": 64,
+   "ax": 26,
+   "ay": 63,
+   "hold": 8
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.18996,
+ "raw": "art/raw/logan-labossiere/air_hurt/20261112-222744-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 108,
+   "h": 130,
+   "ax": 9,
+   "ay": 129,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 136,
+   "h": 80,
+   "ax": 25,
+   "ay": 79,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 82,
+   "h": 124,
+   "ax": -6,
+   "ay": 123,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 140,
+   "h": 47,
+   "ax": 27,
+   "ay": 46,
+   "hold": 8
+  }
+ ]
+}

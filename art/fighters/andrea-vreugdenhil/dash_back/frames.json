@@ -1,0 +1,48 @@
+{
+ "clip": "dash_back",
+ "loop": false,
+ "scale": 0.16529,
+ "raw": "art/raw/andrea-vreugdenhil/dash_back/20261112-222118-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 88,
+   "h": 140,
+   "ax": -1,
+   "ay": 139,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 57,
+   "h": 133,
+   "ax": -7,
+   "ay": 132,
+   "hold": 4
+  },
+  {
+   "file": "02.png",
+   "w": 53,
+   "h": 126,
+   "ax": -10,
+   "ay": 125,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 75,
+   "h": 135,
+   "ax": 1,
+   "ay": 134,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 75,
+   "h": 136,
+   "ax": 1,
+   "ay": 135,
+   "hold": 3
+  }
+ ]
+}

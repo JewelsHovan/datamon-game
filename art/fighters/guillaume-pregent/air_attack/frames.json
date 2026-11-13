@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.19048,
+ "raw": "art/raw/guillaume-pregent/air_attack/20261112-222900-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 58,
+   "h": 112,
+   "ax": -10,
+   "ay": 111,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 70,
+   "h": 139,
+   "ax": -4,
+   "ay": 138,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 122,
+   "h": 123,
+   "ax": 12,
+   "ay": 122,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 133,
+   "h": 115,
+   "ax": 16,
+   "ay": 114,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 60,
+   "h": 108,
+   "ax": -10,
+   "ay": 107,
+   "hold": 6
+  }
+ ]
+}

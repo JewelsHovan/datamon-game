@@ -1,0 +1,32 @@
+{
+ "clip": "crouch",
+ "loop": false,
+ "scale": 0.16018,
+ "raw": "art/raw/victor-desautels/crouch/20261112-223811-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 63,
+   "h": 127,
+   "ax": 0,
+   "ay": 126,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 62,
+   "h": 107,
+   "ax": 3,
+   "ay": 106,
+   "hold": 2
+  },
+  {
+   "file": "02.png",
+   "w": 58,
+   "h": 85,
+   "ax": 5,
+   "ay": 84,
+   "hold": 6
+  }
+ ]
+}

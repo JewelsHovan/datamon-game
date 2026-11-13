@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.17478,
+ "raw": "art/raw/scott-carr/crouch_hurt/20261112-212130-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 72,
+   "h": 99,
+   "ax": 9,
+   "ay": 98,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 66,
+   "h": 96,
+   "ax": 0,
+   "ay": 95,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 61,
+   "h": 97,
+   "ax": 0,
+   "ay": 96,
+   "hold": 6
+  }
+ ]
+}

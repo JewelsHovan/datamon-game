@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.17115,
+ "raw": "art/raw/guillaume-pregent/crouch_hurt/20261112-223119-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 63,
+   "h": 105,
+   "ax": 13,
+   "ay": 104,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 61,
+   "h": 94,
+   "ax": 10,
+   "ay": 93,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 62,
+   "h": 96,
+   "ax": 9,
+   "ay": 95,
+   "hold": 6
+  }
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "clip": "knockdown",
+ "loop": false,
+ "scale": 0.23689,
+ "raw": "art/raw/richard-el-chaar/knockdown/20261112-223502-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 132,
+   "h": 121,
+   "ax": 24,
+   "ay": 120,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 137,
+   "h": 60,
+   "ax": 25,
+   "ay": 59,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 110,
+   "h": 86,
+   "ax": 17,
+   "ay": 85,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 110,
+   "h": 81,
+   "ax": 13,
+   "ay": 80,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 126,
+   "h": 32,
+   "ax": 21,
+   "ay": 31,
+   "hold": 26
+  },
+  {
+   "file": "05.png",
+   "w": 96,
+   "h": 68,
+   "ax": 1,
+   "ay": 67,
+   "hold": 8
+  },
+  {
+   "file": "06.png",
+   "w": 78,
+   "h": 101,
+   "ax": 0,
+   "ay": 100,
+   "hold": 8
+  },
+  {
+   "file": "07.png",
+   "w": 78,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 8
+  }
+ ]
+}

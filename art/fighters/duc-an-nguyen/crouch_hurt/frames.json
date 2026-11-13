@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.17677,
+ "raw": "art/raw/duc-an-nguyen/crouch_hurt/20261112-222231-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 69,
+   "h": 106,
+   "ax": 10,
+   "ay": 105,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 60,
+   "h": 98,
+   "ax": 4,
+   "ay": 97,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 63,
+   "h": 104,
+   "ax": 4,
+   "ay": 103,
+   "hold": 6
+  }
+ ]
+}

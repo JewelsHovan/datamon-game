@@ -1,0 +1,32 @@
+{
+ "clip": "crouch",
+ "loop": false,
+ "scale": 0.16548,
+ "raw": "art/raw/antonia-nistor/crouch/20261112-211904-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 76,
+   "h": 129,
+   "ax": 0,
+   "ay": 128,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 76,
+   "h": 113,
+   "ax": 0,
+   "ay": 112,
+   "hold": 2
+  },
+  {
+   "file": "02.png",
+   "w": 60,
+   "h": 89,
+   "ax": 1,
+   "ay": 88,
+   "hold": 6
+  }
+ ]
+}

@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.21739,
+ "raw": "art/raw/philippe-miranda-jean/crouch_attack/20261112-223654-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 74,
+   "h": 104,
+   "ax": 4,
+   "ay": 103,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 73,
+   "h": 88,
+   "ax": 4,
+   "ay": 87,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 99,
+   "h": 87,
+   "ax": 4,
+   "ay": 86,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 112,
+   "h": 82,
+   "ax": 0,
+   "ay": 81,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 94,
+   "h": 90,
+   "ax": 0,
+   "ay": 89,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 70,
+   "h": 103,
+   "ax": 4,
+   "ay": 102,
+   "hold": 6
+  }
+ ]
+}

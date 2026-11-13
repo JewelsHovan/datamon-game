@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.1931,
+ "raw": "art/raw/jonah-lee/air_attack/20261112-222650-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 56,
+   "h": 110,
+   "ax": -16,
+   "ay": 109,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 64,
+   "h": 135,
+   "ax": -12,
+   "ay": 134,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 124,
+   "h": 104,
+   "ax": 8,
+   "ay": 103,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 130,
+   "h": 109,
+   "ax": 11,
+   "ay": 108,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 57,
+   "h": 130,
+   "ax": -15,
+   "ay": 129,
+   "hold": 6
+  }
+ ]
+}

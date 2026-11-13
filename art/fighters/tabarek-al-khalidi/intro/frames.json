@@ -1,0 +1,56 @@
+{
+ "clip": "intro",
+ "loop": false,
+ "scale": 0.17115,
+ "raw": "art/raw/tabarek-al-khalidi/intro/20261112-223932-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 53,
+   "h": 145,
+   "ax": 10,
+   "ay": 144,
+   "hold": 12
+  },
+  {
+   "file": "01.png",
+   "w": 55,
+   "h": 147,
+   "ax": 7,
+   "ay": 146,
+   "hold": 12
+  },
+  {
+   "file": "02.png",
+   "w": 51,
+   "h": 145,
+   "ax": 1,
+   "ay": 144,
+   "hold": 12
+  },
+  {
+   "file": "03.png",
+   "w": 58,
+   "h": 146,
+   "ax": 0,
+   "ay": 145,
+   "hold": 10
+  },
+  {
+   "file": "04.png",
+   "w": 74,
+   "h": 135,
+   "ax": 0,
+   "ay": 134,
+   "hold": 8
+  },
+  {
+   "file": "05.png",
+   "w": 77,
+   "h": 138,
+   "ax": 0,
+   "ay": 137,
+   "hold": 10
+  }
+ ]
+}

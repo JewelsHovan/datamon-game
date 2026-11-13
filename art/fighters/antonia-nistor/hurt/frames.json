@@ -1,0 +1,40 @@
+{
+ "clip": "hurt",
+ "loop": false,
+ "scale": 0.16509,
+ "raw": "art/raw/antonia-nistor/hurt/20261112-212104-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 101,
+   "h": 132,
+   "ax": 19,
+   "ay": 131,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 99,
+   "h": 135,
+   "ax": 20,
+   "ay": 134,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 73,
+   "h": 120,
+   "ax": 0,
+   "ay": 119,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 82,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

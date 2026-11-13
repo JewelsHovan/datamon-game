@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.20438,
+ "raw": "art/raw/dana-domanko/crouch_attack/20261112-222138-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 62,
+   "h": 103,
+   "ax": 7,
+   "ay": 102,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 67,
+   "h": 96,
+   "ax": 3,
+   "ay": 95,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 105,
+   "h": 86,
+   "ax": 0,
+   "ay": 85,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 106,
+   "h": 82,
+   "ax": 2,
+   "ay": 81,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 86,
+   "h": 88,
+   "ax": 8,
+   "ay": 87,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 55,
+   "h": 104,
+   "ax": 20,
+   "ay": 103,
+   "hold": 6
+  }
+ ]
+}

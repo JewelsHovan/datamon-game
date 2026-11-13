@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.19391,
+ "raw": "art/raw/jonathan-kim/air_hurt/20261112-223323-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 126,
+   "h": 128,
+   "ax": 20,
+   "ay": 127,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 143,
+   "h": 88,
+   "ax": 26,
+   "ay": 87,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 84,
+   "h": 119,
+   "ax": 4,
+   "ay": 118,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 148,
+   "h": 45,
+   "ax": 30,
+   "ay": 44,
+   "hold": 8
+  }
+ ]
+}

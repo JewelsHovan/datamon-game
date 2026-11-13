@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.20833,
+ "raw": "art/raw/saransh-padhy/crouch_attack/20261112-211955-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 73,
+   "h": 110,
+   "ax": 6,
+   "ay": 109,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 75,
+   "h": 101,
+   "ax": 2,
+   "ay": 100,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 104,
+   "h": 96,
+   "ax": 20,
+   "ay": 95,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 106,
+   "h": 85,
+   "ax": 16,
+   "ay": 84,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 88,
+   "h": 96,
+   "ax": 21,
+   "ay": 95,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 68,
+   "h": 110,
+   "ax": 5,
+   "ay": 109,
+   "hold": 6
+  }
+ ]
+}

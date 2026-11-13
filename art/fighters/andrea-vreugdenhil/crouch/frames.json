@@ -1,0 +1,32 @@
+{
+ "clip": "crouch",
+ "loop": false,
+ "scale": 0.15891,
+ "raw": "art/raw/andrea-vreugdenhil/crouch/20261112-222045-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 69,
+   "h": 125,
+   "ax": 0,
+   "ay": 124,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 61,
+   "h": 108,
+   "ax": 0,
+   "ay": 107,
+   "hold": 2
+  },
+  {
+   "file": "02.png",
+   "w": 56,
+   "h": 87,
+   "ax": 5,
+   "ay": 86,
+   "hold": 6
+  }
+ ]
+}

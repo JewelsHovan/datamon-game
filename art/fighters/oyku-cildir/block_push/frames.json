@@ -1,0 +1,32 @@
+{
+ "clip": "block_push",
+ "loop": false,
+ "scale": 0.17052,
+ "raw": "art/raw/oyku-cildir/block_push/20261112-223810-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 71,
+   "h": 138,
+   "ax": 0,
+   "ay": 137,
+   "hold": 4
+  },
+  {
+   "file": "01.png",
+   "w": 92,
+   "h": 138,
+   "ax": 0,
+   "ay": 137,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 83,
+   "h": 139,
+   "ax": 0,
+   "ay": 138,
+   "hold": 6
+  }
+ ]
+}

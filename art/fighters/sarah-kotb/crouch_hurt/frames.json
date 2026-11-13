@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.16432,
+ "raw": "art/raw/sarah-kotb/crouch_hurt/20261112-223506-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 70,
+   "h": 102,
+   "ax": 25,
+   "ay": 101,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 59,
+   "h": 94,
+   "ax": 15,
+   "ay": 93,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 61,
+   "h": 95,
+   "ax": 16,
+   "ay": 94,
+   "hold": 6
+  }
+ ]
+}

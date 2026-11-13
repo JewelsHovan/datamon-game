@@ -1,0 +1,56 @@
+{
+ "clip": "getup_roll",
+ "loop": false,
+ "scale": 0.21605,
+ "raw": "art/raw/veronica-marallag/getup_roll/20261112-224545-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 130,
+   "h": 29,
+   "ax": 26,
+   "ay": 28,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 77,
+   "h": 75,
+   "ax": 7,
+   "ay": 74,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 63,
+   "h": 64,
+   "ax": -2,
+   "ay": 63,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 92,
+   "h": 77,
+   "ax": 20,
+   "ay": 76,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 83,
+   "h": 110,
+   "ax": 12,
+   "ay": 109,
+   "hold": 6
+  },
+  {
+   "file": "05.png",
+   "w": 70,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

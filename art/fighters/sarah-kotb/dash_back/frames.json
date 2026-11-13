@@ -1,0 +1,48 @@
+{
+ "clip": "dash_back",
+ "loop": false,
+ "scale": 0.16451,
+ "raw": "art/raw/sarah-kotb/dash_back/20261112-223326-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 90,
+   "h": 133,
+   "ax": -2,
+   "ay": 132,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 62,
+   "h": 133,
+   "ax": -6,
+   "ay": 132,
+   "hold": 4
+  },
+  {
+   "file": "02.png",
+   "w": 63,
+   "h": 131,
+   "ax": -5,
+   "ay": 130,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 73,
+   "h": 131,
+   "ax": -4,
+   "ay": 130,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 72,
+   "h": 133,
+   "ax": -4,
+   "ay": 132,
+   "hold": 3
+  }
+ ]
+}

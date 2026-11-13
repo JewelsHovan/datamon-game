@@ -1,0 +1,56 @@
+{
+ "clip": "getup_roll",
+ "loop": false,
+ "scale": 0.21084,
+ "raw": "art/raw/emile-moffatt/getup_roll/20261112-222248-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 119,
+   "h": 28,
+   "ax": 20,
+   "ay": 27,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 78,
+   "h": 76,
+   "ax": 5,
+   "ay": 75,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 62,
+   "h": 58,
+   "ax": -5,
+   "ay": 57,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 82,
+   "h": 76,
+   "ax": 8,
+   "ay": 75,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 80,
+   "h": 118,
+   "ax": 7,
+   "ay": 117,
+   "hold": 6
+  },
+  {
+   "file": "05.png",
+   "w": 73,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

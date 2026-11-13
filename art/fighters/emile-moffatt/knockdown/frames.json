@@ -1,0 +1,72 @@
+{
+ "clip": "knockdown",
+ "loop": false,
+ "scale": 0.23609,
+ "raw": "art/raw/emile-moffatt/knockdown/20261112-222221-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 108,
+   "h": 124,
+   "ax": 14,
+   "ay": 123,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 128,
+   "h": 69,
+   "ax": 24,
+   "ay": 68,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 108,
+   "h": 62,
+   "ax": 12,
+   "ay": 61,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 105,
+   "h": 74,
+   "ax": 14,
+   "ay": 73,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 119,
+   "h": 39,
+   "ax": 21,
+   "ay": 38,
+   "hold": 26
+  },
+  {
+   "file": "05.png",
+   "w": 80,
+   "h": 66,
+   "ax": 6,
+   "ay": 65,
+   "hold": 8
+  },
+  {
+   "file": "06.png",
+   "w": 71,
+   "h": 96,
+   "ax": 1,
+   "ay": 95,
+   "hold": 8
+  },
+  {
+   "file": "07.png",
+   "w": 78,
+   "h": 140,
+   "ax": 1,
+   "ay": 139,
+   "hold": 8
+  }
+ ]
+}

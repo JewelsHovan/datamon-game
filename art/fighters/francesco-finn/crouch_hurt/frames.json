@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.17722,
+ "raw": "art/raw/francesco-finn/crouch_hurt/20261112-222726-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 73,
+   "h": 98,
+   "ax": 5,
+   "ay": 97,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 64,
+   "h": 89,
+   "ax": 0,
+   "ay": 88,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 64,
+   "h": 95,
+   "ax": 0,
+   "ay": 94,
+   "hold": 6
+  }
+ ]
+}

@@ -1,0 +1,56 @@
+{
+ "clip": "light_kick",
+ "loop": false,
+ "scale": 0.17094,
+ "raw": "art/raw/dana-domanko/light_kick/20261112-222105-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 56,
+   "h": 139,
+   "ax": 10,
+   "ay": 138,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 59,
+   "h": 139,
+   "ax": 15,
+   "ay": 138,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 101,
+   "h": 138,
+   "ax": 19,
+   "ay": 137,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 56,
+   "h": 138,
+   "ax": 15,
+   "ay": 137,
+   "hold": 3
+  },
+  {
+   "file": "04.png",
+   "w": 48,
+   "h": 138,
+   "ax": 10,
+   "ay": 137,
+   "hold": 3
+  },
+  {
+   "file": "05.png",
+   "w": 58,
+   "h": 138,
+   "ax": 0,
+   "ay": 137,
+   "hold": 3
+  }
+ ]
+}

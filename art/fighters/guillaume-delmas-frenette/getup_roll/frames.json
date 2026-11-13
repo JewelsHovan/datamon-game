@@ -1,0 +1,56 @@
+{
+ "clip": "getup_roll",
+ "loop": false,
+ "scale": 0.21705,
+ "raw": "art/raw/guillaume-delmas-frenette/getup_roll/20261112-222832-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 137,
+   "h": 34,
+   "ax": 28,
+   "ay": 33,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 65,
+   "h": 89,
+   "ax": -3,
+   "ay": 88,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 69,
+   "h": 69,
+   "ax": -1,
+   "ay": 68,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 92,
+   "h": 95,
+   "ax": 16,
+   "ay": 94,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 80,
+   "h": 120,
+   "ax": 6,
+   "ay": 119,
+   "hold": 6
+  },
+  {
+   "file": "05.png",
+   "w": 72,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { SimEvent } from "../sim/types";
+import type { FighterState, SimEvent, SimState } from "../sim/types";
 import { BASE_LEVELS } from "./engine";
 import { bindAudioControls, createAudio, DEFAULT_SETTINGS, STORAGE_KEY, type AudioOptions, type GameAudio } from "./index";
 import { routeEvent } from "./sfx";
@@ -25,6 +25,7 @@ const ALL_EVENTS: readonly SimEvent[] = [
   { type: "knockdown", player: 1, x: 0, y: 0 },
   { type: "projectile", player: 0, x: 0, y: 0 },
   { type: "clash", x: 0, y: 0 },
+  { type: "counter", player: 0, target: 1, x: 0, y: 0 },
   { type: "ko", player: 1, x: 0, y: 0 },
   { type: "round_start", round: 1 },
   { type: "fight" },
@@ -181,6 +182,55 @@ describe("audio facade: events to voices (A1)", () => {
     for (let timer = 600; timer >= 1; timer -= 30) audio.onEvents([], { phase: "fight", timer, training: true });
     for (let timer = 600; timer >= 1; timer -= 30) audio.onEvents([], { phase: "intro", timer, training: false });
     expect(ctx.started.length).toBe(before);
+  });
+
+  it("forwards sim state so fighter sfxPitch differentiates taunts and attacks", () => {
+    const mkFighter = (slug: string): FighterState => ({
+      slug,
+      x: 0,
+      y: 0,
+      vx: 0,
+      vy: 0,
+      facing: 1,
+      state: "idle",
+      stateFrame: 0,
+      jumpDir: 0,
+      input: { frames: [0], head: 0 },
+      health: 1000,
+      move: null,
+      hitstop: 0,
+      stun: 0,
+      stunLow: false,
+      pushLeft: 0,
+      pushFrames: 0,
+      comboHits: 0,
+      consumedFrame: -1,
+      maxHealth: 1000,
+      juggle: 0,
+      wallBounced: false,
+      slideDir: 0,
+      rollFrom: -1,
+      tumble: false,
+    });
+    const state: SimState = {
+      frame: 0,
+      rng: 1,
+      fighters: [mkFighter("scott-carr"), mkFighter("megane-darnaud")],
+      projectiles: [],
+      round: { phase: "fight", phaseFrame: 0, number: 1, wins: [0, 0], timer: 5940, winner: -1, reason: "", training: false },
+      events: [],
+    };
+    const { ctx, audio } = setup({ random: () => 0.5 });
+    const tauntFreq = (player: 0 | 1) => {
+      const before = ctx.started.length;
+      audio.onEvents([{ type: "taunt", player }], state);
+      const oscs = startedSince(ctx, before).filter((v): v is FakeOscillator => v instanceof FakeOscillator);
+      ctx.advance(1);
+      return oscs[0]!.startFrequency;
+    };
+    const scottFreq = tauntFreq(0);
+    const meganeFreq = tauntFreq(1);
+    expect(meganeFreq / scottFreq).toBeCloseTo(1.12 / 0.88, 5);
   });
 
   it("menu sounds play on the effects bus", () => {

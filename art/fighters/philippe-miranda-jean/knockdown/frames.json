@@ -1,0 +1,72 @@
+{
+ "clip": "knockdown",
+ "loop": false,
+ "scale": 0.23729,
+ "raw": "art/raw/philippe-miranda-jean/knockdown/20261112-224016-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 82,
+   "h": 137,
+   "ax": 11,
+   "ay": 136,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 134,
+   "h": 65,
+   "ax": 23,
+   "ay": 64,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 115,
+   "h": 83,
+   "ax": 23,
+   "ay": 82,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 110,
+   "h": 81,
+   "ax": 18,
+   "ay": 80,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 135,
+   "h": 32,
+   "ax": 28,
+   "ay": 31,
+   "hold": 26
+  },
+  {
+   "file": "05.png",
+   "w": 68,
+   "h": 77,
+   "ax": -1,
+   "ay": 76,
+   "hold": 8
+  },
+  {
+   "file": "06.png",
+   "w": 72,
+   "h": 107,
+   "ax": -5,
+   "ay": 106,
+   "hold": 8
+  },
+  {
+   "file": "07.png",
+   "w": 78,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 8
+  }
+ ]
+}

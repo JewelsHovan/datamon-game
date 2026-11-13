@@ -1,0 +1,56 @@
+{
+ "clip": "taunt",
+ "loop": false,
+ "scale": 0.17011,
+ "raw": "art/raw/logan-labossiere/taunt/20261112-222918-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 70,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 53,
+   "h": 146,
+   "ax": 0,
+   "ay": 145,
+   "hold": 10
+  },
+  {
+   "file": "02.png",
+   "w": 57,
+   "h": 145,
+   "ax": 0,
+   "ay": 144,
+   "hold": 10
+  },
+  {
+   "file": "03.png",
+   "w": 55,
+   "h": 142,
+   "ax": 0,
+   "ay": 141,
+   "hold": 10
+  },
+  {
+   "file": "04.png",
+   "w": 82,
+   "h": 143,
+   "ax": 15,
+   "ay": 142,
+   "hold": 10
+  },
+  {
+   "file": "05.png",
+   "w": 68,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

@@ -1,0 +1,56 @@
+{
+ "clip": "walk_back",
+ "loop": true,
+ "scale": 0.18617,
+ "raw": "art/raw/francesco-finn/walk_back/20261112-222125-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 69,
+   "h": 141,
+   "ax": -3,
+   "ay": 140,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 80,
+   "h": 140,
+   "ax": 8,
+   "ay": 139,
+   "hold": 4
+  },
+  {
+   "file": "02.png",
+   "w": 89,
+   "h": 140,
+   "ax": 10,
+   "ay": 139,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 58,
+   "h": 141,
+   "ax": -11,
+   "ay": 140,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 52,
+   "h": 141,
+   "ax": -13,
+   "ay": 140,
+   "hold": 3
+  },
+  {
+   "file": "05.png",
+   "w": 73,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

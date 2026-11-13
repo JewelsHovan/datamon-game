@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.1847,
+ "raw": "art/raw/emile-moffatt/air_attack/20261112-222148-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 55,
+   "h": 103,
+   "ax": -10,
+   "ay": 102,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 60,
+   "h": 131,
+   "ax": -10,
+   "ay": 130,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 129,
+   "h": 118,
+   "ax": 19,
+   "ay": 117,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 132,
+   "h": 109,
+   "ax": 20,
+   "ay": 108,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 54,
+   "h": 111,
+   "ax": -12,
+   "ay": 110,
+   "hold": 6
+  }
+ ]
+}

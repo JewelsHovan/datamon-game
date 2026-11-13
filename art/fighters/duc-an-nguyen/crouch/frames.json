@@ -1,0 +1,32 @@
+{
+ "clip": "crouch",
+ "loop": false,
+ "scale": 0.16451,
+ "raw": "art/raw/duc-an-nguyen/crouch/20261112-222052-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 67,
+   "h": 131,
+   "ax": 0,
+   "ay": 130,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 66,
+   "h": 114,
+   "ax": 0,
+   "ay": 113,
+   "hold": 2
+  },
+  {
+   "file": "02.png",
+   "w": 64,
+   "h": 90,
+   "ax": 3,
+   "ay": 89,
+   "hold": 6
+  }
+ ]
+}

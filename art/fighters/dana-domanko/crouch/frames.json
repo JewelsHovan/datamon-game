@@ -1,0 +1,32 @@
+{
+ "clip": "crouch",
+ "loop": false,
+ "scale": 0.16413,
+ "raw": "art/raw/dana-domanko/crouch/20261112-222033-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 65,
+   "h": 129,
+   "ax": 0,
+   "ay": 128,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 63,
+   "h": 113,
+   "ax": 2,
+   "ay": 112,
+   "hold": 2
+  },
+  {
+   "file": "02.png",
+   "w": 58,
+   "h": 89,
+   "ax": 3,
+   "ay": 88,
+   "hold": 6
+  }
+ ]
+}

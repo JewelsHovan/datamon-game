@@ -1,0 +1,56 @@
+{
+ "clip": "getup_roll",
+ "loop": false,
+ "scale": 0.19971,
+ "raw": "art/raw/logan-labossiere/getup_roll/20261112-222747-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 134,
+   "h": 34,
+   "ax": 28,
+   "ay": 33,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 71,
+   "h": 82,
+   "ax": 4,
+   "ay": 81,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 63,
+   "h": 65,
+   "ax": -4,
+   "ay": 64,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 82,
+   "h": 89,
+   "ax": 8,
+   "ay": 88,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 75,
+   "h": 127,
+   "ax": 7,
+   "ay": 126,
+   "hold": 6
+  },
+  {
+   "file": "05.png",
+   "w": 74,
+   "h": 140,
+   "ax": 1,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

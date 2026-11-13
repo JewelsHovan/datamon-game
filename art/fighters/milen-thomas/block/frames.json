@@ -1,0 +1,24 @@
+{
+ "clip": "block",
+ "loop": false,
+ "scale": 0.15301,
+ "raw": "art/raw/milen-thomas/block/20261112-223148-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 84,
+   "h": 138,
+   "ax": 0,
+   "ay": 137,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 83,
+   "h": 104,
+   "ax": 2,
+   "ay": 103,
+   "hold": 6
+  }
+ ]
+}

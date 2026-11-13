@@ -1,0 +1,48 @@
+{
+ "clip": "dash_back",
+ "loop": false,
+ "scale": 0.16509,
+ "raw": "art/raw/dana-domanko/dash_back/20261112-222109-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 83,
+   "h": 136,
+   "ax": 2,
+   "ay": 135,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 50,
+   "h": 141,
+   "ax": -7,
+   "ay": 140,
+   "hold": 4
+  },
+  {
+   "file": "02.png",
+   "w": 52,
+   "h": 132,
+   "ax": -7,
+   "ay": 131,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 64,
+   "h": 135,
+   "ax": 0,
+   "ay": 134,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 65,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

@@ -1,0 +1,56 @@
+{
+ "clip": "getup_roll",
+ "loop": false,
+ "scale": 0.2026,
+ "raw": "art/raw/tabarek-al-khalidi/getup_roll/20261112-223855-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 120,
+   "h": 30,
+   "ax": 17,
+   "ay": 29,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 69,
+   "h": 72,
+   "ax": -3,
+   "ay": 71,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 66,
+   "h": 64,
+   "ax": -3,
+   "ay": 63,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 82,
+   "h": 78,
+   "ax": 7,
+   "ay": 77,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 80,
+   "h": 108,
+   "ax": 5,
+   "ay": 107,
+   "hold": 6
+  },
+  {
+   "file": "05.png",
+   "w": 72,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

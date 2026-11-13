@@ -1,0 +1,56 @@
+{
+ "clip": "victory",
+ "loop": true,
+ "scale": 0.18692,
+ "raw": "art/raw/richard-el-chaar/victory/20261112-223537-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 67,
+   "h": 157,
+   "ax": 1,
+   "ay": 156,
+   "hold": 10
+  },
+  {
+   "file": "01.png",
+   "w": 71,
+   "h": 168,
+   "ax": 1,
+   "ay": 167,
+   "hold": 10
+  },
+  {
+   "file": "02.png",
+   "w": 75,
+   "h": 157,
+   "ax": 5,
+   "ay": 156,
+   "hold": 10
+  },
+  {
+   "file": "03.png",
+   "w": 79,
+   "h": 150,
+   "ax": 10,
+   "ay": 149,
+   "hold": 10
+  },
+  {
+   "file": "04.png",
+   "w": 71,
+   "h": 157,
+   "ax": 4,
+   "ay": 156,
+   "hold": 10
+  },
+  {
+   "file": "05.png",
+   "w": 67,
+   "h": 154,
+   "ax": 2,
+   "ay": 153,
+   "hold": 10
+  }
+ ]
+}

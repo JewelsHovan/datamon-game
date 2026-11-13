@@ -1,0 +1,56 @@
+{
+ "clip": "walk_back",
+ "loop": true,
+ "scale": 0.17327,
+ "raw": "art/raw/stephanie-fontaine/walk_back/20261112-223549-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 63,
+   "h": 140,
+   "ax": -2,
+   "ay": 139,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 78,
+   "h": 140,
+   "ax": 8,
+   "ay": 139,
+   "hold": 4
+  },
+  {
+   "file": "02.png",
+   "w": 88,
+   "h": 140,
+   "ax": 9,
+   "ay": 139,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 54,
+   "h": 140,
+   "ax": -7,
+   "ay": 139,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 48,
+   "h": 140,
+   "ax": -12,
+   "ay": 139,
+   "hold": 3
+  },
+  {
+   "file": "05.png",
+   "w": 68,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

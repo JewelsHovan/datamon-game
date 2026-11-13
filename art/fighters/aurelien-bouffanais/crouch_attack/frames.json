@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.20896,
+ "raw": "art/raw/aurelien-bouffanais/crouch_attack/20261112-222506-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 69,
+   "h": 107,
+   "ax": 4,
+   "ay": 106,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 75,
+   "h": 98,
+   "ax": 4,
+   "ay": 97,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 88,
+   "h": 88,
+   "ax": 0,
+   "ay": 87,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 122,
+   "h": 86,
+   "ax": 0,
+   "ay": 85,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 71,
+   "h": 96,
+   "ax": 0,
+   "ay": 95,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 66,
+   "h": 100,
+   "ax": 4,
+   "ay": 99,
+   "hold": 6
+  }
+ ]
+}

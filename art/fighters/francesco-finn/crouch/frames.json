@@ -1,0 +1,32 @@
+{
+ "clip": "crouch",
+ "loop": false,
+ "scale": 0.17011,
+ "raw": "art/raw/francesco-finn/crouch/20261112-222147-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 74,
+   "h": 129,
+   "ax": 0,
+   "ay": 128,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 72,
+   "h": 110,
+   "ax": 0,
+   "ay": 109,
+   "hold": 2
+  },
+  {
+   "file": "02.png",
+   "w": 63,
+   "h": 87,
+   "ax": 3,
+   "ay": 86,
+   "hold": 6
+  }
+ ]
+}

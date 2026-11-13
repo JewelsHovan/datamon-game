@@ -1,0 +1,32 @@
+{
+ "clip": "crouch",
+ "loop": false,
+ "scale": 0.17284,
+ "raw": "art/raw/jewoo-lee/crouch/20261112-222528-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 76,
+   "h": 131,
+   "ax": 0,
+   "ay": 130,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 72,
+   "h": 111,
+   "ax": 0,
+   "ay": 110,
+   "hold": 2
+  },
+  {
+   "file": "02.png",
+   "w": 64,
+   "h": 91,
+   "ax": 2,
+   "ay": 90,
+   "hold": 6
+  }
+ ]
+}

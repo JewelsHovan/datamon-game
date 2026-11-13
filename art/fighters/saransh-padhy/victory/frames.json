@@ -1,0 +1,56 @@
+{
+ "clip": "victory",
+ "loop": true,
+ "scale": 0.1788,
+ "raw": "art/raw/saransh-padhy/victory/20261112-212218-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 63,
+   "h": 161,
+   "ax": 0,
+   "ay": 160,
+   "hold": 10
+  },
+  {
+   "file": "01.png",
+   "w": 64,
+   "h": 171,
+   "ax": 1,
+   "ay": 170,
+   "hold": 10
+  },
+  {
+   "file": "02.png",
+   "w": 75,
+   "h": 157,
+   "ax": 7,
+   "ay": 156,
+   "hold": 10
+  },
+  {
+   "file": "03.png",
+   "w": 73,
+   "h": 157,
+   "ax": 9,
+   "ay": 156,
+   "hold": 10
+  },
+  {
+   "file": "04.png",
+   "w": 66,
+   "h": 157,
+   "ax": 0,
+   "ay": 156,
+   "hold": 10
+  },
+  {
+   "file": "05.png",
+   "w": 61,
+   "h": 161,
+   "ax": 0,
+   "ay": 160,
+   "hold": 10
+  }
+ ]
+}

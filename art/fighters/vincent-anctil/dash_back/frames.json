@@ -1,0 +1,48 @@
+{
+ "clip": "dash_back",
+ "loop": false,
+ "scale": 0.17178,
+ "raw": "art/raw/vincent-anctil/dash_back/20261112-211828-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 82,
+   "h": 137,
+   "ax": -6,
+   "ay": 136,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 52,
+   "h": 136,
+   "ax": -14,
+   "ay": 135,
+   "hold": 4
+  },
+  {
+   "file": "02.png",
+   "w": 49,
+   "h": 127,
+   "ax": -15,
+   "ay": 126,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 74,
+   "h": 135,
+   "ax": -10,
+   "ay": 134,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 76,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

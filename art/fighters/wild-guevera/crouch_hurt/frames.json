@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.17263,
+ "raw": "art/raw/wild-guevera/crouch_hurt/20261112-224521-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 69,
+   "h": 97,
+   "ax": 11,
+   "ay": 96,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 61,
+   "h": 89,
+   "ax": 4,
+   "ay": 88,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 61,
+   "h": 92,
+   "ax": 3,
+   "ay": 91,
+   "hold": 6
+  }
+ ]
+}

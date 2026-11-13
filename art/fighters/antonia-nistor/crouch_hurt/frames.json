@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.16746,
+ "raw": "art/raw/antonia-nistor/crouch_hurt/20261112-212118-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 61,
+   "h": 99,
+   "ax": 5,
+   "ay": 98,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 63,
+   "h": 94,
+   "ax": 4,
+   "ay": 93,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 60,
+   "h": 97,
+   "ax": 4,
+   "ay": 96,
+   "hold": 6
+  }
+ ]
+}

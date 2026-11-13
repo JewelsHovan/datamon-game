@@ -1,0 +1,40 @@
+{
+ "clip": "hurt",
+ "loop": false,
+ "scale": 0.15927,
+ "raw": "art/raw/oyku-cildir/hurt/20261112-223842-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 90,
+   "h": 137,
+   "ax": 14,
+   "ay": 136,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 100,
+   "h": 135,
+   "ax": 23,
+   "ay": 134,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 68,
+   "h": 119,
+   "ax": 0,
+   "ay": 118,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 73,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

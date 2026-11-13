@@ -1,0 +1,132 @@
+{
+  "air_attack": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/air_attack/20261112-223419-0.png",
+    "state": "approved"
+  },
+  "air_hurt": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/air_hurt/20261112-223507-0.png",
+    "state": "approved"
+  },
+  "block": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/block/20261112-223428-0.png",
+    "state": "approved"
+  },
+  "block_push": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/block_push/20261112-223427-0.png",
+    "state": "approved"
+  },
+  "crouch": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/crouch/20261112-223328-0.png",
+    "state": "approved"
+  },
+  "crouch_attack": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/crouch_attack/20261112-223419-0.png",
+    "state": "approved"
+  },
+  "crouch_hurt": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/crouch_hurt/20261112-223506-0.png",
+    "state": "approved"
+  },
+  "dash_back": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/dash_back/20261112-223326-0.png",
+    "state": "approved"
+  },
+  "dash_forward": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/dash_forward/20261112-223325-0.png",
+    "state": "approved"
+  },
+  "getup_roll": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/getup_roll/20261112-223503-0.png",
+    "state": "approved"
+  },
+  "heavy_kick": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/heavy_kick/20261112-223401-0.png",
+    "state": "approved"
+  },
+  "heavy_punch": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/heavy_punch/20261112-223402-0.png",
+    "state": "approved"
+  },
+  "hurt": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/hurt/20261112-223507-0.png",
+    "state": "approved"
+  },
+  "idle": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/idle/20261112-223233-1.png",
+    "state": "approved"
+  },
+  "intro": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/intro/20261112-223528-0.png",
+    "state": "approved"
+  },
+  "jump": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/jump/20261112-223358-0.png",
+    "state": "approved"
+  },
+  "knockdown": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/knockdown/20261112-223506-0.png",
+    "state": "approved"
+  },
+  "light_kick": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/light_kick/20261112-223358-0.png",
+    "state": "approved"
+  },
+  "light_punch": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/light_punch/20261112-223400-0.png",
+    "state": "approved"
+  },
+  "special": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/special/20261112-223532-0.png",
+    "state": "approved"
+  },
+  "summon": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/summon/20261112-223532-0.png",
+    "state": "approved"
+  },
+  "taunt": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/taunt/20261112-223530-0.png",
+    "state": "approved"
+  },
+  "throw": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/throw/20261112-223427-0.png",
+    "state": "approved"
+  },
+  "victory": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/victory/20261112-223532-0.png",
+    "state": "approved"
+  },
+  "walk": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/walk/20261112-223325-0.png",
+    "state": "approved"
+  },
+  "walk_back": {
+    "note": "",
+    "raw": "art/raw/sarah-kotb/walk_back/20261112-223327-0.png",
+    "state": "approved"
+  }
+}

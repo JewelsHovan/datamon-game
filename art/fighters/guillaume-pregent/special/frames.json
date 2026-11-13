@@ -1,0 +1,72 @@
+{
+ "clip": "special",
+ "loop": false,
+ "scale": 0.18445,
+ "raw": "art/raw/guillaume-pregent/special/20261112-223437-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 69,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 85,
+   "h": 121,
+   "ax": 4,
+   "ay": 120,
+   "hold": 4
+  },
+  {
+   "file": "02.png",
+   "w": 75,
+   "h": 122,
+   "ax": 3,
+   "ay": 121,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 67,
+   "h": 138,
+   "ax": 4,
+   "ay": 137,
+   "hold": 3
+  },
+  {
+   "file": "04.png",
+   "w": 88,
+   "h": 138,
+   "ax": 0,
+   "ay": 137,
+   "hold": 3
+  },
+  {
+   "file": "05.png",
+   "w": 95,
+   "h": 139,
+   "ax": 0,
+   "ay": 138,
+   "hold": 9
+  },
+  {
+   "file": "06.png",
+   "w": 97,
+   "h": 139,
+   "ax": 0,
+   "ay": 138,
+   "hold": 7
+  },
+  {
+   "file": "07.png",
+   "w": 73,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 7
+  }
+ ]
+}

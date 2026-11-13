@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.2099,
+ "raw": "art/raw/francesco-finn/crouch_attack/20261112-222454-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 70,
+   "h": 109,
+   "ax": 1,
+   "ay": 108,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 79,
+   "h": 97,
+   "ax": 0,
+   "ay": 96,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 107,
+   "h": 85,
+   "ax": 0,
+   "ay": 84,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 115,
+   "h": 74,
+   "ax": 0,
+   "ay": 73,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 73,
+   "h": 87,
+   "ax": 0,
+   "ay": 86,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 66,
+   "h": 100,
+   "ax": 0,
+   "ay": 99,
+   "hold": 6
+  }
+ ]
+}

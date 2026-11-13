@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.19971,
+ "raw": "art/raw/francesco-finn/air_hurt/20261112-222749-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 122,
+   "h": 120,
+   "ax": 15,
+   "ay": 119,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 131,
+   "h": 82,
+   "ax": 22,
+   "ay": 81,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 84,
+   "h": 120,
+   "ax": 0,
+   "ay": 119,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 144,
+   "h": 52,
+   "ax": 28,
+   "ay": 51,
+   "hold": 8
+  }
+ ]
+}

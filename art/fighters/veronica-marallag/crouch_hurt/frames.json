@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.16,
+ "raw": "art/raw/veronica-marallag/crouch_hurt/20261112-224434-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 77,
+   "h": 93,
+   "ax": 39,
+   "ay": 92,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 60,
+   "h": 87,
+   "ax": 16,
+   "ay": 86,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 55,
+   "h": 93,
+   "ax": 15,
+   "ay": 92,
+   "hold": 6
+  }
+ ]
+}

@@ -1,0 +1,48 @@
+{
+ "clip": "dash_back",
+ "loop": false,
+ "scale": 0.17972,
+ "raw": "art/raw/wild-guevera/dash_back/20261112-223949-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 86,
+   "h": 143,
+   "ax": -9,
+   "ay": 142,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 65,
+   "h": 139,
+   "ax": -10,
+   "ay": 138,
+   "hold": 4
+  },
+  {
+   "file": "02.png",
+   "w": 57,
+   "h": 132,
+   "ax": -14,
+   "ay": 131,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 78,
+   "h": 137,
+   "ax": -6,
+   "ay": 136,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 84,
+   "h": 139,
+   "ax": -1,
+   "ay": 138,
+   "hold": 3
+  }
+ ]
+}

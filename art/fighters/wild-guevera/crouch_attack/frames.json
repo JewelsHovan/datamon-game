@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.21084,
+ "raw": "art/raw/wild-guevera/crouch_attack/20261112-224252-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 67,
+   "h": 105,
+   "ax": 1,
+   "ay": 104,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 79,
+   "h": 93,
+   "ax": 2,
+   "ay": 92,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 111,
+   "h": 89,
+   "ax": 0,
+   "ay": 88,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 104,
+   "h": 84,
+   "ax": 0,
+   "ay": 83,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 75,
+   "h": 94,
+   "ax": 0,
+   "ay": 93,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 64,
+   "h": 99,
+   "ax": 2,
+   "ay": 98,
+   "hold": 6
+  }
+ ]
+}

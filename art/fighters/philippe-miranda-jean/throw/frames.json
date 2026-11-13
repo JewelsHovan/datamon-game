@@ -1,0 +1,64 @@
+{
+ "clip": "throw",
+ "loop": false,
+ "scale": 0.17305,
+ "raw": "art/raw/philippe-miranda-jean/throw/20261112-223742-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 97,
+   "h": 131,
+   "ax": 35,
+   "ay": 130,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 90,
+   "h": 136,
+   "ax": 0,
+   "ay": 135,
+   "hold": 4
+  },
+  {
+   "file": "02.png",
+   "w": 64,
+   "h": 134,
+   "ax": 1,
+   "ay": 133,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 70,
+   "h": 134,
+   "ax": 3,
+   "ay": 133,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 86,
+   "h": 135,
+   "ax": 0,
+   "ay": 134,
+   "hold": 3
+  },
+  {
+   "file": "05.png",
+   "w": 125,
+   "h": 131,
+   "ax": 0,
+   "ay": 130,
+   "hold": 7
+  },
+  {
+   "file": "06.png",
+   "w": 74,
+   "h": 139,
+   "ax": 0,
+   "ay": 138,
+   "hold": 8
+  }
+ ]
+}

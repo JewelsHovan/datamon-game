@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.16949,
+ "raw": "art/raw/elina-gu/crouch_hurt/20261112-222232-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 62,
+   "h": 99,
+   "ax": 6,
+   "ay": 98,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 60,
+   "h": 94,
+   "ax": 5,
+   "ay": 93,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 60,
+   "h": 97,
+   "ax": 6,
+   "ay": 96,
+   "hold": 6
+  }
+ ]
+}

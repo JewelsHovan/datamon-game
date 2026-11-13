@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.19126,
+ "raw": "art/raw/emile-moffatt/air_hurt/20261112-222220-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 124,
+   "h": 129,
+   "ax": 14,
+   "ay": 128,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 125,
+   "h": 96,
+   "ax": 21,
+   "ay": 95,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 79,
+   "h": 136,
+   "ax": -6,
+   "ay": 135,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 144,
+   "h": 33,
+   "ax": 26,
+   "ay": 32,
+   "hold": 8
+  }
+ ]
+}

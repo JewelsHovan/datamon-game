@@ -1,0 +1,64 @@
+{
+ "clip": "throw",
+ "loop": false,
+ "scale": 0.16847,
+ "raw": "art/raw/aurelien-bouffanais/throw/20261112-222553-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 109,
+   "h": 139,
+   "ax": 5,
+   "ay": 138,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 96,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 4
+  },
+  {
+   "file": "02.png",
+   "w": 70,
+   "h": 141,
+   "ax": 0,
+   "ay": 140,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 86,
+   "h": 141,
+   "ax": 0,
+   "ay": 140,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 78,
+   "h": 139,
+   "ax": 35,
+   "ay": 138,
+   "hold": 3
+  },
+  {
+   "file": "05.png",
+   "w": 101,
+   "h": 141,
+   "ax": 4,
+   "ay": 140,
+   "hold": 7
+  },
+  {
+   "file": "06.png",
+   "w": 72,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 8
+  }
+ ]
+}

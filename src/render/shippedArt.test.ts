@@ -65,7 +65,7 @@ describe("a fight loads only WebP art named by the manifests (spec 013)", () => 
     ]);
     expect([a.source, b.source, alt.source]).toEqual(["manifest", "manifest", "manifest"]);
     expect(fx).not.toBeNull();
-    expect(stage?.walkers?.cast).toHaveLength(7);
+    expect(stage?.walkers?.cast).toHaveLength(9);
     const art = images(requests);
     expect(art.length).toBeGreaterThanOrEqual(6);
     for (const url of art) expect(url).toMatch(/\.webp\?v=\d+$/);
@@ -97,18 +97,38 @@ describe("a fight loads only WebP art named by the manifests (spec 013)", () => 
     expect(stage!.walkers!.stand).toBe(2);
   });
 
-  it("the shipped fighter index lists exactly the fighters with a manifest, so nobody else is probed", async () => {
+  it("the shipped fighter index lists all 37 fighters with a manifest, and unindexed entries fall back to walk sheets", async () => {
     const { deps, requests } = publicDeps();
     const playable = await detectPlayable(getPeople(), deps);
     const withManifest = getPeople().filter((p) => existsSync(resolve(PUBLIC, "fighters", p.slug, "manifest.json"))).map((p) => p.slug);
     expect([...playable].sort()).toEqual(withManifest.sort());
-    expect(withManifest).toHaveLength(4);
+    expect(withManifest).toHaveLength(37);
     expect(requests).toEqual(["./fighters/index.json"]);
-    // A coworker without art loads straight from the walk sheet: no manifest request.
+    // An unindexed guest person without a manifest loads straight from the walk sheet: no manifest request.
     requests.length = 0;
-    const jewoo = person("jewoo-lee");
-    await loadClipSet(jewoo, deps);
-    expect(requests).toEqual([jewoo.sheetUrl]);
+    const guest: Person = { ...person("jewoo-lee"), slug: "guest-coworker" };
+    await loadClipSet(guest, deps);
+    expect(requests).toEqual([guest.sheetUrl]);
+  });
+
+  it("new expansion fighters load lossless WebP manifests with no .png or walk sheet", async () => {
+    const { deps, requests } = publicDeps();
+    const [ethan, megane] = await Promise.all([
+      loadClipSet(person("ethan-pirso"), deps),
+      loadClipSet(person("megane-darnaud"), deps),
+    ]);
+    expect([ethan.source, megane.source]).toEqual(["manifest", "manifest"]);
+    const art = images(requests);
+    expect(art).toHaveLength(2);
+    for (const url of art) expect(url).toMatch(/\.webp\?v=\d+$/);
+    expect(art).toEqual(
+      expect.arrayContaining([
+        expect.stringMatching(/^\.\/fighters\/ethan-pirso\/atlas\.webp\?v=\d+$/),
+        expect.stringMatching(/^\.\/fighters\/megane-darnaud\/atlas\.webp\?v=\d+$/),
+      ]),
+    );
+    expect(requests.filter((u) => u.includes(".png"))).toEqual([]);
+    expect(requests.filter((u) => u.includes("datamon/walk/"))).toEqual([]);
   });
 
   it("a stage manifest without a usable walkers block still loads its layers", () => {

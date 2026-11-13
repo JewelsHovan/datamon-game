@@ -1,0 +1,48 @@
+{
+ "clip": "dash_forward",
+ "loop": false,
+ "scale": 0.18717,
+ "raw": "art/raw/minh-ngoc-do/dash_forward/20261112-223153-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 91,
+   "h": 137,
+   "ax": 15,
+   "ay": 136,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 91,
+   "h": 128,
+   "ax": 16,
+   "ay": 127,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 77,
+   "h": 136,
+   "ax": 5,
+   "ay": 135,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 88,
+   "h": 136,
+   "ax": 13,
+   "ay": 135,
+   "hold": 3
+  },
+  {
+   "file": "04.png",
+   "w": 79,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

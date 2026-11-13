@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.21053,
+ "raw": "art/raw/oyku-cildir/crouch_attack/20261112-223621-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 68,
+   "h": 106,
+   "ax": 0,
+   "ay": 105,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 72,
+   "h": 95,
+   "ax": 4,
+   "ay": 94,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 105,
+   "h": 81,
+   "ax": 3,
+   "ay": 80,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 119,
+   "h": 79,
+   "ax": 6,
+   "ay": 78,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 86,
+   "h": 89,
+   "ax": 4,
+   "ay": 88,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 59,
+   "h": 96,
+   "ax": 0,
+   "ay": 95,
+   "hold": 6
+  }
+ ]
+}

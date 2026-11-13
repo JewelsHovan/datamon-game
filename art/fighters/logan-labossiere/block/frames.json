@@ -1,0 +1,24 @@
+{
+ "clip": "block",
+ "loop": false,
+ "scale": 0.14583,
+ "raw": "art/raw/logan-labossiere/block/20261112-222714-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 74,
+   "h": 137,
+   "ax": 0,
+   "ay": 136,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 60,
+   "h": 89,
+   "ax": 8,
+   "ay": 88,
+   "hold": 6
+  }
+ ]
+}

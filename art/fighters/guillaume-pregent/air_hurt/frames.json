@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.2029,
+ "raw": "art/raw/guillaume-pregent/air_hurt/20261112-223142-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 122,
+   "h": 122,
+   "ax": 13,
+   "ay": 121,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 141,
+   "h": 69,
+   "ax": 25,
+   "ay": 68,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 84,
+   "h": 123,
+   "ax": 3,
+   "ay": 122,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 150,
+   "h": 41,
+   "ax": 30,
+   "ay": 40,
+   "hold": 8
+  }
+ ]
+}

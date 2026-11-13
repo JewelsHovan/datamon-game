@@ -1,0 +1,56 @@
+{
+ "clip": "jump",
+ "loop": false,
+ "scale": 0.20741,
+ "raw": "art/raw/guillaume-delmas-frenette/jump/20261112-222247-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 87,
+   "h": 116,
+   "ax": 3,
+   "ay": 115,
+   "hold": 4
+  },
+  {
+   "file": "01.png",
+   "w": 70,
+   "h": 188,
+   "ax": -10,
+   "ay": 187,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 58,
+   "h": 153,
+   "ax": -15,
+   "ay": 152,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 61,
+   "h": 110,
+   "ax": -10,
+   "ay": 109,
+   "hold": 8
+  },
+  {
+   "file": "04.png",
+   "w": 58,
+   "h": 154,
+   "ax": -11,
+   "ay": 153,
+   "hold": 7
+  },
+  {
+   "file": "05.png",
+   "w": 84,
+   "h": 157,
+   "ax": -4,
+   "ay": 156,
+   "hold": 7
+  }
+ ]
+}

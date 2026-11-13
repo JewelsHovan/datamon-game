@@ -1,0 +1,56 @@
+{
+ "clip": "jump",
+ "loop": false,
+ "scale": 0.20802,
+ "raw": "art/raw/philippe-miranda-jean/jump/20261112-223449-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 79,
+   "h": 121,
+   "ax": -3,
+   "ay": 120,
+   "hold": 4
+  },
+  {
+   "file": "01.png",
+   "w": 69,
+   "h": 179,
+   "ax": -11,
+   "ay": 178,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 56,
+   "h": 146,
+   "ax": -15,
+   "ay": 145,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 58,
+   "h": 102,
+   "ax": -13,
+   "ay": 101,
+   "hold": 8
+  },
+  {
+   "file": "04.png",
+   "w": 52,
+   "h": 147,
+   "ax": -15,
+   "ay": 146,
+   "hold": 7
+  },
+  {
+   "file": "05.png",
+   "w": 80,
+   "h": 158,
+   "ax": -5,
+   "ay": 157,
+   "hold": 7
+  }
+ ]
+}

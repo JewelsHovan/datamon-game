@@ -1,0 +1,132 @@
+{
+  "air_attack": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/air_attack/20261112-222156-0.png",
+    "state": "approved"
+  },
+  "air_hurt": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/air_hurt/20261112-222233-0.png",
+    "state": "approved"
+  },
+  "block": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/block/20261112-222158-0.png",
+    "state": "approved"
+  },
+  "block_push": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/block_push/20261112-222201-0.png",
+    "state": "approved"
+  },
+  "crouch": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/crouch/20261112-222052-0.png",
+    "state": "approved"
+  },
+  "crouch_attack": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/crouch_attack/20261112-222156-0.png",
+    "state": "approved"
+  },
+  "crouch_hurt": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/crouch_hurt/20261112-222231-0.png",
+    "state": "approved"
+  },
+  "dash_back": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/dash_back/20261112-222123-0.png",
+    "state": "approved"
+  },
+  "dash_forward": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/dash_forward/20261112-222050-0.png",
+    "state": "approved"
+  },
+  "getup_roll": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/getup_roll/20261112-222229-0.png",
+    "state": "approved"
+  },
+  "heavy_kick": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/heavy_kick/20261112-222125-0.png",
+    "state": "approved"
+  },
+  "heavy_punch": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/heavy_punch/20261112-222126-0.png",
+    "state": "approved"
+  },
+  "hurt": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/hurt/20261112-222233-0.png",
+    "state": "approved"
+  },
+  "idle": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/idle/20261112-222008-0.png",
+    "state": "approved"
+  },
+  "intro": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/intro/20261112-222307-0.png",
+    "state": "approved"
+  },
+  "jump": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/jump/20261112-222049-0.png",
+    "state": "approved"
+  },
+  "knockdown": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/knockdown/20261112-222231-0.png",
+    "state": "approved"
+  },
+  "light_kick": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/light_kick/20261112-222126-0.png",
+    "state": "approved"
+  },
+  "light_punch": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/light_punch/20261112-222123-0.png",
+    "state": "approved"
+  },
+  "special": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/special/20261112-222307-0.png",
+    "state": "approved"
+  },
+  "summon": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/summon/20261112-222303-0.png",
+    "state": "approved"
+  },
+  "taunt": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/taunt/20261112-222303-0.png",
+    "state": "approved"
+  },
+  "throw": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/throw/20261112-222158-0.png",
+    "state": "approved"
+  },
+  "victory": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/victory/20261112-222304-0.png",
+    "state": "approved"
+  },
+  "walk": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/walk/20261112-222047-0.png",
+    "state": "approved"
+  },
+  "walk_back": {
+    "note": "",
+    "raw": "art/raw/duc-an-nguyen/walk_back/20261112-222050-0.png",
+    "state": "approved"
+  }
+}

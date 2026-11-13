@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.19126,
+ "raw": "art/raw/stephanie-fontaine/crouch_attack/20261112-223705-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 53,
+   "h": 96,
+   "ax": 4,
+   "ay": 95,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 77,
+   "h": 90,
+   "ax": 3,
+   "ay": 89,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 88,
+   "h": 83,
+   "ax": 0,
+   "ay": 82,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 104,
+   "h": 71,
+   "ax": 6,
+   "ay": 70,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 77,
+   "h": 85,
+   "ax": 0,
+   "ay": 84,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 50,
+   "h": 96,
+   "ax": 4,
+   "ay": 95,
+   "hold": 6
+  }
+ ]
+}

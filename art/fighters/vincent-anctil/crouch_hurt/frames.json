@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.16413,
+ "raw": "art/raw/vincent-anctil/crouch_hurt/20261112-212106-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 59,
+   "h": 104,
+   "ax": 3,
+   "ay": 103,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 59,
+   "h": 90,
+   "ax": 0,
+   "ay": 89,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 57,
+   "h": 91,
+   "ax": 0,
+   "ay": 90,
+   "hold": 6
+  }
+ ]
+}

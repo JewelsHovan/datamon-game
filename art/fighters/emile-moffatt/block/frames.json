@@ -1,0 +1,24 @@
+{
+ "clip": "block",
+ "loop": false,
+ "scale": 0.1547,
+ "raw": "art/raw/emile-moffatt/block/20261112-222149-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 75,
+   "h": 139,
+   "ax": 0,
+   "ay": 138,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 68,
+   "h": 92,
+   "ax": 1,
+   "ay": 91,
+   "hold": 6
+  }
+ ]
+}

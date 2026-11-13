@@ -1,0 +1,32 @@
+{
+ "clip": "crouch",
+ "loop": false,
+ "scale": 0.16667,
+ "raw": "art/raw/minh-ngoc-do/crouch/20261112-223240-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 76,
+   "h": 131,
+   "ax": 0,
+   "ay": 130,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 72,
+   "h": 117,
+   "ax": 2,
+   "ay": 116,
+   "hold": 2
+  },
+  {
+   "file": "02.png",
+   "w": 58,
+   "h": 92,
+   "ax": 4,
+   "ay": 91,
+   "hold": 6
+  }
+ ]
+}

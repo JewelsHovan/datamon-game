@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.19337,
+ "raw": "art/raw/william-chan/air_hurt/20261112-224708-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 114,
+   "h": 121,
+   "ax": 14,
+   "ay": 120,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 127,
+   "h": 77,
+   "ax": 20,
+   "ay": 76,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 88,
+   "h": 126,
+   "ax": 9,
+   "ay": 125,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 131,
+   "h": 52,
+   "ax": 27,
+   "ay": 51,
+   "hold": 8
+  }
+ ]
+}

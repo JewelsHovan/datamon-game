@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.20498,
+ "raw": "art/raw/jonathan-kim/crouch_attack/20261112-223021-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 66,
+   "h": 98,
+   "ax": 0,
+   "ay": 97,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 75,
+   "h": 95,
+   "ax": 0,
+   "ay": 94,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 98,
+   "h": 88,
+   "ax": 8,
+   "ay": 87,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 101,
+   "h": 80,
+   "ax": 0,
+   "ay": 79,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 71,
+   "h": 86,
+   "ax": 0,
+   "ay": 85,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 66,
+   "h": 98,
+   "ax": 0,
+   "ay": 97,
+   "hold": 6
+  }
+ ]
+}

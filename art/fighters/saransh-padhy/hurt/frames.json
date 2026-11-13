@@ -1,0 +1,40 @@
+{
+ "clip": "hurt",
+ "loop": false,
+ "scale": 0.16787,
+ "raw": "art/raw/saransh-padhy/hurt/20261112-212046-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 95,
+   "h": 142,
+   "ax": 13,
+   "ay": 141,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 112,
+   "h": 138,
+   "ax": 28,
+   "ay": 137,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 73,
+   "h": 120,
+   "ax": 0,
+   "ay": 119,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 79,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

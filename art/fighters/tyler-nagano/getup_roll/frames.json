@@ -1,0 +1,56 @@
+{
+ "clip": "getup_roll",
+ "loop": false,
+ "scale": 0.21807,
+ "raw": "art/raw/tyler-nagano/getup_roll/20261112-212151-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 136,
+   "h": 30,
+   "ax": 25,
+   "ay": 29,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 75,
+   "h": 84,
+   "ax": 0,
+   "ay": 83,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 68,
+   "h": 65,
+   "ax": -4,
+   "ay": 64,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 89,
+   "h": 80,
+   "ax": 12,
+   "ay": 79,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 77,
+   "h": 122,
+   "ax": 4,
+   "ay": 121,
+   "hold": 6
+  },
+  {
+   "file": "05.png",
+   "w": 76,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

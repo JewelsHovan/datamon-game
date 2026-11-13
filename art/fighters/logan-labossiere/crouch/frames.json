@@ -1,0 +1,32 @@
+{
+ "clip": "crouch",
+ "loop": false,
+ "scale": 0.16018,
+ "raw": "art/raw/logan-labossiere/crouch/20261112-222607-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 71,
+   "h": 128,
+   "ax": 0,
+   "ay": 127,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 67,
+   "h": 108,
+   "ax": 0,
+   "ay": 107,
+   "hold": 2
+  },
+  {
+   "file": "02.png",
+   "w": 55,
+   "h": 86,
+   "ax": 2,
+   "ay": 85,
+   "hold": 6
+  }
+ ]
+}

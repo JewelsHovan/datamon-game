@@ -1,0 +1,72 @@
+{
+ "clip": "knockdown",
+ "loop": false,
+ "scale": 0.21705,
+ "raw": "art/raw/victor-desautels/knockdown/20261112-223952-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 100,
+   "h": 127,
+   "ax": 13,
+   "ay": 126,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 123,
+   "h": 75,
+   "ax": 25,
+   "ay": 74,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 104,
+   "h": 64,
+   "ax": 20,
+   "ay": 63,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 91,
+   "h": 59,
+   "ax": 11,
+   "ay": 58,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 125,
+   "h": 34,
+   "ax": 28,
+   "ay": 33,
+   "hold": 26
+  },
+  {
+   "file": "05.png",
+   "w": 86,
+   "h": 60,
+   "ax": 3,
+   "ay": 59,
+   "hold": 8
+  },
+  {
+   "file": "06.png",
+   "w": 65,
+   "h": 102,
+   "ax": -1,
+   "ay": 101,
+   "hold": 8
+  },
+  {
+   "file": "07.png",
+   "w": 69,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 8
+  }
+ ]
+}

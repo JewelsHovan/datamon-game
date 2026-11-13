@@ -1,0 +1,56 @@
+{
+ "clip": "jump",
+ "loop": false,
+ "scale": 0.19608,
+ "raw": "art/raw/stephanie-fontaine/jump/20261112-223629-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 73,
+   "h": 116,
+   "ax": 2,
+   "ay": 115,
+   "hold": 4
+  },
+  {
+   "file": "01.png",
+   "w": 70,
+   "h": 174,
+   "ax": -3,
+   "ay": 173,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 54,
+   "h": 129,
+   "ax": -12,
+   "ay": 128,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 55,
+   "h": 100,
+   "ax": -9,
+   "ay": 99,
+   "hold": 8
+  },
+  {
+   "file": "04.png",
+   "w": 50,
+   "h": 148,
+   "ax": -10,
+   "ay": 147,
+   "hold": 7
+  },
+  {
+   "file": "05.png",
+   "w": 87,
+   "h": 142,
+   "ax": 7,
+   "ay": 141,
+   "hold": 7
+  }
+ ]
+}

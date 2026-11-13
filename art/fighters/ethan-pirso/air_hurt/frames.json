@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.21277,
+ "raw": "art/raw/ethan-pirso/air_hurt/20261112-212149-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 129,
+   "h": 130,
+   "ax": 17,
+   "ay": 129,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 144,
+   "h": 69,
+   "ax": 31,
+   "ay": 68,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 121,
+   "h": 135,
+   "ax": 15,
+   "ay": 134,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 157,
+   "h": 62,
+   "ax": 33,
+   "ay": 61,
+   "hold": 8
+  }
+ ]
+}

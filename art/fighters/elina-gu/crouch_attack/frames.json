@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.20086,
+ "raw": "art/raw/elina-gu/crouch_attack/20261112-222151-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 63,
+   "h": 104,
+   "ax": 2,
+   "ay": 103,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 65,
+   "h": 91,
+   "ax": 1,
+   "ay": 90,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 111,
+   "h": 82,
+   "ax": 3,
+   "ay": 81,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 96,
+   "h": 77,
+   "ax": 2,
+   "ay": 76,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 88,
+   "h": 85,
+   "ax": 10,
+   "ay": 84,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 61,
+   "h": 92,
+   "ax": 8,
+   "ay": 91,
+   "hold": 6
+  }
+ ]
+}

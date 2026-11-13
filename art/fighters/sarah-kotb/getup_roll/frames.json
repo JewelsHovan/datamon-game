@@ -1,0 +1,56 @@
+{
+ "clip": "getup_roll",
+ "loop": false,
+ "scale": 0.21084,
+ "raw": "art/raw/sarah-kotb/getup_roll/20261112-223503-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 129,
+   "h": 32,
+   "ax": 18,
+   "ay": 31,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 88,
+   "h": 73,
+   "ax": 4,
+   "ay": 72,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 61,
+   "h": 81,
+   "ax": -5,
+   "ay": 80,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 89,
+   "h": 100,
+   "ax": 15,
+   "ay": 99,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 82,
+   "h": 129,
+   "ax": 10,
+   "ay": 128,
+   "hold": 6
+  },
+  {
+   "file": "05.png",
+   "w": 79,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

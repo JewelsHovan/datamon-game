@@ -47,8 +47,20 @@ function heldDirs(f: FighterState): number {
   return toFacingRelative(inputAt(f.input, 0), f.facing);
 }
 
-function ownsProjectile(state: SimState, player: PlayerIndex): boolean {
-  return state.projectiles.some((p) => p.owner === player);
+function specialMoveFor(f: FighterState, dirs: number): MoveId {
+  const info = fighterInfo(f.slug);
+  return (dirs & DIR_FORWARD) !== 0 ? info.altSpecialMove : info.specialMove;
+}
+
+function canStartSpecial(state: SimState, player: PlayerIndex, moveId: MoveId): boolean {
+  const def = MOVES[moveId];
+  if (def.projectileTick === undefined) return true;
+  const kind = def.projectileSpec?.kind ?? "orb";
+  return !state.projectiles.some((p) => p.owner === player && (p.kind ?? "orb") === kind);
+}
+
+export function isGrabMove(def: MoveDef): boolean {
+  return def.grabTick !== undefined || def.commandGrabTick !== undefined;
 }
 
 /**
@@ -71,7 +83,10 @@ function chooseGroundMove(f: FighterState, player: PlayerIndex, state: SimState)
   const k = bufferedPress(f, BUTTON_KICK, now);
   const s = bufferedPress(f, BUTTON_SPECIAL, now);
   if (p >= 0 && k >= 0 && Math.abs(p - k) <= COMBAT.throwChordFrames) return { id: "throw", press: Math.max(p, k) };
-  if (s >= 0 && !ownsProjectile(state, player)) return { id: "special", press: s };
+  if (s >= 0) {
+    const specId = specialMoveFor(f, heldDirs(f));
+    if (canStartSpecial(state, player, specId)) return { id: specId, press: s };
+  }
   const press = Math.max(p, k);
   if (press < 0) return null;
   // The newer press wins when both are buffered but too far apart for a throw.
@@ -148,35 +163,54 @@ function tryThrowConversion(f: FighterState, player: PlayerIndex, state: SimStat
   return true;
 }
 
+function allowedCancels(slug: string, id: MoveId): MoveId[] {
+  const out: MoveId[] = [...(MOVES[id].cancels ?? [])];
+  const trait = fighterInfo(slug).chainTrait;
+  if (trait === "rush-chain") {
+    if (id === "light_punch") out.push("light_kick", "crouch_attack");
+    else if (id === "crouch_attack") out.push("special");
+  } else if (trait === "heavy-cancel") {
+    if (id === "heavy_kick" || id === "crouch_attack") out.push("special");
+  } else if (trait === "poke-cancel") {
+    if (id === "light_punch") out.push("light_kick");
+    else if (id === "crouch_attack") out.push("special");
+  }
+  return out;
+}
+
 /**
  * Cancels from a connected move. The press maps to a move with the same
- * scheme as from neutral (normalFor, Special); the move's cancel list decides
- * whether it may follow: light_punch into forward+Punch, forward+Kick or
- * Special; light_kick into forward+Kick or Special; heavy_punch into Special.
+ * scheme as from neutral (normalFor, Special); the move's cancel list plus the
+ * fighter's chainTrait decides whether it may follow.
  */
 function tryCancel(f: FighterState, player: PlayerIndex, state: SimState): boolean {
   const m = f.move;
   if (!m || !m.connected) return false;
   const def = MOVES[m.id];
-  if (!def.cancels || !cancelWindowOpen(def, m.tick)) return false;
+  const allowed = allowedCancels(f.slug, m.id);
+  if (allowed.length === 0 || !cancelWindowOpen(def, m.tick)) return false;
   const now = state.frame;
   const dirs = heldDirs(f);
   const s = bufferedPress(f, BUTTON_SPECIAL, now);
   const p = bufferedPress(f, BUTTON_PUNCH, now);
   const k = bufferedPress(f, BUTTON_KICK, now);
-  const candidates: { id: MoveId; press: number }[] = [];
-  if (s >= 0 && !ownsProjectile(state, player)) candidates.push({ id: "special", press: s });
+  if (s >= 0 && allowed.includes("special")) {
+    const specId = specialMoveFor(f, dirs);
+    if (canStartSpecial(state, player, specId)) {
+      startMove(f, player, specId, s, state.events);
+      return true;
+    }
+  }
   // Newer press first, so the button pressed last decides when both are buffered.
   const normals = [
     { button: BUTTON_PUNCH, press: p },
     { button: BUTTON_KICK, press: k },
   ].sort((a, b) => b.press - a.press);
   for (const n of normals) {
-    if (n.press >= 0) candidates.push({ id: normalFor(n.button, dirs), press: n.press });
-  }
-  for (const c of candidates) {
-    if (def.cancels.includes(c.id)) {
-      startMove(f, player, c.id, c.press, state.events);
+    if (n.press < 0) continue;
+    const id = normalFor(n.button, dirs);
+    if (allowed.includes(id)) {
+      startMove(f, player, id, n.press, state.events);
       return true;
     }
   }
@@ -195,14 +229,19 @@ export function tickGroundMove(f: FighterState, player: PlayerIndex, state: SimS
   m.tick += 1;
   if (tryThrowConversion(f, player, state) || tryCancel(f, player, state)) return false;
   const def = MOVES[m.id];
-  if (def.projectileTick !== undefined && m.tick === def.projectileTick && !ownsProjectile(state, player)) {
-    spawnProjectile(f, player, state);
+  // Counter/parry stances that reach counterJumpTick sequentially (unhit) end after whiff recovery.
+  if (def.counterJumpTick !== undefined && m.tick === def.counterJumpTick) {
+    f.move = null;
+    return true;
+  }
+  if (def.projectileTick !== undefined && m.tick === def.projectileTick && canStartSpecial(state, player, m.id)) {
+    spawnProjectile(f, player, state, def);
   }
   if (def.vanishTick !== undefined && m.tick === def.vanishTick) {
     state.events.push({ type: "teleport", player, phase: "out", x: f.x });
   }
   if (def.reappearTick !== undefined && m.tick === def.reappearTick) reappear(f, player, state);
-  if (def.id === "throw") return tickThrow(f, player, state);
+  if (isGrabMove(def)) return tickGrabMove(f, player, state, def);
   if (m.tick >= moveDuration(def)) {
     f.move = null;
     return true;
@@ -210,13 +249,14 @@ export function tickGroundMove(f: FighterState, player: PlayerIndex, state: SimS
   return false;
 }
 
-/** Throws: the grab is checked in detectHits on grabTick; a whiff recovers, a grab tosses on tossTick. */
-function tickThrow(f: FighterState, player: PlayerIndex, state: SimState): boolean {
+/** Grabs (throws and command grabs): checked in detectHits on grabTick; a whiff recovers, a grab tosses on tossTick. */
+function tickGrabMove(f: FighterState, player: PlayerIndex, state: SimState, def: MoveDef): boolean {
   const m = f.move!;
-  const def = MOVES.throw;
-  const victim = state.fighters[player === 0 ? 1 : 0];
-  if (!m.grabbed && m.tick > def.grabTick!) {
-    if (m.tick >= def.grabTick! + def.whiffRecovery!) {
+  const grabTick = def.commandGrabTick ?? def.grabTick!;
+  const targetIdx = (player === 0 ? 1 : 0) as PlayerIndex;
+  const victim = state.fighters[targetIdx];
+  if (!m.grabbed && m.tick > grabTick) {
+    if (m.tick >= grabTick + def.whiffRecovery!) {
       f.move = null;
       return true;
     }
@@ -228,9 +268,12 @@ function tickThrow(f: FighterState, player: PlayerIndex, state: SimState): boole
     victim.y = MOVEMENT.floorY;
     if (m.tick === def.tossTick) {
       victim.x = clampWall(f.x + f.facing * 6000);
-      const dealt = applyDamage(victim, def.damage, state);
-      state.events.push({ type: "hit", player, target: (player === 0 ? 1 : 0) as PlayerIndex, move: "throw", strength: "heavy", x: victim.x, y: victim.y - 9000, damage: dealt, combo: 1 });
-      knockDown(victim, (player === 0 ? 1 : 0) as PlayerIndex, state, def.launch ?? 0);
+      const info = fighterInfo(f.slug);
+      const scale = def.commandGrabTick !== undefined ? info.damagePct : info.throwDamagePct;
+      const base = Math.max(1, Math.floor((def.damage * scale) / 100));
+      const dealt = applyDamage(victim, base, state, info.comboFloorPct);
+      state.events.push({ type: "hit", player, target: targetIdx, move: def.id, strength: def.strength, x: victim.x, y: victim.y - 9000, damage: dealt, combo: 1 });
+      knockDown(victim, targetIdx, state, def.launch ?? 0);
       f.hitstop = def.hitstop;
       victim.hitstop = def.hitstop;
     }
@@ -257,15 +300,30 @@ function clampWall(x: number): number {
   return x < WALL_LEFT ? WALL_LEFT : x > WALL_RIGHT ? WALL_RIGHT : x;
 }
 
-function spawnProjectile(f: FighterState, player: PlayerIndex, state: SimState): void {
+function spawnProjectile(f: FighterState, player: PlayerIndex, state: SimState, def: MoveDef): void {
+  const spec = def.projectileSpec ?? {
+    kind: "orb" as const,
+    speed: PROJECTILE.speed,
+    spawnX: PROJECTILE.spawnX,
+    spawnY: PROJECTILE.spawnY,
+    halfW: PROJECTILE.halfW,
+    halfH: PROJECTILE.halfH,
+    ttl: 180,
+  };
   const p: Projectile = {
     owner: player,
-    x: f.x + f.facing * PROJECTILE.spawnX,
-    y: f.y + PROJECTILE.spawnY,
-    vx: f.facing * PROJECTILE.speed,
+    x: f.x + f.facing * spec.spawnX,
+    y: f.y + spec.spawnY,
+    vx: f.facing * spec.speed,
+    vy: spec.vy ?? 0,
+    kind: spec.kind,
+    move: def.id,
+    halfW: spec.halfW,
+    halfH: spec.halfH,
+    ttl: spec.ttl,
   };
   state.projectiles.push(p);
-  state.events.push({ type: "projectile", player, x: p.x, y: p.y });
+  state.events.push({ type: "projectile", player, x: p.x, y: p.y, kind: spec.kind });
 }
 
 /**
@@ -278,16 +336,33 @@ export function viewLeft(state: SimState): number {
   return Math.max(0, Math.min(MOVEMENT.stageWidth - MOVEMENT.screenWidth, left));
 }
 
-/** Moves projectiles and drops the ones that left the screen. */
+/** Moves projectiles and drops the ones that left the screen or expired. */
 export function advanceProjectiles(state: SimState): void {
-  for (const p of state.projectiles) p.x += p.vx;
   const left = viewLeft(state);
   const right = left + MOVEMENT.screenWidth;
-  state.projectiles = state.projectiles.filter((p) => p.x > left - PROJECTILE.halfW && p.x < right + PROJECTILE.halfW);
+  const kept: Projectile[] = [];
+  for (const p of state.projectiles) {
+    p.x += p.vx;
+    if (p.vy) p.y += p.vy;
+    if (p.ttl !== undefined) p.ttl -= 1;
+    const hw = p.halfW ?? PROJECTILE.halfW;
+    if (
+      p.x > left - hw &&
+      p.x < right + hw &&
+      p.y > MOVEMENT.floorY - 26000 &&
+      p.y <= MOVEMENT.floorY + 2000 &&
+      (p.ttl === undefined || p.ttl > 0)
+    ) {
+      kept.push(p);
+    }
+  }
+  state.projectiles = kept;
 }
 
 function projectileRect(p: Projectile): Rect {
-  return { left: p.x - PROJECTILE.halfW, right: p.x + PROJECTILE.halfW, top: p.y - PROJECTILE.halfH, bottom: p.y + PROJECTILE.halfH };
+  const hw = p.halfW ?? PROJECTILE.halfW;
+  const hh = p.halfH ?? PROJECTILE.halfH;
+  return { left: p.x - hw, right: p.x + hw, top: p.y - hh, bottom: p.y + hh };
 }
 
 // ------------------------------------------------------- knockdown, K.O. ----
@@ -417,7 +492,7 @@ export function hurtRects(f: FighterState): Rect[] {
     return juggleable ? poseHurt(f.slug, "air").map((b) => toRect(b, f.x, f.y, f.facing)) : [];
   }
   if (f.state === "held" || f.state === "victory") return [];
-  if (f.state === "dash_back" && f.stateFrame < MOVES_V2.dashBackInvuln) return [];
+  if (f.state === "dash_back" && f.stateFrame < fighterInfo(f.slug).dashBackInvuln) return [];
   let boxes: readonly BoxPx[];
   if (f.move) {
     const def = MOVES[f.move.id];
@@ -433,7 +508,7 @@ export function hurtRects(f: FighterState): Rect[] {
 /** World-space hitbox of the fighter's active move frame, or null. */
 export function hitRect(f: FighterState): Rect | null {
   const m = f.move;
-  if (!m || m.id === "throw" || m.id === "special") return null;
+  if (!m || isGrabMove(MOVES[m.id]) || m.id === "special") return null;
   const def = MOVES[m.id];
   const at = segmentAt(def.segments, m.tick);
   const seg = at.segment;
@@ -447,7 +522,7 @@ export function hitRect(f: FighterState): Rect | null {
 
 export type PendingHit =
   | { kind: "strike"; attacker: PlayerIndex; target: PlayerIndex; move: MoveId; x: number; y: number }
-  | { kind: "projectile"; owner: PlayerIndex; target: PlayerIndex; x: number; y: number }
+  | { kind: "projectile"; owner: PlayerIndex; target: PlayerIndex; move: MoveId; x: number; y: number }
   | { kind: "grab"; attacker: PlayerIndex; target: PlayerIndex };
 
 function firstOverlap(hit: Rect, hurts: readonly Rect[]): Rect | null {
@@ -455,9 +530,17 @@ function firstOverlap(hit: Rect, hurts: readonly Rect[]): Rect | null {
   return null;
 }
 
-function throwable(f: FighterState): boolean {
+function throwable(f: FighterState, includeBlockstun = false): boolean {
   if (f.y < MOVEMENT.floorY) return false;
-  return f.state === "idle" || f.state === "walk_forward" || f.state === "walk_back" || f.state === "crouch" || f.state === "landing" || f.state === "attack";
+  return (
+    f.state === "idle" ||
+    f.state === "walk_forward" ||
+    f.state === "walk_back" ||
+    f.state === "crouch" ||
+    f.state === "landing" ||
+    f.state === "attack" ||
+    (includeBlockstun && f.state === "blockstun")
+  );
 }
 
 /** Finds every hit this step before any is applied, so simultaneous hits trade. */
@@ -466,14 +549,26 @@ export function detectHits(state: SimState): PendingHit[] {
   const fighters = state.fighters;
   const hurts = [hurtRects(fighters[0]), hurtRects(fighters[1])] as const;
   const grabbing: boolean[] = [false, false];
+  const cmdGrab: boolean[] = [false, false];
   for (const i of [0, 1] as const) {
     const f = fighters[i];
     const j = (1 - i) as PlayerIndex;
     const m = f.move;
-    if (m && m.id === "throw" && !m.grabbed && m.tick === MOVES.throw.grabTick && f.hitstop === 0) {
-      const target = fighters[j];
-      if (throwable(target) && Math.abs(target.x - f.x) <= COMBAT.throwRange) grabbing[i] = true;
-      continue;
+    if (m && !m.grabbed && f.hitstop === 0) {
+      const def = MOVES[m.id];
+      const grabTick = def.commandGrabTick ?? def.grabTick;
+      if (grabTick !== undefined && m.tick === grabTick) {
+        const isCmd = def.commandGrabTick !== undefined;
+        const target = fighters[j];
+        const range = isCmd
+          ? (def.grabRange ?? COMBAT.throwRange)
+          : Math.floor((COMBAT.throwRange * fighterInfo(f.slug).throwRangePct) / 100);
+        if (throwable(target, isCmd) && (!isCmd || hurts[j].length > 0) && Math.abs(target.x - f.x) <= range) {
+          grabbing[i] = true;
+          cmdGrab[i] = isCmd;
+        }
+        continue;
+      }
     }
     const hit = hitRect(f);
     if (!hit) continue;
@@ -482,11 +577,16 @@ export function detectHits(state: SimState): PendingHit[] {
     const c = overlapCenter(hit, hurt);
     hits.push({ kind: "strike", attacker: i, target: j, move: m!.id, x: c.x, y: c.y });
   }
-  if (grabbing[0] && grabbing[1]) {
-    // Both throw on the same frame: a tech. Both throws whiff.
+  if (grabbing[0] && grabbing[1] && !cmdGrab[0] && !cmdGrab[1]) {
+    // Both normal-throw on the same frame: a tech. Both throws whiff.
     const x = Math.floor((fighters[0].x + fighters[1].x) / 2);
     state.events.push({ type: "tech", x, y: MOVEMENT.floorY - 9000 });
   } else {
+    // A command grab cannot be teched by a normal throw.
+    if (grabbing[0] && grabbing[1] && cmdGrab[0] !== cmdGrab[1]) {
+      if (cmdGrab[0]) grabbing[1] = false;
+      else grabbing[0] = false;
+    }
     for (const i of [0, 1] as const) if (grabbing[i]) hits.push({ kind: "grab", attacker: i, target: (1 - i) as PlayerIndex });
   }
 
@@ -514,7 +614,7 @@ export function detectHits(state: SimState): PendingHit[] {
     const hurt = firstOverlap(pr, hurts[target]);
     if (!hurt) continue;
     const c = overlapCenter(pr, hurt);
-    hits.push({ kind: "projectile", owner: p.owner, target, x: c.x, y: c.y });
+    hits.push({ kind: "projectile", owner: p.owner, target, move: p.move ?? "special", x: c.x, y: c.y });
     dead.add(k);
   }
   // Clashed and spent projectiles leave the field now; their hits carry the owner.
@@ -537,8 +637,8 @@ export function blocks(f: FighterState, height: MoveDef["height"]): boolean {
   return true;
 }
 
-function applyDamage(f: FighterState, base: number, _state: SimState): number {
-  const pct = Math.max(COMBAT.comboScaleFloor, 100 - COMBAT.comboScalePerHit * f.comboHits);
+function applyDamage(f: FighterState, base: number, _state: SimState, comboFloor: number = COMBAT.comboScaleFloor): number {
+  const pct = Math.max(comboFloor, 100 - COMBAT.comboScalePerHit * f.comboHits);
   const dealt = Math.max(1, Math.floor((base * pct) / 100));
   f.health = Math.max(0, f.health - dealt);
   f.comboHits += 1;
@@ -561,6 +661,21 @@ function applyPush(defender: FighterState, attacker: FighterState | null, push: 
 
 function strike(state: SimState, def: MoveDef, attacker: FighterState | null, attackerIdx: PlayerIndex, target: PlayerIndex, x: number, y: number, seg?: Segment): void {
   const d = state.fighters[target];
+  // Counter / parry stance: absorbs the incoming strike with 0 damage and jumps to counterJumpTick.
+  if (d.state === "attack" && d.move) {
+    const dDef = MOVES[d.move.id];
+    if (dDef.counterJumpTick !== undefined && segmentAt(dDef.segments, d.move.tick).segment.counter === true) {
+      d.move.tick = dDef.counterJumpTick;
+      d.move.connected = false;
+      d.move.hitSeg = -1;
+      d.hitstop = 4;
+      if (attacker) attacker.hitstop = 10;
+      state.events.push({ type: "counter", player: target, target: attackerIdx, x, y });
+      return;
+    }
+  }
+  const attackerInfo = fighterInfo(state.fighters[attackerIdx].slug);
+  const push = Math.floor((def.push * attackerInfo.pushbackPct) / 100);
   const hitstop = seg?.hitstop ?? def.hitstop;
   if (blocks(d, def.height)) {
     const crouching = (heldDirs(d) & DIR_DOWN) !== 0;
@@ -569,21 +684,23 @@ function strike(state: SimState, def: MoveDef, attacker: FighterState | null, at
     d.stun = def.blockstun;
     d.stunLow = crouching;
     d.move = null;
-    if (def.chip) d.health = Math.max(d.health > 1 ? 1 : 0, d.health - def.chip);
+    if (def.chip) {
+      const chip = Math.max(1, Math.floor((def.chip * (100 - fighterInfo(d.slug).chipResistPct)) / 100));
+      d.health = Math.max(d.health > 1 ? 1 : 0, d.health - chip);
+    }
     d.hitstop = Math.max(0, hitstop - COMBAT.blockHitstopReduction);
     if (attacker) attacker.hitstop = d.hitstop;
-    applyPush(d, attacker, def.push);
+    applyPush(d, attacker, push);
     state.events.push({ type: "block", player: attackerIdx, target, move: def.id, strength: def.strength, x, y });
     return;
   }
-  const scale = fighterInfo(state.fighters[attackerIdx].slug).damagePct;
-  const base = Math.max(1, Math.floor(((seg?.damage ?? def.damage) * scale) / 100));
+  const base = Math.max(1, Math.floor(((seg?.damage ?? def.damage) * attackerInfo.damagePct) / 100));
   const knocks = seg?.knockdown ?? def.knockdown ?? false;
   const launch = seg?.launch ?? def.launch ?? 0;
   // Armor: an armored segment takes the damage but keeps going (once per move).
   if (d.move && !d.move.armorUsed && segmentAt(MOVES[d.move.id].segments, d.move.tick).segment.armor) {
     d.move.armorUsed = true;
-    const dealt = applyDamage(d, base, state);
+    const dealt = applyDamage(d, base, state, attackerInfo.comboFloorPct);
     state.events.push({ type: "armor", player: target, x, y });
     state.events.push({ type: "hit", player: attackerIdx, target, move: def.id, strength: def.strength, x, y, damage: dealt, combo: d.comboHits });
     d.hitstop = 6;
@@ -592,7 +709,7 @@ function strike(state: SimState, def: MoveDef, attacker: FighterState | null, at
     return;
   }
   const crouching = d.state === "crouch" || (d.state === "attack" && d.move?.id === "crouch_attack");
-  const dealt = applyDamage(d, base, state);
+  const dealt = applyDamage(d, base, state, attackerInfo.comboFloorPct);
   state.events.push({ type: "hit", player: attackerIdx, target, move: def.id, strength: def.strength, x, y, damage: dealt, combo: d.comboHits });
   d.hitstop = hitstop;
   if (attacker) attacker.hitstop = hitstop;
@@ -612,7 +729,7 @@ function strike(state: SimState, def: MoveDef, attacker: FighterState | null, at
   d.stun = def.hitstun + (crouching ? COMBAT.crouchHitstunBonus : 0);
   d.stunLow = crouching || def.height === "low";
   d.move = null;
-  applyPush(d, attacker, def.push);
+  applyPush(d, attacker, push);
 }
 
 /** Applies every detected hit. Two fighter strikes in one step is a trade. */
@@ -638,11 +755,11 @@ export function applyHits(state: SimState, hits: readonly PendingHit[]): void {
       }
       strike(state, def, attacker, h.attacker, h.target, h.x, h.y, seg);
     } else if (h.kind === "projectile") {
-      strike(state, MOVES.special, null, h.owner, h.target, h.x, h.y);
+      strike(state, MOVES[h.move], null, h.owner, h.target, h.x, h.y);
     } else {
       const thrower = state.fighters[h.attacker];
       const victim = state.fighters[h.target];
-      if (thrower.move?.id !== "throw" || thrower.state !== "attack") continue;
+      if (!thrower.move || !isGrabMove(MOVES[thrower.move.id]) || thrower.state !== "attack") continue;
       if (victim.state === "hitstun" || victim.state === "knockdown" || victim.state === "ko") continue;
       thrower.move.grabbed = true;
       thrower.move.connected = true;

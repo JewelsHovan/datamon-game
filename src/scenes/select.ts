@@ -290,8 +290,8 @@ export class SelectScene implements Scene {
 
   private drawPanelFor(ctx: CanvasRenderingContext2D, c: 0 | 1, frame: number): void {
     const left = c === 0;
-    const w = 150;
-    const x = left ? 8 : VIEW_WIDTH - 8 - w;
+    const w = 158;
+    const x = left ? 4 : VIEW_WIDTH - 4 - w;
     const y = 58;
     const h = 250;
     const cx = x + w / 2;
@@ -304,10 +304,10 @@ export class SelectScene implements Scene {
       return;
     }
     const tile: Tile = this.locked[c] ?? this.tiles[this.cursor[c]]!;
-    const footY = y + 178;
+    const footY = y + 175;
     if (tile === "random") {
       text(ctx, "?", cx, y + 80, 40, GOLD, "center");
-      text(ctx, "RANDOM", cx, footY + 10, 16, INK, "center");
+      text(ctx, "RANDOM", cx, footY + 8, 16, INK, "center");
       return;
     }
     const playable = this.isPlayable(tile);
@@ -337,14 +337,15 @@ export class SelectScene implements Scene {
         ctx.restore();
       }
     }
-    text(ctx, tile.shortName.toUpperCase(), cx, footY + 10, tile.shortName.length > 9 ? 8 : 16, INK, "center");
+    text(ctx, tile.shortName.toUpperCase(), cx, footY + 8, tile.shortName.length > 9 ? 8 : 16, INK, "center");
     if (!playable) {
       text(ctx, "COMING SOON", cx, footY + 34, 8, GOLD, "center");
       return;
     }
     const info = this.m.services.info(tile.slug);
-    if (info.archetype) text(ctx, info.archetype.toUpperCase(), cx, footY + 32, 8, GOLD, "center");
-    if (info.special) text(ctx, info.special.toUpperCase(), cx, footY + 46, 8, "#aeaadc", "center");
+    if (info.archetype) text(ctx, info.archetype.toUpperCase(), cx, footY + 28, 8, GOLD, "center");
+    if (info.special) text(ctx, `SP: ${info.special.toUpperCase()}`, cx, footY + 38, 8, "#aeaadc", "center");
+    if (info.altSpecial) text(ctx, `F+${info.altSpecial.toUpperCase()}`, cx, footY + 48, 8, "#7fd6ff", "center");
     if (this.locked[c]) {
       text(ctx, "READY", cx, footY + 60, 8, PLAYER_COLORS[c], "center");
     } else if (!isCpu) {

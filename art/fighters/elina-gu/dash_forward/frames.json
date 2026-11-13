@@ -1,0 +1,48 @@
+{
+ "clip": "dash_forward",
+ "loop": false,
+ "scale": 0.17566,
+ "raw": "art/raw/elina-gu/dash_forward/20261112-222045-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 92,
+   "h": 136,
+   "ax": 17,
+   "ay": 135,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 90,
+   "h": 134,
+   "ax": 16,
+   "ay": 133,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 83,
+   "h": 135,
+   "ax": 11,
+   "ay": 134,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 87,
+   "h": 134,
+   "ax": 12,
+   "ay": 133,
+   "hold": 3
+  },
+  {
+   "file": "04.png",
+   "w": 78,
+   "h": 140,
+   "ax": -1,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

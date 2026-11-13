@@ -1,0 +1,32 @@
+{
+ "clip": "crouch",
+ "loop": false,
+ "scale": 0.16706,
+ "raw": "art/raw/veronica-marallag/crouch/20261112-223937-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 68,
+   "h": 127,
+   "ax": 0,
+   "ay": 126,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 65,
+   "h": 108,
+   "ax": 0,
+   "ay": 107,
+   "hold": 2
+  },
+  {
+   "file": "02.png",
+   "w": 58,
+   "h": 84,
+   "ax": 5,
+   "ay": 83,
+   "hold": 6
+  }
+ ]
+}

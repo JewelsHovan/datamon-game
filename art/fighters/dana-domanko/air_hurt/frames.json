@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.19178,
+ "raw": "art/raw/dana-domanko/air_hurt/20261112-222210-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 115,
+   "h": 119,
+   "ax": 14,
+   "ay": 118,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 132,
+   "h": 68,
+   "ax": 21,
+   "ay": 67,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 91,
+   "h": 111,
+   "ax": 9,
+   "ay": 110,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 147,
+   "h": 40,
+   "ax": 34,
+   "ay": 39,
+   "hold": 8
+  }
+ ]
+}

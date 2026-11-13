@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.15873,
+ "raw": "art/raw/saransh-padhy/crouch_hurt/20261112-212106-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 69,
+   "h": 101,
+   "ax": 8,
+   "ay": 100,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 59,
+   "h": 92,
+   "ax": 1,
+   "ay": 91,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 61,
+   "h": 93,
+   "ax": 1,
+   "ay": 92,
+   "hold": 6
+  }
+ ]
+}

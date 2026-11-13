@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.18135,
+ "raw": "art/raw/dana-domanko/air_attack/20261112-222137-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 58,
+   "h": 101,
+   "ax": -5,
+   "ay": 100,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 69,
+   "h": 131,
+   "ax": 0,
+   "ay": 130,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 119,
+   "h": 113,
+   "ax": 11,
+   "ay": 112,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 127,
+   "h": 95,
+   "ax": 12,
+   "ay": 94,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 61,
+   "h": 101,
+   "ax": -2,
+   "ay": 100,
+   "hold": 6
+  }
+ ]
+}

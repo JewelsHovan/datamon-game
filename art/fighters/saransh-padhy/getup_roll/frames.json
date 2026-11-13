@@ -1,0 +1,56 @@
+{
+ "clip": "getup_roll",
+ "loop": false,
+ "scale": 0.22187,
+ "raw": "art/raw/saransh-padhy/getup_roll/20261112-212130-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 130,
+   "h": 33,
+   "ax": 25,
+   "ay": 32,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 85,
+   "h": 74,
+   "ax": 7,
+   "ay": 73,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 59,
+   "h": 75,
+   "ax": -7,
+   "ay": 74,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 91,
+   "h": 88,
+   "ax": 12,
+   "ay": 87,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 88,
+   "h": 124,
+   "ax": 10,
+   "ay": 123,
+   "hold": 6
+  },
+  {
+   "file": "05.png",
+   "w": 78,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

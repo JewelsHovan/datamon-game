@@ -1,0 +1,24 @@
+{
+ "clip": "block",
+ "loop": false,
+ "scale": 0.15102,
+ "raw": "art/raw/francesco-finn/block/20261112-222611-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 79,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 67,
+   "h": 98,
+   "ax": 3,
+   "ay": 97,
+   "hold": 6
+  }
+ ]
+}

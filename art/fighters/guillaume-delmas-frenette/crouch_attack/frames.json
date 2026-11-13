@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.20144,
+ "raw": "art/raw/guillaume-delmas-frenette/crouch_attack/20261112-222449-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 64,
+   "h": 107,
+   "ax": 3,
+   "ay": 106,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 82,
+   "h": 97,
+   "ax": 3,
+   "ay": 96,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 105,
+   "h": 88,
+   "ax": 7,
+   "ay": 87,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 111,
+   "h": 82,
+   "ax": 0,
+   "ay": 81,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 62,
+   "h": 91,
+   "ax": 8,
+   "ay": 90,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 64,
+   "h": 108,
+   "ax": 3,
+   "ay": 107,
+   "hold": 6
+  }
+ ]
+}

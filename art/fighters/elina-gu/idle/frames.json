@@ -1,0 +1,40 @@
+{
+ "clip": "idle",
+ "loop": true,
+ "scale": 0.16432,
+ "raw": "art/raw/elina-gu/idle/20261112-222004-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 76,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 8
+  },
+  {
+   "file": "01.png",
+   "w": 76,
+   "h": 141,
+   "ax": 0,
+   "ay": 140,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 77,
+   "h": 143,
+   "ax": 0,
+   "ay": 142,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 77,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 8
+  }
+ ]
+}

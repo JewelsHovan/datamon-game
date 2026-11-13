@@ -1,0 +1,48 @@
+{
+ "clip": "dash_forward",
+ "loop": false,
+ "scale": 0.17435,
+ "raw": "art/raw/jonah-lee/dash_forward/20261112-222547-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 97,
+   "h": 135,
+   "ax": 16,
+   "ay": 134,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 94,
+   "h": 137,
+   "ax": 12,
+   "ay": 136,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 65,
+   "h": 137,
+   "ax": -7,
+   "ay": 136,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 87,
+   "h": 136,
+   "ax": 11,
+   "ay": 135,
+   "hold": 3
+  },
+  {
+   "file": "04.png",
+   "w": 79,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

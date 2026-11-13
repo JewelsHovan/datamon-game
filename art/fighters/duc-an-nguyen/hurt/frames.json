@@ -1,0 +1,40 @@
+{
+ "clip": "hurt",
+ "loop": false,
+ "scale": 0.16129,
+ "raw": "art/raw/duc-an-nguyen/hurt/20261112-222233-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 93,
+   "h": 131,
+   "ax": 24,
+   "ay": 130,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 97,
+   "h": 133,
+   "ax": 25,
+   "ay": 132,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 85,
+   "h": 112,
+   "ax": 0,
+   "ay": 111,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 67,
+   "h": 138,
+   "ax": 0,
+   "ay": 137,
+   "hold": 6
+  }
+ ]
+}

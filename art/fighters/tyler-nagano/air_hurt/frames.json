@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.2071,
+ "raw": "art/raw/tyler-nagano/air_hurt/20261112-212131-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 113,
+   "h": 125,
+   "ax": 12,
+   "ay": 124,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 136,
+   "h": 77,
+   "ax": 23,
+   "ay": 76,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 96,
+   "h": 118,
+   "ax": 9,
+   "ay": 117,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 150,
+   "h": 45,
+   "ax": 29,
+   "ay": 44,
+   "hold": 8
+  }
+ ]
+}

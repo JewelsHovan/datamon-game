@@ -1,0 +1,56 @@
+{
+ "clip": "getup_roll",
+ "loop": false,
+ "scale": 0.21407,
+ "raw": "art/raw/richard-el-chaar/getup_roll/20261112-223540-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 132,
+   "h": 32,
+   "ax": 27,
+   "ay": 31,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 66,
+   "h": 93,
+   "ax": -2,
+   "ay": 92,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 68,
+   "h": 69,
+   "ax": 1,
+   "ay": 68,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 79,
+   "h": 89,
+   "ax": 9,
+   "ay": 88,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 78,
+   "h": 124,
+   "ax": 4,
+   "ay": 123,
+   "hold": 6
+  },
+  {
+   "file": "05.png",
+   "w": 73,
+   "h": 140,
+   "ax": -1,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "clip": "summon",
+ "loop": false,
+ "scale": 0.16055,
+ "raw": "art/raw/antonia-nistor/summon/20261112-212232-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 81,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 4
+  },
+  {
+   "file": "01.png",
+   "w": 81,
+   "h": 155,
+   "ax": 0,
+   "ay": 154,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 93,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 98,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 14
+  }
+ ]
+}

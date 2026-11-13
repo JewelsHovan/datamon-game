@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.1788,
+ "raw": "art/raw/victor-desautels/air_hurt/20261112-223950-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 106,
+   "h": 122,
+   "ax": 17,
+   "ay": 121,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 135,
+   "h": 61,
+   "ax": 29,
+   "ay": 60,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 99,
+   "h": 112,
+   "ax": 19,
+   "ay": 111,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 132,
+   "h": 42,
+   "ax": 29,
+   "ay": 41,
+   "hold": 8
+  }
+ ]
+}

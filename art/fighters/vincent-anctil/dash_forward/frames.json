@@ -1,0 +1,48 @@
+{
+ "clip": "dash_forward",
+ "loop": false,
+ "scale": 0.18277,
+ "raw": "art/raw/vincent-anctil/dash_forward/20261112-211828-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 99,
+   "h": 136,
+   "ax": 18,
+   "ay": 135,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 96,
+   "h": 133,
+   "ax": 15,
+   "ay": 132,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 83,
+   "h": 133,
+   "ax": 8,
+   "ay": 132,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 98,
+   "h": 133,
+   "ax": 20,
+   "ay": 132,
+   "hold": 3
+  },
+  {
+   "file": "04.png",
+   "w": 77,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

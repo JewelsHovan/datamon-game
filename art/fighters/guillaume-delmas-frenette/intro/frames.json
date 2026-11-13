@@ -1,0 +1,56 @@
+{
+ "clip": "intro",
+ "loop": false,
+ "scale": 0.16847,
+ "raw": "art/raw/guillaume-delmas-frenette/intro/20261112-222859-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 53,
+   "h": 148,
+   "ax": 0,
+   "ay": 147,
+   "hold": 12
+  },
+  {
+   "file": "01.png",
+   "w": 59,
+   "h": 149,
+   "ax": 6,
+   "ay": 148,
+   "hold": 12
+  },
+  {
+   "file": "02.png",
+   "w": 57,
+   "h": 147,
+   "ax": 0,
+   "ay": 146,
+   "hold": 12
+  },
+  {
+   "file": "03.png",
+   "w": 63,
+   "h": 142,
+   "ax": 2,
+   "ay": 141,
+   "hold": 10
+  },
+  {
+   "file": "04.png",
+   "w": 69,
+   "h": 132,
+   "ax": 0,
+   "ay": 131,
+   "hold": 8
+  },
+  {
+   "file": "05.png",
+   "w": 69,
+   "h": 135,
+   "ax": 0,
+   "ay": 134,
+   "hold": 10
+  }
+ ]
+}

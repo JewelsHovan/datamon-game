@@ -1,0 +1,32 @@
+{
+ "clip": "crouch",
+ "loop": false,
+ "scale": 0.16827,
+ "raw": "art/raw/jonathan-kim/crouch/20261112-222738-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 71,
+   "h": 130,
+   "ax": 0,
+   "ay": 129,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 69,
+   "h": 109,
+   "ax": 1,
+   "ay": 108,
+   "hold": 2
+  },
+  {
+   "file": "02.png",
+   "w": 60,
+   "h": 82,
+   "ax": 9,
+   "ay": 81,
+   "hold": 6
+  }
+ ]
+}

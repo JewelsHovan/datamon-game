@@ -1,0 +1,72 @@
+{
+ "clip": "knockdown",
+ "loop": false,
+ "scale": 0.23333,
+ "raw": "art/raw/tabarek-al-khalidi/knockdown/20261112-223859-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 119,
+   "h": 129,
+   "ax": 10,
+   "ay": 128,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 138,
+   "h": 65,
+   "ax": 23,
+   "ay": 64,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 123,
+   "h": 60,
+   "ax": 26,
+   "ay": 59,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 112,
+   "h": 75,
+   "ax": 12,
+   "ay": 74,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 143,
+   "h": 33,
+   "ax": 29,
+   "ay": 32,
+   "hold": 26
+  },
+  {
+   "file": "05.png",
+   "w": 80,
+   "h": 70,
+   "ax": -2,
+   "ay": 69,
+   "hold": 8
+  },
+  {
+   "file": "06.png",
+   "w": 73,
+   "h": 109,
+   "ax": 4,
+   "ay": 108,
+   "hold": 8
+  },
+  {
+   "file": "07.png",
+   "w": 79,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 8
+  }
+ ]
+}

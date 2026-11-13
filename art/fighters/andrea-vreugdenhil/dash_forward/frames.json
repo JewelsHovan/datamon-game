@@ -1,0 +1,48 @@
+{
+ "clip": "dash_forward",
+ "loop": false,
+ "scale": 0.18301,
+ "raw": "art/raw/andrea-vreugdenhil/dash_forward/20261112-222047-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 96,
+   "h": 137,
+   "ax": 18,
+   "ay": 136,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 100,
+   "h": 132,
+   "ax": 17,
+   "ay": 131,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 76,
+   "h": 135,
+   "ax": 3,
+   "ay": 134,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 85,
+   "h": 135,
+   "ax": 7,
+   "ay": 134,
+   "hold": 3
+  },
+  {
+   "file": "04.png",
+   "w": 78,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

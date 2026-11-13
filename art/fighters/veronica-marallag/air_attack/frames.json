@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.17995,
+ "raw": "art/raw/veronica-marallag/air_attack/20261112-224226-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 63,
+   "h": 98,
+   "ax": -2,
+   "ay": 97,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 71,
+   "h": 125,
+   "ax": -2,
+   "ay": 124,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 119,
+   "h": 111,
+   "ax": 8,
+   "ay": 110,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 128,
+   "h": 88,
+   "ax": 13,
+   "ay": 87,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 64,
+   "h": 106,
+   "ax": -1,
+   "ay": 105,
+   "hold": 6
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.19943,
+ "raw": "art/raw/jewoo-lee/air_hurt/20261112-222707-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 124,
+   "h": 133,
+   "ax": 21,
+   "ay": 132,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 138,
+   "h": 83,
+   "ax": 30,
+   "ay": 82,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 102,
+   "h": 128,
+   "ax": 11,
+   "ay": 127,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 146,
+   "h": 46,
+   "ax": 33,
+   "ay": 45,
+   "hold": 8
+  }
+ ]
+}

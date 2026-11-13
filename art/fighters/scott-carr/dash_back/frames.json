@@ -1,0 +1,48 @@
+{
+ "clip": "dash_back",
+ "loop": false,
+ "scale": 0.17677,
+ "raw": "art/raw/scott-carr/dash_back/20261112-211854-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 69,
+   "h": 139,
+   "ax": -9,
+   "ay": 138,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 60,
+   "h": 139,
+   "ax": -10,
+   "ay": 138,
+   "hold": 4
+  },
+  {
+   "file": "02.png",
+   "w": 56,
+   "h": 138,
+   "ax": -13,
+   "ay": 137,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 76,
+   "h": 135,
+   "ax": 0,
+   "ay": 134,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 82,
+   "h": 139,
+   "ax": 0,
+   "ay": 138,
+   "hold": 3
+  }
+ ]
+}

@@ -1,0 +1,132 @@
+{
+  "air_attack": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/air_attack/20261112-223144-0.png",
+    "state": "approved"
+  },
+  "air_hurt": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/air_hurt/20261112-223221-0.png",
+    "state": "approved"
+  },
+  "block": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/block/20261112-223148-0.png",
+    "state": "approved"
+  },
+  "block_push": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/block_push/20261112-223148-0.png",
+    "state": "approved"
+  },
+  "crouch": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/crouch/20261112-223040-0.png",
+    "state": "approved"
+  },
+  "crouch_attack": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/crouch_attack/20261112-223145-0.png",
+    "state": "approved"
+  },
+  "crouch_hurt": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/crouch_hurt/20261112-223223-0.png",
+    "state": "approved"
+  },
+  "dash_back": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/dash_back/20261112-223037-0.png",
+    "state": "approved"
+  },
+  "dash_forward": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/dash_forward/20261112-223036-0.png",
+    "state": "approved"
+  },
+  "getup_roll": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/getup_roll/20261112-223220-0.png",
+    "state": "approved"
+  },
+  "heavy_kick": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/heavy_kick/20261112-223114-0.png",
+    "state": "approved"
+  },
+  "heavy_punch": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/heavy_punch/20261112-223113-0.png",
+    "state": "approved"
+  },
+  "hurt": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/hurt/20261112-223219-0.png",
+    "state": "approved"
+  },
+  "idle": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/idle/20261112-222945-1.png",
+    "state": "approved"
+  },
+  "intro": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/intro/20261112-223257-0.png",
+    "state": "approved"
+  },
+  "jump": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/jump/20261112-223111-0.png",
+    "state": "approved"
+  },
+  "knockdown": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/knockdown/20261112-223222-0.png",
+    "state": "approved"
+  },
+  "light_kick": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/light_kick/20261112-223112-0.png",
+    "state": "approved"
+  },
+  "light_punch": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/light_punch/20261112-223112-0.png",
+    "state": "approved"
+  },
+  "special": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/special/20261112-223259-0.png",
+    "state": "approved"
+  },
+  "summon": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/summon/20261112-223254-0.png",
+    "state": "approved"
+  },
+  "taunt": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/taunt/20261112-223254-0.png",
+    "state": "approved"
+  },
+  "throw": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/throw/20261112-223148-0.png",
+    "state": "approved"
+  },
+  "victory": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/victory/20261112-223253-0.png",
+    "state": "approved"
+  },
+  "walk": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/walk/20261112-223037-0.png",
+    "state": "approved"
+  },
+  "walk_back": {
+    "note": "",
+    "raw": "art/raw/milen-thomas/walk_back/20261112-223038-0.png",
+    "state": "approved"
+  }
+}

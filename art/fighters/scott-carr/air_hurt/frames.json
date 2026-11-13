@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.18445,
+ "raw": "art/raw/scott-carr/air_hurt/20261112-212135-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 116,
+   "h": 125,
+   "ax": 10,
+   "ay": 124,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 132,
+   "h": 73,
+   "ax": 24,
+   "ay": 72,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 72,
+   "h": 120,
+   "ax": -4,
+   "ay": 119,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 128,
+   "h": 39,
+   "ax": 21,
+   "ay": 38,
+   "hold": 8
+  }
+ ]
+}

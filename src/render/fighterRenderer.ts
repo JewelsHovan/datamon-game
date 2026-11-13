@@ -22,9 +22,10 @@ function moveChoice(f: FighterState): ClipChoice | null {
   if (!m) return null;
   const def = MOVES[m.id];
   let frame = segmentAt(def.segments, m.tick).segment.frame;
-  if (def.id === "throw" && !m.grabbed && m.tick > def.grabTick!) {
-    // A whiffed throw keeps reaching for a moment, then recovers.
-    frame = m.tick < def.grabTick! + 10 ? 0 : 6;
+  const grabTick = def.commandGrabTick ?? def.grabTick;
+  if (grabTick !== undefined && !m.grabbed && m.tick > grabTick) {
+    // A whiffed grab keeps reaching for a moment, then recovers.
+    frame = m.tick < grabTick + 10 ? 0 : 6;
   }
   return { clip: def.clip, tick: m.tick, reverse: false, frame };
 }

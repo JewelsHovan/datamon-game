@@ -29,6 +29,8 @@ export function drawBoxes(ctx: CanvasRenderingContext2D, state: SimState, camera
     if (hit) outline(ctx, hit, camera, "#ff6170", "rgba(255,97,112,0.35)");
   }
   for (const p of state.projectiles) {
-    outline(ctx, { left: p.x - PROJECTILE.halfW, right: p.x + PROJECTILE.halfW, top: p.y - PROJECTILE.halfH, bottom: p.y + PROJECTILE.halfH }, camera, "#7fffff", "rgba(127,255,255,0.3)");
+    const hw = p.halfW ?? PROJECTILE.halfW;
+    const hh = p.halfH ?? PROJECTILE.halfH;
+    outline(ctx, { left: p.x - hw, right: p.x + hw, top: p.y - hh, bottom: p.y + hh }, camera, "#7fffff", "rgba(127,255,255,0.3)");
   }
 }

@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.17052,
+ "raw": "art/raw/ethan-pirso/crouch_hurt/20261112-212117-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 65,
+   "h": 108,
+   "ax": 3,
+   "ay": 107,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 72,
+   "h": 97,
+   "ax": 7,
+   "ay": 96,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 68,
+   "h": 97,
+   "ax": 5,
+   "ay": 96,
+   "hold": 6
+  }
+ ]
+}

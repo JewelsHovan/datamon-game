@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.21875,
+ "raw": "art/raw/sarah-kotb/crouch_attack/20261112-223419-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 58,
+   "h": 103,
+   "ax": 5,
+   "ay": 102,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 68,
+   "h": 96,
+   "ax": 4,
+   "ay": 95,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 116,
+   "h": 92,
+   "ax": 24,
+   "ay": 91,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 112,
+   "h": 78,
+   "ax": 2,
+   "ay": 77,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 94,
+   "h": 90,
+   "ax": 15,
+   "ay": 89,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 58,
+   "h": 102,
+   "ax": 9,
+   "ay": 101,
+   "hold": 6
+  }
+ ]
+}

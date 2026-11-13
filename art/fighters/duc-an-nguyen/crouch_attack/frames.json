@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.21341,
+ "raw": "art/raw/duc-an-nguyen/crouch_attack/20261112-222156-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 70,
+   "h": 107,
+   "ax": 0,
+   "ay": 106,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 75,
+   "h": 99,
+   "ax": 0,
+   "ay": 98,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 111,
+   "h": 94,
+   "ax": 0,
+   "ay": 93,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 124,
+   "h": 90,
+   "ax": 0,
+   "ay": 89,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 79,
+   "h": 97,
+   "ax": 0,
+   "ay": 96,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 62,
+   "h": 107,
+   "ax": 0,
+   "ay": 106,
+   "hold": 6
+  }
+ ]
+}

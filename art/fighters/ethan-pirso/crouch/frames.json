@@ -1,0 +1,32 @@
+{
+ "clip": "crouch",
+ "loop": false,
+ "scale": 0.16667,
+ "raw": "art/raw/ethan-pirso/crouch/20261112-211854-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 70,
+   "h": 126,
+   "ax": 1,
+   "ay": 125,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 69,
+   "h": 111,
+   "ax": 2,
+   "ay": 110,
+   "hold": 2
+  },
+  {
+   "file": "02.png",
+   "w": 64,
+   "h": 92,
+   "ax": 5,
+   "ay": 91,
+   "hold": 6
+  }
+ ]
+}

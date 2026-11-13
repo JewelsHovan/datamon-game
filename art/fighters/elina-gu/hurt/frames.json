@@ -1,0 +1,40 @@
+{
+ "clip": "hurt",
+ "loop": false,
+ "scale": 0.16129,
+ "raw": "art/raw/elina-gu/hurt/20261112-222230-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 97,
+   "h": 138,
+   "ax": 16,
+   "ay": 137,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 96,
+   "h": 133,
+   "ax": 19,
+   "ay": 132,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 72,
+   "h": 120,
+   "ax": 0,
+   "ay": 119,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 79,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

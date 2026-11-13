@@ -1,0 +1,56 @@
+{
+ "clip": "walk",
+ "loop": true,
+ "scale": 0.17413,
+ "raw": "art/raw/veronica-marallag/walk/20261112-223802-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 64,
+   "h": 140,
+   "ax": -2,
+   "ay": 139,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 77,
+   "h": 140,
+   "ax": 8,
+   "ay": 139,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 90,
+   "h": 140,
+   "ax": 12,
+   "ay": 139,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 65,
+   "h": 140,
+   "ax": 1,
+   "ay": 139,
+   "hold": 3
+  },
+  {
+   "file": "04.png",
+   "w": 56,
+   "h": 141,
+   "ax": -6,
+   "ay": 140,
+   "hold": 3
+  },
+  {
+   "file": "05.png",
+   "w": 67,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

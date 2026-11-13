@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.17522,
+ "raw": "art/raw/tabarek-al-khalidi/air_attack/20261112-223821-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 63,
+   "h": 107,
+   "ax": -7,
+   "ay": 106,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 67,
+   "h": 131,
+   "ax": -4,
+   "ay": 130,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 107,
+   "h": 115,
+   "ax": 1,
+   "ay": 114,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 111,
+   "h": 97,
+   "ax": 1,
+   "ay": 96,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 59,
+   "h": 106,
+   "ax": -8,
+   "ay": 105,
+   "hold": 6
+  }
+ ]
+}

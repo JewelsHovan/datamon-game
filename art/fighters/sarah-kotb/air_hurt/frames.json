@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.20173,
+ "raw": "art/raw/sarah-kotb/air_hurt/20261112-223507-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 144,
+   "h": 125,
+   "ax": 27,
+   "ay": 124,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 150,
+   "h": 92,
+   "ax": 23,
+   "ay": 91,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 84,
+   "h": 128,
+   "ax": 3,
+   "ay": 127,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 141,
+   "h": 42,
+   "ax": 25,
+   "ay": 41,
+   "hold": 8
+  }
+ ]
+}

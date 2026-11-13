@@ -425,6 +425,79 @@ describe("roster", () => {
     const list = { FIGHTER_LIST: [{ slug: "alex-andrianavalontsalama", archetype: "all_rounder", special: { name: "Rapid Deploy" } }] };
     expect(infoFromModule(list, "alex-andrianavalontsalama")).toEqual({ archetype: "All-rounder", special: "Rapid Deploy" });
   });
+
+  it("extracts altSpecial, trait, and winQuote from the live fighter table and renders them in select, versus, and results", async () => {
+    const info = fighterInfo("ethan-pirso");
+    expect(info).toEqual({
+      archetype: "Zoner",
+      special: "Packet Sniper",
+      altSpecial: "Rate-Limit Mine",
+      trait: "Firewall Spacing",
+      winQuote: "RATE LIMITED AT FULL SCREEN.",
+    });
+
+    const drawn: { text: string; x: number; y: number }[] = [];
+    const ctx = {
+      font: "",
+      textAlign: "left",
+      textBaseline: "top",
+      fillStyle: "",
+      globalAlpha: 1,
+      filter: "",
+      imageSmoothingEnabled: false,
+      save() {},
+      restore() {},
+      translate() {},
+      scale() {},
+      beginPath() {},
+      moveTo() {},
+      lineTo() {},
+      fill() {},
+      fillRect() {},
+      drawImage() {},
+      createLinearGradient: () => ({ addColorStop() {} }),
+      fillText(s: string, x: number, y: number) {
+        drawn.push({ text: s, x, y });
+      },
+    } as unknown as CanvasRenderingContext2D;
+
+    const f = fakes();
+    const withVictory = (slug: string): ClipSet => ({
+      ...fakeSet(slug),
+      clips: { victory: { loop: false, frames: [{ x: 0, y: 0, w: 1, h: 1, ax: 0, ay: 0, hold: 1 }] } },
+    });
+    const d = new Driver({
+      ...f,
+      services: {
+        ...f.services,
+        loadFight: async (p1, p2) => ({ clipSets: [withVictory(p1.slug), withVictory(p2.slug)], effects: null, portraits: [null, null] }),
+      },
+    });
+    d.titlePick(1);
+    d.m.scene.render(ctx, 0);
+    const selectTexts = drawn.map((t) => t.text);
+    expect(selectTexts).toContain("ALL-ROUNDER");
+    expect(selectTexts).toContain("SP: DATA ORB");
+    expect(selectTexts).toContain("F+RISING COMMIT");
+    for (const t of drawn) expect(t.y).toBeLessThan(360);
+
+    drawn.length = 0;
+    d.press(0, P);
+    d.press(1, P);
+    d.idle(READY_FRAMES);
+    expect(d.scene).toBe("versus");
+    d.m.scene.render(ctx, 20);
+    const versusTexts = drawn.map((t) => t.text);
+    expect(versusTexts).toContain("BALANCED CORE");
+    expect(versusTexts).toContain("DATA ORB / RISING COMMIT");
+    for (const t of drawn) expect(t.y).toBeLessThan(360);
+
+    await d.throughVersus();
+    d.fightToResults();
+    drawn.length = 0;
+    d.m.scene.render(ctx, 0);
+    expect(drawn.map((t) => t.text)).toContain("CLEAN GREEN CHECKS ACROSS THE BOARD.");
+  });
 });
 
 describe("app shell (spec 014)", () => {

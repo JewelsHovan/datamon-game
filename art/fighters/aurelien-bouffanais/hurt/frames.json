@@ -1,0 +1,40 @@
+{
+ "clip": "hurt",
+ "loop": false,
+ "scale": 0.16148,
+ "raw": "art/raw/aurelien-bouffanais/hurt/20261112-222713-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 99,
+   "h": 136,
+   "ax": 20,
+   "ay": 135,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 109,
+   "h": 132,
+   "ax": 26,
+   "ay": 131,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 79,
+   "h": 119,
+   "ax": 0,
+   "ay": 118,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 73,
+   "h": 137,
+   "ax": 0,
+   "ay": 136,
+   "hold": 6
+  }
+ ]
+}

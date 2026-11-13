@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.18893,
+ "raw": "art/raw/megane-darnaud/air_hurt/20261112-212112-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 118,
+   "h": 122,
+   "ax": 13,
+   "ay": 121,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 125,
+   "h": 69,
+   "ax": 16,
+   "ay": 68,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 88,
+   "h": 130,
+   "ax": 1,
+   "ay": 129,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 148,
+   "h": 49,
+   "ax": 31,
+   "ay": 48,
+   "hold": 8
+  }
+ ]
+}

@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.18205,
+ "raw": "art/raw/oyku-cildir/air_attack/20261112-223644-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 65,
+   "h": 108,
+   "ax": -3,
+   "ay": 107,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 69,
+   "h": 130,
+   "ax": -2,
+   "ay": 129,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 124,
+   "h": 109,
+   "ax": 9,
+   "ay": 108,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 119,
+   "h": 115,
+   "ax": 8,
+   "ay": 114,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 63,
+   "h": 104,
+   "ax": -3,
+   "ay": 103,
+   "hold": 6
+  }
+ ]
+}

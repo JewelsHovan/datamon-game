@@ -606,6 +606,672 @@
      "landing back into the fighting stance"
     ]
    }
+  },
+  "ethan-pirso": {
+   "name": "Packet Sniper",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [
+     3,
+     4,
+     4,
+     3,
+     3,
+     9,
+     7,
+     7
+    ],
+    "poses": [
+     "fighting stance",
+     "stepping the rear foot back into a wide sniper stance, lead arm raising",
+     "aiming forward with two fingers extended on the lead hand, rear hand drawn to the chest (draw no energy or effects)",
+     "bracing the shoulders, leaning slightly back to coil",
+     "snapping the rear hand forward to meet the lead wrist",
+     "firing pose, lead arm locked straight forward at shoulder height, sharp recoil lean",
+     "holding the extended aim, coat and hair settling",
+     "recovering cleanly to the fighting stance"
+    ]
+   }
+  },
+  "megane-darnaud": {
+   "name": "Rollback Parry",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [
+     3,
+     5,
+     6,
+     5,
+     3,
+     3,
+     7,
+     8
+    ],
+    "poses": [
+     "fighting stance",
+     "sliding half a step back into a poised parry stance, lead palm open in front of chest",
+     "holding the calm open-palm counter guard, rear hand poised low",
+     "deflecting an unseen strike aside with a sharp sweep of the lead forearm",
+     "coiling forward explosively off the back foot",
+     "lunging palm-heel strike halfway extended",
+     "counter impact, ridge-hand slash fully extended forward at chest height",
+     "recovering smoothly to the fighting stance"
+    ]
+   }
+  },
+  "jerry-zhu": {
+   "name": "Skyline Upper",
+   "clip": {
+    "loop": false,
+    "anchor": "torso",
+    "holds": [
+     3,
+     3,
+     3,
+     4,
+     6,
+     6,
+     6,
+     7
+    ],
+    "poses": [
+     "fighting stance",
+     "crouching deeply, rear fist pulled low beside the knee",
+     "twisting hips upward, rear fist beginning to rise",
+     "leaping upward into a rising dragon uppercut, lead knee tucked high, fist driving skyward",
+     "apex in mid-air, rear arm fully extended straight overhead, body stretched tall",
+     "beginning to descend from the jump, arm lowering to guard",
+     "dropping toward the ground with knees slightly bent",
+     "landing cleanly into the fighting stance"
+    ]
+   }
+  },
+  "scott-carr": {
+   "name": "Force Push",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [
+     4,
+     4,
+     4,
+     4,
+     4,
+     7,
+     7,
+     8
+    ],
+    "poses": [
+     "fighting stance",
+     "stomping forward heavily, both arms opening wide like a grappler",
+     "lunging forward with both huge open hands reaching to clamp an unseen opponent",
+     "clamping both hands together in a crushing grip in front of the chest",
+     "heaving upward and arching the back, lifting an unseen weight",
+     "driving both fists and forearms violently forward and down in a power slam",
+     "braced wide after the slam, shoulders heaving",
+     "straightening back into the fighting stance"
+    ]
+   }
+  },
+  "antonia-nistor": {
+   "name": "Golden Rush",
+   "clip": {
+    "loop": false,
+    "anchor": "torso",
+    "holds": [
+     3,
+     3,
+     3,
+     5,
+     5,
+     5,
+     6,
+     6
+    ],
+    "poses": [
+     "fighting stance",
+     "dropping low, leaning hard forward to sprint",
+     "explosive low dash step, body close to the floor",
+     "baseball-style sliding kick along the ground, lead leg shooting forward low",
+     "low slide kick fully extended forward along the floor, torso reclined low, one hand near floor",
+     "tucking the sliding leg underneath to pop back up",
+     "rising onto one knee with fists up",
+     "snapping back into the fighting stance"
+    ]
+   }
+  },
+  "vincent-anctil": {
+   "name": "Ground Fault",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [
+     4,
+     4,
+     4,
+     3,
+     4,
+     8,
+     7,
+     7
+    ],
+    "poses": [
+     "fighting stance",
+     "raising the rear arm high overhead with fist clenched, weight shifting",
+     "coiling downward, bending knees deeply",
+     "driving the fist straight down toward the floor",
+     "slamming one fist flat onto the ground in a low crouch (draw no effects or cracks)",
+     "holding the ground-punch pose, other arm swept back for balance",
+     "pushing back up from the crouch",
+     "returning to the fighting stance"
+    ]
+   }
+  },
+  "saransh-padhy": {
+   "name": "Cache Blink",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [
+     3,
+     4,
+     4,
+     4,
+     3,
+     4,
+     8,
+     8
+    ],
+    "poses": [
+     "fighting stance",
+     "crossing both arms over the chest, leaning forward into a vanish crouch (draw no effects)",
+     "tucked tight in a crouched vanish pose, silhouette compact",
+     "emerging forward out of a crouch with body coiled like a spring",
+     "uncoiling into a fast spinning back-fist",
+     "leaping side-kick chambered at waist height",
+     "sharp horizontal side-kick fully extended forward at chest height",
+     "landing lightly into the fighting stance"
+    ]
+   }
+  },
+  "tyler-nagano": {
+   "name": "Anvil Drop",
+   "clip": {
+    "loop": false,
+    "anchor": "torso",
+    "holds": [
+     4,
+     4,
+     4,
+     4,
+     3,
+     7,
+     7,
+     7
+    ],
+    "poses": [
+     "fighting stance",
+     "bending knees deeply, lacing both hands together into a double-fist hammer",
+     "hopping forward into the air, double-fist hammer raised high overhead",
+     "airborne at the peak of the hop, body arched back, double fists high above the head",
+     "plunging downward, swinging both laced fists down with full body weight",
+     "crushing overhead double-axe-handle slam fully extended forward and down",
+     "heavy follow-through in a wide low stance",
+     "recovering back into the fighting stance"
+    ]
+   }
+  },
+  "andrea-vreugdenhil": {
+   "name": "Vector Slash",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [3, 3, 4, 3, 4, 8, 6, 7],
+    "poses": [
+     "fighting stance",
+     "stepping forward sharply, lead hand drawn back to the opposite hip like a blade",
+     "pivoting the hips, torso coiling tight",
+     "sweeping the lead arm forward horizontally in a crisp knife-hand slash (draw no effects)",
+     "knife-hand slash halfway across at chest height",
+     "full extension, lead arm slicing straight forward at shoulder height, rear arm counterbalance back",
+     "holding the extended slash pose cleanly",
+     "returning smoothly to the fighting stance"
+    ]
+   }
+  },
+  "aurelien-bouffanais": {
+   "name": "Prism Volley",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [3, 4, 4, 3, 4, 8, 7, 7],
+    "poses": [
+     "fighting stance",
+     "shifting weight onto the rear leg, both palms drawing inward to chest level (draw no effects)",
+     "framing a diamond shape with both hands in front of the chest (draw no effects)",
+     "bracing the shoulders and leaning slightly back",
+     "thrusting both open palms straight forward together",
+     "release pose, both arms locked straight forward at chest height, fingers spread (draw no effects)",
+     "arms beginning to relax back toward guard",
+     "recovering to the fighting stance"
+    ]
+   }
+  },
+  "dana-domanko": {
+   "name": "Mirror Step",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [3, 4, 5, 4, 3, 4, 8, 7],
+    "poses": [
+     "fighting stance",
+     "gliding half a step back into a poised side stance, lead hand raised open (draw no effects)",
+     "holding a calm evasion parry guard, weight light on the balls of the feet",
+     "pivoting sharply to slip an unseen blow",
+     "spinning forward off the rear foot, knee chambering",
+     "whipping a fast hook kick toward chest height",
+     "counter hook kick fully extended forward at chest height, torso upright",
+     "setting the foot down into the fighting stance"
+    ]
+   }
+  },
+  "duc-an-nguyen": {
+   "name": "Turbo Blitz",
+   "clip": {
+    "loop": false,
+    "anchor": "torso",
+    "holds": [3, 3, 3, 3, 3, 4, 7, 7],
+    "poses": [
+     "fighting stance",
+     "explosive sprint lean forward, fists tight",
+     "rapid lead jab extended straight forward",
+     "rapid rear cross extended straight forward",
+     "driving the rear knee upward as the body launches forward",
+     "flying knee strike rising off the floor",
+     "impact pose, lead knee driven high and forward in mid-air, guard tight",
+     "landing crisply into the fighting stance"
+    ]
+   }
+  },
+  "elina-gu": {
+   "name": "Signal Beam",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [3, 4, 4, 3, 3, 9, 7, 7],
+    "poses": [
+     "fighting stance",
+     "stepping into a grounded archer stance, lead arm sweeping up",
+     "drawing the rear hand back beside the cheek while lead palm aims forward (draw no effects)",
+     "coiling shoulders, focusing forward",
+     "driving the rear palm forward beside the lead wrist",
+     "beam cast pose, lead palm open straight forward at shoulder height, crisp posture (draw no effects)",
+     "holding the extended palm follow-through",
+     "stepping back into the fighting stance"
+    ]
+   }
+  },
+  "emile-moffatt": {
+   "name": "Titan Press",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [4, 4, 4, 4, 4, 7, 7, 8],
+    "poses": [
+     "fighting stance",
+     "heavy step forward, raising one knee high for a ground stomp",
+     "stomping the lead foot flat down with heavy force, arms wide",
+     "lunging forward with both arms reaching wide to clinch an unseen opponent",
+     "locking both hands together in a bear-hug crush in front of the chest",
+     "driving both forearms forward and downward in a heavy chest press",
+     "wide powerful follow-through stance",
+     "returning to the fighting stance"
+    ]
+   }
+  },
+  "francesco-finn": {
+   "name": "Comet Upper",
+   "clip": {
+    "loop": false,
+    "anchor": "torso",
+    "holds": [3, 3, 3, 4, 6, 6, 6, 7],
+    "poses": [
+     "fighting stance",
+     "dropping into a tight coil crouch, rear fist pulled back low",
+     "driving upward off both legs, shoulders rotating",
+     "rising uppercut, rear fist shooting skyward, lead knee raised",
+     "mid-air apex, body stretched tall with rear fist high overhead",
+     "tucking slightly as the jump begins to descend",
+     "dropping toward the floor, guard returning",
+     "landing cleanly into the fighting stance"
+    ]
+   }
+  },
+  "guillaume-delmas-frenette": {
+   "name": "Granite Tackle",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [4, 4, 4, 4, 4, 7, 6, 7],
+    "poses": [
+     "fighting stance",
+     "sinking into a low rugby-style brace, lead forearm across the chest",
+     "exploding forward off the back leg, shoulder lowered",
+     "driving forward in an armored forearm-and-shoulder barge",
+     "second powerful stride, forearm shield leading",
+     "full impact, lead shoulder and forearm thrust hard forward in a wide stance",
+     "braking hard, feet planted wide",
+     "resetting to the fighting stance"
+    ]
+   }
+  },
+  "guillaume-pregent": {
+   "name": "Rail Shot",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [3, 4, 4, 3, 3, 9, 7, 7],
+    "poses": [
+     "fighting stance",
+     "dropping onto a low half-crouch stance, lead arm extending forward to sight",
+     "bracing the lead wrist with the rear hand, aiming straight ahead (draw no effects)",
+     "pulling the shoulders back slightly in tension",
+     "snapping the lead hand open forward",
+     "sharp recoil pose, lead arm extended straight forward at chest height (draw no effects)",
+     "steadying the extended arm",
+     "rising back into the fighting stance"
+    ]
+   }
+  },
+  "jewoo-lee": {
+   "name": "Tempest Kick",
+   "clip": {
+    "loop": false,
+    "anchor": "torso",
+    "holds": [3, 3, 3, 4, 4, 7, 6, 6],
+    "poses": [
+     "fighting stance",
+     "stepping forward fast, hips Whipping around",
+     "springing off the floor into a spinning jump kick",
+     "mid-air spin, back briefly turned, rear leg chambering high",
+     "uncoiling out of the spin in mid-air",
+     "tornado roundhouse kick fully extended forward at chest height in mid-air",
+     "retracting the kicking leg while descending",
+     "landing into the fighting stance"
+    ]
+   }
+  },
+  "jonah-lee": {
+   "name": "Dragon Merge",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [3, 3, 4, 3, 4, 8, 6, 7],
+    "poses": [
+     "fighting stance",
+     "sliding the lead foot forward into a deep martial horse stance, fists at hips",
+     "twisting the waist sharply, rear shoulder driving forward",
+     "launching a powerful twin-fist thrust from the core",
+     "arms halfway extended in a double punch",
+     "full impact, one fist high and one fist mid extended straight forward (draw no effects)",
+     "holding the crisp martial strike",
+     "stepping back into the fighting stance"
+    ]
+   }
+  },
+  "jonathan-kim": {
+   "name": "Shadow Pivot",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [3, 4, 4, 4, 3, 4, 8, 8],
+    "poses": [
+     "fighting stance",
+     "tucking low with one forearm raised across the face in a stealth stance (draw no effects)",
+     "compact low pivot crouch, weight coiled",
+     "darting forward low out of the pivot",
+     "rising sharply while rotating the shoulders",
+     "whipping a backhand elbow-and-chop strike forward",
+     "sharp ridge-hand strike fully extended forward at neck height",
+     "recovering cleanly to the fighting stance"
+    ]
+   }
+  },
+  "logan-labossiere": {
+   "name": "Cobalt Crush",
+   "clip": {
+    "loop": false,
+    "anchor": "torso",
+    "holds": [4, 4, 4, 4, 4, 7, 7, 7],
+    "poses": [
+     "fighting stance",
+     "clenching both fists tight at the sides, knees bending deeply",
+     "leaping forward in a heavy bounding hop, rear arm cocked",
+     "airborne, body coiled back with rear haymaker fist high behind the shoulder",
+     "driving downward and forward with full body weight",
+     "crushing overhand haymaker punch fully extended forward at chest height",
+     "heavy grounded follow-through, rear foot planted",
+     "straightening into the fighting stance"
+    ]
+   }
+  },
+  "milen-thomas": {
+   "name": "Vortex Combo",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [3, 3, 3, 3, 4, 4, 7, 7],
+    "poses": [
+     "fighting stance",
+     "lunging in with a fast lead hook punch",
+     "following immediately with a tight rear body blow",
+     "pivoting on the front foot, rear leg lifting",
+     "chambering a fast spinning back-kick",
+     "driving the heel straight forward",
+     "finisher back-kick fully extended forward at waist height, torso leaning back",
+     "pulling the leg back into the fighting stance"
+    ]
+   }
+  },
+  "minh-ngoc-do": {
+   "name": "Lotus Strike",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [3, 4, 3, 4, 3, 8, 6, 7],
+    "poses": [
+     "fighting stance",
+     "graceful circular palm guard, hands sweeping inward (draw no effects)",
+     "stepping forward deeply into a front lunge stance",
+     "coiling both palms at the waist",
+     "explosive double-palm strike shooting forward",
+     "double-palm thrust fully extended straight forward at chest height, heels grounded (draw no effects)",
+     "palms holding poise before retracting",
+     "gliding back to the fighting stance"
+    ]
+   }
+  },
+  "oyku-cildir": {
+   "name": "Starlight Hop",
+   "clip": {
+    "loop": false,
+    "anchor": "torso",
+    "holds": [3, 3, 4, 4, 4, 7, 6, 6],
+    "poses": [
+     "fighting stance",
+     "light crouch on the toes, arms sweeping back",
+     "springing upward into a nimble acrobatic hop",
+     "tucked high in mid-air above low attacks, knees drawn up",
+     "extending the lead leg downward from the hop",
+     "sharp axe-kick extended forward and down from chest height",
+     "follow-through as the foot touches down",
+     "resetting smoothly into the fighting stance"
+    ]
+   }
+  },
+  "philippe-miranda-jean": {
+   "name": "Forge Breaker",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [4, 4, 4, 4, 3, 8, 7, 7],
+    "poses": [
+     "fighting stance",
+     "planting the lead foot hard, drawing the rear arm wide behind the back",
+     "torquing the shoulders in a heavy wind-up",
+     "stepping through with a massive wide clothesline lariat",
+     "arm sweeping across at chest level",
+     "heavy lariat impact, thick arm fully extended forward, body leaning in",
+     "holding the heavy follow-through stance",
+     "returning to the fighting stance"
+    ]
+   }
+  },
+  "richard-el-chaar": {
+   "name": "Cedar Upper",
+   "clip": {
+    "loop": false,
+    "anchor": "torso",
+    "holds": [3, 3, 3, 4, 6, 6, 6, 7],
+    "poses": [
+     "fighting stance",
+     "bending low at the knees, lead shoulder dipped, rear fist low",
+     "exploding upward from the floor, hips turning",
+     "rising skyward uppercut, rear fist driving straight overhead, front knee high",
+     "airborne peak, full vertical extension of the uppercut arm",
+     "lowering the fist to guard while beginning to drop",
+     "descending cleanly toward the ground",
+     "landing firmly in the fighting stance"
+    ]
+   }
+  },
+  "sarah-kotb": {
+   "name": "Oasis Wave",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [4, 4, 4, 3, 4, 8, 7, 7],
+    "poses": [
+     "fighting stance",
+     "sweeping the rear arm high in a wide arc (draw no effects)",
+     "dropping into a deep single-knee crouch",
+     "swinging the open palm downward toward the floor",
+     "striking the ground cleanly with an open palm to send a floor wave (draw no effects)",
+     "holding the low ground-strike posture, lead arm extended forward",
+     "pushing smoothly up from the floor",
+     "returning to the fighting stance"
+    ]
+   }
+  },
+  "stephanie-fontaine": {
+   "name": "Cascade Flurry",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [3, 3, 3, 3, 4, 4, 7, 7],
+    "poses": [
+     "fighting stance",
+     "dashing forward lightly on the toes",
+     "fast low snap kick to the shin",
+     "immediate mid-level side kick chambering",
+     "mid kick extending forward, setting up a high kick",
+     "whipping the rear leg high toward head level",
+     "high roundhouse finisher fully extended forward at head height",
+     "setting the leg down into the fighting stance"
+    ]
+   }
+  },
+  "tabarek-al-khalidi": {
+   "name": "Blink Edge",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [3, 4, 4, 4, 3, 4, 8, 8],
+    "poses": [
+     "fighting stance",
+     "drawing one arm across the face in a sleek vanish stance (draw no effects)",
+     "crouched compactly as if phasing forward (draw no effects)",
+     "lunging out of the low crouch at high speed",
+     "extending the lead arm into a spear-hand thrust",
+     "driving the rear shoulder behind the strike",
+     "precise lunging palm-blade strike fully extended forward at chest height",
+     "stepping back into the fighting stance"
+    ]
+   }
+  },
+  "veronica-marallag": {
+   "name": "Gale Kick",
+   "clip": {
+    "loop": false,
+    "anchor": "torso",
+    "holds": [3, 3, 3, 4, 5, 6, 6, 6],
+    "poses": [
+     "fighting stance",
+     "leaning hard forward into a burst dash",
+     "leaping forward horizontally off the front foot",
+     "airborne bicycle-style knee drive",
+     "snapping the lead leg straight forward in mid-air",
+     "horizontal flying side-kick fully extended forward at chest height",
+     "tucking knees while coming down",
+     "landing nimbly into the fighting stance"
+    ]
+   }
+  },
+  "victor-desautels": {
+   "name": "Cryo Ping",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [3, 4, 4, 3, 3, 9, 7, 7],
+    "poses": [
+     "fighting stance",
+     "stepping back into a composed upright zoner stance, lead hand lifting",
+     "drawing the rear hand to the shoulder while pointing forward (draw no effects)",
+     "tensing the core, shoulders square",
+     "snapping a crisp single-arm cast forward",
+     "extended cast pose, lead arm straight forward at shoulder level, coat steady (draw no effects)",
+     "holding the composed follow-through",
+     "returning to the fighting stance"
+    ]
+   }
+  },
+  "wild-guevera": {
+   "name": "Wild Fang",
+   "clip": {
+    "loop": false,
+    "anchor": "torso",
+    "holds": [3, 3, 3, 4, 4, 7, 6, 7],
+    "poses": [
+     "fighting stance",
+     "crouching feral and low like a sprinter on the blocks",
+     "pouncing forward off both feet, arms swept back",
+     "lunging mid-air with lead shoulder and claw-fists cocked",
+     "slashing both fists forward in a fierce cross-strike",
+     "full extension, fierce double-hook punch lunging forward at chest height",
+     "skidding to a grounded stop, knees bent",
+     "rising back into the fighting stance"
+    ]
+   }
+  },
+  "william-chan": {
+   "name": "Jade Palm",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [3, 4, 3, 4, 3, 8, 6, 7],
+    "poses": [
+     "fighting stance",
+     "sinking into a rooted kung-fu stance, lead hand circling open (draw no effects)",
+     "drawing the rear palm tight to the ribs",
+     "stomping the lead foot forward a half-step",
+     "explosive single iron-palm thrust accelerating forward",
+     "iron-palm strike fully extended straight forward at chest height, rear fist at hip (draw no effects)",
+     "holding the rooted martial extension",
+     "returning to the fighting stance"
+    ]
+   }
   }
  }
 }

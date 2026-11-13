@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.18767,
+ "raw": "art/raw/guillaume-delmas-frenette/air_hurt/20261112-222742-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 112,
+   "h": 109,
+   "ax": 14,
+   "ay": 108,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 134,
+   "h": 64,
+   "ax": 30,
+   "ay": 63,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 77,
+   "h": 107,
+   "ax": 1,
+   "ay": 106,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 123,
+   "h": 38,
+   "ax": 23,
+   "ay": 37,
+   "hold": 8
+  }
+ ]
+}

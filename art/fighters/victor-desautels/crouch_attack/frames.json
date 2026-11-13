@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.21472,
+ "raw": "art/raw/victor-desautels/crouch_attack/20261112-223914-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 70,
+   "h": 111,
+   "ax": 0,
+   "ay": 110,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 82,
+   "h": 102,
+   "ax": 2,
+   "ay": 101,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 97,
+   "h": 94,
+   "ax": 0,
+   "ay": 93,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 121,
+   "h": 89,
+   "ax": 0,
+   "ay": 88,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 87,
+   "h": 93,
+   "ax": 0,
+   "ay": 92,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 62,
+   "h": 104,
+   "ax": 0,
+   "ay": 103,
+   "hold": 6
+  }
+ ]
+}

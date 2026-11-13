@@ -1,0 +1,56 @@
+{
+ "clip": "taunt",
+ "loop": false,
+ "scale": 0.16888,
+ "raw": "art/raw/guillaume-pregent/taunt/20261112-223327-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 70,
+   "h": 141,
+   "ax": 0,
+   "ay": 140,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 58,
+   "h": 144,
+   "ax": 6,
+   "ay": 143,
+   "hold": 10
+  },
+  {
+   "file": "02.png",
+   "w": 56,
+   "h": 143,
+   "ax": 0,
+   "ay": 142,
+   "hold": 10
+  },
+  {
+   "file": "03.png",
+   "w": 49,
+   "h": 143,
+   "ax": 0,
+   "ay": 142,
+   "hold": 10
+  },
+  {
+   "file": "04.png",
+   "w": 84,
+   "h": 142,
+   "ax": 23,
+   "ay": 141,
+   "hold": 10
+  },
+  {
+   "file": "05.png",
+   "w": 70,
+   "h": 138,
+   "ax": 0,
+   "ay": 137,
+   "hold": 6
+  }
+ ]
+}

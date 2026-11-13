@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.17348,
+ "raw": "art/raw/jerry-zhu/crouch_hurt/20261112-212256-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 66,
+   "h": 98,
+   "ax": 1,
+   "ay": 97,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 70,
+   "h": 92,
+   "ax": 1,
+   "ay": 91,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 68,
+   "h": 91,
+   "ax": 1,
+   "ay": 90,
+   "hold": 6
+  }
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "clip": "knockdown",
+ "loop": false,
+ "scale": 0.22654,
+ "raw": "art/raw/antonia-nistor/knockdown/20261112-212140-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 116,
+   "h": 130,
+   "ax": 15,
+   "ay": 129,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 135,
+   "h": 64,
+   "ax": 20,
+   "ay": 63,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 134,
+   "h": 63,
+   "ax": 26,
+   "ay": 62,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 95,
+   "h": 72,
+   "ax": 4,
+   "ay": 71,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 129,
+   "h": 34,
+   "ax": 22,
+   "ay": 33,
+   "hold": 26
+  },
+  {
+   "file": "05.png",
+   "w": 77,
+   "h": 71,
+   "ax": -4,
+   "ay": 70,
+   "hold": 8
+  },
+  {
+   "file": "06.png",
+   "w": 79,
+   "h": 103,
+   "ax": 4,
+   "ay": 102,
+   "hold": 8
+  },
+  {
+   "file": "07.png",
+   "w": 81,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 8
+  }
+ ]
+}

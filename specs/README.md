@@ -21,3 +21,5 @@ Files are `NNN-short-slug.md`. The skills keep this index in sync.
 | 013 | [Load speed and memory](013-load-speed-and-memory.md) | review |
 | 014 | [App shell and accessibility](014-app-shell-and-accessibility.md) | review |
 | 015 | [Touch controls and phone layout](015-touch-and-phones.md) | review |
+| 016 | [Roster expansion (12 fighters) and full unique kits](016-character-expansion.md) | review |
+| 017 | [Complete 37-fighter roster (74 specials, dynamic walkers, full unique kits)](017-full-roster.md) | review |

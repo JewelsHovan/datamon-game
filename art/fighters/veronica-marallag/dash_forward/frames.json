@@ -1,0 +1,48 @@
+{
+ "clip": "dash_forward",
+ "loop": false,
+ "scale": 0.18253,
+ "raw": "art/raw/veronica-marallag/dash_forward/20261112-223849-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 88,
+   "h": 132,
+   "ax": 18,
+   "ay": 131,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 78,
+   "h": 125,
+   "ax": 10,
+   "ay": 124,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 70,
+   "h": 128,
+   "ax": 1,
+   "ay": 127,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 87,
+   "h": 130,
+   "ax": 16,
+   "ay": 129,
+   "hold": 3
+  },
+  {
+   "file": "04.png",
+   "w": 71,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

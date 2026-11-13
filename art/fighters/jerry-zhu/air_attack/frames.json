@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.18996,
+ "raw": "art/raw/jerry-zhu/air_attack/20261112-212208-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 58,
+   "h": 113,
+   "ax": -11,
+   "ay": 112,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 63,
+   "h": 143,
+   "ax": -6,
+   "ay": 142,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 133,
+   "h": 118,
+   "ax": 15,
+   "ay": 117,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 137,
+   "h": 117,
+   "ax": 21,
+   "ay": 116,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 56,
+   "h": 133,
+   "ax": -10,
+   "ay": 132,
+   "hold": 6
+  }
+ ]
+}

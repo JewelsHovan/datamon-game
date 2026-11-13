@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.16568,
+ "raw": "art/raw/stephanie-fontaine/crouch_hurt/20261112-223736-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 66,
+   "h": 97,
+   "ax": 12,
+   "ay": 96,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 57,
+   "h": 89,
+   "ax": 3,
+   "ay": 88,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 57,
+   "h": 89,
+   "ax": 3,
+   "ay": 88,
+   "hold": 6
+  }
+ ]
+}

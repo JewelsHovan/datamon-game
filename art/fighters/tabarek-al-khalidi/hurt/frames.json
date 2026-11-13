@@ -1,0 +1,40 @@
+{
+ "clip": "hurt",
+ "loop": false,
+ "scale": 0.15351,
+ "raw": "art/raw/tabarek-al-khalidi/hurt/20261112-223858-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 93,
+   "h": 132,
+   "ax": 20,
+   "ay": 131,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 101,
+   "h": 132,
+   "ax": 22,
+   "ay": 131,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 71,
+   "h": 121,
+   "ax": 0,
+   "ay": 120,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 80,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

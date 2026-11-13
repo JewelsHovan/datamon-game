@@ -1,0 +1,40 @@
+{
+ "clip": "hurt",
+ "loop": false,
+ "scale": 0.16166,
+ "raw": "art/raw/stephanie-fontaine/hurt/20261112-223734-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 89,
+   "h": 137,
+   "ax": 12,
+   "ay": 136,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 100,
+   "h": 137,
+   "ax": 32,
+   "ay": 136,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 69,
+   "h": 114,
+   "ax": 0,
+   "ay": 113,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 74,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

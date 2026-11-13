@@ -1,0 +1,48 @@
+{
+ "clip": "dash_forward",
+ "loop": false,
+ "scale": 0.18543,
+ "raw": "art/raw/saransh-padhy/dash_forward/20261112-211826-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 103,
+   "h": 135,
+   "ax": 19,
+   "ay": 134,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 107,
+   "h": 130,
+   "ax": 22,
+   "ay": 129,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 85,
+   "h": 133,
+   "ax": 6,
+   "ay": 132,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 92,
+   "h": 131,
+   "ax": 11,
+   "ay": 130,
+   "hold": 3
+  },
+  {
+   "file": "04.png",
+   "w": 78,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

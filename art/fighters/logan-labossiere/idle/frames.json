@@ -1,0 +1,40 @@
+{
+ "clip": "idle",
+ "loop": true,
+ "scale": 0.15713,
+ "raw": "art/raw/logan-labossiere/idle/20261112-222518-1.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 73,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 8
+  },
+  {
+   "file": "01.png",
+   "w": 73,
+   "h": 142,
+   "ax": 0,
+   "ay": 141,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 73,
+   "h": 143,
+   "ax": 0,
+   "ay": 142,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 73,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 8
+  }
+ ]
+}

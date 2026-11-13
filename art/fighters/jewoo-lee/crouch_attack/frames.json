@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.22293,
+ "raw": "art/raw/jewoo-lee/crouch_attack/20261112-222631-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 77,
+   "h": 107,
+   "ax": 1,
+   "ay": 106,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 86,
+   "h": 95,
+   "ax": 7,
+   "ay": 94,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 113,
+   "h": 93,
+   "ax": 0,
+   "ay": 92,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 116,
+   "h": 75,
+   "ax": 0,
+   "ay": 74,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 90,
+   "h": 93,
+   "ax": 0,
+   "ay": 92,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 64,
+   "h": 106,
+   "ax": 0,
+   "ay": 105,
+   "hold": 6
+  }
+ ]
+}

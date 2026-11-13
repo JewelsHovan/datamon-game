@@ -1,0 +1,48 @@
+{
+ "clip": "dash_back",
+ "loop": false,
+ "scale": 0.16807,
+ "raw": "art/raw/logan-labossiere/dash_back/20261112-222606-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 98,
+   "h": 132,
+   "ax": 2,
+   "ay": 131,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 64,
+   "h": 133,
+   "ax": -4,
+   "ay": 132,
+   "hold": 4
+  },
+  {
+   "file": "02.png",
+   "w": 61,
+   "h": 132,
+   "ax": -6,
+   "ay": 131,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 69,
+   "h": 135,
+   "ax": -2,
+   "ay": 134,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 72,
+   "h": 136,
+   "ax": 0,
+   "ay": 135,
+   "hold": 3
+  }
+ ]
+}

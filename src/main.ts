@@ -37,7 +37,7 @@ try {
     search: window.location.search,
     hooks: {
       simEvents: (events, state) => {
-        audio.onEvents(events, state.round);
+        audio.onEvents(events, state);
         announcer.simEvents(events, state);
       },
       ui: (kind) => audio.ui(kind),

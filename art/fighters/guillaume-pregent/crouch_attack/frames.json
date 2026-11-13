@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.22152,
+ "raw": "art/raw/guillaume-pregent/crouch_attack/20261112-222834-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 66,
+   "h": 101,
+   "ax": 0,
+   "ay": 100,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 90,
+   "h": 95,
+   "ax": 2,
+   "ay": 94,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 112,
+   "h": 92,
+   "ax": 12,
+   "ay": 91,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 122,
+   "h": 80,
+   "ax": 0,
+   "ay": 79,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 82,
+   "h": 99,
+   "ax": 14,
+   "ay": 98,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 66,
+   "h": 101,
+   "ax": 0,
+   "ay": 100,
+   "hold": 6
+  }
+ ]
+}

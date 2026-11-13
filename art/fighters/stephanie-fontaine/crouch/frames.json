@@ -1,0 +1,32 @@
+{
+ "clip": "crouch",
+ "loop": false,
+ "scale": 0.15801,
+ "raw": "art/raw/stephanie-fontaine/crouch/20261112-223554-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 67,
+   "h": 128,
+   "ax": 0,
+   "ay": 127,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 70,
+   "h": 112,
+   "ax": 4,
+   "ay": 111,
+   "hold": 2
+  },
+  {
+   "file": "02.png",
+   "w": 59,
+   "h": 84,
+   "ax": 2,
+   "ay": 83,
+   "hold": 6
+  }
+ ]
+}

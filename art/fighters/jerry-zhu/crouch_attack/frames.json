@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.21374,
+ "raw": "art/raw/jerry-zhu/crouch_attack/20261112-212144-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 74,
+   "h": 113,
+   "ax": 0,
+   "ay": 112,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 84,
+   "h": 93,
+   "ax": 0,
+   "ay": 92,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 123,
+   "h": 88,
+   "ax": 0,
+   "ay": 87,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 108,
+   "h": 81,
+   "ax": 0,
+   "ay": 80,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 69,
+   "h": 91,
+   "ax": 0,
+   "ay": 90,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 74,
+   "h": 110,
+   "ax": 0,
+   "ay": 109,
+   "hold": 6
+  }
+ ]
+}

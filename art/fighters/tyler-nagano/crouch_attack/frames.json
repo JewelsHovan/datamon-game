@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.21407,
+ "raw": "art/raw/tyler-nagano/crouch_attack/20261112-211953-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 73,
+   "h": 107,
+   "ax": 5,
+   "ay": 106,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 67,
+   "h": 100,
+   "ax": 4,
+   "ay": 99,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 104,
+   "h": 91,
+   "ax": 1,
+   "ay": 90,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 115,
+   "h": 87,
+   "ax": 0,
+   "ay": 86,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 85,
+   "h": 96,
+   "ax": 1,
+   "ay": 95,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 67,
+   "h": 107,
+   "ax": 3,
+   "ay": 106,
+   "hold": 6
+  }
+ ]
+}

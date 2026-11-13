@@ -1,0 +1,72 @@
+{
+ "clip": "heavy_punch",
+ "loop": false,
+ "scale": 0.1847,
+ "raw": "art/raw/wild-guevera/heavy_punch/20261112-224134-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 76,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 72,
+   "h": 141,
+   "ax": 0,
+   "ay": 140,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 75,
+   "h": 143,
+   "ax": 9,
+   "ay": 142,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 77,
+   "h": 141,
+   "ax": 0,
+   "ay": 140,
+   "hold": 2
+  },
+  {
+   "file": "04.png",
+   "w": 75,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 2
+  },
+  {
+   "file": "05.png",
+   "w": 106,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  },
+  {
+   "file": "06.png",
+   "w": 90,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 5
+  },
+  {
+   "file": "07.png",
+   "w": 77,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

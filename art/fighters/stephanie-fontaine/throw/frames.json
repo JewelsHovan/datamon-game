@@ -1,0 +1,64 @@
+{
+ "clip": "throw",
+ "loop": false,
+ "scale": 0.15573,
+ "raw": "art/raw/stephanie-fontaine/throw/20261112-223705-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 95,
+   "h": 136,
+   "ax": 0,
+   "ay": 135,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 84,
+   "h": 138,
+   "ax": 0,
+   "ay": 137,
+   "hold": 4
+  },
+  {
+   "file": "02.png",
+   "w": 68,
+   "h": 137,
+   "ax": 0,
+   "ay": 136,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 68,
+   "h": 137,
+   "ax": 5,
+   "ay": 136,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 86,
+   "h": 137,
+   "ax": 0,
+   "ay": 136,
+   "hold": 3
+  },
+  {
+   "file": "05.png",
+   "w": 96,
+   "h": 137,
+   "ax": 0,
+   "ay": 136,
+   "hold": 7
+  },
+  {
+   "file": "06.png",
+   "w": 65,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 8
+  }
+ ]
+}

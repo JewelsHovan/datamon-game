@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.22329,
+ "raw": "art/raw/scott-carr/crouch_attack/20261112-212016-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 72,
+   "h": 106,
+   "ax": 0,
+   "ay": 105,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 86,
+   "h": 95,
+   "ax": 5,
+   "ay": 94,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 114,
+   "h": 98,
+   "ax": 0,
+   "ay": 97,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 119,
+   "h": 88,
+   "ax": 0,
+   "ay": 87,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 87,
+   "h": 101,
+   "ax": 13,
+   "ay": 100,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 72,
+   "h": 106,
+   "ax": 0,
+   "ay": 105,
+   "hold": 6
+  }
+ ]
+}

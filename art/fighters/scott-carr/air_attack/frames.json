@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.17199,
+ "raw": "art/raw/scott-carr/air_attack/20261112-212027-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 54,
+   "h": 102,
+   "ax": -15,
+   "ay": 101,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 66,
+   "h": 118,
+   "ax": -5,
+   "ay": 117,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 116,
+   "h": 112,
+   "ax": 7,
+   "ay": 111,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 117,
+   "h": 110,
+   "ax": 9,
+   "ay": 109,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 54,
+   "h": 106,
+   "ax": -15,
+   "ay": 105,
+   "hold": 6
+  }
+ ]
+}

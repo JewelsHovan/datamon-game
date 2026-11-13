@@ -1,0 +1,48 @@
+{
+ "clip": "dash_forward",
+ "loop": false,
+ "scale": 0.17632,
+ "raw": "art/raw/aurelien-bouffanais/dash_forward/20261112-222149-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 94,
+   "h": 136,
+   "ax": 14,
+   "ay": 135,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 93,
+   "h": 135,
+   "ax": 13,
+   "ay": 134,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 68,
+   "h": 136,
+   "ax": -7,
+   "ay": 135,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 86,
+   "h": 137,
+   "ax": 9,
+   "ay": 136,
+   "hold": 3
+  },
+  {
+   "file": "04.png",
+   "w": 77,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

@@ -1,0 +1,56 @@
+{
+ "clip": "getup_roll",
+ "loop": false,
+ "scale": 0.21773,
+ "raw": "art/raw/guillaume-pregent/getup_roll/20261112-223228-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 121,
+   "h": 31,
+   "ax": 20,
+   "ay": 30,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 82,
+   "h": 77,
+   "ax": 7,
+   "ay": 76,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 64,
+   "h": 64,
+   "ax": -6,
+   "ay": 63,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 91,
+   "h": 75,
+   "ax": 11,
+   "ay": 74,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 81,
+   "h": 116,
+   "ax": 7,
+   "ay": 115,
+   "hold": 6
+  },
+  {
+   "file": "05.png",
+   "w": 75,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

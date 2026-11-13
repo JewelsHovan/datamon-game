@@ -1,0 +1,56 @@
+{
+ "clip": "intro",
+ "loop": false,
+ "scale": 0.15982,
+ "raw": "art/raw/stephanie-fontaine/intro/20261112-223820-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 55,
+   "h": 142,
+   "ax": 3,
+   "ay": 141,
+   "hold": 12
+  },
+  {
+   "file": "01.png",
+   "w": 50,
+   "h": 141,
+   "ax": 4,
+   "ay": 140,
+   "hold": 12
+  },
+  {
+   "file": "02.png",
+   "w": 52,
+   "h": 142,
+   "ax": 2,
+   "ay": 141,
+   "hold": 12
+  },
+  {
+   "file": "03.png",
+   "w": 53,
+   "h": 141,
+   "ax": 0,
+   "ay": 140,
+   "hold": 10
+  },
+  {
+   "file": "04.png",
+   "w": 68,
+   "h": 128,
+   "ax": 0,
+   "ay": 127,
+   "hold": 8
+  },
+  {
+   "file": "05.png",
+   "w": 67,
+   "h": 129,
+   "ax": 0,
+   "ay": 128,
+   "hold": 10
+  }
+ ]
+}

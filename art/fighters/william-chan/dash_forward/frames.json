@@ -1,0 +1,48 @@
+{
+ "clip": "dash_forward",
+ "loop": false,
+ "scale": 0.1847,
+ "raw": "art/raw/william-chan/dash_forward/20261112-224059-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 98,
+   "h": 137,
+   "ax": 21,
+   "ay": 136,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 104,
+   "h": 134,
+   "ax": 25,
+   "ay": 133,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 97,
+   "h": 135,
+   "ax": 20,
+   "ay": 134,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 89,
+   "h": 135,
+   "ax": 14,
+   "ay": 134,
+   "hold": 3
+  },
+  {
+   "file": "04.png",
+   "w": 71,
+   "h": 140,
+   "ax": 1,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

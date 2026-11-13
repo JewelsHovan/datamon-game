@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.19746,
+ "raw": "art/raw/oyku-cildir/air_hurt/20261112-223931-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 121,
+   "h": 130,
+   "ax": 17,
+   "ay": 129,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 144,
+   "h": 85,
+   "ax": 26,
+   "ay": 84,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 101,
+   "h": 126,
+   "ax": 9,
+   "ay": 125,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 161,
+   "h": 37,
+   "ax": 34,
+   "ay": 36,
+   "hold": 8
+  }
+ ]
+}

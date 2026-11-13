@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.22838,
+ "raw": "art/raw/ethan-pirso/crouch_attack/20261112-212005-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 76,
+   "h": 112,
+   "ax": 0,
+   "ay": 111,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 79,
+   "h": 105,
+   "ax": 9,
+   "ay": 104,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 123,
+   "h": 101,
+   "ax": 0,
+   "ay": 100,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 110,
+   "h": 95,
+   "ax": 0,
+   "ay": 94,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 88,
+   "h": 104,
+   "ax": 0,
+   "ay": 103,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 69,
+   "h": 112,
+   "ax": 0,
+   "ay": 111,
+   "hold": 6
+  }
+ ]
+}

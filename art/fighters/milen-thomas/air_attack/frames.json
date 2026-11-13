@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.19471,
+ "raw": "art/raw/milen-thomas/air_attack/20261112-223144-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 62,
+   "h": 116,
+   "ax": -19,
+   "ay": 115,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 71,
+   "h": 118,
+   "ax": -13,
+   "ay": 117,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 122,
+   "h": 117,
+   "ax": 0,
+   "ay": 116,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 120,
+   "h": 104,
+   "ax": 2,
+   "ay": 103,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 58,
+   "h": 117,
+   "ax": -21,
+   "ay": 116,
+   "hold": 6
+  }
+ ]
+}

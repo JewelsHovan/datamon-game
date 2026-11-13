@@ -1,0 +1,32 @@
+{
+ "clip": "block_push",
+ "loop": false,
+ "scale": 0.16807,
+ "raw": "art/raw/tabarek-al-khalidi/block_push/20261112-223826-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 76,
+   "h": 138,
+   "ax": 0,
+   "ay": 137,
+   "hold": 4
+  },
+  {
+   "file": "01.png",
+   "w": 84,
+   "h": 137,
+   "ax": 0,
+   "ay": 136,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 77,
+   "h": 137,
+   "ax": 0,
+   "ay": 136,
+   "hold": 6
+  }
+ ]
+}

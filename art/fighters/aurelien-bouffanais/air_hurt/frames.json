@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.1983,
+ "raw": "art/raw/aurelien-bouffanais/air_hurt/20261112-222800-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 118,
+   "h": 130,
+   "ax": 13,
+   "ay": 129,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 146,
+   "h": 74,
+   "ax": 31,
+   "ay": 73,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 91,
+   "h": 125,
+   "ax": -1,
+   "ay": 124,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 148,
+   "h": 47,
+   "ax": 29,
+   "ay": 46,
+   "hold": 8
+  }
+ ]
+}

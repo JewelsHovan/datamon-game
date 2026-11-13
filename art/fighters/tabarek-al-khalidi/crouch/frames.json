@@ -1,0 +1,32 @@
+{
+ "clip": "crouch",
+ "loop": false,
+ "scale": 0.15608,
+ "raw": "art/raw/tabarek-al-khalidi/crouch/20261112-223711-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 67,
+   "h": 128,
+   "ax": 0,
+   "ay": 127,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 54,
+   "h": 109,
+   "ax": 5,
+   "ay": 108,
+   "hold": 2
+  },
+  {
+   "file": "02.png",
+   "w": 55,
+   "h": 85,
+   "ax": 6,
+   "ay": 84,
+   "hold": 6
+  }
+ ]
+}

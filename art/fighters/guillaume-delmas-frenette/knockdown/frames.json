@@ -1,0 +1,72 @@
+{
+ "clip": "knockdown",
+ "loop": false,
+ "scale": 0.2418,
+ "raw": "art/raw/guillaume-delmas-frenette/knockdown/20261112-222811-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 117,
+   "h": 128,
+   "ax": 19,
+   "ay": 127,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 132,
+   "h": 79,
+   "ax": 25,
+   "ay": 78,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 129,
+   "h": 55,
+   "ax": 28,
+   "ay": 54,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 90,
+   "h": 63,
+   "ax": 2,
+   "ay": 62,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 129,
+   "h": 31,
+   "ax": 22,
+   "ay": 30,
+   "hold": 26
+  },
+  {
+   "file": "05.png",
+   "w": 90,
+   "h": 69,
+   "ax": 0,
+   "ay": 68,
+   "hold": 8
+  },
+  {
+   "file": "06.png",
+   "w": 84,
+   "h": 93,
+   "ax": 8,
+   "ay": 92,
+   "hold": 8
+  },
+  {
+   "file": "07.png",
+   "w": 76,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 8
+  }
+ ]
+}

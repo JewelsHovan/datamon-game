@@ -1,0 +1,56 @@
+{
+ "clip": "walk_back",
+ "loop": true,
+ "scale": 0.18158,
+ "raw": "art/raw/andrea-vreugdenhil/walk_back/20261112-222044-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 67,
+   "h": 140,
+   "ax": -3,
+   "ay": 139,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 78,
+   "h": 140,
+   "ax": 9,
+   "ay": 139,
+   "hold": 4
+  },
+  {
+   "file": "02.png",
+   "w": 98,
+   "h": 140,
+   "ax": 15,
+   "ay": 139,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 67,
+   "h": 140,
+   "ax": -6,
+   "ay": 139,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 50,
+   "h": 140,
+   "ax": -15,
+   "ay": 139,
+   "hold": 3
+  },
+  {
+   "file": "05.png",
+   "w": 74,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

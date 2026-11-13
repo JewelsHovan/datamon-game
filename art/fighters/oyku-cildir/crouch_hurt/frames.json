@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.16827,
+ "raw": "art/raw/oyku-cildir/crouch_hurt/20261112-223907-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 68,
+   "h": 102,
+   "ax": 10,
+   "ay": 101,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 64,
+   "h": 96,
+   "ax": 8,
+   "ay": 95,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 62,
+   "h": 97,
+   "ax": 5,
+   "ay": 96,
+   "hold": 6
+  }
+ ]
+}

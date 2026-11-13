@@ -1,0 +1,56 @@
+{
+ "clip": "getup_roll",
+ "loop": false,
+ "scale": 0.21807,
+ "raw": "art/raw/minh-ngoc-do/getup_roll/20261112-223912-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 122,
+   "h": 27,
+   "ax": 18,
+   "ay": 26,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 77,
+   "h": 67,
+   "ax": -2,
+   "ay": 66,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 68,
+   "h": 68,
+   "ax": -7,
+   "ay": 67,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 80,
+   "h": 91,
+   "ax": 6,
+   "ay": 90,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 83,
+   "h": 113,
+   "ax": 4,
+   "ay": 112,
+   "hold": 6
+  },
+  {
+   "file": "05.png",
+   "w": 80,
+   "h": 140,
+   "ax": -1,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.17789,
+ "raw": "art/raw/logan-labossiere/air_attack/20261112-222709-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 56,
+   "h": 104,
+   "ax": -10,
+   "ay": 103,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 74,
+   "h": 119,
+   "ax": -4,
+   "ay": 118,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 116,
+   "h": 108,
+   "ax": 6,
+   "ay": 107,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 117,
+   "h": 98,
+   "ax": 10,
+   "ay": 97,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 57,
+   "h": 110,
+   "ax": -9,
+   "ay": 109,
+   "hold": 6
+  }
+ ]
+}

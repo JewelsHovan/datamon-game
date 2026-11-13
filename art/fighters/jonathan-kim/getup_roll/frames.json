@@ -1,0 +1,56 @@
+{
+ "clip": "getup_roll",
+ "loop": false,
+ "scale": 0.22329,
+ "raw": "art/raw/jonathan-kim/getup_roll/20261112-223412-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 138,
+   "h": 32,
+   "ax": 28,
+   "ay": 31,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 75,
+   "h": 71,
+   "ax": 0,
+   "ay": 70,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 64,
+   "h": 71,
+   "ax": -7,
+   "ay": 70,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 94,
+   "h": 79,
+   "ax": 18,
+   "ay": 78,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 82,
+   "h": 113,
+   "ax": 6,
+   "ay": 112,
+   "hold": 6
+  },
+  {
+   "file": "05.png",
+   "w": 75,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

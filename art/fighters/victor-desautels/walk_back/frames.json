@@ -1,0 +1,56 @@
+{
+ "clip": "walk_back",
+ "loop": true,
+ "scale": 0.17391,
+ "raw": "art/raw/victor-desautels/walk_back/20261112-223808-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 64,
+   "h": 140,
+   "ax": 1,
+   "ay": 139,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 75,
+   "h": 138,
+   "ax": 9,
+   "ay": 137,
+   "hold": 4
+  },
+  {
+   "file": "02.png",
+   "w": 82,
+   "h": 140,
+   "ax": 12,
+   "ay": 139,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 66,
+   "h": 140,
+   "ax": -3,
+   "ay": 139,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 49,
+   "h": 141,
+   "ax": -12,
+   "ay": 140,
+   "hold": 3
+  },
+  {
+   "file": "05.png",
+   "w": 66,
+   "h": 140,
+   "ax": 1,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

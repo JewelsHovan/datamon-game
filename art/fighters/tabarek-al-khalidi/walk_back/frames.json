@@ -1,0 +1,56 @@
+{
+ "clip": "walk_back",
+ "loop": true,
+ "scale": 0.18018,
+ "raw": "art/raw/tabarek-al-khalidi/walk_back/20261112-223709-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 68,
+   "h": 140,
+   "ax": -4,
+   "ay": 139,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 74,
+   "h": 137,
+   "ax": 1,
+   "ay": 136,
+   "hold": 4
+  },
+  {
+   "file": "02.png",
+   "w": 92,
+   "h": 136,
+   "ax": 7,
+   "ay": 135,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 61,
+   "h": 137,
+   "ax": -11,
+   "ay": 136,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 49,
+   "h": 138,
+   "ax": -15,
+   "ay": 137,
+   "hold": 3
+  },
+  {
+   "file": "05.png",
+   "w": 77,
+   "h": 138,
+   "ax": -1,
+   "ay": 137,
+   "hold": 3
+  }
+ ]
+}

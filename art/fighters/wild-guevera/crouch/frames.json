@@ -1,0 +1,32 @@
+{
+ "clip": "crouch",
+ "loop": false,
+ "scale": 0.17073,
+ "raw": "art/raw/wild-guevera/crouch/20261112-224015-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 75,
+   "h": 129,
+   "ax": 0,
+   "ay": 128,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 73,
+   "h": 112,
+   "ax": 3,
+   "ay": 111,
+   "hold": 2
+  },
+  {
+   "file": "02.png",
+   "w": 71,
+   "h": 91,
+   "ax": 5,
+   "ay": 90,
+   "hold": 6
+  }
+ ]
+}

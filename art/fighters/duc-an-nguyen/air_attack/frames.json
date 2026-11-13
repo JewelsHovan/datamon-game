@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.18065,
+ "raw": "art/raw/duc-an-nguyen/air_attack/20261112-222156-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 52,
+   "h": 110,
+   "ax": -9,
+   "ay": 109,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 58,
+   "h": 136,
+   "ax": -4,
+   "ay": 135,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 109,
+   "h": 110,
+   "ax": 13,
+   "ay": 109,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 127,
+   "h": 103,
+   "ax": 20,
+   "ay": 102,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 53,
+   "h": 112,
+   "ax": -8,
+   "ay": 111,
+   "hold": 6
+  }
+ ]
+}

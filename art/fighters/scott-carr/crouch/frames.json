@@ -1,0 +1,32 @@
+{
+ "clip": "crouch",
+ "loop": false,
+ "scale": 0.16548,
+ "raw": "art/raw/scott-carr/crouch/20261112-211914-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 70,
+   "h": 127,
+   "ax": 0,
+   "ay": 126,
+   "hold": 2
+  },
+  {
+   "file": "01.png",
+   "w": 68,
+   "h": 108,
+   "ax": 4,
+   "ay": 107,
+   "hold": 2
+  },
+  {
+   "file": "02.png",
+   "w": 64,
+   "h": 87,
+   "ax": 4,
+   "ay": 86,
+   "hold": 6
+  }
+ ]
+}

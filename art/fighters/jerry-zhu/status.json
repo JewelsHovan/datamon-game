@@ -1,0 +1,132 @@
+{
+  "air_attack": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/air_attack/20261112-212208-0.png",
+    "state": "approved"
+  },
+  "air_hurt": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/air_hurt/20261112-212329-0.png",
+    "state": "approved"
+  },
+  "block": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/block/20261112-212234-0.png",
+    "state": "approved"
+  },
+  "block_push": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/block_push/20261112-212233-0.png",
+    "state": "approved"
+  },
+  "crouch": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/crouch/20261112-212024-0.png",
+    "state": "approved"
+  },
+  "crouch_attack": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/crouch_attack/20261112-212144-0.png",
+    "state": "approved"
+  },
+  "crouch_hurt": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/crouch_hurt/20261112-212256-0.png",
+    "state": "approved"
+  },
+  "dash_back": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/dash_back/20261112-212004-0.png",
+    "state": "approved"
+  },
+  "dash_forward": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/dash_forward/20261112-212000-0.png",
+    "state": "approved"
+  },
+  "getup_roll": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/getup_roll/20261112-212349-0.png",
+    "state": "approved"
+  },
+  "heavy_kick": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/heavy_kick/20261112-212146-0.png",
+    "state": "approved"
+  },
+  "heavy_punch": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/heavy_punch/20261112-212050-0.png",
+    "state": "approved"
+  },
+  "hurt": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/hurt/20261112-212254-0.png",
+    "state": "approved"
+  },
+  "idle": {
+    "note": "calibrated idle",
+    "raw": "art/raw/jerry-zhu/idle/20261112-211835-1.png",
+    "state": "approved"
+  },
+  "intro": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/intro/20261112-212352-0.png",
+    "state": "approved"
+  },
+  "jump": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/jump/20261112-212025-0.png",
+    "state": "approved"
+  },
+  "knockdown": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/knockdown/20261112-212331-0.png",
+    "state": "approved"
+  },
+  "light_kick": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/light_kick/20261112-212110-0.png",
+    "state": "approved"
+  },
+  "light_punch": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/light_punch/20261112-212049-0.png",
+    "state": "approved"
+  },
+  "special": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/special/20261112-212436-0.png",
+    "state": "approved"
+  },
+  "summon": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/summon/20261112-212434-0.png",
+    "state": "approved"
+  },
+  "taunt": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/taunt/20261112-212412-0.png",
+    "state": "approved"
+  },
+  "throw": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/throw/20261112-212210-0.png",
+    "state": "approved"
+  },
+  "victory": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/victory/20261112-212412-0.png",
+    "state": "approved"
+  },
+  "walk": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/walk/20261112-211939-0.png",
+    "state": "approved"
+  },
+  "walk_back": {
+    "note": "verified",
+    "raw": "/Users/julien.hovan/Playground/datamon-game/.claude/worktrees/character-expansion/art/raw/jerry-zhu/walk_back/20261112-211939-0.png",
+    "state": "approved"
+  }
+}

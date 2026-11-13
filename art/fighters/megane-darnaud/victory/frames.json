@@ -1,0 +1,56 @@
+{
+ "clip": "victory",
+ "loop": true,
+ "scale": 0.17456,
+ "raw": "art/raw/megane-darnaud/victory/20261112-212217-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 59,
+   "h": 161,
+   "ax": 1,
+   "ay": 160,
+   "hold": 10
+  },
+  {
+   "file": "01.png",
+   "w": 61,
+   "h": 164,
+   "ax": 0,
+   "ay": 163,
+   "hold": 10
+  },
+  {
+   "file": "02.png",
+   "w": 65,
+   "h": 156,
+   "ax": 4,
+   "ay": 155,
+   "hold": 10
+  },
+  {
+   "file": "03.png",
+   "w": 75,
+   "h": 154,
+   "ax": 8,
+   "ay": 153,
+   "hold": 10
+  },
+  {
+   "file": "04.png",
+   "w": 61,
+   "h": 156,
+   "ax": 1,
+   "ay": 155,
+   "hold": 10
+  },
+  {
+   "file": "05.png",
+   "w": 61,
+   "h": 161,
+   "ax": 0,
+   "ay": 160,
+   "hold": 10
+  }
+ ]
+}

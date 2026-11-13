@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.19691,
+ "raw": "art/raw/milen-thomas/air_hurt/20261112-223221-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 121,
+   "h": 121,
+   "ax": 14,
+   "ay": 120,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 136,
+   "h": 85,
+   "ax": 23,
+   "ay": 84,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 93,
+   "h": 131,
+   "ax": -2,
+   "ay": 130,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 152,
+   "h": 38,
+   "ax": 30,
+   "ay": 37,
+   "hold": 8
+  }
+ ]
+}

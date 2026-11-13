@@ -1,0 +1,48 @@
+{
+ "clip": "dash_forward",
+ "loop": false,
+ "scale": 0.18817,
+ "raw": "art/raw/tyler-nagano/dash_forward/20261112-211827-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 97,
+   "h": 131,
+   "ax": 17,
+   "ay": 130,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 93,
+   "h": 131,
+   "ax": 10,
+   "ay": 130,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 87,
+   "h": 133,
+   "ax": 8,
+   "ay": 132,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 95,
+   "h": 134,
+   "ax": 14,
+   "ay": 133,
+   "hold": 3
+  },
+  {
+   "file": "04.png",
+   "w": 77,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

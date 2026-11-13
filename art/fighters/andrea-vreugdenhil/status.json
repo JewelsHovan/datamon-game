@@ -1,0 +1,132 @@
+{
+  "air_attack": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/air_attack/20261112-222153-0.png",
+    "state": "approved"
+  },
+  "air_hurt": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/air_hurt/20261112-222227-0.png",
+    "state": "approved"
+  },
+  "block": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/block/20261112-222154-0.png",
+    "state": "approved"
+  },
+  "block_push": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/block_push/20261112-222230-0.png",
+    "state": "approved"
+  },
+  "crouch": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/crouch/20261112-222045-0.png",
+    "state": "approved"
+  },
+  "crouch_attack": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/crouch_attack/20261112-222153-0.png",
+    "state": "approved"
+  },
+  "crouch_hurt": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/crouch_hurt/20261112-222230-0.png",
+    "state": "approved"
+  },
+  "dash_back": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/dash_back/20261112-222118-0.png",
+    "state": "approved"
+  },
+  "dash_forward": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/dash_forward/20261112-222047-0.png",
+    "state": "approved"
+  },
+  "getup_roll": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/getup_roll/20261112-222301-0.png",
+    "state": "approved"
+  },
+  "heavy_kick": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/heavy_kick/20261112-222159-0.png",
+    "state": "approved"
+  },
+  "heavy_punch": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/heavy_punch/20261112-222123-0.png",
+    "state": "approved"
+  },
+  "hurt": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/hurt/20261112-222227-0.png",
+    "state": "approved"
+  },
+  "idle": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/idle/20261112-222004-0.png",
+    "state": "approved"
+  },
+  "intro": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/intro/20261112-222300-0.png",
+    "state": "approved"
+  },
+  "jump": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/jump/20261112-222044-0.png",
+    "state": "approved"
+  },
+  "knockdown": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/knockdown/20261112-222231-0.png",
+    "state": "approved"
+  },
+  "light_kick": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/light_kick/20261112-222120-0.png",
+    "state": "approved"
+  },
+  "light_punch": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/light_punch/20261112-222119-0.png",
+    "state": "approved"
+  },
+  "special": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/special/20261112-222304-0.png",
+    "state": "approved"
+  },
+  "summon": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/summon/20261112-222301-0.png",
+    "state": "approved"
+  },
+  "taunt": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/taunt/20261112-222300-0.png",
+    "state": "approved"
+  },
+  "throw": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/throw/20261112-222155-0.png",
+    "state": "approved"
+  },
+  "victory": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/victory/20261112-222301-0.png",
+    "state": "approved"
+  },
+  "walk": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/walk/20261112-222118-0.png",
+    "state": "approved"
+  },
+  "walk_back": {
+    "note": "",
+    "raw": "art/raw/andrea-vreugdenhil/walk_back/20261112-222044-0.png",
+    "state": "approved"
+  }
+}

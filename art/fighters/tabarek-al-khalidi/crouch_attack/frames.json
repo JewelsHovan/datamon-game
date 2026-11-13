@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.21739,
+ "raw": "art/raw/tabarek-al-khalidi/crouch_attack/20261112-223822-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 59,
+   "h": 99,
+   "ax": 4,
+   "ay": 98,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 76,
+   "h": 97,
+   "ax": 9,
+   "ay": 96,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 113,
+   "h": 86,
+   "ax": 2,
+   "ay": 85,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 123,
+   "h": 81,
+   "ax": 14,
+   "ay": 80,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 76,
+   "h": 93,
+   "ax": 10,
+   "ay": 92,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 55,
+   "h": 101,
+   "ax": 2,
+   "ay": 100,
+   "hold": 6
+  }
+ ]
+}

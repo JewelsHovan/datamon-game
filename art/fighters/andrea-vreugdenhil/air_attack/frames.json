@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.18592,
+ "raw": "art/raw/andrea-vreugdenhil/air_attack/20261112-222153-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 57,
+   "h": 96,
+   "ax": -8,
+   "ay": 95,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 60,
+   "h": 127,
+   "ax": -7,
+   "ay": 126,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 120,
+   "h": 110,
+   "ax": 7,
+   "ay": 109,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 128,
+   "h": 93,
+   "ax": 10,
+   "ay": 92,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 59,
+   "h": 100,
+   "ax": -5,
+   "ay": 99,
+   "hold": 6
+  }
+ ]
+}

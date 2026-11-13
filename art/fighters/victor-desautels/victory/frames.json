@@ -1,0 +1,56 @@
+{
+ "clip": "victory",
+ "loop": true,
+ "scale": 0.16471,
+ "raw": "art/raw/victor-desautels/victory/20261112-224022-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 53,
+   "h": 145,
+   "ax": 3,
+   "ay": 144,
+   "hold": 10
+  },
+  {
+   "file": "01.png",
+   "w": 52,
+   "h": 156,
+   "ax": 2,
+   "ay": 155,
+   "hold": 10
+  },
+  {
+   "file": "02.png",
+   "w": 55,
+   "h": 146,
+   "ax": 5,
+   "ay": 145,
+   "hold": 10
+  },
+  {
+   "file": "03.png",
+   "w": 58,
+   "h": 145,
+   "ax": 7,
+   "ay": 144,
+   "hold": 10
+  },
+  {
+   "file": "04.png",
+   "w": 52,
+   "h": 144,
+   "ax": 0,
+   "ay": 143,
+   "hold": 10
+  },
+  {
+   "file": "05.png",
+   "w": 60,
+   "h": 146,
+   "ax": 7,
+   "ay": 145,
+   "hold": 10
+  }
+ ]
+}
