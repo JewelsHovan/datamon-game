@@ -19,14 +19,14 @@ interface ManifestJson {
   clips: Record<string, { frames: unknown[] }>;
 }
 
-describe("playable fighter roster (37 fighters, 74 specials)", () => {
+describe("playable fighter roster (40 fighters, 80 specials)", () => {
   const entries = Object.values(FIGHTERS);
   const slugs = Object.keys(FIGHTERS);
 
-  it("has all 37 catalog people as playable fighters with matching slugs", () => {
-    expect(entries).toHaveLength(37);
+  it("has all 40 catalog people as playable fighters with matching slugs", () => {
+    expect(entries).toHaveLength(40);
     const peopleSlugs = new Set(getPeople().map((p) => p.slug));
-    expect(peopleSlugs.size).toBe(37);
+    expect(peopleSlugs.size).toBe(40);
     for (const [key, fighter] of Object.entries(FIGHTERS)) {
       expect(fighter.slug).toBe(key);
       expect(peopleSlugs.has(key)).toBe(true);
@@ -43,15 +43,15 @@ describe("playable fighter roster (37 fighters, 74 specials)", () => {
     expect(used.size).toBe(35);
   });
 
-  it("balances all five archetypes across the 37 fighters (8/8/7/7/7)", () => {
+  it("balances all five archetypes across the 40 fighters (8/8/8/8/8)", () => {
     const counts: Record<string, number> = {};
     for (const f of entries) counts[f.archetype] = (counts[f.archetype] ?? 0) + 1;
     expect(counts).toEqual({
       "all-rounder": 8,
       rusher: 8,
-      bruiser: 7,
-      zoner: 7,
-      trickster: 7,
+      bruiser: 8,
+      zoner: 8,
+      trickster: 8,
     });
   });
 
@@ -61,12 +61,12 @@ describe("playable fighter roster (37 fighters, 74 specials)", () => {
     }
   });
 
-  it("defines 74 distinct special moves and names across the 37 fighters", () => {
+  it("defines 80 distinct special moves and names across the 40 fighters", () => {
     const moveIds = entries.flatMap((f) => [f.specialMove, f.altSpecialMove]);
     const moveNames = entries.flatMap((f) => [f.specialName, f.altSpecialName]);
-    expect(moveIds).toHaveLength(74);
-    expect(new Set(moveIds).size).toBe(74);
-    expect(new Set(moveNames).size).toBe(74);
+    expect(moveIds).toHaveLength(80);
+    expect(new Set(moveIds).size).toBe(80);
+    expect(new Set(moveNames).size).toBe(80);
     for (const id of moveIds) {
       expect(MOVES[id]).toBeDefined();
     }

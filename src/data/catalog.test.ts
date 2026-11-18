@@ -8,11 +8,11 @@ const PUBLIC_DIR = resolve(import.meta.dirname, "../../public");
 describe("catalog wrapper (A2)", () => {
   const people = getPeople();
 
-  it("returns exactly 37 people, all datamon_person, no voxel skins", () => {
-    expect(people).toHaveLength(37);
+  it("returns exactly 40 people, all datamon_person, no voxel skins", () => {
+    expect(people).toHaveLength(40);
     for (const p of people) expect(p.kind).toBe("datamon_person");
     expect(people.some((p) => p.id <= 5)).toBe(false);
-    expect(new Set(people.map((p) => p.slug)).size).toBe(37);
+    expect(new Set(people.map((p) => p.slug)).size).toBe(40);
   });
 
   it("every person has a portrait URL, a sheet URL and 4 frames for left and right", () => {
@@ -37,10 +37,10 @@ describe("catalog wrapper (A2)", () => {
     }
   });
 
-  it("cell sizes come from the catalog (cellW 99..130, cellH 240)", () => {
+  it("cell sizes come from the catalog (cellW 99..155, cellH 240)", () => {
     for (const p of people) {
       expect(p.cellW).toBeGreaterThanOrEqual(99);
-      expect(p.cellW).toBeLessThanOrEqual(130);
+      expect(p.cellW).toBeLessThanOrEqual(155);
       expect(p.cellH).toBe(240);
     }
   });

@@ -1,0 +1,56 @@
+{
+ "clip": "getup_roll",
+ "loop": false,
+ "scale": 0.21672,
+ "raw": "art/raw/duru-aran/getup_roll/20261117-190923-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 138,
+   "h": 34,
+   "ax": 26,
+   "ay": 33,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 75,
+   "h": 88,
+   "ax": -5,
+   "ay": 87,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 73,
+   "h": 70,
+   "ax": -3,
+   "ay": 69,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 88,
+   "h": 83,
+   "ax": 7,
+   "ay": 82,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 78,
+   "h": 118,
+   "ax": 0,
+   "ay": 117,
+   "hold": 6
+  },
+  {
+   "file": "05.png",
+   "w": 82,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  }
+ ]
+}

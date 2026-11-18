@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.21538,
+ "raw": "art/raw/duru-aran/crouch_attack/20261117-190853-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 62,
+   "h": 105,
+   "ax": 6,
+   "ay": 104,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 62,
+   "h": 90,
+   "ax": 2,
+   "ay": 89,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 108,
+   "h": 87,
+   "ax": 6,
+   "ay": 86,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 117,
+   "h": 78,
+   "ax": 6,
+   "ay": 77,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 99,
+   "h": 86,
+   "ax": 11,
+   "ay": 85,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 61,
+   "h": 106,
+   "ax": 6,
+   "ay": 105,
+   "hold": 6
+  }
+ ]
+}

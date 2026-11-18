@@ -1,5 +1,5 @@
 // Creating and copying sim state.
-import { COMBAT, ROUND } from "../data/combat";
+import { ROUND, SHIELD } from "../data/combat";
 import { fighterInfo } from "../data/fighters";
 import { MOVEMENT } from "../data/movement";
 import { cloneInputHistory, createInputHistory } from "./inputHistory";
@@ -32,7 +32,10 @@ export function createFighter(slug: string, x: number, facing: Facing): FighterS
     wallBounced: false,
     slideDir: 0,
     rollFrom: -1,
+    rollDir: 0,
     tumble: false,
+    guard: SHIELD.maxGuard,
+    guardCooldown: 0,
   };
 }
 

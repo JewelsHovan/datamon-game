@@ -17,8 +17,39 @@ export const COMBAT = Object.freeze({
   comboScaleFloor: 50,
   /** Extra hitstun when the defender is crouching. */
   crouchHitstunBonus: 2,
+  /** Extra hitstun when hitting an opponent out of attack startup (counter-hit). */
+  counterHitstunBonus: 3,
   /** Hit-stop on a blocked hit is this much shorter. */
   blockHitstopReduction: 2,
+  /** Frames after a normal throw grabs during which Punch+Kick escapes into a tech. */
+  throwTechFrames: 8,
+});
+
+export const SHIELD = Object.freeze({
+  /** Full Cardinal Shield integrity per fighter. */
+  maxGuard: 1000,
+  /** Guard drained per blocked strike before fighter chipResistPct scaling. */
+  drainLight: 70,
+  drainHeavy: 210,
+  drainSpecial: 250,
+  /** Air Shield drains 1.5x Guard (projectiles and air-to-air strikes). */
+  airDrainPct: 150,
+  /** Guard spent by Pushblock (Punch+Kick during blockstun). */
+  pushCost: 220,
+  /** Frames after blocking/pushblocking before Guard begins regenerating. */
+  regenDelay: 20,
+  /** Guard recovered per frame once regenDelay expires outside blockstun/guard_break. */
+  regenPerFrame: 6,
+  /** Vulnerable stagger duration when Guard reaches 0. */
+  breakStunFrames: 42,
+  /** Guard restored if guard_break expires without being hit (full 1000 if punished). */
+  postBreakGuard: 700,
+  /** Just-Defend / Perfect Shield window: Back pressed within this many frames before impact. */
+  perfectWindowFrames: 3,
+  /** Guard restored on a Perfect Shield. */
+  perfectGuardRestore: 160,
+  /** Blockstun shaved off the defender on a Perfect Shield. */
+  perfectStunReduction: 5,
 });
 
 export const MOVES_V2 = Object.freeze({
@@ -45,9 +76,13 @@ export const MOVES_V2 = Object.freeze({
   /** Pop of a juggle hit and of a wall bounce (subpixels per frame, upward). */
   jugglePop: 550,
   wallBouncePop: 600,
-  /** Get-up roll: holding back while lying rolls away this far over the roll. */
+  /** Get-up roll: holding back or forward while lying rolls this far over the roll. */
   rollFrames: 36,
   rollSpeed: 250,
+  /** Final frames of a get-up roll that expose standing hurtboxes so predictable rolls can be baited. */
+  rollVulnTail: 5,
+  /** Lying frames shaved off when holding Up on knockdown for a Quick Rise. */
+  quickRiseCut: 14,
   /** Block push: Punch+Kick in blockstun; the attacker slides back this far. */
   blockPushFrames: 12,
   /** Extra input-buffer frames for the block push, so a press during the block's hit-stop counts. */

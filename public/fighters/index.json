@@ -30,6 +30,11 @@
    "atlas": "atlas.webp",
    "version": 1
   },
+  "duru-aran": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
   "elina-gu": {
    "manifest": "manifest.json",
    "atlas": "atlas.webp",
@@ -91,6 +96,11 @@
    "version": 4
   },
   "logan-labossiere": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "martin-dawson": {
    "manifest": "manifest.json",
    "atlas": "atlas.webp",
    "version": 1
@@ -171,6 +181,11 @@
    "version": 1
   },
   "vincent-anctil": {
+   "manifest": "manifest.json",
+   "atlas": "atlas.webp",
+   "version": 1
+  },
+  "walid-aissa": {
    "manifest": "manifest.json",
    "atlas": "atlas.webp",
    "version": 1

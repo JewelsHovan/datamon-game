@@ -101,12 +101,12 @@ describe("a fight loads only WebP art named by the manifests (spec 013)", () => 
     expect(stage!.walkers!.stand).toBe(2);
   });
 
-  it("the shipped fighter index lists all 37 fighters with a manifest, and unindexed entries fall back to walk sheets", async () => {
+  it("the shipped fighter index lists all 40 fighters with a manifest, and unindexed entries fall back to walk sheets", async () => {
     const { deps, requests } = publicDeps();
     const playable = await detectPlayable(getPeople(), deps);
     const withManifest = getPeople().filter((p) => existsSync(resolve(PUBLIC, "fighters", p.slug, "manifest.json"))).map((p) => p.slug);
     expect([...playable].sort()).toEqual(withManifest.sort());
-    expect(withManifest).toHaveLength(37);
+    expect(withManifest).toHaveLength(40);
     expect(requests).toEqual(["./fighters/index.json"]);
     // An unindexed guest person without a manifest loads straight from the walk sheet: no manifest request.
     requests.length = 0;

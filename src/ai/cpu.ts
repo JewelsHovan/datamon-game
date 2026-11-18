@@ -63,6 +63,8 @@ export const REACH: Readonly<Record<MoveId, number>> = {
   solar_dart: 9999,
   blink_edge: 9999,
   cryo_ping: 9999,
+  alpha_pulse: 9999,
+  vector_lance: 9999,
   // Mines / traps, angled anti-air bursts & floor shockwaves (260-360)
   rate_mine: 320,
   mirage_trap: 280,
@@ -76,6 +78,7 @@ export const REACH: Readonly<Record<MoveId, number>> = {
   mirage_arc: 280,
   trap_socket: 280,
   frost_fault: 310,
+  tensor_arc: 285,
   // Advancing specials, slides, flurries & overheads (155-235)
   charge: 230,
   rush: 170,
@@ -106,6 +109,7 @@ export const REACH: Readonly<Record<MoveId, number>> = {
   lightning_slide: 195,
   wild_fang: 210,
   jade_palm: 155,
+  pipeline_crush: 195,
   // Anti-airs / counters / command grabs (92-118)
   rising_commit: 95,
   skyline_upper: 100,
@@ -119,11 +123,13 @@ export const REACH: Readonly<Record<MoveId, number>> = {
   null_counter: 105,
   silk_parry: 100,
   iron_guard: 105,
+  quant_counter: 105,
   force_push: 115,
   titan_press: 118,
   vault_throw: 110,
   blue_shift_grab: 115,
   apex_pounce: 118,
+  schema_lock: 116,
 };
 
 const ANTI_AIR_SPECIALS: ReadonlySet<MoveId> = new Set([
@@ -136,6 +142,7 @@ const ANTI_AIR_SPECIALS: ReadonlySet<MoveId> = new Set([
   "cedar_upper",
   "mirage_arc",
   "cloud_rising",
+  "tensor_arc",
 ]);
 const COUNTER_SPECIALS: ReadonlySet<MoveId> = new Set([
   "rollback_parry",
@@ -144,6 +151,7 @@ const COUNTER_SPECIALS: ReadonlySet<MoveId> = new Set([
   "null_counter",
   "silk_parry",
   "iron_guard",
+  "quant_counter",
 ]);
 const OVERHEAD_SPECIALS: ReadonlySet<MoveId> = new Set([
   "canary_hop",
@@ -163,6 +171,7 @@ const COMMAND_GRAB_SPECIALS: ReadonlySet<MoveId> = new Set([
   "vault_throw",
   "blue_shift_grab",
   "apex_pounce",
+  "schema_lock",
 ]);
 const MINE_SPECIALS: ReadonlySet<MoveId> = new Set([
   "rate_mine",
@@ -380,6 +389,13 @@ export function createCpu(level: CpuLevel, player: PlayerIndex, seed: number): C
       }
 
       // 2. Reactions (only when free to act; urgent plans are not interrupted).
+      if (me.state === "blockstun" && me.guard >= 380 && dist < 68 && lv.block >= 0.3 && !(plan && plan.urgent) && chance(0.22)) {
+        return start(press(back | P | K), true);
+      }
+      if (me.state === "knockdown" && me.rollFrom < 0 && lv.block >= 0.3 && !(plan && plan.urgent)) {
+        const nearCorner = Math.min(me.x, MOVEMENT.stageWidth - me.x) < 12000;
+        if (nearCorner && dist < 110 && chance(0.35)) return start(hold(fwd, 10), true);
+      }
       const free = actionable(me) || me.state === "blockstun";
       if (free && !(plan && plan.urgent)) {
         // Throw tech: answer a throw with a throw.
@@ -571,6 +587,10 @@ export function createCpu(level: CpuLevel, player: PlayerIndex, seed: number): C
 
       // Close: nobody pokes into a jump on purpose (that is the anti-air decision above).
       if (opAir) return start(hold(0, 6));
+      // Cash out heavily on a Shield Break!
+      if (v.state === "guard_break" && dist < 92) {
+        return start(press(fwd | K), true);
+      }
       // Counters bait close-range attacks on Normal/Hard.
       const opThreatening = actionable(state.fighters[player === 0 ? 1 : 0]) || v.state === "attack";
       const counterOpt = findSpecialByRole(info, fwd, COUNTER_SPECIALS);

@@ -170,12 +170,12 @@ describe("matches (A4, A5)", () => {
   });
 });
 
-describe("expanded 37-fighter CPU roster (spec 016, spec 017)", () => {
+describe("expanded 40-fighter CPU roster (spec 016, spec 017, spec 018)", () => {
   const allSlugs = Object.keys(FIGHTERS);
 
   it("every MoveId in MOVES has a finite positive REACH entry", () => {
     const moveIds = Object.keys(MOVES) as MoveId[];
-    expect(moveIds.length).toBeGreaterThanOrEqual(81);
+    expect(moveIds.length).toBeGreaterThanOrEqual(87);
     for (const id of moveIds) {
       const r = REACH[id];
       expect(Number.isFinite(r), `REACH[${id}] should be finite`).toBe(true);
@@ -183,8 +183,8 @@ describe("expanded 37-fighter CPU roster (spec 016, spec 017)", () => {
     }
   });
 
-  it("is deterministic and completes multi-hundred-frame bouts for all 37 fighters without stuck states", () => {
-    expect(allSlugs).toHaveLength(37);
+  it("is deterministic and completes multi-hundred-frame bouts for all 40 fighters without stuck states", () => {
+    expect(allSlugs).toHaveLength(40);
     for (let i = 0; i < allSlugs.length; i++) {
       const slug = allSlugs[i]!;
       const opp = allSlugs[(i + 1) % allSlugs.length]!;
@@ -310,7 +310,7 @@ describe("expanded 37-fighter CPU roster (spec 016, spec 017)", () => {
     }
   });
 
-  it("all 37 fighters finish Hard vs Hard matches cleanly and use specials", () => {
+  it("all 40 fighters finish Hard vs Hard matches cleanly and use specials", () => {
     for (let i = 0; i < allSlugs.length; i++) {
       const p1 = allSlugs[i]!;
       const p2 = allSlugs[(i + 13) % allSlugs.length]!;

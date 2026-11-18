@@ -1,0 +1,132 @@
+{
+  "air_attack": {
+    "note": "",
+    "raw": "art/raw/duru-aran/air_attack/20261117-190859-0.png",
+    "state": "approved"
+  },
+  "air_hurt": {
+    "note": "",
+    "raw": "art/raw/duru-aran/air_hurt/20261117-190922-0.png",
+    "state": "approved"
+  },
+  "block": {
+    "note": "",
+    "raw": "art/raw/duru-aran/block/20261117-190902-0.png",
+    "state": "approved"
+  },
+  "block_push": {
+    "note": "",
+    "raw": "art/raw/duru-aran/block_push/20261117-190908-0.png",
+    "state": "approved"
+  },
+  "crouch": {
+    "note": "",
+    "raw": "art/raw/duru-aran/crouch/20261117-190835-0.png",
+    "state": "approved"
+  },
+  "crouch_attack": {
+    "note": "",
+    "raw": "art/raw/duru-aran/crouch_attack/20261117-190853-0.png",
+    "state": "approved"
+  },
+  "crouch_hurt": {
+    "note": "",
+    "raw": "art/raw/duru-aran/crouch_hurt/20261117-190926-0.png",
+    "state": "approved"
+  },
+  "dash_back": {
+    "note": "",
+    "raw": "art/raw/duru-aran/dash_back/20261117-190833-0.png",
+    "state": "approved"
+  },
+  "dash_forward": {
+    "note": "",
+    "raw": "art/raw/duru-aran/dash_forward/20261117-190830-0.png",
+    "state": "approved"
+  },
+  "getup_roll": {
+    "note": "",
+    "raw": "art/raw/duru-aran/getup_roll/20261117-190923-0.png",
+    "state": "approved"
+  },
+  "heavy_kick": {
+    "note": "",
+    "raw": "art/raw/duru-aran/heavy_kick/20261117-190855-0.png",
+    "state": "approved"
+  },
+  "heavy_punch": {
+    "note": "",
+    "raw": "art/raw/duru-aran/heavy_punch/20261117-190833-0.png",
+    "state": "approved"
+  },
+  "hurt": {
+    "note": "",
+    "raw": "art/raw/duru-aran/hurt/20261117-190858-0.png",
+    "state": "approved"
+  },
+  "idle": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/duru-aran/idle/20261117-190647-0.png",
+    "state": "approved"
+  },
+  "intro": {
+    "note": "",
+    "raw": "art/raw/duru-aran/intro/20261117-190925-0.png",
+    "state": "approved"
+  },
+  "jump": {
+    "note": "",
+    "raw": "art/raw/duru-aran/jump/20261117-190828-0.png",
+    "state": "approved"
+  },
+  "knockdown": {
+    "note": "",
+    "raw": "art/raw/duru-aran/knockdown/20261117-190952-0.png",
+    "state": "approved"
+  },
+  "light_kick": {
+    "note": "",
+    "raw": "art/raw/duru-aran/light_kick/20261117-190854-0.png",
+    "state": "approved"
+  },
+  "light_punch": {
+    "note": "",
+    "raw": "art/raw/duru-aran/light_punch/20261117-190827-0.png",
+    "state": "approved"
+  },
+  "special": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/duru-aran/special/20261117-191038-0.png",
+    "state": "approved"
+  },
+  "summon": {
+    "note": "",
+    "raw": "art/raw/duru-aran/summon/20261117-190930-0.png",
+    "state": "approved"
+  },
+  "taunt": {
+    "note": "",
+    "raw": "art/raw/duru-aran/taunt/20261117-190925-0.png",
+    "state": "approved"
+  },
+  "throw": {
+    "note": "",
+    "raw": "art/raw/duru-aran/throw/20261117-190900-0.png",
+    "state": "approved"
+  },
+  "victory": {
+    "note": "",
+    "raw": "art/raw/duru-aran/victory/20261117-190927-0.png",
+    "state": "approved"
+  },
+  "walk": {
+    "note": "",
+    "raw": "art/raw/duru-aran/walk/20261117-190827-0.png",
+    "state": "approved"
+  },
+  "walk_back": {
+    "note": "",
+    "raw": "art/raw/duru-aran/walk_back/20261117-190833-0.png",
+    "state": "approved"
+  }
+}

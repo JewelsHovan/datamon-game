@@ -1,0 +1,48 @@
+{
+ "clip": "dash_forward",
+ "loop": false,
+ "scale": 0.19337,
+ "raw": "art/raw/duru-aran/dash_forward/20261117-190830-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 97,
+   "h": 135,
+   "ax": 17,
+   "ay": 134,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 122,
+   "h": 129,
+   "ax": 26,
+   "ay": 128,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 82,
+   "h": 131,
+   "ax": -1,
+   "ay": 130,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 84,
+   "h": 134,
+   "ax": -3,
+   "ay": 133,
+   "hold": 3
+  },
+  {
+   "file": "04.png",
+   "w": 80,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

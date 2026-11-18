@@ -19,8 +19,8 @@ Stack: Vite + TypeScript + Canvas 2D (no engine), Vitest, npm. `src/sim` is a pu
 
 ## Assets
 
-- `public/datamon/portraits/<slug>.webp`: 37 people portraits.
-- `public/datamon/walk/<slug>.webp`: 4-direction walk sheets for the same 37 people (down, up, left, right; 4 frames each).
+- `public/datamon/portraits/<slug>.webp`: 40 people portraits.
+- `public/datamon/walk/<slug>.webp`: 4-direction walk sheets for the same 40 people (down, up, left, right; 4 frames each).
 - `public/datamon/battlemons/<slug>.webp` and `battlemons/icons/<slug>.webp`: 35 creatures, 7 in each of 5 domains (AGENT, CONFIG, CONTEXT, MCP, PROMPT).
 - `src/data/datamonCatalog.js`: registry with names, colors, sprite cell sizes and per-frame metrics. Asset URLs are relative (`./datamon/...`), so they resolve when `public/` is served at the root. Ids 0..5 are leftover voxel skins from the project the assets came from (`../minecraft-clone`) and can be ignored.
 

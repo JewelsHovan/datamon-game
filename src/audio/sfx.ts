@@ -152,6 +152,24 @@ export const SFX = {
   ],
   /** Block push: a shove and a whoosh. */
   block_push: [noise(env(0.01, 0.14), 0.26, bp(500, 1, 1400, 0.12)), tone("sine", 160, env(0.001, 0.1), 0.3, { sweep: { to: 80, time: 0.1 } })],
+  /** Perfect Shield (Just Defend): crystalline harmonic parry chime. */
+  perfect_block: [
+    noise(env(0.001, 0.02), 0.2, hp(4500)),
+    tone("triangle", 1318, env(0.001, 0.2), 0.16),
+    tone("triangle", 1976, env(0.001, 0.22), 0.12, { delay: 0.02 }),
+    tone("sine", 2637, env(0.001, 0.18), 0.08, { delay: 0.04 }),
+  ],
+  /** Shield Break (Guard Crush): glass/crystalline shatter over a sub drop. */
+  guard_break: [
+    noise(env(0.001, 0.24), 0.45, bp(2600, 0.7, 700, 0.24)),
+    tone("sawtooth", 740, env(0.001, 0.22), 0.16, { sweep: { to: 110, time: 0.2 }, drive: 4, filter: lp(3200, 500, 0.22) }),
+    tone("sine", 135, env(0.001, 0.28), 0.5, { sweep: { to: 36, time: 0.25 } }),
+  ],
+  /** Counter-hit callout accent: crisp staccato octave ping. */
+  counter_hit: [
+    tone("pulse25", 880, env(0.001, 0.07), 0.08, { filter: lp(4000) }),
+    tone("pulse25", 1760, env(0.001, 0.1), 0.07, { delay: 0.035, filter: lp(4500) }),
+  ],
   /** Get-up roll: a soft tumble. */
   roll: [noise(env(0.02, 0.2), 0.12, lp(700, 300, 0.2))],
   /** Taunt: two cheeky blips. */
@@ -421,6 +439,12 @@ export function routeEvent(e: SimEvent, state?: SimState): Route {
       return route("counter");
     case "block_push":
       return route("block_push");
+    case "perfect_block":
+      return route("perfect_block");
+    case "guard_break":
+      return route("guard_break");
+    case "callout":
+      return e.kind === "counter" ? route("counter_hit") : route(null);
     case "roll":
       return route("roll");
     case "taunt":

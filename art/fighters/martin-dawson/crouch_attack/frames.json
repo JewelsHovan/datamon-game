@@ -1,0 +1,56 @@
+{
+ "clip": "crouch_attack",
+ "loop": false,
+ "scale": 0.2099,
+ "raw": "art/raw/martin-dawson/crouch_attack/20261117-194355-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 72,
+   "h": 104,
+   "ax": 0,
+   "ay": 103,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 79,
+   "h": 96,
+   "ax": 0,
+   "ay": 95,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 101,
+   "h": 88,
+   "ax": 0,
+   "ay": 87,
+   "hold": 3
+  },
+  {
+   "file": "03.png",
+   "w": 114,
+   "h": 80,
+   "ax": 4,
+   "ay": 79,
+   "hold": 5
+  },
+  {
+   "file": "04.png",
+   "w": 87,
+   "h": 88,
+   "ax": 9,
+   "ay": 87,
+   "hold": 4
+  },
+  {
+   "file": "05.png",
+   "w": 64,
+   "h": 103,
+   "ax": 3,
+   "ay": 102,
+   "hold": 6
+  }
+ ]
+}

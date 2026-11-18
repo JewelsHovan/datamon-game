@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.20558,
+ "raw": "art/raw/walid-aissa/air_hurt/20261117-194556-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 119,
+   "h": 128,
+   "ax": 9,
+   "ay": 127,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 141,
+   "h": 84,
+   "ax": 28,
+   "ay": 83,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 113,
+   "h": 116,
+   "ax": 10,
+   "ay": 115,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 136,
+   "h": 40,
+   "ax": 22,
+   "ay": 39,
+   "hold": 8
+  }
+ ]
+}

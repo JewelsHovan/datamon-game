@@ -1,0 +1,132 @@
+{
+  "air_attack": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/air_attack/20261117-194355-0.png",
+    "state": "approved"
+  },
+  "air_hurt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/air_hurt/20261117-194426-0.png",
+    "state": "approved"
+  },
+  "block": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/block/20261117-194401-0.png",
+    "state": "approved"
+  },
+  "block_push": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/block_push/20261117-194403-0.png",
+    "state": "approved"
+  },
+  "crouch": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/crouch/20261117-194322-0.png",
+    "state": "approved"
+  },
+  "crouch_attack": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/crouch_attack/20261117-194355-0.png",
+    "state": "approved"
+  },
+  "crouch_hurt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/crouch_hurt/20261117-194414-0.png",
+    "state": "approved"
+  },
+  "dash_back": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/dash_back/20261117-194323-0.png",
+    "state": "approved"
+  },
+  "dash_forward": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/dash_forward/20261117-194319-0.png",
+    "state": "approved"
+  },
+  "getup_roll": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/getup_roll/20261117-194428-0.png",
+    "state": "approved"
+  },
+  "heavy_kick": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/heavy_kick/20261117-194400-0.png",
+    "state": "approved"
+  },
+  "heavy_punch": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/heavy_punch/20261117-194324-0.png",
+    "state": "approved"
+  },
+  "hurt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/hurt/20261117-194357-0.png",
+    "state": "approved"
+  },
+  "idle": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/idle/20261117-194246-0.png",
+    "state": "approved"
+  },
+  "intro": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/intro/20261117-194428-0.png",
+    "state": "approved"
+  },
+  "jump": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/jump/20261117-194325-0.png",
+    "state": "approved"
+  },
+  "knockdown": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/knockdown/20261117-194431-0.png",
+    "state": "approved"
+  },
+  "light_kick": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/light_kick/20261117-194349-0.png",
+    "state": "approved"
+  },
+  "light_punch": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/light_punch/20261117-194321-0.png",
+    "state": "approved"
+  },
+  "special": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/special/20261117-194443-0.png",
+    "state": "approved"
+  },
+  "summon": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/summon/20261117-194428-0.png",
+    "state": "approved"
+  },
+  "taunt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/taunt/20261117-194429-0.png",
+    "state": "approved"
+  },
+  "throw": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/throw/20261117-194355-0.png",
+    "state": "approved"
+  },
+  "victory": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/victory/20261117-194430-0.png",
+    "state": "approved"
+  },
+  "walk": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/walk/20261117-194323-0.png",
+    "state": "approved"
+  },
+  "walk_back": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/martin-dawson/walk_back/20261117-194320-0.png",
+    "state": "approved"
+  }
+}

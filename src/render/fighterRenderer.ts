@@ -59,9 +59,11 @@ export function clipForFighter(f: FighterState, introFrame = -1): ClipChoice {
       return { clip: "block", tick: 0, reverse: false, frame: f.stunLow ? 1 : 0 };
     case "held":
       return { clip: "hurt", tick: 0, reverse: false, frame: 0 };
+    case "guard_break":
+      return { clip: "hurt", tick: 0, reverse: false, frame: Math.floor(f.stateFrame / 6) % 2 === 0 ? 1 : 2 };
     case "knockdown":
     case "ko":
-      if (f.rollFrom >= 0) return { clip: "getup_roll", tick: f.stateFrame - f.rollFrom, reverse: false };
+      if (f.rollFrom >= 0) return { clip: "getup_roll", tick: f.stateFrame - f.rollFrom, reverse: f.rollDir === 1 };
       if (f.tumble && f.y < MOVEMENT.floorY) return { clip: "air_hurt", tick: 0, reverse: false, frame: tumbleFrame(f) };
       return { clip: "knockdown", tick: f.stateFrame, reverse: false, frame: downedFrame(f) };
     case "victory":

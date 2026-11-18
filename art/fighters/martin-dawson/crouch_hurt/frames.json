@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.16548,
+ "raw": "art/raw/martin-dawson/crouch_hurt/20261117-194414-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 63,
+   "h": 101,
+   "ax": 1,
+   "ay": 100,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 66,
+   "h": 86,
+   "ax": 1,
+   "ay": 85,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 64,
+   "h": 90,
+   "ax": 0,
+   "ay": 89,
+   "hold": 6
+  }
+ ]
+}

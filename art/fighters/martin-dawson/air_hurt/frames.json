@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.18919,
+ "raw": "art/raw/martin-dawson/air_hurt/20261117-194426-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 119,
+   "h": 114,
+   "ax": 15,
+   "ay": 113,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 142,
+   "h": 81,
+   "ax": 24,
+   "ay": 80,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 93,
+   "h": 115,
+   "ax": 4,
+   "ay": 114,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 143,
+   "h": 42,
+   "ax": 28,
+   "ay": 41,
+   "hold": 8
+  }
+ ]
+}

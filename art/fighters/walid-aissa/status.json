@@ -1,0 +1,132 @@
+{
+  "air_attack": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/air_attack/20261117-194535-0.png",
+    "state": "approved"
+  },
+  "air_hurt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/air_hurt/20261117-194556-0.png",
+    "state": "approved"
+  },
+  "block": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/block/20261117-194539-0.png",
+    "state": "approved"
+  },
+  "block_push": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/block_push/20261117-194541-0.png",
+    "state": "approved"
+  },
+  "crouch": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/crouch/20261117-194503-0.png",
+    "state": "approved"
+  },
+  "crouch_attack": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/crouch_attack/20261117-194538-0.png",
+    "state": "approved"
+  },
+  "crouch_hurt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/crouch_hurt/20261117-194555-0.png",
+    "state": "approved"
+  },
+  "dash_back": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/dash_back/20261117-194453-0.png",
+    "state": "approved"
+  },
+  "dash_forward": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/dash_forward/20261117-194457-0.png",
+    "state": "approved"
+  },
+  "getup_roll": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/getup_roll/20261117-194601-0.png",
+    "state": "approved"
+  },
+  "heavy_kick": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/heavy_kick/20261117-194535-0.png",
+    "state": "approved"
+  },
+  "heavy_punch": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/heavy_punch/20261117-194518-0.png",
+    "state": "approved"
+  },
+  "hurt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/hurt/20261117-194542-0.png",
+    "state": "approved"
+  },
+  "idle": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/idle/20261117-194246-0.png",
+    "state": "approved"
+  },
+  "intro": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/intro/20261117-194604-0.png",
+    "state": "approved"
+  },
+  "jump": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/jump/20261117-194503-0.png",
+    "state": "approved"
+  },
+  "knockdown": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/knockdown/20261117-194604-0.png",
+    "state": "approved"
+  },
+  "light_kick": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/light_kick/20261117-194529-0.png",
+    "state": "approved"
+  },
+  "light_punch": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/light_punch/20261117-194455-0.png",
+    "state": "approved"
+  },
+  "special": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/special/20261117-194719-0.png",
+    "state": "approved"
+  },
+  "summon": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/summon/20261117-194605-0.png",
+    "state": "approved"
+  },
+  "taunt": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/taunt/20261117-194602-0.png",
+    "state": "approved"
+  },
+  "throw": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/throw/20261117-194533-0.png",
+    "state": "approved"
+  },
+  "victory": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/victory/20261117-194607-0.png",
+    "state": "approved"
+  },
+  "walk": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/walk/20261117-194454-0.png",
+    "state": "approved"
+  },
+  "walk_back": {
+    "note": "",
+    "raw": "/Users/julien.hovan/Games/cardinal-clash/art/raw/walid-aissa/walk_back/20261117-194456-0.png",
+    "state": "approved"
+  }
+}

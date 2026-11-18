@@ -1,0 +1,24 @@
+{
+ "clip": "block",
+ "loop": false,
+ "scale": 0.15152,
+ "raw": "art/raw/martin-dawson/block/20261117-194401-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 84,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 72,
+   "h": 89,
+   "ax": 1,
+   "ay": 88,
+   "hold": 6
+  }
+ ]
+}

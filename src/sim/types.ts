@@ -32,6 +32,8 @@ export const FIGHTER_STATES = [
   "dash_back",
   "block_push",
   "taunt",
+  // spec 018
+  "guard_break",
 ] as const;
 
 export type FighterStateName = (typeof FIGHTER_STATES)[number];
@@ -97,8 +99,15 @@ export interface FighterState {
   slideDir: -1 | 0 | 1;
   /** State frame at which a get-up roll started (-1: standing up normally). */
   rollFrom: number;
+  /** Direction of get-up roll relative to facing (-1 back, 0 none, 1 forward cross-up). */
+  rollDir: -1 | 0 | 1;
   /** Launched by an air hit, a juggle or a wall bounce: tumbles (air_hurt) until landing. */
   tumble: boolean;
+  // spec 018: Cardinal Shield
+  /** Remaining Shield / Guard integrity (0..SHIELD.maxGuard). */
+  guard: number;
+  /** Frames remaining before Guard passively regenerates. */
+  guardCooldown: number;
 }
 
 export interface Projectile {
@@ -151,6 +160,9 @@ export type SimEvent =
   | { type: "armor"; player: PlayerIndex; x: number; y: number }
   | { type: "counter"; player: PlayerIndex; target: PlayerIndex; x: number; y: number }
   | { type: "block_push"; player: PlayerIndex; target: PlayerIndex; x: number; y: number }
+  | { type: "perfect_block"; player: PlayerIndex; attacker: PlayerIndex; x: number; y: number }
+  | { type: "guard_break"; player: PlayerIndex; attacker: PlayerIndex; x: number; y: number }
+  | { type: "callout"; player: PlayerIndex; kind: "counter" | "punish"; x: number; y: number }
   | { type: "taunt"; player: PlayerIndex }
   | { type: "roll"; player: PlayerIndex }
   | { type: "round_start"; round: number }

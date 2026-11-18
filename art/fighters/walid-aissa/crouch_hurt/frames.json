@@ -1,0 +1,32 @@
+{
+ "clip": "crouch_hurt",
+ "loop": false,
+ "scale": 0.1737,
+ "raw": "art/raw/walid-aissa/crouch_hurt/20261117-194555-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 67,
+   "h": 104,
+   "ax": 3,
+   "ay": 103,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 68,
+   "h": 91,
+   "ax": 4,
+   "ay": 90,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 70,
+   "h": 91,
+   "ax": 5,
+   "ay": 90,
+   "hold": 6
+  }
+ ]
+}

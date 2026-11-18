@@ -2,11 +2,11 @@
 // in advanceFighter, the floor contact in landFighter (called by physics when an
 // airborne fighter reaches the floor), and the combat ones through combat.ts
 // helpers called from here and from hit application.
-import { MOVES_V2 } from "../data/combat";
+import { MOVES_V2, SHIELD } from "../data/combat";
 import { fighterInfo } from "../data/fighters";
 import { MOVES, segmentAt } from "../data/moves";
 import { MOVEMENT } from "../data/movement";
-import { advanceDowned, dashInput, isGrabMove, tickGroundMove, tryAirMove, tryBlockPush, tryGroundMove, tryTaunt } from "./combat";
+import { advanceDowned, dashInput, isGrabMove, tickGroundMove, tryAirMove, tryBlockPush, tryGroundMove, tryTaunt, tryThrowEscape } from "./combat";
 import { DIR_BACK, DIR_DOWN, DIR_FORWARD, DIR_UP } from "./inputBits";
 import { inputAt, toFacingRelative } from "./inputHistory";
 import type { FighterState, FighterStateName, JumpDir, PlayerIndex, SimEvent, SimState } from "./types";
@@ -132,6 +132,12 @@ export function advanceFighter(f: FighterState, player: PlayerIndex, state: SimS
   const dirs = toFacingRelative(inputAt(f.input, 0), f.facing);
   f.stateFrame += 1;
 
+  if (f.guardCooldown > 0) {
+    f.guardCooldown -= 1;
+  } else if (f.state !== "blockstun" && f.state !== "guard_break" && f.guard < SHIELD.maxGuard) {
+    f.guard = Math.min(SHIELD.maxGuard, f.guard + SHIELD.regenPerFrame);
+  }
+
   switch (f.state) {
     case "jumpsquat": {
       // A direction held during the squat still picks the jump direction.
@@ -174,9 +180,20 @@ export function advanceFighter(f: FighterState, player: PlayerIndex, state: SimS
       const grabbed = thrower.state === "attack" && thrower.move && isGrabMove(MOVES[thrower.move.id]) && thrower.move.grabbed;
       if (!grabbed || f.stateFrame > 60) {
         enter(f, "idle");
+        break;
       }
+      if (control && tryThrowEscape(f, player, state)) break;
       break;
     }
+    case "guard_break":
+      f.stun -= 1;
+      if (f.stun <= 0) {
+        f.guard = Math.max(f.guard, SHIELD.postBreakGuard);
+        f.state = "idle";
+        f.stateFrame = 0;
+        groundedControl(f, control ? dirs : 0);
+      }
+      break;
     case "knockdown":
     case "ko":
       advanceDowned(f, player, state);

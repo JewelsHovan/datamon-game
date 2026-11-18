@@ -1,0 +1,40 @@
+{
+ "clip": "hurt",
+ "loop": false,
+ "scale": 0.16241,
+ "raw": "art/raw/duru-aran/hurt/20261117-190858-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 104,
+   "h": 135,
+   "ax": 27,
+   "ay": 134,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 109,
+   "h": 136,
+   "ax": 33,
+   "ay": 135,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 77,
+   "h": 124,
+   "ax": 0,
+   "ay": 123,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 80,
+   "h": 138,
+   "ax": 0,
+   "ay": 137,
+   "hold": 6
+  }
+ ]
+}

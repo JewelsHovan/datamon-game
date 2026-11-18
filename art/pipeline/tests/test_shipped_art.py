@@ -83,7 +83,7 @@ def test_stage_layers_and_walkers_are_webp_and_match_their_masters():
 
 def test_fighter_index_lists_every_manifest_with_its_atlas():
     index = manifest(common.PUBLIC_FIGHTERS / "index.json")["fighters"]
-    assert sorted(index) == FIGHTERS and len(FIGHTERS) == 37
+    assert sorted(index) == FIGHTERS and len(FIGHTERS) == 40
     for slug, entry in index.items():
         m = manifest(common.PUBLIC_FIGHTERS / slug / entry["manifest"])
         assert (entry["atlas"], entry["version"]) == (m["atlas"], m["version"]), slug
@@ -103,7 +103,7 @@ def test_walker_cast_follows_the_stage_rule():
     expected = pool[:: rule["every"]][: rule["count"]]
     cast = [c["slug"] for c in manifest(STAGE / "manifest.json")["walkers"]["cast"]]
     assert cast == expected and len(cast) == 9
-    assert set(cast) <= set(FIGHTERS), "all walker slugs come from the 37-person catalog; active fighters filter dynamically at draw time"
+    assert set(cast) <= set(FIGHTERS), "all walker slugs come from the 40-person catalog; active fighters filter dynamically at draw time"
 
 
 def test_walker_frames_are_four_right_facing_frames_at_walker_scale():

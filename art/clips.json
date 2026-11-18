@@ -1272,6 +1272,60 @@
      "returning to the fighting stance"
     ]
    }
+  },
+  "duru-aran": {
+   "name": "Quant Counter",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [3, 4, 3, 4, 3, 8, 6, 7],
+    "poses": [
+     "fighting stance",
+     "composed counter-read stance, lead open palm raised in front of the chest, rear hand coiled at the hip (draw no effects)",
+     "crisp inward forearm deflection across the chest, knees bending to spring",
+     "stepping forward sharply off the rear foot, hips pivoting",
+     "driving a fast knife-hand strike forward at chest height",
+     "palm-blade counter strike fully extended straight forward at chest height, rear hand tucked at ribs (draw no effects)",
+     "holding the extended martial counter posture",
+     "stepping smoothly back into the fighting stance"
+    ]
+   }
+  },
+  "martin-dawson": {
+   "name": "Pipeline Crush",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [4, 4, 4, 3, 3, 8, 7, 7],
+    "poses": [
+     "fighting stance",
+     "planting the lead foot wide in an armored brace, both fists clenched tight at chest height",
+     "coiling the torso back, rear fist drawn behind the shoulder for a heavy strike",
+     "driving forward strongly off the rear leg, shoulders rotating",
+     "accelerating a heavy straight cross-punch forward at chest height",
+     "crushing straight cross-punch fully extended forward at chest height, rear arm braced at ribs (draw no effects)",
+     "holding the heavy grounded follow-through",
+     "returning cleanly to the fighting stance"
+    ]
+   }
+  },
+  "walid-aissa": {
+   "name": "Vector Lance",
+   "clip": {
+    "loop": false,
+    "anchor": "backfoot",
+    "holds": [3, 4, 4, 3, 3, 8, 6, 7],
+    "poses": [
+     "fighting stance",
+     "stepping into a poised zoner stance, lead hand lifting to aim forward (draw no effects)",
+     "drawing the rear hand back near the lapel, shoulders square",
+     "stepping the lead foot forward crisply",
+     "snapping a sharp two-finger cast straight forward at shoulder height (draw no effects)",
+     "extended cast posture, lead arm straight forward at shoulder height, blazer steady (draw no effects)",
+     "holding the composed follow-through",
+     "returning smoothly to the fighting stance"
+    ]
+   }
   }
  }
 }

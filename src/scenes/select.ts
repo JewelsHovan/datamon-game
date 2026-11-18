@@ -1,4 +1,4 @@
-// Character select (spec 005, R6): a grid of all 37 people plus a random
+// Character select (spec 005, R6; spec 018, R1): a 9-column grid of all 40 people plus a random
 // tile. Fighters with generated clips are lit; the rest are dimmed and
 // "coming soon". Each player has a cursor (P1 blue, P2 red), moves it with
 // their directions, picks with Punch (or Start) and cancels with Kick, with a
@@ -15,7 +15,7 @@ import { VIEW_HEIGHT, VIEW_WIDTH } from "../render/screen";
 import type { GameMode, Match, MenuInput, Scene, SceneManager } from "./manager";
 import { BACK_BITS, CONFIRM_BITS, DIM, drawBackdrop, drawPanel, drawSmooth, GOLD, INK, nav, PLAYER_COLORS, pressed } from "./ui";
 
-export const GRID_COLS = 8;
+export const GRID_COLS = 9;
 export const CPU_LEVELS: readonly CpuLevel[] = ["easy", "normal", "hard"];
 /** Frames between both picks locking in and the versus splash. */
 export const READY_FRAMES = 40;
@@ -23,8 +23,8 @@ export const READY_FRAMES = 40;
 export type Tile = Person | "random";
 type Stage = "pick" | "cpu" | "level" | "ready";
 
-const TILE = 36;
-const PITCH = 38;
+const TILE = 32;
+const PITCH = 34;
 const GRID_X = Math.round((VIEW_WIDTH - (GRID_COLS * PITCH - 2)) / 2);
 const GRID_Y = 58;
 
@@ -351,7 +351,8 @@ export class SelectScene implements Scene {
 
   private drawLevel(ctx: CanvasRenderingContext2D, frame: number): void {
     const active = this.stage === "level";
-    const y = GRID_Y + 5 * PITCH + 8;
+    const rows = Math.max(5, Math.ceil(this.tiles.length / GRID_COLS));
+    const y = GRID_Y + rows * PITCH + 8;
     text(ctx, "CPU LEVEL", VIEW_WIDTH / 2, y, 8, active ? INK : DIM, "center");
     CPU_LEVELS.forEach((l, k) => {
       const on = k === this.levelIndex;

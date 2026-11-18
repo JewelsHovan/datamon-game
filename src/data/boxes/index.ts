@@ -6,6 +6,7 @@ import boxes_antonia_nistor from "./antonia-nistor.json";
 import boxes_aurelien_bouffanais from "./aurelien-bouffanais.json";
 import boxes_dana_domanko from "./dana-domanko.json";
 import boxes_duc_an_nguyen from "./duc-an-nguyen.json";
+import boxes_duru_aran from "./duru-aran.json";
 import boxes_elina_gu from "./elina-gu.json";
 import boxes_emile_moffatt from "./emile-moffatt.json";
 import boxes_ethan_pirso from "./ethan-pirso.json";
@@ -19,6 +20,7 @@ import boxes_jonah_lee from "./jonah-lee.json";
 import boxes_jonathan_kim from "./jonathan-kim.json";
 import boxes_julien_hovan from "./julien-hovan.json";
 import boxes_logan_labossiere from "./logan-labossiere.json";
+import boxes_martin_dawson from "./martin-dawson.json";
 import boxes_megane_darnaud from "./megane-darnaud.json";
 import boxes_milen_thomas from "./milen-thomas.json";
 import boxes_minh_ngoc_do from "./minh-ngoc-do.json";
@@ -35,6 +37,7 @@ import boxes_tyler_nagano from "./tyler-nagano.json";
 import boxes_veronica_marallag from "./veronica-marallag.json";
 import boxes_victor_desautels from "./victor-desautels.json";
 import boxes_vincent_anctil from "./vincent-anctil.json";
+import boxes_walid_aissa from "./walid-aissa.json";
 import boxes_wild_guevera from "./wild-guevera.json";
 import boxes_william_chan from "./william-chan.json";
 
@@ -45,6 +48,7 @@ export const BOXES: Readonly<Record<string, FighterBoxes>> = {
   "aurelien-bouffanais": boxes_aurelien_bouffanais as unknown as FighterBoxes,
   "dana-domanko": boxes_dana_domanko as unknown as FighterBoxes,
   "duc-an-nguyen": boxes_duc_an_nguyen as unknown as FighterBoxes,
+  "duru-aran": boxes_duru_aran as unknown as FighterBoxes,
   "elina-gu": boxes_elina_gu as unknown as FighterBoxes,
   "emile-moffatt": boxes_emile_moffatt as unknown as FighterBoxes,
   "ethan-pirso": boxes_ethan_pirso as unknown as FighterBoxes,
@@ -58,6 +62,7 @@ export const BOXES: Readonly<Record<string, FighterBoxes>> = {
   "jonathan-kim": boxes_jonathan_kim as unknown as FighterBoxes,
   "julien-hovan": boxes_julien_hovan as unknown as FighterBoxes,
   "logan-labossiere": boxes_logan_labossiere as unknown as FighterBoxes,
+  "martin-dawson": boxes_martin_dawson as unknown as FighterBoxes,
   "megane-darnaud": boxes_megane_darnaud as unknown as FighterBoxes,
   "milen-thomas": boxes_milen_thomas as unknown as FighterBoxes,
   "minh-ngoc-do": boxes_minh_ngoc_do as unknown as FighterBoxes,
@@ -74,6 +79,7 @@ export const BOXES: Readonly<Record<string, FighterBoxes>> = {
   "veronica-marallag": boxes_veronica_marallag as unknown as FighterBoxes,
   "victor-desautels": boxes_victor_desautels as unknown as FighterBoxes,
   "vincent-anctil": boxes_vincent_anctil as unknown as FighterBoxes,
+  "walid-aissa": boxes_walid_aissa as unknown as FighterBoxes,
   "wild-guevera": boxes_wild_guevera as unknown as FighterBoxes,
   "william-chan": boxes_william_chan as unknown as FighterBoxes,
 };

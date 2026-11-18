@@ -90,7 +90,13 @@ export type MoveId =
   | "wild_fang"
   | "apex_pounce"
   | "jade_palm"
-  | "cloud_rising";
+  | "cloud_rising"
+  | "quant_counter"
+  | "alpha_pulse"
+  | "pipeline_crush"
+  | "schema_lock"
+  | "vector_lance"
+  | "tensor_arc";
 
 export type ProjectileKind = "orb" | "fast_packet" | "slow_mine" | "shockwave" | "arc_burst";
 
@@ -1129,6 +1135,98 @@ export const MOVES: Readonly<Record<MoveId, MoveDef>> = Object.freeze({
       { frame: 7, ticks: 6 }, { frame: 8, ticks: 8 },
     ],
     damage: 98, hitstun: 23, blockstun: 14, hitstop: 11, push: 1150, chip: 12,
+  },
+
+  quant_counter: {
+    // Duru S: predictive model-validation parry into lunging palm-blade strike
+    id: "quant_counter", clip: "special", height: "mid", strength: "special", knockdown: true, launch: 700,
+    segments: [
+      { frame: 0, ticks: 3 },
+      { frame: 1, ticks: 6, counter: true },
+      { frame: 2, ticks: 8, counter: true },
+      { frame: 3, ticks: 8 },
+      { frame: 4, ticks: 3, invuln: true, vx: 500 },
+      { frame: 5, ticks: 4, active: true, invuln: true, vx: 360, reach: [24, -122, 60, 42] },
+      { frame: 6, ticks: 5, active: true, reach: [24, -120, 62, 40] },
+      { frame: 7, ticks: 8 },
+    ],
+    counterJumpTick: 25,
+    damage: 118, hitstun: 24, blockstun: 14, hitstop: 12, push: 1380, chip: 10,
+  },
+  alpha_pulse: {
+    // Duru F+S: crisp high-velocity algorithmic signal bolt
+    id: "alpha_pulse", clip: "summon", height: "mid", strength: "special",
+    segments: [
+      { frame: 0, ticks: 4 },
+      { frame: 1, ticks: 4 },
+      { frame: 2, ticks: 5 },
+      { frame: 3, ticks: 11 },
+    ],
+    projectileTick: 11,
+    projectileSpec: { kind: "fast_packet", speed: 910, spawnX: 6600, spawnY: -9400, halfW: 1750, halfH: 1100, ttl: 145 },
+    damage: 76, hitstun: 19, blockstun: 14, hitstop: 8, push: 1450, chip: 13,
+  },
+
+  pipeline_crush: {
+    // Martin S: armored shoulder-coil into heavy straight cross-punch smash
+    id: "pipeline_crush", clip: "special", height: "mid", strength: "special", knockdown: true, launch: 580,
+    segments: [
+      { frame: 0, ticks: 4 },
+      { frame: 1, ticks: 4, armor: true },
+      { frame: 2, ticks: 4, armor: true, vx: 220 },
+      { frame: 3, ticks: 3, vx: 480 },
+      { frame: 4, ticks: 3, active: true, vx: 380, reach: [22, -122, 56, 44] },
+      { frame: 5, ticks: 7, active: true, reach: [26, -122, 64, 46] },
+      { frame: 6, ticks: 7 },
+      { frame: 7, ticks: 7 },
+    ],
+    damage: 114, hitstun: 25, blockstun: 17, hitstop: 12, push: 1650, chip: 15,
+  },
+  schema_lock: {
+    // Martin F+S: advancing Bruiser command grab
+    id: "schema_lock", clip: "throw", height: "mid", strength: "special", knockdown: true, launch: 650,
+    segments: [
+      { frame: 0, ticks: 4, vx: 440 },
+      { frame: 1, ticks: 5, vx: 380 }, // commandGrabTick at 8
+      { frame: 2, ticks: 4 },
+      { frame: 3, ticks: 4 },
+      { frame: 4, ticks: 3 }, // tossTick at 18
+      { frame: 5, ticks: 7 },
+      { frame: 6, ticks: 8 },
+    ],
+    commandGrabTick: 8, grabRange: 9200, tossTick: 18, whiffRecovery: 17,
+    damage: 136, hitstun: 0, blockstun: 0, hitstop: 12, push: 0,
+  },
+
+  vector_lance: {
+    // Walid S: crisp long-range data lance projectile
+    id: "vector_lance", clip: "special", height: "mid", strength: "special",
+    segments: [
+      { frame: 0, ticks: 3 },
+      { frame: 1, ticks: 4 },
+      { frame: 2, ticks: 4 },
+      { frame: 3, ticks: 3 },
+      { frame: 4, ticks: 3 },
+      { frame: 5, ticks: 8 },
+      { frame: 6, ticks: 6 },
+      { frame: 7, ticks: 6 },
+    ],
+    projectileTick: 15,
+    projectileSpec: { kind: "fast_packet", speed: 930, spawnX: 6800, spawnY: -9400, halfW: 1800, halfH: 1100, ttl: 150 },
+    damage: 78, hitstun: 20, blockstun: 15, hitstop: 8, push: 1500, chip: 14,
+  },
+  tensor_arc: {
+    // Walid F+S: diagonal anti-air arc burst locking jump-in angles
+    id: "tensor_arc", clip: "summon", height: "mid", strength: "special", knockdown: true, launch: 560,
+    segments: [
+      { frame: 0, ticks: 4 },
+      { frame: 1, ticks: 5 },
+      { frame: 2, ticks: 5 },
+      { frame: 3, ticks: 12 },
+    ],
+    projectileTick: 10,
+    projectileSpec: { kind: "arc_burst", speed: 560, vy: -320, spawnX: 5400, spawnY: -9800, halfW: 1650, halfH: 1650, ttl: 95 },
+    damage: 86, hitstun: 22, blockstun: 15, hitstop: 9, push: 1250, chip: 12,
   },
 });
 

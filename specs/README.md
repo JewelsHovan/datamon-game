@@ -23,3 +23,4 @@ Files are `NNN-short-slug.md`. The skills keep this index in sync.
 | 015 | [Touch controls and phone layout](015-touch-and-phones.md) | review |
 | 016 | [Roster expansion (12 fighters) and full unique kits](016-character-expansion.md) | review |
 | 017 | [Complete 37-fighter roster (74 specials, dynamic walkers, full unique kits)](017-full-roster.md) | review |
+| 018 | [Cardinal Shield, Perfect Guard & Combat Depth (40-Fighter Complete Edition)](018-shield-and-combat-depth.md) | review |

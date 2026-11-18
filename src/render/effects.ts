@@ -64,6 +64,7 @@ const CHARGE_STREAK_MOVES = new Set<MoveId>([
   "dragon_merge",
   "jade_palm",
   "lotus_strike",
+  "pipeline_crush",
 ]);
 const RUSH_STREAK_MOVES = new Set<MoveId>([
   "rush",
@@ -86,6 +87,7 @@ const RUSH_STREAK_MOVES = new Set<MoveId>([
   "blink_edge",
   "gale_kick",
   "wild_fang",
+  "quant_counter",
 ]);
 const UPPERCUT_MOVES = new Set<MoveId>([
   "rising_commit",
@@ -102,7 +104,7 @@ const UPPERCUT_MOVES = new Set<MoveId>([
 ]);
 const SLAM_MOVES = new Set<MoveId>(["seismic_slam", "ground_fault", "tectonic_stomp", "oasis_wave", "frost_fault"]);
 const SLIDE_DUST_MOVES = new Set<MoveId>(["golden_rush", "jet_sweep", "lightning_slide"]);
-const COMMAND_GRAB_MOVES = new Set<MoveId>(["force_push", "titan_press", "vault_throw", "blue_shift_grab", "apex_pounce"]);
+const COMMAND_GRAB_MOVES = new Set<MoveId>(["force_push", "titan_press", "vault_throw", "blue_shift_grab", "apex_pounce", "schema_lock"]);
 
 export class EffectsLayer {
   private live: Live[] = [];
@@ -221,6 +223,24 @@ export class EffectsLayer {
           this.shake(1);
           break;
         }
+        case "perfect_block": {
+          const facing = state.fighters[e.player].facing;
+          this.spawn("block", e.x, e.y, facing, true, 1.25);
+          this.spawn("orb_burst", e.x, e.y, facing, true, 0.85);
+          this.shake(SHAKE.light);
+          if (!this.reduced) this.flash[e.player] = 3;
+          break;
+        }
+        case "guard_break": {
+          const facing = state.fighters[e.player].facing;
+          this.spawn("hit_heavy", e.x, e.y, facing, true, 1.3);
+          this.spawn("orb_burst", e.x, e.y, (-facing) as 1 | -1, true, 1.15);
+          this.shake(SHAKE.heavy);
+          if (!this.reduced) this.flash[e.player] = 4;
+          break;
+        }
+        case "callout":
+          break;
         case "roll":
           this.spawn("dust", state.fighters[e.player].x, MOVEMENT.floorY, 1, false, 0.6);
           break;

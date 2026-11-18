@@ -60,11 +60,11 @@ function frames(n: number, p1 = 0, p2 = 0): InputPair[] {
   return Array.from({ length: n }, () => [p1, p2] as InputPair);
 }
 
-describe("directional 2nd specials across all 37 fighters", () => {
+describe("directional 2nd specials across all 40 fighters", () => {
   const slugs = Object.keys(FIGHTERS);
 
-  it("has all 37 fighters registered", () => {
-    expect(slugs).toHaveLength(37);
+  it("has all 40 fighters registered", () => {
+    expect(slugs).toHaveLength(40);
   });
 
   for (const slug of slugs) {
@@ -428,6 +428,8 @@ describe("determinism across pairings of all 8 new fighters", () => {
     ["guillaume-pregent", "jonathan-kim"],
     ["logan-labossiere", "oyku-cildir"],
     ["wild-guevera", "william-chan"],
+    ["duru-aran", "julien-hovan"],
+    ["martin-dawson", "walid-aissa"],
   ] as const;
 
   for (const [p1, p2] of pairings) {
@@ -459,5 +461,15 @@ describe("determinism across pairings of all 8 new fighters", () => {
     const rail = run(mine.state, [[S, 0], ...frames(20)]);
     expect(rail.state.projectiles.some((p) => p.kind === "slow_mine")).toBe(true);
     expect(rail.state.projectiles.some((p) => p.kind === "fast_packet")).toBe(true);
+  });
+
+  it("Duru Aran kit: quant_counter parry reversal and alpha_pulse fast_packet signal", () => {
+    const parry = run(duel("duru-aran", "julien-hovan", 52), [[S, 0], ...frames(4), [0, P], ...frames(30)]);
+    expect(parry.events.some((e) => e.type === "counter" && e.player === 0)).toBe(true);
+    expect(parry.events.some((e) => e.type === "hit" && e.player === 0 && e.move === "quant_counter")).toBe(true);
+
+    const pulse = run(duel("duru-aran", "julien-hovan", 220), [[R | S, 0], ...frames(16)]);
+    expect(pulse.state.projectiles).toHaveLength(1);
+    expect(pulse.state.projectiles[0]?.kind).toBe("fast_packet");
   });
 });

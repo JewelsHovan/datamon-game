@@ -45,7 +45,7 @@ def art(slug: str) -> dict:
 
 
 def test_every_fighter_has_an_alternate_atlas():
-    assert len(FIGHTERS) == 37
+    assert len(FIGHTERS) == 40
     for slug in FIGHTERS:
         assert (common.fighter_dir(slug) / palette_alt.CONFIG).exists(), slug
 

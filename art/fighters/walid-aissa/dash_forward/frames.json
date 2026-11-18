@@ -1,0 +1,48 @@
+{
+ "clip": "dash_forward",
+ "loop": false,
+ "scale": 0.1788,
+ "raw": "art/raw/walid-aissa/dash_forward/20261117-194457-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 106,
+   "h": 130,
+   "ax": 22,
+   "ay": 129,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 94,
+   "h": 126,
+   "ax": 11,
+   "ay": 125,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 90,
+   "h": 127,
+   "ax": 9,
+   "ay": 126,
+   "hold": 4
+  },
+  {
+   "file": "03.png",
+   "w": 90,
+   "h": 129,
+   "ax": 11,
+   "ay": 128,
+   "hold": 3
+  },
+  {
+   "file": "04.png",
+   "w": 84,
+   "h": 140,
+   "ax": 0,
+   "ay": 139,
+   "hold": 3
+  }
+ ]
+}

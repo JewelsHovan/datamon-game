@@ -1,0 +1,40 @@
+{
+ "clip": "air_hurt",
+ "loop": false,
+ "scale": 0.19802,
+ "raw": "art/raw/duru-aran/air_hurt/20261117-190922-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 130,
+   "h": 124,
+   "ax": 16,
+   "ay": 123,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 146,
+   "h": 71,
+   "ax": 25,
+   "ay": 70,
+   "hold": 8
+  },
+  {
+   "file": "02.png",
+   "w": 96,
+   "h": 129,
+   "ax": 3,
+   "ay": 128,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 148,
+   "h": 36,
+   "ax": 29,
+   "ay": 35,
+   "hold": 8
+  }
+ ]
+}

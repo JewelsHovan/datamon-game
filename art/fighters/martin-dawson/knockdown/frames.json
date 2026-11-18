@@ -1,0 +1,72 @@
+{
+ "clip": "knockdown",
+ "loop": false,
+ "scale": 0.2418,
+ "raw": "art/raw/martin-dawson/knockdown/20261117-194431-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 117,
+   "h": 134,
+   "ax": 14,
+   "ay": 133,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 129,
+   "h": 86,
+   "ax": 20,
+   "ay": 85,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 109,
+   "h": 75,
+   "ax": 14,
+   "ay": 74,
+   "hold": 6
+  },
+  {
+   "file": "03.png",
+   "w": 104,
+   "h": 70,
+   "ax": 10,
+   "ay": 69,
+   "hold": 4
+  },
+  {
+   "file": "04.png",
+   "w": 125,
+   "h": 37,
+   "ax": 20,
+   "ay": 36,
+   "hold": 26
+  },
+  {
+   "file": "05.png",
+   "w": 87,
+   "h": 67,
+   "ax": 5,
+   "ay": 66,
+   "hold": 8
+  },
+  {
+   "file": "06.png",
+   "w": 77,
+   "h": 86,
+   "ax": 0,
+   "ay": 85,
+   "hold": 8
+  },
+  {
+   "file": "07.png",
+   "w": 84,
+   "h": 140,
+   "ax": 1,
+   "ay": 139,
+   "hold": 8
+  }
+ ]
+}

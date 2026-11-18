@@ -179,7 +179,7 @@ Spike evidence: raw images in `.claude-images/2026-11-12/`, the cut-and-anchor p
 | Zoner | Keeps distance, weak up close | Fast projectile, slow projectile, trap |
 | Trickster | Mobility and mix-ups | Teleport, feint, crossup dive |
 
-Specs 016 and 017 assigned all 37 people (8 all-rounders, 8 rushers, 7 bruisers, 7 zoners, 7 tricksters, in `src/data/fighters.ts`); whether to keep that assignment is open on the HQ page.
+Specs 016, 017, and 018 assigned all 40 people (8 all-rounders, 8 rushers, 8 bruisers, 8 zoners, 8 tricksters, in `src/data/fighters.ts`); whether to keep that assignment is open on the HQ page.
 
 ## Battlemon domains (super behavior)
 
@@ -215,3 +215,4 @@ Each line is one spec, roughly one session. `./dm specs` has each spec's status.
 13. **Load speed and memory** (`specs/013-load-speed-and-memory.md`): lossless WebP art, small walker sprites, cache headers and speed budgets on a production build.
 14. **App shell and accessibility** (`specs/014-app-shell-and-accessibility.md`): icons, installable app, share card, fullscreen, a failure screen and screen reader announcements.
 15. **Touch controls and phones** (`specs/015-touch-and-phones.md`): on-screen controls for P1, a phone landscape layout and a rotate screen.
+16. **Cardinal Shield and 40-fighter complete edition** (`specs/018-shield-and-combat-depth.md`): Duru Aran, Martin Dawson, and Walid Aissa (40 fighters, 8/8/8/8/8 archetypes, 80 specials, 9-column select grid), plus Cardinal Shield (`guard` gauge, Pushblock cost, `guard_break` stagger), 3-frame Perfect Shield, Air Shield, 8-frame Throw Escape, 3-way wakeup (Back/Forward Roll + Quick Rise), and Counter/Punish hitstun & callouts.

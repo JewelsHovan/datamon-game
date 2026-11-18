@@ -56,7 +56,10 @@ const fakeFighter = (slug: string): FighterState => ({
   wallBounced: false,
   slideDir: 0,
   rollFrom: -1,
+  rollDir: 0,
   tumble: false,
+  guard: 1000,
+  guardCooldown: 0,
 });
 
 const fakeState = (p0Slug: string, p1Slug = "julien-hovan"): SimState => ({

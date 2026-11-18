@@ -1,0 +1,40 @@
+{
+ "clip": "hurt",
+ "loop": false,
+ "scale": 0.16588,
+ "raw": "art/raw/martin-dawson/hurt/20261117-194357-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 108,
+   "h": 133,
+   "ax": 16,
+   "ay": 132,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 99,
+   "h": 137,
+   "ax": 16,
+   "ay": 136,
+   "hold": 6
+  },
+  {
+   "file": "02.png",
+   "w": 87,
+   "h": 119,
+   "ax": 0,
+   "ay": 118,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 83,
+   "h": 138,
+   "ax": 0,
+   "ay": 137,
+   "hold": 6
+  }
+ ]
+}

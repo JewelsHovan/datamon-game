@@ -1,0 +1,24 @@
+{
+ "clip": "block",
+ "loop": false,
+ "scale": 0.15217,
+ "raw": "art/raw/walid-aissa/block/20261117-194539-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 89,
+   "h": 138,
+   "ax": 0,
+   "ay": 137,
+   "hold": 6
+  },
+  {
+   "file": "01.png",
+   "w": 75,
+   "h": 91,
+   "ax": 3,
+   "ay": 90,
+   "hold": 6
+  }
+ ]
+}

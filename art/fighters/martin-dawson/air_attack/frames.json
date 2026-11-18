@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.17588,
+ "raw": "art/raw/martin-dawson/air_attack/20261117-194355-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 59,
+   "h": 104,
+   "ax": -12,
+   "ay": 103,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 64,
+   "h": 128,
+   "ax": -14,
+   "ay": 127,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 125,
+   "h": 108,
+   "ax": 8,
+   "ay": 107,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 121,
+   "h": 107,
+   "ax": 3,
+   "ay": 106,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 59,
+   "h": 102,
+   "ax": -13,
+   "ay": 101,
+   "hold": 6
+  }
+ ]
+}

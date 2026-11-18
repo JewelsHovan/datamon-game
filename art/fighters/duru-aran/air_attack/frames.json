@@ -1,0 +1,48 @@
+{
+ "clip": "air_attack",
+ "loop": false,
+ "scale": 0.18919,
+ "raw": "art/raw/duru-aran/air_attack/20261117-190859-0.png",
+ "frames": [
+  {
+   "file": "00.png",
+   "w": 63,
+   "h": 103,
+   "ax": -7,
+   "ay": 102,
+   "hold": 3
+  },
+  {
+   "file": "01.png",
+   "w": 77,
+   "h": 130,
+   "ax": 0,
+   "ay": 129,
+   "hold": 3
+  },
+  {
+   "file": "02.png",
+   "w": 129,
+   "h": 110,
+   "ax": 9,
+   "ay": 109,
+   "hold": 8
+  },
+  {
+   "file": "03.png",
+   "w": 132,
+   "h": 99,
+   "ax": 9,
+   "ay": 98,
+   "hold": 6
+  },
+  {
+   "file": "04.png",
+   "w": 65,
+   "h": 109,
+   "ax": -5,
+   "ay": 108,
+   "hold": 6
+  }
+ ]
+}

@@ -210,7 +210,10 @@ describe("audio facade: events to voices (A1)", () => {
       wallBounced: false,
       slideDir: 0,
       rollFrom: -1,
+      rollDir: 0,
       tumble: false,
+      guard: 1000,
+      guardCooldown: 0,
     });
     const state: SimState = {
       frame: 0,

@@ -2,7 +2,7 @@
 // portraits and names, round pips, the timer, the announcer and combo text,
 // and each player's key legend under their bar (spec 005, R7).
 // Drawn at the 640x360 internal resolution in the Press Start 2P pixel font.
-import { COMBAT, ROUND } from "../data/combat";
+import { COMBAT, ROUND, SHIELD } from "../data/combat";
 import type { Person } from "../data/catalog";
 import { keyLabel, type KeyBindings } from "../input/keymap";
 import type { SimEvent, SimState } from "../sim/types";
@@ -51,6 +51,23 @@ export class Hud {
         this.popups.push({ text: "MERGE CONFLICT!", color: "#ff6170", x: VIEW_WIDTH / 2, y: 120, age: 0, life: 55, size: 16 });
       } else if (e.type === "tech") {
         this.popups.push({ text: "TECH", color: "#7fd6ff", x: VIEW_WIDTH / 2, y: 120, age: 0, life: 40, size: 16 });
+      } else if (e.type === "perfect_block") {
+        const px = e.player === 0 ? 130 : VIEW_WIDTH - 130;
+        this.popups.push({ text: "PERFECT SHIELD", color: "#4ef2ff", x: px, y: 84, age: 0, life: 44, size: 8 });
+      } else if (e.type === "guard_break") {
+        this.popups.push({ text: "SHIELD BREAK!", color: "#ff4d6d", x: VIEW_WIDTH / 2, y: 108, age: 0, life: 56, size: 16 });
+      } else if (e.type === "callout") {
+        const px = e.player === 0 ? 116 : VIEW_WIDTH - 116;
+        const isCounter = e.kind === "counter";
+        this.popups.push({
+          text: isCounter ? "COUNTER!" : "PUNISH!",
+          color: isCounter ? "#ffc94a" : "#ff8c42",
+          x: px,
+          y: 96,
+          age: 0,
+          life: 38,
+          size: 8,
+        });
       } else if (e.type === "round_start") {
         this.trail = [-1, -1];
       }
@@ -146,6 +163,18 @@ export class Hud {
         ctx.fillRect(cx - 4, BAR_Y + BAR_H + 6, 8, 8);
       }
     }
+    // Cardinal Shield integrity bar (spec 018): sleek 3px gauge anchored toward center.
+    const guardMaxW = 140;
+    const guardY = BAR_Y + BAR_H + 17;
+    const gx0 = left ? x0 + BAR_W - guardMaxW : x0;
+    ctx.fillStyle = "#0d0c22";
+    ctx.fillRect(gx0 - 1, guardY - 1, guardMaxW + 2, 5);
+    ctx.fillStyle = "#19183e";
+    ctx.fillRect(gx0, guardY, guardMaxW, 3);
+    const guardW = Math.round((guardMaxW * Math.max(0, f.guard)) / SHIELD.maxGuard);
+    const gxFill = left ? x0 + BAR_W - guardW : x0;
+    ctx.fillStyle = f.state === "guard_break" ? "#ff4d6d" : f.guard < SHIELD.maxGuard * 0.35 ? "#ffab4c" : "#4ef2ff";
+    if (guardW > 0) ctx.fillRect(gxFill, guardY, guardW, 3);
   }
 
   private drawLegend(ctx: CanvasRenderingContext2D, i: 0 | 1): void {
@@ -154,7 +183,7 @@ export class Hud {
     const left = i === 0;
     const width = Math.max(...lines.map((l) => l.length)) * 8 + 10;
     const x = left ? MARGIN + 34 : VIEW_WIDTH - MARGIN - 34;
-    const y = BAR_Y + BAR_H + 22;
+    const y = BAR_Y + BAR_H + 26;
     ctx.fillStyle = "rgba(13, 12, 34, 0.72)";
     ctx.fillRect(left ? x - 5 : x - width + 5, y - 4, width, lines.length * 12 + 6);
     ctx.fillStyle = left ? "#4aa8ff" : "#ff5a5a";
