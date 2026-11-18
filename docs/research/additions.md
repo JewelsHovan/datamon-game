@@ -1,6 +1,6 @@
 # Proposed additions
 
-Updated: 2026-11-12.
+Updated: 2026-11-17.
 
 - Ranked by score: 2 x Impact + Fit + Ease, max 20.
 - Statuses: proposed, covered (the design or a spec now has it), parked. Adopted and rejected are set by the user.
@@ -12,18 +12,20 @@ Seeded from `foundations.md` checked against `docs/game-design.md` on 2026-11-12
 
 | Rank | ID | Addition | Roadmap step | Score | Evidence | Status |
 |---|---|---|---|---|---|---|
-| 1 | A-002 | Explicit input buffer and direction+button leniency windows | 1 Engine core, 3 Combat core | 18 | primary (principle); numbers secondary, unverified | proposed |
-| 2 | A-003 | Hitstop table by hit strength, with a cap | 3 Combat core | 18 | primary (principle); numbers secondary, unverified | proposed |
-| 3 | A-004 | Throw escape: any attack button, short window | 3 Combat core | 17 | primary | proposed |
-| 4 | A-017 | Hitstop shake on the hit fighter | 4 Effects and feel | 17 | primary | proposed |
-| 5 | A-012 | Latch presses between input samples | 1 Engine core | 16 | primary | proposed |
-| 6 | A-005 | Engine-level combo and unblockable guards, battlemons included | 3 Combat core, 7 Battlemon supers | 16 | primary | proposed |
-| 7 | A-006 | Basic hit and block sounds in the effects step, not the audio step | 4 Effects and feel | 16 | primary | proposed |
-| 8 | A-007 | Training mode: frame meter, input display, dummy record and playback | new step after 5 | 16 | primary | proposed |
-| 9 | A-013 | Vsync-aware accumulator: snap to the display interval, carry the remainder | 1 Engine core | 15 | primary | proposed |
-| 10 | A-015 | Battlemon screen-time budget for legibility | 7 Battlemon supers | 15 | primary | proposed |
+| 1 | A-004 | Throw escape: any attack button, short window | 3 Combat core | 17 | primary | proposed |
+| 2 | A-017 | Hitstop shake on the hit fighter | 4 Effects and feel | 17 | primary | proposed |
+| 3 | A-005 | Unblockable guard (post-block grace) and loop escape, battlemons included | 3 Combat core, 7 Battlemon supers | 17 | primary | proposed |
+| 4 | A-018 | Meter builds from forward play and from taking damage, resets each round | 7 Battlemon supers | 17 | primary | proposed |
+| 5 | A-002 | Per-action buffer windows and a direction lock | 3 Combat core | 16 | primary (principle); numbers secondary, unverified | proposed |
+| 6 | A-007 | Training tools: frame meter, input display, dummy record and playback | new step after 5 | 16 | primary | proposed |
+| 7 | A-019 | Hittable battlemon: hitting it ends the summon early | 7 Battlemon supers | 16 | primary | proposed |
+| 8 | A-008 | PUNISH and COUNTER callouts, plus combo damage | 5 Match flow and UI | 15 | primary | proposed |
+| 9 | A-021 | Results screen: kind, specific stats and "hit most by" with an answer | 5 Match flow and UI | 15 | primary | proposed |
+| 10 | A-020 | "What happened?" replay with tips and a 10-second take-over | 5 Match flow and UI | 15 | primary | proposed |
 
-Below the Top 10: A-008 (15), A-009 (15), A-010 (14), A-014 (13), A-016 (13), A-011 (13). Covered: A-001.
+Below the Top 10: A-022 (15), A-013 (15), A-015 (15), A-009 (15), A-024 (15, unverified), A-010 (14), A-023 (13), A-014 (13), A-016 (13), A-011 (13). Covered: A-001, A-003 (spec 003), A-006 (spec 010), A-012 (specs 001, 015).
+
+Ties are broken by primary evidence, then by serving the next build target (step 5, so A-008, A-021 and A-020 lead the 15s), then by the previous rank. A-021 is ranked above A-020 because it's easier. A-022 (new 2026-11-16) also serves step 5 but needs A-021's answer table first, so it sits just below A-020. A-024 (new 2026-11-17) is last of the 15s because its input rule rests on a bot-blocked wiki. A-023 (new 2026-11-17) leads the 13s on primary evidence and serves step 7, which has nothing built yet.
 
 ## All additions
 
@@ -35,69 +37,74 @@ Below the Top 10: A-008 (15), A-009 (15), A-010 (14), A-014 (13), A-016 (13), A-
 - Score: Impact 5, Fit 5, Ease 3 = 18 (frozen at covering).
 - History: 2026-11-12: seeded. 2026-11-12: verification failed. Kotaku (https://kotaku.com/breaking-down-the-animation-of-guilty-gear-and-dragonba-1836849279, read in full) confirms ArcSys "emulates the 'limited animation' of anime" but not the clarity rationale; the Motomura handout refused the connection. 2026-11-12 (Run 2): covered by the round 2 design (image-generated clips with anticipation and recovery poses, plus step 4 smears and flashes).
 
-### A-002: Explicit input buffer and direction+button leniency windows
-- Status: proposed. First proposed 2026-11-12. Last updated 2026-11-12.
+### A-002: Per-action buffer windows and a direction lock
+- Status: proposed. First proposed 2026-11-12. Last updated 2026-11-13.
+- Built already: spec 003 R1 buffers presses for 4 frames. What's left is below: windows per action instead of one global value, and the direction lock.
 - What: name the windows in one data table, one row per action. A button pressed up to 4 frames before a move becomes possible still comes out (5-frame window). Dashes and wakeup reversals get 7 frames. A special comes out if its direction was held at any point in the last N frames before the button, so simple inputs stay forgiving. Once a direction+button move is recognized, the direction is locked: changing it during the move's first frames does not swap the move.
 - Why: SF6 buffers any move 4 frames early, with 7 frames for dashes and wakeup reversals [secondary] (https://srk.shib.live/w/Street_Fighter_6/Game_Data; the page is bot-blocked, so these figures come from search snippets). Arc System Works' Nov 2 2026 Marvel Tokon patch "Extended the input buffer window for dash when using directional inputs", added a buffer to Aerial Dash for "responsiveness of the controls", and stopped a late direction from changing which assist appears [primary] (https://finalweapon.net/2026/11/02/marvel-tokon-fighting-souls-shares-november-2-update-patch-notes/). So per-action buffer windows are a tuning knob, worth keeping as data. The design keeps a 30-frame input history "for press detection and input buffering" but sets no windows.
 - Fits: steps 1 and 3. Lives in the sim's input history; deterministic. Spec 001 R4 builds the history but sets no windows.
-- Score: Impact 4, Fit 5, Ease 5 = 18.
-- History: 2026-11-12: seeded. 2026-11-12: added Tokon patch evidence [primary] and the direction lock; SF6 numbers still unverified (wiki bot-blocked); ranked #1 on the primary-evidence tie-break. 2026-11-12 (Run 2): roadmap step renumbered (Combat core is now 3); stays #1 (tie with A-003, serves the next build target).
+- Score: Impact 3, Fit 5, Ease 5 = 16.
+- History: 2026-11-12: seeded. 2026-11-12: added Tokon patch evidence [primary] and the direction lock; SF6 numbers still unverified (wiki bot-blocked); ranked #1 on the primary-evidence tie-break. 2026-11-12 (Run 2): roadmap step renumbered (Combat core is now 3); stays #1 (tie with A-003, serves the next build target). 2026-11-13: narrowed because spec 003 R1 already buffers presses for 4 frames; Impact 4 to 3, rescored 18 to 16.
 
 ### A-003: Hitstop table by hit strength, with a cap
-- Status: proposed. First proposed 2026-11-12. Last updated 2026-11-12.
+- Status: covered. First proposed 2026-11-12. Last updated 2026-11-13.
 - What: hitstop frames per hit class in one table (light, heavy, special, super, K.O.), plus per-move modifiers and a global maximum no move can exceed. Both fighters freeze for the same number of frames. Starting values of 8/12/16 for light/medium/heavy are only an example to tune from by feel. Multi-hit moves use shorter hitstop per hit.
 - Why: Sakurai sets hitstop from damage plus per-attack modifiers (more for electric hits, less for projectiles), caps "the maximum amount of time characters can be in freeze frames", and freezes both fighters "for the exact same amount of time" [primary, fan translation] (https://sourcegaming.info/2015/11/11/thoughts-on-hitstop-sakurais-famitsu-column-vol-490-1/). Capcom's SF Seminar column gives 8/12/16 as a hypothetical example for one game, not SFV's values, and a later column says longer hitstop makes heavies easier to cancel [secondary: search summaries; both pages return 503] (https://game.capcom.com/cfn/sfv/column/131545?lang=en, https://game.capcom.com/cfn/sfv/column/132455?lang=en).
 - Fits: step 3 (sim freezes fighters) and step 4 (effects keep running on render time), as the design already specifies.
-- Score: Impact 4, Fit 5, Ease 5 = 18.
-- History: 2026-11-12: seeded. 2026-11-12: verification failed: the Capcom column returned 503 and Dustloop's GGACR attack-attributes table returned 403. 2026-11-12 (Run 2): principle verified against Sakurai's column [primary]; added the cap and equal freeze; 8/12/16 relabeled as Capcom's hypothetical example; numbers still unverified.
+- Score: Impact 4, Fit 5, Ease 5 = 18 (frozen at covering).
+- History: 2026-11-12: seeded. 2026-11-12: verification failed: the Capcom column returned 503 and Dustloop's GGACR attack-attributes table returned 403. 2026-11-12 (Run 2): principle verified against Sakurai's column [primary]; added the cap and equal freeze; 8/12/16 relabeled as Capcom's hypothetical example; numbers still unverified. 2026-11-13: covered by spec 003 R4, which sets hit-stop per class in frame data (light 6, heavy 10, special 12) on both fighters. Only the global cap isn't covered, and it's small enough to raise in review.
 
 ### A-004: Throw escape: any attack button, short window
-- Status: proposed. First proposed 2026-11-12. Last updated 2026-11-12.
+- Status: proposed. First proposed 2026-11-12. Last updated 2026-11-14.
+- Built already: two normal throws on the same frame tech (a "TECH" popup), and command grabs can't be teched (`src/sim/combat.ts:580`). The CPU techs by throwing back. There's no window to escape after being grabbed, so a tech only happens on an exact same-frame clash.
 - What: being grabbed opens a short escape window (start near 9 frames, as data). Pressing any attack button in it breaks the throw with no damage and pushes the fighters apart, so the strike, throw and block triangle stays fair. A strike and a throw that connect on the same frame: the strike wins. Command grabs (Rusher) cannot be escaped, as the counterweight to their risk.
 - Why: Granblue Fantasy Versus: Rising, a game built for simple inputs, lets throw breaks use any attack button, and tuned its break window down after beta feedback ("We had a lot of feedback regarding throws") [primary] (https://gematsu.com/2023/10/granblue-fantasy-versus-rising-details-major-adjustments-to-mechanics-in-response-to-first-open-beta-test). SF6's window lasts until the 9th frame of being thrown, strike beats throw on the same frame, and command grabs can't be teched [secondary] (https://srk.shib.live/w/Street_Fighter_6/Defense, snippet). Infil: SF6's tech "sends you almost full screen, so your pressure is over" [primary] (https://words.infil.net/w03-sf6beta-p4.html). Layered rock-paper-scissors needs every option to have a counter (Sirlin, https://sirlin.net/articles/designing-yomi [primary]).
 - Fits: step 3 (the design has a throw clip, no escape). The control table has no throw button, so the throw input itself is a spec decision; "any attack button" breaks keep the escape simple whatever the throw input is.
 - Score: Impact 4, Fit 5, Ease 4 = 17.
-- History: 2026-11-12: seeded. 2026-11-12 (Run 2): GBVS Rising evidence [primary] and SF6 window [secondary] added; any-button break, strike-beats-throw and command-grab exception added; verified against Gematsu.
+- History: 2026-11-12: seeded. 2026-11-12 (Run 2): GBVS Rising evidence [primary] and SF6 window [secondary] added; any-button break, strike-beats-throw and command-grab exception added; verified against Gematsu. 2026-11-14: narrowed. The same-frame tech and the command-grab exception are built; the escape window is what's left. No rescore.
 
-### A-005: Engine-level combo and unblockable guards, battlemons included
-- Status: proposed. First proposed 2026-11-12. Last updated 2026-11-12.
-- What: system rules instead of per-move fixes. Hitstun and damage scale down as a combo grows, the engine detects a looping combo and lets the defender escape, and a fighter can never be hit high and low on the same frame by a fighter plus their battlemon.
-- Why: Skullgirls detects infinites by combo content and removed high/low unblockables engine-wide, which made custom assists safe. "I don't know which unblockables you can find, but I know they're not going to work." (Mike Zaimont) [primary] (https://gamedeveloper.com/design/interview-an-upstart-fighting-game-developer-s-radical-re-think). Battlemon summons are assists, so they inherit this risk.
-- Fits: step 3 for scaling and loop detection, step 7 for the summon rule.
-- Score: Impact 4, Fit 5, Ease 3 = 16.
-- History: 2026-11-12: seeded. 2026-11-12 (Run 2): roadmap steps renumbered.
+### A-005: Unblockable guard (post-block grace) and loop escape, battlemons included
+- Status: proposed. First proposed 2026-11-12. Last updated 2026-11-13.
+- Built already: damage scales down per combo hit (`COMBAT.comboScalePerHit` and a per-fighter floor in `src/sim/combat.ts`), air hits allow 2 juggle hits, and there's one wall bounce per combo (spec 012).
+- What: after a fighter blocks a hit, a short grace period (a few frames, as data) lets them block the other hit level too. A fighter plus their battlemon can't create a high/low unblockable, and the battlemon summon can't either. A looping-combo detector (the same move sequence repeating) lets the defender break out with any button.
+- Why: Skullgirls "has a short grace period after blocking that will guard against other hit types", and "by eliminating the possibility of high/low unblockables, we've been able to allow custom assists"; a looping combo can be broken "by hitting any button" [primary] (https://blog.playstation.com/2011/10/27/skullgirls-dev-diary-skullgirls-perfected-pugilism/, Peter Bartholow, Lab Zero). "I don't know which unblockables you can find, but I know they're not going to work." (Mike Zaimont) [primary] (https://gamedeveloper.com/design/interview-an-upstart-fighting-game-developer-s-radical-re-think). Battlemon summons are assists, so they inherit this risk.
+- Fits: step 7 (the summon is the main source of two simultaneous attackers) and step 3 (the grace period sits in block resolution). Deterministic.
+- Score: Impact 4, Fit 5, Ease 4 = 17.
+- History: 2026-11-12: seeded. 2026-11-12 (Run 2): roadmap steps renumbered. 2026-11-13: narrowed to the grace period and loop escape because scaling and juggle limits are built; added the PlayStation Blog dev diary [primary, verified]; Ease 3 to 4, rescored 16 to 17.
 
 ### A-006: Basic hit and block sounds in the effects step, not the audio step
-- Status: proposed. First proposed 2026-11-12. Last updated 2026-11-12.
+- Status: covered. First proposed 2026-11-12. Last updated 2026-11-13.
 - What: move a minimal set of hit, block and K.O. sounds into step 4 so impact is tuned with sound from the start. Music and the full sound pass stay in step 10.
 - Why: a study of Steam player comments found hitstop, sound coherence and camera control together drive impact feel, and a lack of design on one "may ruin" it [primary, abstract] (https://arxiv.org/abs/2208.06155).
 - Fits: design change (roadmap order only). Small: WebAudio one-shots triggered by sim events.
-- Score: Impact 4, Fit 4, Ease 4 = 16.
-- History: 2026-11-12: seeded. 2026-11-12 (Run 2): roadmap steps renumbered (Effects and feel 4, Audio 10).
+- Score: Impact 4, Fit 4, Ease 4 = 16 (frozen at covering).
+- History: 2026-11-12: seeded. 2026-11-12 (Run 2): roadmap steps renumbered (Effects and feel 4, Audio 10). 2026-11-13: covered by spec 010 R2: sound effects for hit, block and K.O. come from sim events. Audio shipped, so the ordering question is moot.
 
-### A-007: Training mode: frame meter, input display, dummy record and playback
-- Status: proposed. First proposed 2026-11-12. Last updated 2026-11-12.
+### A-007: Training tools: frame meter, input display, dummy record and playback
+- Status: proposed. First proposed 2026-11-12. Last updated 2026-11-13.
+- Built already: a free training mode (TRAINING on the title screen, `?mode=training`, spec 005). It has no frame meter, input display or dummy controls.
 - What: a training stage with a frame meter (startup, active and recovery colored per frame, frame advantage shown), the hitbox view the design already plans, an input display, and a dummy that can block, jump or replay a recorded sequence. Doubles as the tuning tool for 37 fighters.
 - Why: hidden information is a main newcomer wall, and Fantasy Strike shows frame advantage on every move [primary] (https://blog.playstation.com/?p=213018, https://critpoints.net/2021/05/07/how-fighting-games-can-retain-players/). SF6 ships a frame meter in training [secondary].
 - Fits: a new step after 5. Deterministic inputs make record and playback cheap.
 - Score: Impact 4, Fit 5, Ease 3 = 16.
-- History: 2026-11-12: seeded. 2026-11-12: Marvel Tokon's Nov 2 2026 patch added an "Assist Cooldown" item to its training gauge settings [primary] (https://finalweapon.net/2026/11/02/marvel-tokon-fighting-souls-shares-november-2-update-patch-notes/), a hint to expose meter and battlemon state in training. No rescore. 2026-11-12 (Run 2): roadmap steps renumbered.
+- History: 2026-11-12: seeded. 2026-11-12: Marvel Tokon's Nov 2 2026 patch added an "Assist Cooldown" item to its training gauge settings [primary] (https://finalweapon.net/2026/11/02/marvel-tokon-fighting-souls-shares-november-2-update-patch-notes/), a hint to expose meter and battlemon state in training. No rescore. 2026-11-12 (Run 2): roadmap steps renumbered. 2026-11-13: noted that the training mode exists without these tools; scope unchanged, no rescore.
 
-### A-008: Callouts that show hidden state: combo count, damage, PUNISH, COUNTER
-- Status: proposed. First proposed 2026-11-12. Last updated 2026-11-12.
-- What: the HUD shows the combo hit count and damage, and flashes PUNISH or COUNTER when a hit lands on recovery or startup. Flavor text can riff on the work ("ROLLBACK!").
-- Why: frame advantage, invincibility and scaling are hidden information that stops newcomers (Celia Wagar) [primary] (https://critpoints.net/2021/05/07/how-fighting-games-can-retain-players/).
-- Fits: step 5. The sim already emits hit events; the callout needs a "hit during startup or recovery" flag on them.
+### A-008: PUNISH and COUNTER callouts, plus combo damage
+- Status: proposed. First proposed 2026-11-12. Last updated 2026-11-17.
+- Built already: the HUD shows a combo hit count from 2 hits up, plus "MERGE CONFLICT!" and "TECH" popups (`src/render/hud.ts`).
+- What: a hit on the opponent's recovery frames flashes PUNISH by the attacker's side of the screen, and a hit during startup flashes COUNTER. The callout looks the same however the HUD is set up. The combo counter adds the combo's total damage under the hit count. Flavor text can riff on the work ("HOTFIX!" for a punish). Optional, a separate tuning call: SF6 adds +4 frames of hitstun on a punish counter. Callouts are text only: no camera move, zoom or slow-down on a counter or punish.
+- Why: frame advantage, invincibility and scaling are hidden information that stops newcomers (Celia Wagar) [primary] (https://critpoints.net/2021/05/07/how-fighting-games-can-retain-players/). SF6: "Any time you hit anyone in recovery, you get punish counter and +4 frames of hit stun" [primary] (https://words.infil.net/w03-sf6beta-p8.html). SF6 shows "Punish Counter" as side text, the same in every HUD style [secondary] (https://srk.shib.live/w/Street_Fighter_6/HUD, https://dashfight.com/news/street-fighter-6-new-battle-ui-update-leaves-a-lot-to-be-desired-8231). Skullgirls added a combo-damage indicator after an intern found the damage bar "doesn't do a good job of informing you how much damage you've dealt during a combo" [secondary] (https://skullgirls.com/?p=106, page no longer serves the post). Guilty Gear Strive's beta players said "some camera work, such as the effect on counter hit, impacts the game's pace", "player inputs, and visibility". Its oversized hit counter was meant to fix hit counts "difficult to see" behind characters [primary] (https://www.arcsystemworks.jp/guiltygear/db/en/volume1.php).
+- Fits: step 5 (HUD). The hit event already carries `damage` and `combo`; it needs one more field saying whether the defender was in startup, active or recovery. Presentation only, except the optional hitstun bonus.
 - Score: Impact 3, Fit 5, Ease 4 = 15.
-- History: 2026-11-12: seeded. 2026-11-12 (Run 2): roadmap steps renumbered.
+- History: 2026-11-12: seeded. 2026-11-12 (Run 2): roadmap steps renumbered. 2026-11-13: narrowed (the combo count is built); added SF6 [primary] and Skullgirls [secondary] evidence; no rescore. It serves the next build target, so it leads the 15s. 2026-11-17: from G-03, callouts stay text only, after Strive's counter-hit camera feedback [primary]. No rescore.
 
 ### A-009: Instant replay of the round-winning K.O.
-- Status: proposed. First proposed 2026-11-12. Last updated 2026-11-12.
+- Status: proposed. First proposed 2026-11-12. Last updated 2026-11-14.
 - What: after a K.O., an optional replay of the last few seconds from the recorded inputs, skippable with a button.
-- Why: the design already notes determinism gives replays [unsourced, design inference]. No external evidence yet on what replays do for couch play.
-- Fits: step 5. Replays from a state snapshot plus inputs.
+- Why: the design already notes determinism gives replays [unsourced, design inference]. Celia Wagar lists "Built in replay recording" among the features that keep players, citing Smash Ultimate [primary] (https://critpoints.net/2021/05/07/how-fighting-games-can-retain-players/). No evidence yet on what K.O. replays do for couch play specifically.
+- Fits: step 5. Replays from a state snapshot plus inputs. It uses the same input log and replay plumbing as A-020, so building either one makes the other cheaper.
 - Score: Impact 3, Fit 5, Ease 4 = 15.
-- History: 2026-11-12: seeded. 2026-11-12 (Run 2): roadmap steps renumbered.
+- History: 2026-11-12: seeded. 2026-11-12 (Run 2): roadmap steps renumbered. 2026-11-14: added Wagar evidence [primary]; linked to A-020. No rescore.
 
 ### A-010: Headless archetype matchup chart from CPU-vs-CPU sims
 - Status: proposed. First proposed 2026-11-12. Last updated 2026-11-12.
@@ -116,12 +123,12 @@ Below the Top 10: A-008 (15), A-009 (15), A-010 (14), A-014 (13), A-016 (13), A-
 - History: 2026-11-12: seeded. 2026-11-12 (Run 2): roadmap steps renumbered.
 
 ### A-012: Latch presses between input samples
-- Status: proposed. First proposed 2026-11-12. Last updated 2026-11-12.
+- Status: covered. First proposed 2026-11-12. Last updated 2026-11-13.
 - What: a button tap is never lost, even when it starts and ends between two samples or lands during a hitch. Keyboard `keydown` sets a "pressed since last sample" bit per button. The sampler ORs that bit into the bitmask for the next sim step, then clears it. When one animation frame runs several catch-up steps, the latched press goes to the first step only. Gamepads are still polled once per animation frame. Where a browser exposes `gamepadrawinputchanged`, it latches gamepad presses the same way (feature-detected, optional). A unit test feeds a press and release inside one frame and checks that the press reaches the sim.
 - Why: the Edge gamepad explainer says "input changes can be missed between polling intervals", and rAF polling adds "approximately half the polling interval", about 8.33 ms at 60 Hz [primary] (https://microsoftedge.github.io/MSEdgeExplainers/GamepadEventDrivenInputAPI/explainer.html). SDL, LÖVE and MonoGame developers agree that state polling misses short taps and that event handling or a latch fixes it [secondary] (https://discourse.libsdl.org/t/polling-events-vs-get-keyboardstate/39050).
 - Fits: step 1 (spec 001 R4 samples "once per step into a per-player bitmask" but says nothing on taps between samples). The sim still sees one bitmask per step, so determinism is untouched.
-- Score: Impact 3, Fit 5, Ease 5 = 16.
-- History: 2026-11-12: proposed from G-01.
+- Score: Impact 3, Fit 5, Ease 5 = 16 (frozen at covering).
+- History: 2026-11-12: proposed from G-01. 2026-11-13: covered by spec 001 ("a tap shorter than one step is latched into the next sample") and spec 015 A1 (touch taps latched too). The optional `gamepadrawinputchanged` latch isn't built; no browser ships that event.
 
 ### A-013: Vsync-aware accumulator: snap to the display interval, carry the remainder
 - Status: proposed. First proposed 2026-11-12. Last updated 2026-11-12.
@@ -140,12 +147,12 @@ Below the Top 10: A-008 (15), A-009 (15), A-010 (14), A-014 (13), A-016 (13), A-
 - History: 2026-11-12: proposed from G-01. 2026-11-12 (Run 2): offscreen buffer size updated to 640x360 after the round 2 design.
 
 ### A-015: Battlemon screen-time budget for legibility
-- Status: proposed. First proposed 2026-11-12. Last updated 2026-11-12.
+- Status: proposed. First proposed 2026-11-12. Last updated 2026-11-13.
 - What: a summoned battlemon stays on screen for a fixed time (start near 180 frames), then leaves. The user's super meter does not fill while their battlemon is out, so supers can't chain back to back. If both players summon at once, both stay readable: neither battlemon may cover the other fighter's sprite for more than a few frames. Values live in the battlemon data table.
-- Why: Arc System Works lengthened Marvel Tokon's assist cooldowns (180F for all Assemble Assist versions, 300F when the assist is attacked) because "the screen is overly busy or the match loses momentum", aiming at "reducing the amount of information on the screen at one time and improving legibility" [primary] (https://finalweapon.net/2026/11/02/marvel-tokon-fighting-souls-shares-november-2-update-patch-notes/). At 640x360 with two fighters about 140px tall, a battlemon takes up a large share of the screen (design inference). The specific 180-frame value is borrowed, not tested here [unsourced].
+- Why: Arc System Works lengthened Marvel Tokon's assist cooldowns (180F for all Assemble Assist versions, 300F when the assist is attacked) because "the screen is overly busy or the match loses momentum", aiming at "reducing the amount of information on the screen at one time and improving legibility" [primary] (https://finalweapon.net/2026/11/02/marvel-tokon-fighting-souls-shares-november-2-update-patch-notes/). At 640x360 with two fighters about 140px tall, a battlemon takes up a large share of the screen (design inference). The specific 180-frame value is borrowed, not tested here [unsourced]. Sakurai on Smash's summoned Assist Trophies: they help "for a short amount of time", and "blocking the screen is something you can't normally get away with in a competitive game like this" [primary] (https://www.nintendo.com/en-gb/Iwata-Asks/Iwata-Asks-Super-Smash-Bros-Brawl/Volume-5-Plethora-of-New-Features/2-Assist-Trophies/2-Assist-Trophies-226746.html).
 - Fits: step 7. Complements A-005 (that one covers unblockables; this one covers clutter). Data-driven, deterministic.
 - Score: Impact 3, Fit 5, Ease 4 = 15.
-- History: 2026-11-12: proposed from G-17. 2026-11-12 (Run 2): sizes updated to the round 2 design; roadmap step renumbered.
+- History: 2026-11-12: proposed from G-17. 2026-11-12 (Run 2): sizes updated to the round 2 design; roadmap step renumbered. 2026-11-13: added the Sakurai / Iwata Asks evidence [primary]; no rescore.
 
 ### A-016: Display-rate report, and redraw only on a new sim frame
 - Status: proposed. First proposed 2026-11-12. Last updated 2026-11-12.
@@ -162,3 +169,61 @@ Below the Top 10: A-008 (15), A-009 (15), A-010 (14), A-014 (13), A-016 (13), A-
 - Fits: step 4. Follows the design's rule that effects and shake animate on render time while the sim freezes fighters; generated clips stay untouched.
 - Score: Impact 4, Fit 5, Ease 4 = 17.
 - History: 2026-11-12: proposed from G-02.
+
+### A-018: Meter builds from forward play and from taking damage, resets each round
+- Status: proposed. First proposed 2026-11-13. Last updated 2026-11-16.
+- What: the battlemon super's meter fills from walking forward, attacking (on hit, block or whiff) and taking damage. Taking damage fills it faster than dealing the same damage, so a player who is getting beaten still gets their super. Rates live in one data table. The meter empties at the start of every round, so each round stands alone and a player who lost round 1 can't be swamped by a banked super. The HUD bar flashes and plays a cue the moment it fills, so newcomers notice the super is ready. Tuning targets: each player fills the bar about once per round, and a player who is losing has a full bar by the time they're down to about 30% health, whatever the opponent does. A headless CPU-vs-CPU check (as in A-010) reports both: the median frame the bar first fills, and the losing side's health when their bar is first full. So "too often" or "never" shows up as a number.
+- Why: Guilty Gear Strive's Tension gauge "resets at the start of each round" and rises "through proactive actions like advancing and attacking" [primary] (https://www.guiltygear.com/ggst/en/battle/systems/). Yoshinori Ono on SF4's damage-fed Ultra meter: "it's something there that can prevent a perfect from happening too", and "I think we've been very successful in avoiding perfect KOs on beginning players" [primary] (https://gamesbeat.com/street-fighter-v-round-3-yoshinori-ono-dishes-on-the-comeback-mechanic/). Rival Schools' signature Team-Ups first got "up to 9 meters with just a bit of fighting", which was "too far!". The team cut it to 3 but still "buffed up the meter gain" so a player who wants a Team-Up has one, because "Those Team-Ups are what separate Rival Schools from other games" (Itsuno) [primary] (https://itsfantastic.moe/rival-schools-developer-interview/). Battlemon summons play that role here. Killer Instinct producer Torin Retting wanted a mechanic that "helped facilitate come backs from tough situation", built "by taking damage and doing Combo Breakers" [primary] (https://www.siliconera.com/making-new-killer-instinct-everything-combo-breakers-selecting-characters/). Infil: "you'll earn your first instinct no later than around 30% health left on your first health bar" [primary] (https://ki.infil.net/meter2.html). MK1 gives the defender more meter for being hit than the attacker gets for hitting [secondary] (https://srk.shib.live/w/Mortal_Kombat_1/Gauges, snippet). Skullgirls convention players found a plain horizontal super bar "didn't communicate the level very well" [secondary] (https://skullgirls.com/?p=106, search summary). The design lists "Super meter" but sets no gain or carry-over rules (`game-design.md`, Round 1 and Defaults).
+- Fits: step 7. Integer meter in sim state, deterministic. The reset-or-carry choice and the attacker/defender split are design decisions for the HQ page. Pairs with A-011 if the user later wants a half-bar use.
+- Score: Impact 4, Fit 5, Ease 4 = 17.
+- History: 2026-11-13: proposed from G-05. 2026-11-14: from G-09, added gain from taking damage (Ono [primary]) and a measured once-per-round target (Rival Schools [primary]). Impact 3 to 4, because the summon is the game's signature feature and newcomers have to get to use it. Ease 5 to 4, because the target needs a headless check. Rescored 16 to 17. 2026-11-16: from G-25, added a health-based target after Killer Instinct's Instinct meter (Retting and Infil [primary, verified]). No rescore.
+
+### A-019: Hittable battlemon: hitting it ends the summon early
+- Status: proposed. First proposed 2026-11-13. Last updated 2026-11-15.
+- What: a summoned battlemon has a hurtbox and a small hit budget (for example 2 hits, as data). The defender can block its attack or hit it. Using up the budget sends it off early with its faint frame (battlemon sheets already include a hurt and a faint cell), and the summoner's next meter build is slowed for a few seconds. The defender sees a BREAK! callout and gets a small chunk of super meter, so beating the summon feels like a win, not just survival. The summoner can't deny that reward by ending the summon early. So a super is a big moment, not a free hit, and the defender always has an answer.
+- Why: Marvel Tokon makes the assist cooldown 300F when the assist is attacked, against 180F otherwise [primary] (https://finalweapon.net/2026/11/02/marvel-tokon-fighting-souls-shares-november-2-update-patch-notes/). Smash's summoned characters are "very powerful ... but also very predictable", so they "can easily be avoided", and nearly all that attack fighters can be damaged in Ultimate [secondary] (https://www.ssbwiki.com/Assist_Trophy). Persona 4 Arena disables Persona attacks for about 10 seconds after the Persona takes enough hits (Persona Break) [secondary] (https://www.dustloop.com/w/Gauges_(P4Arena), snippet). Smash Ultimate rewards the defender: whoever KOs a damageable Assist Trophy gets "one point as if they took an opponent's stock", and the summoner can KO their own to deny it [primary, fan wiki] (https://www.ssbwiki.com/Assist_Trophy). No designer's reasoning for hittable summons has been found yet.
+- Fits: step 7. Fits every domain except perhaps CONTEXT's screen-wide beam, which may need to be unhittable and blockable instead. Uses the existing hurtbox and hit-resolution code; deterministic.
+- Score: Impact 4, Fit 5, Ease 3 = 16.
+- History: 2026-11-13: proposed from G-08. 2026-11-15: from G-22, added the defender's reward (BREAK! callout and meter) after Smash Ultimate [primary, fan wiki]. No rescore.
+
+### A-020: "What happened?" replay with tips and a 10-second take-over
+- Status: proposed. First proposed 2026-11-14. Last updated 2026-11-15.
+- Scope (2026-11-15): build in two phases. Phase 1 pauses only on moments the per-move answer table (shared with A-021) covers: "That was Hotfix Charge. Jump over it, or hit it twice to break the armor." Phase 2 adds missed-punish cards with a rule the sim can compute: the defender blocked a move whose remaining recovery was longer than the defender's fastest startup, and didn't hit back in that window [unsourced, design inference; Tekken's own rule is not published].
+- What: from the results screen, the loser can pick WHAT HAPPENED?. The match replays from its input log. It pauses with a short, plain-language card on a few kinds of moment. A missed punish: "Their roundhouse was blocked. A jab would have hit before they recovered." A throw that could have been escaped, once A-004 exists. A combo that a bigger listed combo would have beaten. At any pause, a TRY IT button hands both fighters' current state to the player, who controls their fighter for 10 seconds against the opponent's recorded inputs. Then the replay resumes. No jargon and no frame numbers on the cards.
+- Why: Tekken 8's My Replay & Tips shows real-time advice during playback on punishes the player missed, throw escapes and higher-damage combos. Any moment can be replayed for 10 seconds, and beginners praised it as accessible [primary] (https://automaton-media.com/articles/newsjp/20240131-280770/). Kohei Ikeda wanted to avoid "a lot of jargon and technical data". Jun Yasuda: "the computer tells you exactly what you're doing wrong, and then it allows you to practice on the spot" [primary] (https://gamingbolt.com/tekken-8-overhauls-my-replay-and-tips-allows-for-real-time-practice/amp). Celia Wagar proposes match analysis that tracks the moves you got hit by [primary] (https://critpoints.net/2021/05/07/how-fighting-games-can-retain-players/). Caution: Tekken 8 director Kohei Ikeda calls the replay advice "a feature for intermediate and advanced players who play Arcade Style", and Special Style (simplified input) players get no punish tips. Its tips come in two kinds: general move answers ("this move's second hit is high, so you can crouch and counter") and matchup punishes ("you could have countered with this move after blocking") [primary] (https://dengekionline.com/articles/213882). For newcomers, the general move answers are the safer bet, hence the phase 1 scope.
+- Fits: step 5 (results and match flow). The deterministic sim, its input history and serializable state make replay and take-over cheap compared with other engines. The take-over is a fork from a snapshot. Missed-punish detection needs move frame data the sim already has (recovery left against the fastest startup). It shares the replay plumbing with A-009. No constraint bent.
+- Score: Impact 4, Fit 5, Ease 2 = 15.
+- History: 2026-11-14: proposed from G-23. 2026-11-15: from G-24, Dengeki interview [primary]: Tekken aims these tips at intermediate players. Rescoped so phase 1 uses the per-move answer table and missed-punish detection comes second. No rescore: the weaker newcomer evidence is offset by the narrower, cheaper first phase.
+
+### A-021: Results screen: kind, specific stats and "hit most by" with an answer
+- Status: proposed. First proposed 2026-11-14. Last updated 2026-11-16.
+- What: the results screen shows two or three stats per player, picked from a fixed list and framed positively: anti-airs landed, lows blocked, punishes, throws teched, longest combo, biggest hit. Each player also sees the move that hit them most, with a one-line answer: "Hit most by: Hotfix Charge (6x). Try: jump over it, or hit it twice to break the armor." Answers live in a per-move data table, so they cover all 74 specials, one line of about 15 words each. A second, finer line per move can come later. Stats about the person never get mocking text.
+- Why: Celia Wagar suggests "more relevant post-match statistics, like how many overheads you blocked, how many times you successfully anti-aired", and tracking "what moves specifically you get hit by" with a suggested answer [primary] (https://critpoints.net/2021/05/07/how-fighting-games-can-retain-players/). Smash results show KOs, falls and damage given and taken [secondary] (https://www.ssbwiki.com/Results). A defeat screen that shows only negative stats may push players to tilt or quit [secondary, low-quality, not fighting-game specific] (https://mail.infosecinstitute.com/league-defeat-screen-1165466103.html). The results scene shows no match stats today. Tekken 8's general replay tip is the same idea as the per-move answer line: "this move's second hit is high, so you can crouch and counter" [primary] (https://dengekionline.com/articles/213882).
+- Fits: step 5. It counts sim events the game already emits (hit, block, tech). It needs the same extra hit-event field as A-008 (whether the defender was in startup or recovery, plus whether it was an anti-air). Presentation only, deterministic, and the friendly-flavor rule applies.
+- Score: Impact 3, Fit 5, Ease 4 = 15.
+- History: 2026-11-14: proposed from G-23. 2026-11-15: added Tekken 8's general-tip evidence [primary]; the answer table is now shared with A-020 phase 1. No rescore. 2026-11-16: from G-27, set the answer line at about 15 words, after Smash Ultimate's one- or two-sentence tips [primary, fan wiki] (https://www.ssbwiki.com/List_of_tips_(SSBU)/Fighters). The table is shared with A-022 too. No rescore.
+
+### A-022: Versus splash tip: one answer to the opponent's signature special
+- Status: proposed. First proposed 2026-11-16. Last updated 2026-11-16.
+- What: the versus splash shows a one-line tip under each fighter about the other side's signature special: "Pentcho's Hotfix Charge absorbs one hit. Jump over it, or hit it twice." The line comes from A-021's per-move answer table, so it needs no new content beyond that table. The first time a pair meets, the tip covers the primary special (Special). After that it rotates to the second one (Forward+Special). Tips are about moves, never about the person.
+- Why: Smash Ultimate shows tagged, per-fighter, per-move tips while a match loads, one or two sentences each, about 14 to 22 per fighter. It holds back finer tips until a player has seen 200 (middle tier) and 650 (high tier) [primary, fan wiki] (https://www.ssbwiki.com/List_of_tips_(SSBU), https://www.ssbwiki.com/List_of_tips_(SSBU)/Fighters). Most of Smash's move tips explain how to use a move, not how to beat it, so the counter framing here is a design inference [unsourced]. Fantasy Strike and SF6 teach characters through videos outside the match, not with text in it [primary] (https://www.fantasystrike.com/guide) [secondary] (SF6 Character Guide). With 37 fighters and 74 specials, couch newcomers will mostly face specials they've never seen (design inference).
+- Fits: step 5 (the versus splash is in spec 005, animated by spec 009). Presentation only, at 640x360 one ~15-word line fits under each portrait. Order: build after A-021's table. No constraint bent.
+- Score: Impact 3, Fit 5, Ease 4 = 15.
+- History: 2026-11-16: proposed from G-27.
+
+### A-023: Guard strain: blocking too long breaks guard
+- Status: proposed. First proposed 2026-11-17. Last updated 2026-11-17.
+- Built already: specials deal chip damage on block, reduced by a per-fighter resist (`src/sim/combat.ts:687`). Nothing else taxes long blocking.
+- What: a thin strain bar under each health bar fills with every blocked hit, heavier hits filling more. It drains after about a second without blocking. When it's full, the next blocked hit breaks guard. The defender staggers briefly, open to one follow-up, and a callout flashes ("RATE LIMITED!"). Then the bar resets. The bar is always visible and empties each round. It's a passive rule with no new button and no guard-crush move. Battlemon supers don't break guard on their own (A-005's no-unblockables rule holds), though a domain could opt in later as data. Rates and stagger length live in one table. A headless check (as in A-010) reports how often guard breaks happen per round, so the rule can be tuned to rare.
+- Why: GBVS Rising's team heard "defense is too strong, which makes players prone to stalemate", and wants beginners and experts alike to "break their foe's guard at critical moments" [primary] (https://automaton-media.com/en/interviews/20230901-21299/). Its guard-crush move was called "too strong" in beta, so it was given slower startup and a resource cost, and a same-input counter answers it [primary] (https://gematsu.com/2023/10/granblue-fantasy-versus-rising-details-major-adjustments-to-mechanics-in-response-to-first-open-beta-test). Strive's R.I.S.C. is the passive version: it "increases as you block", and at max "all incoming attacks become counter hits" [primary] (https://www.guiltygear.com/ggst/en/battle/systems/). Its designers "intentionally made the R.I.S.C. gauge less visible", and players criticized the UI's visibility [primary] (https://www.arcsystemworks.jp/guiltygear/db/en/volume1.php). Strive removed Wild Assault, a cheap guard-crushing button, because it "made defense very hard in some situations" [primary, official notes as quoted] (https://dashfight.com/news/guilty-gear-strive-2-0-battle-balance-patch-is-out-and-its-massive-8602). Smash's shield shrinks per hit and breaks into a stun [secondary] (https://www.ssbwiki.com/Shield). Caution: no evidence was found that newcomers turtle. Designers describe newcomers mashing instead [secondary] (Nakayama, https://gameranx.com/updates/id/397516/article/street-fighter-6-team-discuss-dynamic-control-scheme/), which caps Impact at 3.
+- Fits: step 7 (the agenda's G-28 asked whether a super should break guard) and step 3 (block resolution). An integer gauge in sim state is deterministic. It adds one HUD bar per player at 640x360. It sits next to A-005's post-block grace: strain counts blocked hits, grace only widens which level blocks.
+- Score: Impact 3, Fit 4, Ease 3 = 13.
+- History: 2026-11-17: proposed from G-28.
+
+### A-024: Summon freeze: dim, freeze, then a fair reaction window
+- Status: proposed (unverified: the input rule rests on a bot-blocked wiki). First proposed 2026-11-17. Last updated 2026-11-17.
+- What: when a player triggers the battlemon super, the background dims and both fighters freeze for a fixed number of frames (data, start near 30). The summoner's portrait and battlemon icon flash during the freeze. Inputs the defender presses during the freeze are dropped, not buffered, so nobody wins by mashing through the flash. When the freeze ends, the battlemon's first hit comes no sooner than a set number of frames (data), so a defender who reacts to the flash can still block or jump. The freeze is sim-side (both fighters frozen, deterministic); the dim and flash are render-side and respect the reduced-effects toggle.
+- Why: a screen freeze is "The period directly after a super ... where the game pauses for dramatic effect" [primary] (https://glossary.infil.net/json/glossary.json). In KOF XIII only the player who triggered the super can input during the freeze, and the defender must reply after it [secondary] (https://srk.shib.live/w/The_King_of_Fighters_XIII/Game_Elements/Super_Freeze, Anubis-blocked). Supers that put their startup before the flash become "effectively 0 frames" after it and can't be reacted to [secondary] (https://srk.shib.live/w/Glossary). Hence the minimum gap after the freeze. The design already lists a "super flash" effect but sets no freeze or input rule (`game-design.md`, Round 2; spec 004 leaves it to step 7).
+- Fits: step 7. Spec 004's K.O. slow motion lives in the loop; this freeze must live in the sim instead, because it changes when the battlemon hits. Pairs with A-015 (screen time) and A-005 (no unblockables).
+- Score: Impact 3, Fit 5, Ease 4 = 15.
+- History: 2026-11-17: proposed from G-03.
