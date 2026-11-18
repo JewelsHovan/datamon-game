@@ -1,0 +1,88 @@
+name: Deploy Production (Tag on main)
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "Optional deploy note"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Verify main lineage, check & deploy to Cloudflare
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CLOUDFLARE_ACCOUNT_ID: "465b4165237ea1225de7bbb09eddbf38"
+      LIVE_URL: "https://datamon-game.julienh15.workers.dev/"
+    steps:
+      - name: Checkout repository with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Ensure tagged commit is on main
+        run: |
+          git fetch origin main:refs/remotes/origin/main
+          if ! git merge-base --is-ancestor "${GITHUB_SHA}" refs/remotes/origin/main; then
+            echo "::error::Tagged commit ${GITHUB_SHA} is not on origin/main. Refusing production deploy."
+            exit 1
+          fi
+          echo "Verified ${GITHUB_REF_NAME} (${GITHUB_SHA::7}) is on origin/main."
+
+      - name: Verify CLOUDFLARE_API_TOKEN secret is configured
+        env:
+          CF_TOKEN_SET: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+        run: |
+          if [ "${CF_TOKEN_SET}" != "true" ]; then
+            echo "::error::Missing CLOUDFLARE_API_TOKEN repository secret. Create an 'Edit Cloudflare Workers' API token on account 465b4165237ea1225de7bbb09eddbf38 and run: gh secret set CLOUDFLARE_API_TOKEN"
+            exit 1
+          fi
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run typecheck, test, and production build gates
+        run: |
+          npm run typecheck
+          npm test
+          npm run build
+
+      - name: Deploy to Cloudflare Workers
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          MSG="${GITHUB_REF_NAME} (${GITHUB_SHA::7})"
+          npx --yes wrangler@4 deploy --message "${MSG:0:100}"
+
+      - name: Smoke-test live site and fighter index
+        run: |
+          for attempt in $(seq 1 10); do
+            PAGE_STATUS=$(curl -sS -o /tmp/live_page.html -w "%{http_code}" "${LIVE_URL}" || echo "000")
+            INDEX_STATUS=$(curl -sS -o /tmp/live_index.json -w "%{http_code}" "${LIVE_URL}fighters/index.json" || echo "000")
+            if [ "${PAGE_STATUS}" = "200" ] && [ "${INDEX_STATUS}" = "200" ] && grep -qi '<canvas[^>]*id="game"' /tmp/live_page.html; then
+              echo "Smoke test passed: ${LIVE_URL} (${PAGE_STATUS}), fighters/index.json (${INDEX_STATUS})"
+              exit 0
+            fi
+            echo "Attempt ${attempt}/10: page=${PAGE_STATUS} index=${INDEX_STATUS}; retrying in 3s..."
+            sleep 3
+          done
+          echo "::error::Post-deploy smoke test failed against ${LIVE_URL}"
+          exit 1

@@ -235,6 +235,9 @@ Ship
         --allow-dirty         deploy with uncommitted changes (off by default)
         --allow-branch        deploy from a branch other than main
         --skip-check          skip the gates (build still runs)
+  release [vX.Y.Z]            tag HEAD on main and push to trigger GitHub Actions deploy
+                              (no local wrangler login switching needed; auto-names vYYYY.MM.DD)
+        --skip-check          skip local gates before tagging (CI still runs all gates)
   url                         print the production URL from the last deploy
 
 Project
@@ -388,6 +391,66 @@ Exit codes: 0 ok, 1 a gate, deploy or check failed, 2 usage error, 3 missing pre
     writeJson(DEPLOY_FILE, record);
     say(`${smoke.ok ? "live" : "DEPLOYED, SMOKE FAILED"}  ${url}  (${g.sha}, page ${smoke.page}, asset ${smoke.asset})`);
     finish(smoke.ok ? EXIT.ok : EXIT.fail, record);
+  },
+
+  async release() {
+    const g = gitInfo();
+    if (g.branch !== "main") {
+      warn(`dm: on branch ${g.branch}. Releases must be tagged from main.`);
+      finish(EXIT.fail, { stage: "git", branch: g.branch });
+    }
+    if (g.dirty.length) {
+      warn(`dm: ${g.dirty.length} uncommitted path(s). Commit changes on main before tagging a release.`);
+      finish(EXIT.fail, { stage: "git", dirty: g.dirty });
+    }
+    const secrets = sh("gh", ["secret", "list"]);
+    if (secrets.code === 0 && !/^CLOUDFLARE_API_TOKEN\b/m.test(secrets.out)) {
+      warn(
+        `dm: GitHub secret CLOUDFLARE_API_TOKEN is not set yet.\n` +
+          `  1. Create an "Edit Cloudflare Workers" API token on Cloudflare account 465b4165237ea1225de7bbb09eddbf38:\n` +
+          `     https://dash.cloudflare.com/465b4165237ea1225de7bbb09eddbf38/profile/api-tokens\n` +
+          `  2. Save it once to GitHub:  gh secret set CLOUDFLARE_API_TOKEN\n` +
+          `  3. Re-run:                 ./dm release`,
+      );
+      finish(EXIT.prereq, { stage: "secret", missing: "CLOUDFLARE_API_TOKEN" });
+    }
+    if (!flag("skip-check")) {
+      const gates = await runGates();
+      if (!gates.every((r) => r.pass)) finish(EXIT.fail, { stage: "gates", gates });
+    }
+    let tag = args[1] && !args[1].startsWith("--") ? args[1] : "";
+    if (!tag) {
+      const d = new Date();
+      const base = `v${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, "0")}.${String(d.getDate()).padStart(2, "0")}`;
+      const existing = new Set(git("tag", "--list", `${base}*`).out.split("\n").filter(Boolean));
+      tag = base;
+      let n = 2;
+      while (existing.has(tag)) tag = `${base}-${n++}`;
+    }
+    if (!/^v[0-9A-Za-z._-]+$/.test(tag)) usage(`tag "${tag}" must start with "v" (e.g. v1.2.0 or v2026.11.17)`);
+    if (git("rev-parse", "-q", "--verify", `refs/tags/${tag}`).code === 0) {
+      warn(`dm: tag ${tag} already exists.`);
+      finish(EXIT.fail, { stage: "tag", tag });
+    }
+    const pushMain = await run("release-push-main", "git", ["push", "origin", "main"]);
+    if (pushMain.code !== 0) {
+      warn(`--- last lines of ${pushMain.log} ---\n${tail(pushMain.output)}`);
+      finish(EXIT.fail, { stage: "push-main", log: pushMain.log });
+    }
+    const mkTag = git("tag", "-a", tag, "-m", `${tag}: ${g.subject}`);
+    if (mkTag.code !== 0) {
+      warn(`dm: git tag failed: ${mkTag.err}`);
+      finish(EXIT.fail, { stage: "tag", error: mkTag.err });
+    }
+    const pushTag = await run("release-push-tag", "git", ["push", "origin", tag]);
+    if (pushTag.code !== 0) {
+      warn(`--- last lines of ${pushTag.log} ---\n${tail(pushTag.output)}`);
+      finish(EXIT.fail, { stage: "push-tag", log: pushTag.log });
+    }
+    const repo = sh("gh", ["repo", "view", "--json", "url", "-q", ".url"]).out || "https://github.com/JewelsHovan/datamon-game";
+    say(`tagged  ${tag} @ ${g.sha} -> pushed to origin`);
+    say(`watch   gh run watch   (${repo}/actions/workflows/deploy.yml)`);
+    finish(EXIT.ok, { tag, sha: g.sha, actionsUrl: `${repo}/actions/workflows/deploy.yml` });
   },
 
   async url() {

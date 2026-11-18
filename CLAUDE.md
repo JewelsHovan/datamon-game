@@ -13,7 +13,8 @@ Use `./dm` (`scripts/dm.mjs`) rather than raw npm, vite or wrangler. Every comma
 - `./dm doctor` before anything else in a fresh checkout; `./dm check` (typecheck, test, build) before handing work off.
 - `./dm dev` / `./dm dev stop`: background dev server on a free port. Use its printed URL; other sessions may hold 5173.
 - `./dm preview`: a Cloudflare preview URL that is not live. Use it to show work or to point `game-qa` at a deployed build.
-- `./dm deploy`: production. Only from `main`, with a clean tree, after the gates; it smoke-tests the live URL. The public repo and site are live, so deploy only when the user asks.
+- `./dm deploy`: local production deploy. Only from `main`, with a clean tree, after the gates; it smoke-tests the live URL.
+- `./dm release [vX.Y.Z]`: pushes `main` + a `v*` git tag (auto-naming `vYYYY.MM.DD` when omitted) so `.github/workflows/deploy.yml` runs the gates, deploys to Cloudflare using the repo's `CLOUDFLARE_API_TOKEN` secret (no local `wrangler login` account switching), and smoke-tests the live URL. Deploy/release only when the user asks.
 
 Stack: Vite + TypeScript + Canvas 2D (no engine), Vitest, npm. `src/sim` is a pure, deterministic 60 Hz simulation and must stay free of DOM, clock and `Math.random`.
 
