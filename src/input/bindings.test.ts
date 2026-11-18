@@ -137,12 +137,28 @@ describe("key labels and legends (R7)", () => {
 
   it("legends follow each player's actual bindings, or the pad", () => {
     const b = new ControlBindings(null);
-    expect(legendLines(b.current[0])).toEqual(["F PUNCH  Q KICK  E SPECIAL", "WASD MOVE  F+Q THROW"]);
-    expect(legendLines(b.current[1])).toEqual(["H PUNCH  U KICK  O SPECIAL", "IJKL MOVE  H+U THROW"]);
+    expect(legendLines(b.current[0])).toEqual([
+      "F PUNCH  Q KICK  E SPECIAL",
+      "WASD MOVE  F+Q THROW/PUSH",
+      "HOLD BACK: SHIELD  TAP: PARRY",
+    ]);
+    expect(legendLines(b.current[1])).toEqual([
+      "H PUNCH  U KICK  O SPECIAL",
+      "IJKL MOVE  H+U THROW/PUSH",
+      "HOLD BACK: SHIELD  TAP: PARRY",
+    ]);
     b.rebind(0, "punch", "KeyG");
     b.rebind(0, "up", "ArrowUp");
-    expect(legendLines(b.current[0])).toEqual(["G PUNCH  Q KICK  E SPECIAL", "UP A S D MOVE  G+Q THROW"]);
-    expect(legendLines(b.current[1], true)).toEqual(["A PUNCH  B KICK  X/Y SPECIAL", "D-PAD MOVE  A+B THROW"]);
+    expect(legendLines(b.current[0])).toEqual([
+      "G PUNCH  Q KICK  E SPECIAL",
+      "UP A S D MOVE  G+Q THROW/PUSH",
+      "HOLD BACK: SHIELD  TAP: PARRY",
+    ]);
+    expect(legendLines(b.current[1], true)).toEqual([
+      "A PUNCH  B KICK  X/Y SPECIAL",
+      "D-PAD MOVE  A+B THROW/PUSH",
+      "HOLD BACK: SHIELD  TAP: PARRY",
+    ]);
   });
 });
 

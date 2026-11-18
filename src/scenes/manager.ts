@@ -16,14 +16,16 @@ import { VIEW_WIDTH } from "../render/screen";
 import type { InputPair, PlayerIndex, SimEvent, SimState } from "../sim/types";
 import { ControlsScene } from "./controls";
 import { FightScene } from "./fight";
+import { GuideScene } from "./guide";
 import { PauseScene } from "./pause";
 import { ResultsScene } from "./results";
 import type { FighterInfo } from "./roster";
 import { SelectScene } from "./select";
 import { TitleScene } from "./title";
 import { VersusScene } from "./versus";
+import type { Players } from "./ui";
 
-export type SceneName = "title" | "select" | "versus" | "fight" | "pause" | "results" | "controls";
+export type SceneName = "title" | "select" | "versus" | "fight" | "pause" | "results" | "controls" | "guide";
 
 /** VS CPU (P2 is the CPU), VS PLAYER (two humans), or free training. */
 export type GameMode = "cpu" | "versus" | "training";
@@ -278,5 +280,10 @@ export class SceneManager {
   /** The controls screen; Back returns to `back`. */
   toControls(back: Scene): void {
     this.go(new ControlsScene(this, back));
+  }
+
+  /** The Shield & Combat Guide screen; Back returns to `back`. */
+  toGuide(back: Scene, players?: Players): void {
+    this.go(new GuideScene(this, back, players));
   }
 }

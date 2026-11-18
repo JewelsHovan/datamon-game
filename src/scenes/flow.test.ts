@@ -177,6 +177,7 @@ describe("scene flow (A5, R5)", () => {
     expect(rematch.state.frame).toBe(frozen);
     d.press(0, BUTTON_DOWN);
     d.press(0, BUTTON_DOWN);
+    d.press(0, BUTTON_DOWN);
     expect(d.m.scene.debug?.()).toMatchObject({ item: "QUIT TO SELECT" });
     d.press(0, P);
     expect(d.select.mode).toBe("versus");
@@ -544,14 +545,14 @@ describe("app shell (spec 014)", () => {
 
   it("FULLSCREEN is the last title item and toggles fullscreen; it is left out where the API is missing (R4)", () => {
     const off = new Driver(fakes());
-    expect(off.m.scene.debug?.()).toMatchObject({ items: ["VS CPU", "VS PLAYER", "TRAINING", "CONTROLS"] });
+    expect(off.m.scene.debug?.()).toMatchObject({ items: ["VS CPU", "VS PLAYER", "TRAINING", "CONTROLS", "SHIELD GUIDE"] });
     const disabled = new Driver(withFullscreen(false).f);
     expect((disabled.m.scene.debug?.() as { items: string[] }).items).not.toContain("FULLSCREEN");
 
     const { f, toggles } = withFullscreen(true);
     const d = new Driver(f);
-    expect(d.m.scene.debug?.()).toMatchObject({ items: ["VS CPU", "VS PLAYER", "TRAINING", "CONTROLS", "FULLSCREEN"] });
-    d.titlePick(4);
+    expect(d.m.scene.debug?.()).toMatchObject({ items: ["VS CPU", "VS PLAYER", "TRAINING", "CONTROLS", "SHIELD GUIDE", "FULLSCREEN"] });
+    d.titlePick(5);
     expect(toggles).toHaveLength(1);
     expect(d.scene).toBe("title"); // stays on the title
   });
@@ -565,7 +566,11 @@ describe("app shell (spec 014)", () => {
     d.press(1, P);
     await d.throughVersus();
     d.escape();
-    expect(d.m.scene.debug?.()).toMatchObject({ items: ["RESUME", "CONTROLS", "FULLSCREEN", "QUIT TO SELECT"], hint: "ESC: RESUME   M: MUTE" });
+    expect(d.m.scene.debug?.()).toMatchObject({
+      items: ["RESUME", "CONTROLS", "SHIELD GUIDE", "FULLSCREEN", "QUIT TO SELECT"],
+      hint: "ESC: RESUME   M: MUTE",
+    });
+    d.press(0, BUTTON_DOWN);
     d.press(0, BUTTON_DOWN);
     d.press(0, BUTTON_DOWN);
     d.press(0, P); // FULLSCREEN
@@ -587,20 +592,70 @@ describe("app shell (spec 014)", () => {
     d.press(1, P);
     await d.throughVersus();
     d.escape();
-    expect(d.m.scene.debug?.()).toMatchObject({ items: ["RESUME", "CONTROLS", "SOUND ON", "FULLSCREEN", "QUIT TO SELECT"] });
+    expect(d.m.scene.debug?.()).toMatchObject({
+      items: ["RESUME", "CONTROLS", "SHIELD GUIDE", "SOUND ON", "FULLSCREEN", "QUIT TO SELECT"],
+    });
+    d.press(0, BUTTON_DOWN);
     d.press(0, BUTTON_DOWN);
     d.press(0, BUTTON_DOWN);
     expect(d.m.scene.debug?.()).toMatchObject({ item: "SOUND ON" });
     d.press(0, P);
     expect(muted).toBe(true);
     expect(d.scene).toBe("pause"); // stays on the menu
-    expect(d.m.scene.debug?.()).toMatchObject({ item: "SOUND OFF", items: ["RESUME", "CONTROLS", "SOUND OFF", "FULLSCREEN", "QUIT TO SELECT"], hint: "ESC: RESUME   M: UNMUTE" });
+    expect(d.m.scene.debug?.()).toMatchObject({
+      item: "SOUND OFF",
+      items: ["RESUME", "CONTROLS", "SHIELD GUIDE", "SOUND OFF", "FULLSCREEN", "QUIT TO SELECT"],
+      hint: "ESC: RESUME   M: UNMUTE",
+    });
     d.press(1, P); // either human player can drive the menu
     expect(muted).toBe(false);
     expect(d.m.scene.debug?.()).toMatchObject({ item: "SOUND ON" });
     // M from the keyboard and the item share one state: the label follows it
     muted = true;
     expect(d.m.scene.debug?.()).toMatchObject({ item: "SOUND OFF" });
+  });
+
+  it("opens SHIELD GUIDE from Title and Pause, cycles all 4 visual tabs inside 640x360, and returns cleanly", async () => {
+    const drawn: { text: string; x: number; y: number }[] = [];
+    const ctx = {
+      save() {},
+      restore() {},
+      fillRect() {},
+      createLinearGradient: () => ({ addColorStop() {} }),
+      fillText(s: string, x: number, y: number) {
+        drawn.push({ text: s, x, y });
+      },
+    } as unknown as CanvasRenderingContext2D;
+    const d = new Driver(fakes());
+    d.titlePick(4); // SHIELD GUIDE
+    expect(d.scene).toBe("guide");
+
+    for (let tab = 0; tab < 4; tab++) {
+      expect(d.m.scene.debug?.()).toMatchObject({ tab });
+      drawn.length = 0;
+      d.m.scene.render(ctx, tab * 35);
+      expect(drawn.map((t) => t.text)).toContain("SHIELD & COMBAT GUIDE");
+      for (const t of drawn) expect(t.y).toBeLessThan(360);
+      d.press(0, BUTTON_RIGHT);
+    }
+    expect(d.m.scene.debug?.()).toMatchObject({ tab: 0 });
+    d.press(0, K); // Kick goes back to Title
+    expect(d.scene).toBe("title");
+
+    // Also accessible mid-fight from Pause -> SHIELD GUIDE -> Esc returns to Pause
+    d.m.toTitle();
+    d.titlePick(1);
+    d.press(0, P);
+    d.press(1, P);
+    await d.throughVersus();
+    d.escape();
+    expect(d.scene).toBe("pause");
+    d.press(0, BUTTON_DOWN);
+    d.press(0, BUTTON_DOWN);
+    d.press(0, P); // SHIELD GUIDE
+    expect(d.scene).toBe("guide");
+    d.escape();
+    expect(d.scene).toBe("pause");
   });
 
   it("on touch every screen names the touch buttons; a keyboard brings the keys back (QA F3)", async () => {

@@ -6,19 +6,20 @@
 import { text } from "../render/hud";
 import { VIEW_HEIGHT, VIEW_WIDTH } from "../render/screen";
 import type { FightScene } from "./fight";
+import { GUIDE_ITEM } from "./guide";
 import type { MenuInput, Scene, SceneManager } from "./manager";
 import { drawPanel, FULLSCREEN_ITEM, GOLD, Menu } from "./ui";
 
-export const PAUSE_ITEMS = ["RESUME", "CONTROLS", "QUIT TO SELECT"] as const;
+export const PAUSE_ITEMS = ["RESUME", "CONTROLS", GUIDE_ITEM, "QUIT TO SELECT"] as const;
 /** Mutes or unmutes the sound for everyone; reads SOUND ON or SOUND OFF (QA 2026-11-12 F3: no mute without a keyboard). */
 export const SOUND_ITEM = "SOUND";
 
 /**
- * The pause menu: SOUND after CONTROLS when the game can mute, FULLSCREEN before
- * QUIT TO SELECT when the page can go fullscreen.
+ * The pause menu: SHIELD GUIDE after CONTROLS, SOUND when the game can mute,
+ * FULLSCREEN before QUIT TO SELECT when the page can go fullscreen.
  */
 export function pauseItems(fullscreen: boolean, sound = false): readonly string[] {
-  return ["RESUME", "CONTROLS", ...(sound ? [SOUND_ITEM] : []), ...(fullscreen ? [FULLSCREEN_ITEM] : []), "QUIT TO SELECT"];
+  return ["RESUME", "CONTROLS", GUIDE_ITEM, ...(sound ? [SOUND_ITEM] : []), ...(fullscreen ? [FULLSCREEN_ITEM] : []), "QUIT TO SELECT"];
 }
 
 /** The SOUND item's words: what the sound is now. */
@@ -61,6 +62,7 @@ export class PauseScene implements Scene {
     const item = r === "back" ? "RESUME" : this.menu.items[r]!;
     if (item === "RESUME") this.m.resume(this.fight);
     else if (item === "CONTROLS") this.m.toControls(this);
+    else if (item === GUIDE_ITEM) this.m.toGuide(this, this.fight.humans);
     else if (item === SOUND_ITEM) this.m.services.toggleSound?.();
     else if (item === FULLSCREEN_ITEM) this.m.toggleFullscreen();
     else this.m.toSelect(this.fight.match.mode, this.fight.match);
@@ -71,10 +73,12 @@ export class PauseScene implements Scene {
     ctx.fillStyle = "rgba(8, 7, 24, 0.55)";
     ctx.fillRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT);
     const items = this.menu.items.length;
-    const hintY = TOP + 46 + items * ITEM_GAP + 8; // five items end at y 296, inside the 360 px view
-    drawPanel(ctx, VIEW_WIDTH / 2 - 130, TOP, 260, hintY + 22 - TOP);
-    text(ctx, "PAUSED", VIEW_WIDTH / 2, TOP + 14, 16, GOLD, "center");
-    this.menu.draw(ctx, VIEW_WIDTH / 2, TOP + 46, frame, 8, ITEM_GAP);
+    const top = items > 5 ? 92 : TOP;
+    const gap = items > 5 ? 20 : ITEM_GAP;
+    const hintY = top + 46 + items * gap + 8;
+    drawPanel(ctx, VIEW_WIDTH / 2 - 130, top, 260, hintY + 22 - top);
+    text(ctx, "PAUSED", VIEW_WIDTH / 2, top + 14, 16, GOLD, "center");
+    this.menu.draw(ctx, VIEW_WIDTH / 2, top + 46, frame, 8, gap);
     text(ctx, this.hint, VIEW_WIDTH / 2, hintY, 8, "#aeaadc", "center");
   }
 

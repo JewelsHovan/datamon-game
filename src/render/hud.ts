@@ -266,11 +266,11 @@ export function moveLabel(b: KeyBindings): string {
   return labels.every((l) => l.length === 1) ? labels.join("") : labels.join(" ");
 }
 
-/** A player's key legend (their actual bindings), two lines; pad buttons when they hold a gamepad. */
-export function legendLines(b: KeyBindings, hasPad = false): [string, string] {
-  if (hasPad) return ["A PUNCH  B KICK  X/Y SPECIAL", "D-PAD MOVE  A+B THROW"];
+/** A player's key legend (their actual bindings), three lines; pad buttons when they hold a gamepad. */
+export function legendLines(b: KeyBindings, hasPad = false): [string, string, string] {
+  if (hasPad) return ["A PUNCH  B KICK  X/Y SPECIAL", "D-PAD MOVE  A+B THROW/PUSH", "HOLD BACK: SHIELD  TAP: PARRY"];
   const p = keyLabel(b.punch[0]);
   const k = keyLabel(b.kick[0]);
   const s = keyLabel(b.special[0]);
-  return [`${p} PUNCH  ${k} KICK  ${s} SPECIAL`, `${moveLabel(b)} MOVE  ${p}+${k} THROW`];
+  return [`${p} PUNCH  ${k} KICK  ${s} SPECIAL`, `${moveLabel(b)} MOVE  ${p}+${k} THROW/PUSH`, "HOLD BACK: SHIELD  TAP: PARRY"];
 }

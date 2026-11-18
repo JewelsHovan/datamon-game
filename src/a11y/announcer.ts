@@ -28,6 +28,7 @@ const SCREENS: Readonly<Record<SceneName, string>> = {
   pause: "paused",
   results: "results",
   controls: "controls",
+  guide: "shield and combat guide",
 };
 
 const MODE_WORDS: Readonly<Record<GameMode, string>> = { cpu: "VS CPU", versus: "VS player", training: "training" };
@@ -59,11 +60,13 @@ export function sceneMessage(name: SceneName, prev: SceneName | null, mode: Game
       if (prev === "results") return "Rematch.";
       return null;
     case "pause":
-      return prev === "controls" ? null : "Paused.";
+      return prev === "controls" || prev === "guide" ? null : "Paused.";
     case "results":
       return detail ? sentence(`Results: ${detail}`) : "Results.";
     case "controls":
       return "Controls.";
+    case "guide":
+      return detail ? `Shield and combat guide, ${detail}.` : "Shield and combat guide.";
   }
 }
 

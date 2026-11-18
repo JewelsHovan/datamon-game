@@ -3,10 +3,11 @@
 import { keyLabel } from "../input/keymap";
 import { moveLabel, text } from "../render/hud";
 import { VIEW_HEIGHT, VIEW_WIDTH } from "../render/screen";
+import { GUIDE_ITEM } from "./guide";
 import type { GameMode, MenuInput, Scene, SceneManager } from "./manager";
 import { drawBackdrop, FULLSCREEN_ITEM, GOLD, INK, Menu } from "./ui";
 
-export const TITLE_ITEMS = ["VS CPU", "VS PLAYER", "TRAINING", "CONTROLS"] as const;
+export const TITLE_ITEMS = ["VS CPU", "VS PLAYER", "TRAINING", "CONTROLS", GUIDE_ITEM] as const;
 /** The title's hint on touch (QA 2026-11-12 F3), in place of the keys and the gamepad line. */
 export const TOUCH_TITLE_HINT = "MOVE: D-PAD   CONFIRM: PUNCH   BACK: KICK";
 const MODES: Readonly<Record<string, GameMode>> = { "VS CPU": "cpu", "VS PLAYER": "versus", TRAINING: "training" };
@@ -31,16 +32,18 @@ export class TitleScene implements Scene {
     const mode = MODES[item];
     if (mode) this.m.toSelect(mode);
     else if (item === FULLSCREEN_ITEM) this.m.toggleFullscreen();
+    else if (item === GUIDE_ITEM) this.m.toGuide(this);
     else this.m.toControls(this);
   }
 
   render(ctx: CanvasRenderingContext2D, frame: number): void {
     drawBackdrop(ctx, frame);
     const bob = Math.round(Math.sin(frame / 40) * 2);
-    text(ctx, "COMPASS", VIEW_WIDTH / 2, 52 + bob, 40, GOLD, "center");
-    text(ctx, "CARDINAL CLASH", VIEW_WIDTH / 2, 102, 16, "#ff6170", "center");
-    if (Math.floor(frame / 30) % 2 === 0) text(ctx, "PRESS START", VIEW_WIDTH / 2, 138, 8, INK, "center");
-    this.menu.draw(ctx, VIEW_WIDTH / 2, 170, frame, 16, this.menu.items.length > 4 ? 26 : 28);
+    const many = this.menu.items.length > 5;
+    text(ctx, "COMPASS", VIEW_WIDTH / 2, (many ? 44 : 52) + bob, 40, GOLD, "center");
+    text(ctx, "CARDINAL CLASH", VIEW_WIDTH / 2, many ? 92 : 102, 16, "#ff6170", "center");
+    if (Math.floor(frame / 30) % 2 === 0) text(ctx, "PRESS START", VIEW_WIDTH / 2, many ? 126 : 138, 8, INK, "center");
+    this.menu.draw(ctx, VIEW_WIDTH / 2, many ? 154 : 164, frame, 16, many ? 24 : 26);
     this.hints().forEach((line, k) => text(ctx, line, VIEW_WIDTH / 2, VIEW_HEIGHT - 34 + k * 14, 8, "#aeaadc", "center"));
   }
 
