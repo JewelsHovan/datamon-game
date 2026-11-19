@@ -36,7 +36,8 @@ export class VersusScene implements Scene {
   step(_input: MenuInput): void {
     this.frames += 1;
     if (this.error && this.frames >= 180 && !this.m.services.fatal) {
-      this.m.toSelect(this.match.mode, this.match);
+      if (this.match.cup) this.m.toCupBracket(this.match.cup.bracket);
+      else this.m.toSelect(this.match.mode, this.match);
       return;
     }
     if (this.assets && (!this.splash || this.frames >= VERSUS_FRAMES)) this.m.toFight(this.match, this.assets);
@@ -90,7 +91,9 @@ export class VersusScene implements Scene {
       }
       text(ctx, person.shortName.toUpperCase(), cx, 216, 16, INK, "center");
       const info = this.m.services.info(person.slug);
-      const tag = !left && mode === "cpu" ? `CPU ${(cpuLevel ?? "normal").toUpperCase()}` : `PLAYER ${i + 1}`;
+      const level = this.match.cup ? this.match.cup.cpu[i] : !left && mode === "cpu" ? cpuLevel ?? "normal" : null;
+      const seat = level ? `CPU ${level.toUpperCase()}` : `PLAYER ${i + 1}`;
+      const tag = this.match.cup ? `#${this.match.cup.entrants[i] + 1} / ${seat}` : seat;
       text(ctx, tag, cx, 238, 8, PLAYER_COLORS[i], "center");
       if (info.archetype) text(ctx, info.archetype.toUpperCase(), cx, 252, 8, GOLD, "center");
       if (info.trait) text(ctx, info.trait.toUpperCase(), cx, 264, 8, INK, "center");
@@ -99,7 +102,7 @@ export class VersusScene implements Scene {
     }
     const pop = this.frames < 24 ? 2 - this.frames / 24 : 1;
     text(ctx, "VS", VIEW_WIDTH / 2, 130 - Math.round(16 * pop), Math.round(32 * pop), GOLD, "center");
-    const label = mode === "training" ? "TRAINING" : mode === "cpu" ? "VS CPU" : "BEST OF 3";
+    const label = this.match.cup ? `OFFICE CUP / ${this.match.cup.label}` : mode === "training" ? "TRAINING" : mode === "cpu" ? "VS CPU" : "BEST OF 3";
     text(ctx, label, VIEW_WIDTH / 2, 300, 8, INK, "center");
     if (this.frames >= VERSUS_FRAMES && !this.assets) text(ctx, this.error ? "COULD NOT LOAD THE FIGHT" : "LOADING", VIEW_WIDTH / 2, 320, 8, INK, "center");
   }

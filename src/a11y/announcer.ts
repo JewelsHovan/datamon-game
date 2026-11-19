@@ -29,6 +29,8 @@ const SCREENS: Readonly<Record<SceneName, string>> = {
   results: "results",
   controls: "controls",
   guide: "shield and combat guide",
+  cupSetup: "Office Cup setup",
+  cupBracket: "Office Cup bracket",
 };
 
 const MODE_WORDS: Readonly<Record<GameMode, string>> = { cpu: "VS CPU", versus: "VS player", training: "training" };
@@ -52,6 +54,9 @@ export function sceneMessage(name: SceneName, prev: SceneName | null, mode: Game
       return "Title screen.";
     case "select":
       return mode ? `${MODE_WORDS[mode]}: character select.` : "Character select.";
+    case "cupSetup":
+    case "cupBracket":
+      return detail ? sentence(detail) : sentence(SCREENS[name]);
     case "versus":
       return detail ? sentence(detail) : null;
     case "fight":

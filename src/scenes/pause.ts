@@ -41,7 +41,8 @@ export class PauseScene implements Scene {
     private readonly m: SceneManager,
     readonly fight: FightScene,
   ) {
-    this.menu = new Menu(pauseItems(m.canFullscreen, m.services.toggleSound !== undefined), m.services.hooks);
+    const items = pauseItems(m.canFullscreen, m.services.toggleSound !== undefined);
+    this.menu = new Menu(fight.match.cup ? [...items.slice(0, -1), "RESTART BOUT", "BACK TO BRACKET"] : items, m.services.hooks);
     this.menu.labelOf = (item) => (item === SOUND_ITEM ? soundLabel(this.m.services.soundMuted?.() === true) : item);
   }
 
@@ -57,14 +58,16 @@ export class PauseScene implements Scene {
   step(input: MenuInput): void {
     // Punch or Start (Enter) confirms the selected item; RESUME is selected first,
     // so Start toggles back into the fight. Esc or Kick resumes from any item.
-    const r = this.menu.step(input, this.fight.humans);
+    const r = this.menu.step(input, this.fight.match.cup ? undefined : this.fight.humans);
     if (r === null) return;
     const item = r === "back" ? "RESUME" : this.menu.items[r]!;
     if (item === "RESUME") this.m.resume(this.fight);
     else if (item === "CONTROLS") this.m.toControls(this);
-    else if (item === GUIDE_ITEM) this.m.toGuide(this, this.fight.humans);
+    else if (item === GUIDE_ITEM) this.m.toGuide(this, this.fight.match.cup ? undefined : this.fight.humans);
     else if (item === SOUND_ITEM) this.m.services.toggleSound?.();
     else if (item === FULLSCREEN_ITEM) this.m.toggleFullscreen();
+    else if (item === "RESTART BOUT") this.m.toFight({ ...this.fight.match, seed: this.m.services.newSeed() }, this.fight.assets);
+    else if (this.fight.match.cup) this.m.toCupBracket(this.fight.match.cup.bracket);
     else this.m.toSelect(this.fight.match.mode, this.fight.match);
   }
 

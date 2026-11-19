@@ -6,7 +6,8 @@ import { downedFrame } from "../sim/combat";
 import { SUBPX } from "../sim/fixed";
 import type { FighterState } from "../sim/types";
 import type { Camera } from "./camera";
-import { clipFrameIndex, type Clip, type ClipFrame, type ClipSet } from "./clips";
+import { type Clip, type ClipFrame, type ClipSet, clipFrameIndex } from "./clips";
+import { guardBreakPose, type PoseOptions, poseForFighter } from "./signatureMotion";
 
 export interface ClipChoice {
   clip: string;
@@ -60,7 +61,7 @@ export function clipForFighter(f: FighterState, introFrame = -1): ClipChoice {
     case "held":
       return { clip: "hurt", tick: 0, reverse: false, frame: 0 };
     case "guard_break":
-      return { clip: "hurt", tick: 0, reverse: false, frame: Math.floor(f.stateFrame / 6) % 2 === 0 ? 1 : 2 };
+      return { clip: "hurt", tick: 0, reverse: false, frame: guardBreakPose(f.stateFrame).frameOverride ?? 1 };
     case "knockdown":
     case "ko":
       if (f.rollFrom >= 0) return { clip: "getup_roll", tick: f.stateFrame - f.rollFrom, reverse: f.rollDir === 1 };
@@ -145,23 +146,29 @@ export function drawFighter(
   camera: Camera,
   tint?: string,
   introFrame = -1,
+  options?: PoseOptions,
 ): void {
   if (isHidden(f)) return;
   const frame = frameForFighter(set, f, introFrame);
-  const sx = Math.round(f.x / SUBPX) - camera.x;
-  const sy = Math.round(f.y / SUBPX) - camera.y;
+  const pose = poseForFighter(f, options);
+  const sx = Math.round(f.x / SUBPX) - camera.x + f.facing * pose.offsetX;
+  const sy = Math.round(f.y / SUBPX) - camera.y + pose.offsetY;
+  const dw = pose.scaleX === 1 ? frame.w : Math.max(1, Math.round(frame.w * pose.scaleX));
+  const dh = pose.scaleY === 1 ? frame.h : Math.max(1, Math.round(frame.h * pose.scaleY));
+  const dax = pose.scaleX === 1 ? frame.ax : Math.round((frame.ax * dw) / frame.w);
+  const day = pose.scaleY === 1 ? frame.ay : Math.round((frame.ay * dh) / frame.h);
   const source = tint ? tinted(set, frame, tint) : null;
   const img = source ?? set.atlas;
   const ox = source ? 0 : frame.x;
   const oy = source ? 0 : frame.y;
   if (f.facing === set.artFacing) {
-    ctx.drawImage(img, ox, oy, frame.w, frame.h, sx - frame.ax, sy - frame.ay, frame.w, frame.h);
+    ctx.drawImage(img, ox, oy, frame.w, frame.h, sx - dax, sy - day, dw, dh);
     return;
   }
   ctx.save();
   ctx.translate(sx, sy);
   ctx.scale(-1, 1);
-  ctx.drawImage(img, ox, oy, frame.w, frame.h, -frame.ax, -frame.ay, frame.w, frame.h);
+  ctx.drawImage(img, ox, oy, frame.w, frame.h, -dax, -day, dw, dh);
   ctx.restore();
 }
 

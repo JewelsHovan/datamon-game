@@ -17,6 +17,10 @@ This repo is also a working example for AI onboarding: everything an agent needs
 
 Forward plus Punch or Kick gives the heavy version, down plus either sweeps low, Forward+Special fires each fighter's second signature special, Down+Special taunts, and Punch+Kick throws. Arrow keys and Enter also navigate and confirm all menus alongside WASD and IJKL. Keys can be rebound on the controls screen, mobile devices get on-screen touch controls, and gamepads work too. You can also fight the CPU.
 
+## Office Cup
+
+Choose **Office Cup** on the title screen to play a four-entrant local bracket. Each slot can be human or CPU; pick a fighter or leave it on Random. Use Up/Down to choose a slot, Punch or Enter to switch between the control and fighter fields, and Left/Right to change the value. Two semifinals feed into the final. When two humans face off, use the seats shown on the versus screen. A lone human can use either control set. CPU-only bouts play out on screen.
+
 ## Run it locally
 
 Needs Node 20+.

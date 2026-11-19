@@ -80,6 +80,11 @@ export function pickFighters(search: string, warn: (msg: string) => void = conso
 /** A match in words, for screen readers: "Julien H. versus Felicia G., the CPU on hard". */
 export function matchWords(match: Match): string {
   const { p1, p2, mode, cpuLevel } = match;
+  if (match.cup) {
+    const [a, b] = match.cup.cpu;
+    const [left, right] = match.cup.entrants;
+    return `Office Cup ${match.cup.label}: entrant ${left + 1}, ${p1.shortName}${a ? `, CPU on ${a}` : ""} versus entrant ${right + 1}, ${p2.shortName}${b ? `, CPU on ${b}` : ""}`;
+  }
   if (mode === "training") return `training with ${p1.shortName} and ${p2.shortName}`;
   const cpu = mode === "cpu" ? `, the CPU on ${cpuLevel ?? "normal"}` : "";
   return `${p1.shortName} versus ${p2.shortName}${cpu}`;
@@ -117,10 +122,10 @@ export class FightScene implements Scene {
   ) {
     const { p1, p2, seed } = match;
     this.state = match.mode === "training" ? createSandboxState(seed, p1.slug, p2.slug) : createMatchState(seed, p1.slug, p2.slug);
-    const level = match.mode === "cpu" ? match.cpuLevel : null;
-    this.cpu = [null, level ? m.services.createCpu(level, 1, seed) : null];
+    const [a, b] = match.cup?.cpu ?? [null, match.mode === "cpu" ? match.cpuLevel : null];
+    this.cpu = [a ? m.services.createCpu(a, 0, seed) : null, b ? m.services.createCpu(b, 1, seed) : null];
     this.effects = new EffectsLayer(assets.effects, m.services.prefersReducedMotion ?? false);
-    this.hud = new Hud([p1, p2], assets.portraits, ["", this.cpu[1] ? "CPU" : ""]);
+    this.hud = new Hud([p1, p2], assets.portraits, [this.cpu[0] ? "CPU" : "", this.cpu[1] ? "CPU" : ""]);
   }
 
   /** Player slots driven by people (CPU slots excluded). */
@@ -131,11 +136,14 @@ export class FightScene implements Scene {
   /** The inputs for this step: sampled devices for humans, decide() for CPU slots. */
   inputsFor(input: MenuInput): InputPair {
     const [a, b] = this.cpu;
-    return [a ? a.decide(this.state) : input.held[0], b ? b.decide(this.state) : input.held[1]];
+    // A lone human keeps their device even when the bracket puts them in seat 2.
+    const solo = this.match.cup && (!a !== !b);
+    const shared = input.held[0] | input.held[1];
+    return [a ? a.decide(this.state) : solo ? shared : input.held[0], b ? b.decide(this.state) : solo ? shared : input.held[1]];
   }
 
   step(input: MenuInput): void {
-    if (input.escape || pressed(input, BUTTON_START, this.humans)) {
+    if (input.escape || pressed(input, BUTTON_START, this.match.cup ? undefined : this.humans)) {
       this.m.services.hooks.ui?.("confirm");
       this.m.toPause(this);
       return;
@@ -200,7 +208,17 @@ export class FightScene implements Scene {
     const order: (0 | 1)[] = state.fighters[0].state === "hitstun" || state.fighters[0].state === "knockdown" ? [1, 0] : [0, 1];
     // Round 1 opens with both fighters' intro clips (spec 012).
     const introFrame = state.round.phase === "intro" && state.round.number === 1 && !state.round.training ? state.round.phaseFrame : -1;
-    for (const i of order) drawFighter(ctx, clipSets[i], state.fighters[i], camera, effects.flash[i] > 0 ? "#ffffff" : undefined, introFrame);
+    for (const i of order) {
+      drawFighter(
+        ctx,
+        clipSets[i],
+        state.fighters[i],
+        camera,
+        effects.flash[i] > 0 ? "#ffffff" : undefined,
+        introFrame,
+        effects.poseOptions(i, state.fighters[i]),
+      );
+    }
     effects.drawProjectiles(ctx, state, camera);
     effects.draw(ctx, camera);
     if (this.showBoxes) drawBoxes(ctx, state, camera);
@@ -223,7 +241,9 @@ export class FightScene implements Scene {
     const one = (i: 0 | 1): readonly string[] | null => {
       const cpu = this.cpu[i];
       if (cpu) return [`CPU ${cpu.level.toUpperCase()}`];
-      if (i === 0 && touchP1) return null;
+      const solo = this.match.cup && this.cpu[i === 0 ? 1 : 0];
+      if (touchP1 && (i === 0 || solo)) return null;
+      if (solo) return legendLines(bindings.current[0], this.m.services.hasPad(0) || this.m.services.hasPad(1));
       return legendLines(bindings.current[i], this.m.services.hasPad(i));
     };
     return [one(0), one(1)];

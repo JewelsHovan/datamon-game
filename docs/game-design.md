@@ -63,6 +63,11 @@ Stats per archetype (health, walk speed, damage scale) live in one data table; t
 | Mirror matches | Offline alternate atlas for everyone | All 37 fighters ship `atlas-alt.webp` (QA F1), so P2 in a mirror match changes garments, never a face or hair. |
 | Stage walkers | Filtered at runtime | The office strip has 9 coworkers; whoever is fighting is hidden from the background of their own match (`src/render/stage.ts`). |
 
+### Office Cup and signature animation (2026-11-18)
+
+- Office Cup is a local four-slot single-elimination bracket. Each slot can be human or CPU, with a fighter pick or Random; CPU difficulty is shared. The bracket runs two semifinals and a final using standard matches. Human entrants hand off the two physical control seats between bouts; CPU-only bouts are watchable.
+- Focus animation work on recognizable timing and silhouettes for signature specials, plus clear cues for shared defensive outcomes. Polish the existing roster before expanding it; preserve sim timing and honor reduced effects.
+
 ### Game title (2026-11-12, HQ page)
 
 | Topic | Choice | What it means |

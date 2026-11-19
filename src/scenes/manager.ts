@@ -15,6 +15,7 @@ import { text } from "../render/hud";
 import { VIEW_WIDTH } from "../render/screen";
 import type { InputPair, PlayerIndex, SimEvent, SimState } from "../sim/types";
 import { ControlsScene } from "./controls";
+import { CupBracketScene, CupSetupScene, type Cup } from "./cup";
 import { FightScene } from "./fight";
 import { GuideScene } from "./guide";
 import { PauseScene } from "./pause";
@@ -25,7 +26,7 @@ import { TitleScene } from "./title";
 import { VersusScene } from "./versus";
 import type { Players } from "./ui";
 
-export type SceneName = "title" | "select" | "versus" | "fight" | "pause" | "results" | "controls" | "guide";
+export type SceneName = "title" | "select" | "versus" | "fight" | "pause" | "results" | "controls" | "guide" | "cupSetup" | "cupBracket";
 
 /** VS CPU (P2 is the CPU), VS PLAYER (two humans), or free training. */
 export type GameMode = "cpu" | "versus" | "training";
@@ -37,6 +38,7 @@ export interface Match {
   /** Difficulty of the CPU in P2's slot (VS CPU only). */
   cpuLevel: CpuLevel | null;
   seed: number;
+  cup?: { bracket: Cup; bout: 0 | 1 | 2; entrants: readonly [number, number]; cpu: readonly [CpuLevel | null, CpuLevel | null]; label: string };
 }
 
 /** Everything a fight draws with, loaded during the versus splash. */
@@ -246,6 +248,18 @@ export class SceneManager {
     this.go(new TitleScene(this));
   }
 
+  toCupSetup(previous?: Cup): void {
+    this.fight = null;
+    this.mode = null;
+    this.go(new CupSetupScene(this, previous));
+  }
+
+  toCupBracket(cup: Cup): void {
+    this.fight = null;
+    this.mode = null;
+    this.go(new CupBracketScene(this, cup));
+  }
+
   /** Character select for `mode`; `previous` puts the cursors back on the last picks. */
   toSelect(mode: GameMode, previous: Match | null = null): void {
     this.fight = null;
@@ -274,6 +288,7 @@ export class SceneManager {
   }
 
   toResults(fight: FightScene, winner: PlayerIndex): void {
+    fight.match.cup?.bracket.record(fight.match, winner);
     this.go(new ResultsScene(this, fight, winner));
   }
 

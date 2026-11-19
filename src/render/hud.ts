@@ -31,6 +31,7 @@ export class Hud {
   private trail: [number, number] = [-1, -1];
   private trailWait: [number, number] = [0, 0];
   private popups: Popup[] = [];
+  private guardFlash: [number, number] = [0, 0];
   private combo: [{ hits: number; age: number }, { hits: number; age: number }] = [{ hits: 0, age: 99 }, { hits: 0, age: 99 }];
 
   constructor(
@@ -50,11 +51,13 @@ export class Hud {
       } else if (e.type === "trade") {
         this.popups.push({ text: "MERGE CONFLICT!", color: "#ff6170", x: VIEW_WIDTH / 2, y: 120, age: 0, life: 55, size: 16 });
       } else if (e.type === "tech") {
-        this.popups.push({ text: "TECH", color: "#7fd6ff", x: VIEW_WIDTH / 2, y: 120, age: 0, life: 40, size: 16 });
+        this.popups.push({ text: "THROW TECH", color: "#7fd6ff", x: VIEW_WIDTH / 2, y: 120, age: 0, life: 42, size: 12 });
       } else if (e.type === "perfect_block") {
+        this.guardFlash[e.player] = 14;
         const px = e.player === 0 ? 130 : VIEW_WIDTH - 130;
         this.popups.push({ text: "PERFECT SHIELD", color: "#4ef2ff", x: px, y: 84, age: 0, life: 44, size: 8 });
       } else if (e.type === "guard_break") {
+        this.guardFlash[e.player] = 0;
         this.popups.push({ text: "SHIELD BREAK!", color: "#ff4d6d", x: VIEW_WIDTH / 2, y: 108, age: 0, life: 56, size: 16 });
       } else if (e.type === "callout") {
         const px = e.player === 0 ? 116 : VIEW_WIDTH - 116;
@@ -81,6 +84,7 @@ export class Hud {
       if (this.trail[i] < h) this.trail[i] = h;
       if (this.trailWait[i] > 0) this.trailWait[i] -= 1;
       else if (this.trail[i] > h) this.trail[i] = Math.max(h, this.trail[i] - 12);
+      if (this.guardFlash[i] > 0) this.guardFlash[i] -= 1;
       this.combo[i].age += 1;
     }
     for (const p of this.popups) p.age += 1;
@@ -167,14 +171,25 @@ export class Hud {
     const guardMaxW = 140;
     const guardY = BAR_Y + BAR_H + 17;
     const gx0 = left ? x0 + BAR_W - guardMaxW : x0;
-    ctx.fillStyle = "#0d0c22";
+    ctx.fillStyle = f.state === "guard_break" ? "#ff4d6d" : "#0d0c22";
     ctx.fillRect(gx0 - 1, guardY - 1, guardMaxW + 2, 5);
     ctx.fillStyle = "#19183e";
     ctx.fillRect(gx0, guardY, guardMaxW, 3);
     const guardW = Math.round((guardMaxW * Math.max(0, f.guard)) / SHIELD.maxGuard);
     const gxFill = left ? x0 + BAR_W - guardW : x0;
-    ctx.fillStyle = f.state === "guard_break" ? "#ff4d6d" : f.guard < SHIELD.maxGuard * 0.35 ? "#ffab4c" : "#4ef2ff";
+    ctx.fillStyle =
+      f.state === "guard_break"
+        ? "#ff4d6d"
+        : this.guardFlash[i] > 0
+          ? "#ffffff"
+          : f.guard < SHIELD.maxGuard * 0.35
+            ? "#ffab4c"
+            : "#4ef2ff";
     if (guardW > 0) ctx.fillRect(gxFill, guardY, guardW, 3);
+    if (this.guardFlash[i] > 0 && guardW > 0) {
+      ctx.fillStyle = "#4ef2ff";
+      ctx.fillRect(gxFill, guardY + 1, guardW, 2);
+    }
   }
 
   private drawLegend(ctx: CanvasRenderingContext2D, i: 0 | 1): void {

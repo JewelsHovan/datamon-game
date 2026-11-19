@@ -123,6 +123,95 @@ class Driver {
   }
 }
 
+describe("Office Cup", () => {
+  it("configures entrants and advances a mixed bracket through both semifinals and the final", async () => {
+    const f = fakes(BUTTON_LEFT);
+    const d = new Driver(f);
+    d.titlePick(5);
+    expect(d.scene).toBe("cupSetup");
+    d.press(0, BUTTON_RIGHT); // Explicit pick in slot 1; others start random.
+    expect(d.m.scene.debug?.()).toMatchObject({ slots: [
+      { cpu: false, slug: "julien-hovan" }, { cpu: true, slug: null }, { cpu: true, slug: null }, { cpu: true, slug: null },
+    ] });
+    d.press(0, P); // Focus control field.
+    d.press(0, BUTTON_RIGHT); // Slot 1 to CPU.
+    d.press(0, BUTTON_DOWN);
+    d.press(0, BUTTON_LEFT); // Slot 2 to human.
+    for (let i = 0; i < 3; i++) d.press(0, BUTTON_DOWN);
+    d.press(0, BUTTON_RIGHT); // Hard CPU.
+    d.press(0, BUTTON_DOWN);
+    d.press(0, P);
+    expect(d.scene).toBe("cupBracket");
+    expect(d.m.scene.debug?.()).toMatchObject({ next: 0, winners: [null, null, null], entrants: [true, false, true, true].map((cpu) => ({ cpu, slug: "julien-hovan" })) });
+    d.press(0, K);
+    d.press(0, K);
+    expect(d.scene).toBe("cupBracket");
+    expect(d.m.scene.debug?.()).toMatchObject({ item: "RETURN TO TITLE" });
+    d.press(0, BUTTON_UP);
+
+    async function start(): Promise<void> {
+      d.press(0, P);
+      await d.throughVersus();
+    }
+    function finish(winner: PlayerIndex, winners: (number | null)[]): void {
+      const round = d.fight.state.round;
+      round.wins = winner === 0 ? [2, 0] : [0, 2];
+      round.phase = "matchover";
+      round.phaseFrame = RESULTS_DELAY;
+      d.idle(1);
+      expect(d.scene).toBe("results");
+      d.press(0, P);
+      expect(d.scene).toBe("cupBracket");
+      expect(d.m.scene.debug?.()).toMatchObject({ winners });
+    }
+    await start();
+    expect(d.fight.cpu.map((c) => c?.level ?? null)).toEqual(["hard", null]);
+    const first = d.fight;
+    expect(first.describe()).toContain("versus entrant 2");
+    const padInput = { held: [BUTTON_RIGHT, 0], pressed: [0, 0], nav: [0, 0], escape: false } as const;
+    expect(first.inputsFor({ ...padInput, held: [...padInput.held], pressed: [0, 0], nav: [0, 0] })).toEqual([BUTTON_LEFT, BUTTON_RIGHT]);
+    d.press(0, BUTTON_START);
+    expect(d.scene).toBe("pause");
+    for (let i = 0; i < 3; i++) d.press(0, BUTTON_DOWN);
+    d.press(0, P);
+    expect(d.fight).not.toBe(first);
+    expect(d.fight.match.cup?.bracket.winners).toEqual([null, null, null]);
+    d.press(0, BUTTON_START);
+    for (let i = 0; i < 4; i++) d.press(0, BUTTON_DOWN);
+    d.press(0, P);
+    expect(d.m.scene.debug?.()).toMatchObject({ next: 0, winners: [null, null, null] });
+    await start();
+    finish(1, [1, null, null]);
+    await start();
+    expect(d.fight.cpu.map((c) => c?.level ?? null)).toEqual(["hard", "hard"]);
+    d.idle(1, [BUTTON_RIGHT, BUTTON_RIGHT]);
+    expect(f.cpus.slice(-2).map((c) => c.calls.length > 0)).toEqual([true, true]);
+    d.press(0, BUTTON_START);
+    d.press(0, BUTTON_DOWN);
+    d.press(0, BUTTON_DOWN);
+    d.press(0, P);
+    expect(d.scene).toBe("guide");
+    d.press(0, K);
+    expect(d.scene).toBe("pause");
+    d.press(0, K);
+    expect(d.scene).toBe("fight");
+    finish(0, [1, 2, null]);
+    await start();
+    expect(d.fight.cpu.map((c) => c?.level ?? null)).toEqual([null, "hard"]);
+    finish(1, [1, 2, 2]);
+    expect(d.m.scene.debug?.()).toMatchObject({ next: null, item: "NEW CUP" });
+    expect(d.m.scene.describe?.()).toContain("entrant 3, wins the Office Cup");
+    const completed = d.m.scene;
+    d.press(0, P);
+    expect(d.scene).toBe("cupSetup");
+    expect(d.m.scene.debug?.()).toMatchObject({ row: 5, level: "hard", slots: [true, false, true, true].map((cpu) => ({ cpu, slug: "julien-hovan" })) });
+    d.m.go(completed);
+    d.press(0, BUTTON_DOWN);
+    d.press(0, P);
+    expect(d.scene).toBe("title");
+  });
+});
+
 describe("scene flow (A5, R5)", () => {
   it("title -> select -> versus -> fight -> results -> rematch -> pause -> quit to select", async () => {
     const d = new Driver(fakes());
@@ -545,14 +634,14 @@ describe("app shell (spec 014)", () => {
 
   it("FULLSCREEN is the last title item and toggles fullscreen; it is left out where the API is missing (R4)", () => {
     const off = new Driver(fakes());
-    expect(off.m.scene.debug?.()).toMatchObject({ items: ["VS CPU", "VS PLAYER", "TRAINING", "CONTROLS", "SHIELD GUIDE"] });
+    expect(off.m.scene.debug?.()).toMatchObject({ items: ["VS CPU", "VS PLAYER", "TRAINING", "CONTROLS", "SHIELD GUIDE", "OFFICE CUP"] });
     const disabled = new Driver(withFullscreen(false).f);
     expect((disabled.m.scene.debug?.() as { items: string[] }).items).not.toContain("FULLSCREEN");
 
     const { f, toggles } = withFullscreen(true);
     const d = new Driver(f);
-    expect(d.m.scene.debug?.()).toMatchObject({ items: ["VS CPU", "VS PLAYER", "TRAINING", "CONTROLS", "SHIELD GUIDE", "FULLSCREEN"] });
-    d.titlePick(5);
+    expect(d.m.scene.debug?.()).toMatchObject({ items: ["VS CPU", "VS PLAYER", "TRAINING", "CONTROLS", "SHIELD GUIDE", "OFFICE CUP", "FULLSCREEN"] });
+    d.titlePick(6);
     expect(toggles).toHaveLength(1);
     expect(d.scene).toBe("title"); // stays on the title
   });
